@@ -5,7 +5,11 @@ import Swiper from 'react-native-swiper'
 import { Touchable,Button,IconFont } from '../../components'
 import { NavigationActions, commonStyle } from '../../utils'
 import CompanyService from './CompanyService'
-
+import ProjectService from './ProjectService'
+import TechService from './TechService'
+import BankService from './BankService'
+import MarketService from './MarketService'
+import PolicyService from './PolicyService'
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
 const bannerImg=require('../../assets/images/banner1.png')
@@ -49,20 +53,35 @@ componentDidMount() {
 
 handleSubmenuShow=(type)=>{
   const {companyShow, projectShow, techShow, bankShow, marketShow, policyShow}=this.state
-
-    // switch (type){
-    //   case 1:
-    //   this.setState({companyShow:!companyShow})
-    //   break;
-    //   case 2:
-    //   this.setState({projectShow:!projectShow})
-    //   break;
-    //   case 3:
-    //   this.setState({techShow:!techShow})
-    //   break;
-    //   default:
-    //   break
-    // }
+    switch (type){
+      case 1:
+      this.setState({companyShow:!companyShow,projectShow:false,
+        techShow:false,bankShow:false,marketShow:false,policyShow:false
+      })
+      break;
+      case 2:
+      this.setState({projectShow:!projectShow,companyShow:false,
+        techShow:false,bankShow:false,marketShow:false,policyShow:false})
+      break;
+      case 3:
+      this.setState({techShow:!techShow,companyShow:false,projectShow:false,
+        bankShow:false,marketShow:false,policyShow:false})
+      break;
+      case 4:
+      this.setState({bankShow:!bankShow,companyShow:false,projectShow:false,
+        techShow:false,marketShow:false,policyShow:false})
+      break;
+      case 5:
+      this.setState({marketShow:!marketShow,companyShow:false,projectShow:false,
+        bankShow:false,techShow:false,policyShow:false})
+      break;
+      case 6:
+      this.setState({policyShow:!policyShow,companyShow:false,projectShow:false,
+        bankShow:false,marketShow:false,techShow:false})
+      break;
+      default:
+      break
+    }
   }
 
 gotoDetail = () => {
@@ -121,7 +140,7 @@ renderBanner() {
     }
 
   render() {
-    const {submenuShow}=this.state
+    const {companyShow, projectShow, techShow, bankShow, marketShow, policyShow}=this.state
     return (
       <View style={styles.container}>
       <ScrollView style={{flex:1}}>
@@ -140,31 +159,71 @@ renderBanner() {
                 <Text style={styles.title_text}>6S服务</Text>
               </View>
               <View style={styles.item_row}>
-                  <Touchable style={styles.item_button} onPress={this.handleSubmenuShow(1)}>
+                  <Touchable style={styles.item_button} onPress={()=>this.handleSubmenuShow(1)}>
                   <View style={styles.item_iconbg}>
                     <IconFont name='&#xe61a;' size={60} /> 
                   </View>
                   <Text style={styles.item_title}>企业运行服务</Text>
                   </Touchable>
 
-                  <Touchable style={styles.item_button} onPress={this.handleSubmenuShow(2)}>
+                  <Touchable style={styles.item_button} onPress={()=>this.handleSubmenuShow(2)}>
                   <View style={[styles.item_iconbg,styles.item_iconbg2]}>
                     <IconFont name='&#xe61a;' size={60} /> 
                   </View>
                   <Text style={styles.item_title}>项目推进服务</Text>
                   </Touchable>
 
-                  <Touchable style={styles.item_button} onPress={this.handleSubmenuShow(3)}>
+                  <Touchable style={styles.item_button} onPress={()=>this.handleSubmenuShow(3)}>
                   <View style={[styles.item_iconbg,styles.item_iconbg3]}>
                     <IconFont name='&#xe61a;' size={60} /> 
                   </View>
                   <Text style={styles.item_title}>科技创新服务</Text>
                   </Touchable>
               </View>
-            </View>
-            {submenuShow?<View style={styles.visiable_block}>
+
+              {companyShow?<View style={styles.visiable_block}>
             <CompanyService />
             </View>:null}
+            {projectShow?<View style={styles.visiable_block}>
+            <ProjectService />
+            </View>:null}
+            {techShow?<View style={styles.visiable_block}>
+            <TechService />
+            </View>:null}
+
+              <View style={styles.item_row}>
+                  <Touchable style={styles.item_button} onPress={()=>this.handleSubmenuShow(4)}>
+                  <View style={[styles.item_iconbg,styles.item_iconbg4]}>
+                    <IconFont name='&#xe61a;' size={60} /> 
+                  </View>
+                  <Text style={styles.item_title}>金融与证券服务</Text>
+                  </Touchable>
+
+                  <Touchable style={styles.item_button} onPress={()=>this.handleSubmenuShow(5)}>
+                  <View style={[styles.item_iconbg,styles.item_iconbg5]}>
+                    <IconFont name='&#xe61a;' size={60} /> 
+                  </View>
+                  <Text style={styles.item_title}>品牌与市场促进服务</Text>
+                  </Touchable>
+
+                  <Touchable style={styles.item_button} onPress={()=>this.handleSubmenuShow(6)}>
+                  <View style={[styles.item_iconbg,styles.item_iconbg6]}>
+                    <IconFont name='&#xe61a;' size={60} /> 
+                  </View>
+                  <Text style={styles.item_title}>政策咨询服务</Text>
+                  </Touchable>
+              </View>
+
+              {bankShow?<View style={styles.visiable_block}>
+            <BankService />
+            </View>:null}
+            {marketShow?<View style={styles.visiable_block}>
+            <MarketService />
+            </View>:null}
+            {policyShow?<View style={styles.visiable_block}>
+            <PolicyService />
+            </View>:null}
+            </View>
         </View>
     </ScrollView>
       </View>
@@ -239,10 +298,11 @@ const styles = StyleSheet.create({
     content_block:{
       backgroundColor:'#fff',
       width,
-      padding:15,
+      paddingTop:15,
       
     },
     block_title:{
+      marginLeft:15,
       flexDirection:'row',
       // justifyContent:'center',
        alignItems:'center',
@@ -261,7 +321,11 @@ const styles = StyleSheet.create({
     },
     item_row:{
       flexDirection:'row',
-      justifyContent:'space-around'
+      // justifyContent:'space-around'
+    },
+    item_button:{
+      flex:1,
+      alignItems:'center'
     },
     item_title:{
       fontFamily: commonStyle.PFregular,
@@ -283,6 +347,15 @@ const styles = StyleSheet.create({
     },
     item_iconbg3:{
       backgroundColor:commonStyle.pinkColor,
+    },
+    item_iconbg4:{
+      backgroundColor:commonStyle.oceanColor,
+    },
+    item_iconbg5:{
+      backgroundColor:commonStyle.redColor,
+    },
+    item_iconbg6:{
+      backgroundColor:commonStyle.purpleColor,
     },
     visiable_block:{
       width,

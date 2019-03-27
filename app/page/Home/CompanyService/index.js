@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     // borderColor: "#d5d5d5",
     width:width*0.9,
     // borderRadius:5,
-     paddingHorizontal:13,
+    paddingHorizontal:13,
     paddingVertical:20,
     
   },
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     flexDirection:'row'
   },
   item_each2:{
-    flex:0.5,
+    flex:0.5
   },
   icon_bg:{
     width: 18,
