@@ -15,7 +15,7 @@ import { connect } from 'react-redux'
 import Loading from './page/Loading'
 import Login from './page/Login'
 import Home from './page/Home'
-import FiveSService from './page/5sService'
+import ZHInfos from './page/ZHInfos'
 import InvestZH from './page/InvestZH'
 import Account from './page/My'
 import Detail from './page/Detail'
@@ -23,8 +23,8 @@ import Sorry from './page/others/sorry'
 
 const HomeNavigator = createBottomTabNavigator({
   Home: { screen: Home },
-  FiveSService: { screen: FiveSService },
   InvestZH: { screen: InvestZH },
+  ZHInfos: { screen: ZHInfos },
   Account: { screen: Account },
 })
 

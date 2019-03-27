@@ -12,9 +12,9 @@ import { NavigationActions } from '../../utils'
 
 const {width,height}=Dimensions.get('window')
 @connect()
-class FiveSService extends Component {
+class ZHInfos extends Component {
   static navigationOptions = {
-    tabBarLabel: '5S服务',
+    tabBarLabel: '昭化资讯',
     tabBarIcon: ({ focused, tintColor }) => (
       focused?<Text style={{fontFamily:'iconfont',fontSize:24,color:'#d81519'}}>&#xe62d;</Text>
       :
@@ -30,29 +30,7 @@ class FiveSService extends Component {
   render() {
     return (
       <View style={styles.container}>
-      <ScrollView>
-        <Touchable onPress={this.gotoDetail}>
-        <CompanyBlock title='企业运行服务' style={styles.serviceBox} />
-        </Touchable>
-
-        <Touchable onPress={this.gotoDetail}>
-        <ProjectBlock title='项目推进服务' style={styles.serviceBox}/>
-        </Touchable>
-        
-        <Touchable onPress={this.gotoDetail}>
-        <FinanceBlock title='金融与证券服务' style={styles.serviceBox}/>
-        </Touchable>
-
-        <Touchable onPress={this.gotoDetail}>
-        <TechBlock title='科技创新服务' style={styles.serviceBox}/>
-        </Touchable>
-
-        <Touchable onPress={this.gotoDetail}>
-        <BrandBlock title='品牌与市场促进服务' style={styles.serviceBox}/>
-        </Touchable>
-
-        <View style={styles.devied}/>
-      </ScrollView>
+        <Text>昭化资讯</Text>
 
       </View>
     )
@@ -75,4 +53,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default FiveSService
+export default ZHInfos
