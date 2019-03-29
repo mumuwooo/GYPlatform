@@ -10,6 +10,7 @@ import TechService from './TechService'
 import BankService from './BankService'
 import MarketService from './MarketService'
 import PolicyService from './PolicyService'
+import CompanyInfos from './CompanyInfos'
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
 const bannerImg=require('../../assets/images/banner1.png')
@@ -34,7 +35,7 @@ class Home extends Component {
    super(props);
     this.state = {
     swiperShow: false, 
-    companyShow:true, 
+    companyShow:false, 
     projectShow:false,
     techShow:false,
     bankShow:false,
@@ -44,12 +45,15 @@ class Home extends Component {
 }
 
 componentDidMount() {
-        setTimeout(() => {
-            this.setState({
-                swiperShow: true
-            });
-        }, 0)
+  setTimeout(()=>{
+    this.setTimeout = this.setState({swiperShow:true});
+ },0)
     }
+
+// 移除定时器
+componentWillUnmount(){
+  this.setTimeout && clearTimeout(this.setTimeout);
+}
 
 handleSubmenuShow=(type)=>{
   const {companyShow, projectShow, techShow, bankShow, marketShow, policyShow}=this.state
@@ -224,6 +228,23 @@ renderBanner() {
             <PolicyService />
             </View>:null}
             </View>
+
+            <View style={[styles.content_block,styles.content_block2]}>
+            <View style={styles.block_title}>
+                <Text style={styles.title_redIcon}/>
+                <Text style={styles.title_text}>企业信息</Text>
+            </View>
+            <CompanyInfos style={{marginBottom:17}}/>
+            </View>
+
+            <View style={[styles.content_block,styles.content_block2]}>
+            <View style={styles.block_title}>
+                <Text style={styles.title_redIcon}/>
+                <Text style={styles.title_text}>成果展示</Text>
+            </View>
+            <CompanyInfos style={{marginBottom:17}}/>
+            </View>
+
         </View>
     </ScrollView>
       </View>
@@ -239,27 +260,26 @@ const styles = StyleSheet.create({
   bannerBox:{
     height: width*40/75,
   },
-    wrapper: {
+  wrapper: {
     width,
-    },
-    slide: {
+  },
+  slide: {
     flex: 1,
     justifyContent: 'center',
     backgroundColor: 'transparent'
   },  
-    bannerImg: {
+  bannerImg: {
       height: width*40/75,
       width
-    },
-    textBox:{
+  },
+  textBox:{
     width,
     height:50,
     backgroundColor:'#000',
     opacity:0.6,
     position:'absolute',
     bottom:0,
-
-    },
+  },
     bannerText:{
     marginLeft:15,
     height:50,
@@ -270,12 +290,12 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     textAlignVertical:'center',
     },
-    paginationStyle: {
+  paginationStyle: {
       bottom:20,
       left:null,
       right:10,
     },
-    dotStyle: {
+  dotStyle: {
         width: 7,
         height: 7,
         backgroundColor:'#fff',
@@ -283,38 +303,43 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         marginRight:10,   
     },
-    activeDotStyle: {
+  activeDotStyle: {
         width: 7,
         height: 7,
         backgroundColor:'#de1d21',
         borderRadius: 4,
         marginRight:10,   
     },
-    content:{
+  content:{
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor:'#efefef'
     },
-    content_block:{
+  content_block:{
       backgroundColor:'#fff',
       width,
-      paddingTop:15,
+      paddingTop:20,
+      paddingBottom:22,
       
     },
-    block_title:{
+  content_block2:{
+      marginTop:6,
+      height:300,
+    },
+  block_title:{
       marginLeft:15,
       flexDirection:'row',
       // justifyContent:'center',
        alignItems:'center',
     },
-    title_redIcon:{
+  title_redIcon:{
       width: 4,
       height: 12,
       borderRadius: 2,
       backgroundColor: commonStyle.themeColor,
       marginRight:6
     },
-    title_text:{
+  title_text:{
       fontFamily: commonStyle.PFregular,
       fontSize: commonStyle.h31Size,
       color: commonStyle.themeColor
