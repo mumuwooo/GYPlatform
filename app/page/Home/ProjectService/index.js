@@ -18,23 +18,17 @@ handleSubmenuShow=()=>{
               <View style={styles.item_row}>
 
                 <View style={styles.item_each}>
-                  <View style={styles.icon_bg}>
-                  <IconFont name='&#xe61f;' size={16}/>
-                  </View>
+                  <IconFont name='&#xe631;' size={22} color={commonStyle.orangeColor}/>
                   <Text style={styles.icon_text}>投资在线审批服务</Text>
                 </View>
 
                 <View style={styles.item_each}>
-                  <View style={styles.icon_bg}>
-                  <IconFont name='&#xe61f;' size={16}/>
-                  </View>
+                  <IconFont name='&#xe629;' size={22} color={commonStyle.orangeColor}/>
                   <Text style={styles.icon_text}>项目申报</Text>
                 </View>
 
                 <View style={styles.item_each}>
-                  <View style={styles.icon_bg}>
-                  <IconFont name='&#xe61f;' size={16}/>
-                  </View>
+                  <IconFont name='&#xe62d;' size={22} color={commonStyle.orangeColor}/>
                   <Text style={styles.icon_text}>建设项目协调服务</Text>
                 </View>
               </View>
@@ -50,11 +44,7 @@ const styles = StyleSheet.create({
   },
   content_block:{
     backgroundColor:'#e9e9e9',
-    // borderStyle: "solid",
-    // borderWidth: 1,
-    // borderColor: "#d5d5d5",
     width:width*0.9,
-    // borderRadius:5,
     paddingHorizontal:13,
     paddingVertical:20,
     
@@ -64,24 +54,9 @@ const styles = StyleSheet.create({
    justifyContent:'space-between',
     // marginBottom:12,
   },
-  // item_row2:{
-  //   marginBottom:0,
-  //   justifyContent:'flex-start',
-  // },
   item_each:{
-    // flex:1,
-    flexDirection:'row'
-  },
-  // item_each2:{
-  //   flex:0.5
-  // },
-  icon_bg:{
-    width: 18,
-    height: 18,
-    backgroundColor: commonStyle.orangeColor,
-    borderRadius:9,
-    justifyContent:'center',
-    alignItems:'center'
+    flexDirection:'row',
+    alignItems:'center',
   },
   icon_text:{
     fontFamily: commonStyle.PFregular,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import { connect } from 'react-redux'
 
 import { Button } from '../../components'
@@ -11,10 +11,9 @@ class Account extends Component {
   static navigationOptions = {
     tabBarLabel: '我的',
     tabBarIcon: ({ focused, tintColor }) => (
-      <Image
-        style={[styles.icon, { tintColor: focused ? '#d81519' : 'gray' }]}
-        source={require('../../assets/images/person.png')}
-      />
+      focused?<Text style={{fontFamily:'iconfont',fontSize:26,color:'#d81519'}}>&#xe64d;</Text>
+      :
+      <Text style={{fontFamily:'iconfont',fontSize:26,color:'#353434'}}>&#xe63b;</Text>
     ),
   }
 

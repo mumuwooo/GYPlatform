@@ -15,9 +15,9 @@ class InvestZH extends Component {
       //   style={[styles.icon, { tintColor: focused ? tintColor : 'gray' }]}
       //   source={require('../../assets/images/house.png')}
       // />
-            focused?<Text style={{fontFamily:'iconfont',fontSize:24,color:'#d81519'}}>&#xe62f;</Text>
+            focused?<Text style={{fontFamily:'iconfont',fontSize:26,color:'#d81519'}}>&#xe64a;</Text>
       :
-      <Text style={{fontFamily:'iconfont',fontSize:24,color:'#353434'}}>&#xe62f;</Text>
+      <Text style={{fontFamily:'iconfont',fontSize:26,color:'#353434'}}>&#xe63a;</Text>
 
     ),
   }

@@ -18,67 +18,51 @@ handleSubmenuShow=()=>{
               <View style={styles.item_row}>
 
                 <View style={styles.item_each}>
-                  <View style={styles.icon_bg}>
-                  <IconFont name='&#xe61f;' size={16}/>
-                  </View>
+                  <IconFont name='&#xe624;' size={22} color={commonStyle.blueColor}/>
                   <Text style={styles.icon_text}>企业运行分析</Text>
                 </View>
 
                 <View style={styles.item_each}>
-                  <View style={styles.icon_bg}>
-                  <IconFont name='&#xe61f;' size={16}/>
-                  </View>
+                  <IconFont name='&#xe62c;' size={22} color={commonStyle.blueColor}/>
                   <Text style={styles.icon_text}>要素保障服务</Text>
                 </View>
 
                 <View style={styles.item_each}>
-                  <View style={styles.icon_bg}>
-                  <IconFont name='&#xe61f;' size={16}/>
-                  </View>
+                  <IconFont name='&#xe628;' size={22} color={commonStyle.blueColor}/>
                   <Text style={styles.icon_text}>社保服务直通车</Text>
                 </View>
               </View>
 
-              <View style={styles.item_row}>
+               <View style={styles.item_row}>
 
                 <View style={styles.item_each}>
-                  <View style={styles.icon_bg}>
-                  <IconFont name='&#xe61f;' size={16}/>
-                  </View>
+                  <IconFont name='&#xe626;' size={22} color={commonStyle.blueColor}/>
                   <Text style={styles.icon_text}>税务服务直通车</Text>
                 </View>
 
                 <View style={styles.item_each}>
-                  <View style={styles.icon_bg}>
-                  <IconFont name='&#xe61f;' size={16}/>
-                  </View>
+                  <IconFont name='&#xe625;' size={22} color={commonStyle.blueColor}/>
                   <Text style={styles.icon_text}>行政审批事项</Text>
                 </View>
 
                 <View style={styles.item_each}>
-                  <View style={styles.icon_bg}>
-                  <IconFont name='&#xe61f;' size={16}/>
-                  </View>
+                  <IconFont name='&#xe62a;' size={22} color={commonStyle.blueColor}/>
                   <Text style={styles.icon_text}>四上企业申报</Text>
                 </View>
                 </View>
 
                 <View style={[styles.item_row,styles.item_row2]}>
                 <View style={[styles.item_each,styles.item_each2]}>
-                  <View style={styles.icon_bg}>
-                  <IconFont name='&#xe61f;' size={16}/>
-                  </View>
+                  <IconFont name='&#xe627;' size={22} color={commonStyle.blueColor}/>
                   <Text style={styles.icon_text}>法律援助服务</Text>
                 </View>
 
                 <View style={styles.item_each}>
-                  <View style={styles.icon_bg}>
-                  <IconFont name='&#xe61f;' size={16}/>
-                  </View>
+                  <IconFont name='&#xe62b;' size={22} color={commonStyle.blueColor}/>
                   <Text style={styles.icon_text}>我要诉求</Text>
                 </View>
 
-                </View>
+                </View> 
             </Popover>
     </View>
 )
@@ -111,18 +95,11 @@ const styles = StyleSheet.create({
   },
   item_each:{
     flex:1,
-    flexDirection:'row'
+    flexDirection:'row',
+    alignItems:'center',
   },
   item_each2:{
     flex:0.5
-  },
-  icon_bg:{
-    width: 18,
-    height: 18,
-    backgroundColor: commonStyle.blueColor,
-    borderRadius:9,
-    justifyContent:'center',
-    alignItems:'center'
   },
   icon_text:{
     fontFamily: commonStyle.PFregular,

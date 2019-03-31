@@ -18,23 +18,17 @@ handleSubmenuShow=()=>{
               <View style={styles.item_row}>
 
                 <View style={styles.item_each}>
-                  <View style={styles.icon_bg}>
-                  <IconFont name='&#xe61f;' size={16}/>
-                  </View>
+                  <IconFont name='&#xe630;' size={22} color={commonStyle.pinkColor}/>
                   <Text style={styles.icon_text}>专利申报服务</Text>
                 </View>
 
                 <View style={styles.item_each}>
-                  <View style={styles.icon_bg}>
-                  <IconFont name='&#xe61f;' size={16}/>
-                  </View>
+                  <IconFont name='&#xe62e;' size={22} color={commonStyle.pinkColor}/>
                   <Text style={styles.icon_text}>科技项目服务</Text>
                 </View>
 
                 <View style={styles.item_each}>
-                  <View style={styles.icon_bg}>
-                  <IconFont name='&#xe61f;' size={16}/>
-                  </View>
+                  <IconFont name='&#xe633;' size={22} color={commonStyle.pinkColor}/>
                   <Text style={styles.icon_text}>科技成果服务</Text>
                 </View>
               </View>
@@ -50,11 +44,7 @@ const styles = StyleSheet.create({
   },
   content_block:{
     backgroundColor:'#e9e9e9',
-    // borderStyle: "solid",
-    // borderWidth: 1,
-    // borderColor: "#d5d5d5",
     width:width*0.9,
-    // borderRadius:5,
     paddingHorizontal:13,
     paddingVertical:20,
     
@@ -64,16 +54,8 @@ const styles = StyleSheet.create({
    justifyContent:'space-between',
   },
   item_each:{
-    flexDirection:'row'
-  },
-
-  icon_bg:{
-    width: 18,
-    height: 18,
-    backgroundColor: commonStyle.pinkColor,
-    borderRadius:9,
-    justifyContent:'center',
-    alignItems:'center'
+    flexDirection:'row',
+    alignItems:'center',
   },
   icon_text:{
     fontFamily: commonStyle.PFregular,

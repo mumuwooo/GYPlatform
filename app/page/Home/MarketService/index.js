@@ -18,16 +18,12 @@ handleSubmenuShow=()=>{
               <View style={styles.item_row}>
 
                 <View style={styles.item_each}>
-                  <View style={styles.icon_bg}>
-                  <IconFont name='&#xe61f;' size={16}/>
-                  </View>
+                  <IconFont name='&#xe61f;' size={22} color={commonStyle.redColor}/>
                   <Text style={styles.icon_text}>市场开拓</Text>
                 </View>
 
                 <View style={styles.item_each}>
-                  <View style={styles.icon_bg}>
-                  <IconFont name='&#xe61f;' size={16}/>
-                  </View>
+                  <IconFont name='&#xe632;' size={22} color={commonStyle.redColor}/>
                   <Text style={styles.icon_text}>金字招牌工程</Text>
                 </View>
               </View>
@@ -43,31 +39,18 @@ const styles = StyleSheet.create({
   },
   content_block:{
     backgroundColor:'#e9e9e9',
-    // borderStyle: "solid",
-    // borderWidth: 1,
-    // borderColor: "#d5d5d5",
     width:width*0.9,
-    // borderRadius:5,
     paddingHorizontal:13,
     paddingVertical:20,
     
   },
   item_row:{
     flexDirection:'row',
-  //  justifyContent:'space-between',
   },
   item_each:{
     flexDirection:'row',
+    alignItems:'center',
     flex:0.33
-  },
-
-  icon_bg:{
-    width: 18,
-    height: 18,
-    backgroundColor: commonStyle.redColor,
-    borderRadius:9,
-    justifyContent:'center',
-    alignItems:'center'
   },
   icon_text:{
     fontFamily: commonStyle.PFregular,

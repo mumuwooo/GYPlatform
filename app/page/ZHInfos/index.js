@@ -16,9 +16,9 @@ class ZHInfos extends Component {
   static navigationOptions = {
     tabBarLabel: '昭化资讯',
     tabBarIcon: ({ focused, tintColor }) => (
-      focused?<Text style={{fontFamily:'iconfont',fontSize:24,color:'#d81519'}}>&#xe62d;</Text>
+      focused?<Text style={{fontFamily:'iconfont',fontSize:26,color:'#d81519'}}>&#xe654;</Text>
       :
-      <Text style={{fontFamily:'iconfont',fontSize:24,color:'#353434'}}>&#xe62d;</Text>
+      <Text style={{fontFamily:'iconfont',fontSize:26,color:'#353434'}}>&#xe64e;</Text>
 
     ),
   }

@@ -11,6 +11,8 @@ import BankService from './BankService'
 import MarketService from './MarketService'
 import PolicyService from './PolicyService'
 import CompanyInfos from './CompanyInfos'
+import AchiveInfos from './AchiveInfos'
+
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
 const bannerImg=require('../../assets/images/banner1.png')
@@ -19,15 +21,12 @@ const bannerImg=require('../../assets/images/banner1.png')
 class Home extends Component {
 
   static navigationOptions = {
-    tabBarLabel: '首页',
+    tabBarLabel: '6S服务',
     tabBarIcon: ({ focused, tintColor }) => (
-      // <Image
-      //   style={[styles.icon, { tintColor: focused ? tintColor : 'gray' }]}
-      //   source={require('../../assets/images/house.png')}
-      // />
-      focused?<Text style={{fontFamily:'iconfont',fontSize:24,color:'#d81519'}}>&#xe624;</Text>
+      focused?<Text style={{fontFamily:'iconfont',fontSize:26,color:'#d81519'}}>&#xe64b;</Text>
       :
-      <Text style={{fontFamily:'iconfont',fontSize:24,color:'#353434'}}>&#xe624;</Text>
+      <Text style={{fontFamily:'iconfont',fontSize:26,color:'#353434'}}>&#xe638;</Text>
+
     ),
   }
 
@@ -164,23 +163,23 @@ renderBanner() {
               </View>
               <View style={styles.item_row}>
                   <Touchable style={styles.item_button} onPress={()=>this.handleSubmenuShow(1)}>
-                  <View style={styles.item_iconbg}>
-                    <IconFont name='&#xe61a;' size={60} /> 
-                  </View>
+                  {/* <View style={styles.item_iconbg}> */}
+                    <IconFont name='&#xe658;' size={70} color={commonStyle.blueColor}/> 
+                  {/* </View> */}
                   <Text style={styles.item_title}>企业运行服务</Text>
                   </Touchable>
 
                   <Touchable style={styles.item_button} onPress={()=>this.handleSubmenuShow(2)}>
-                  <View style={[styles.item_iconbg,styles.item_iconbg2]}>
-                    <IconFont name='&#xe61a;' size={60} /> 
-                  </View>
+                  {/* <View style={[styles.item_iconbg,styles.item_iconbg2]}> */}
+                    <IconFont name='&#xe64f;' size={70} color={commonStyle.orangeColor}/> 
+                  {/* </View> */}
                   <Text style={styles.item_title}>项目推进服务</Text>
                   </Touchable>
 
                   <Touchable style={styles.item_button} onPress={()=>this.handleSubmenuShow(3)}>
-                  <View style={[styles.item_iconbg,styles.item_iconbg3]}>
-                    <IconFont name='&#xe61a;' size={60} /> 
-                  </View>
+                  {/* <View style={[styles.item_iconbg,styles.item_iconbg3]}> */}
+                    <IconFont name='&#xe653;' size={70} color={commonStyle.pinkColor}/> 
+                  {/* </View> */}
                   <Text style={styles.item_title}>科技创新服务</Text>
                   </Touchable>
               </View>
@@ -197,23 +196,23 @@ renderBanner() {
 
               <View style={styles.item_row}>
                   <Touchable style={styles.item_button} onPress={()=>this.handleSubmenuShow(4)}>
-                  <View style={[styles.item_iconbg,styles.item_iconbg4]}>
-                    <IconFont name='&#xe61a;' size={60} /> 
-                  </View>
+                  {/* <View style={[styles.item_iconbg,styles.item_iconbg4]}> */}
+                    <IconFont name='&#xe651;' size={70} color={commonStyle.oceanColor}/> 
+                  {/* </View> */}
                   <Text style={styles.item_title}>金融与证券服务</Text>
                   </Touchable>
 
                   <Touchable style={styles.item_button} onPress={()=>this.handleSubmenuShow(5)}>
-                  <View style={[styles.item_iconbg,styles.item_iconbg5]}>
-                    <IconFont name='&#xe61a;' size={60} /> 
-                  </View>
+                  {/* <View style={[styles.item_iconbg,styles.item_iconbg5]}> */}
+                    <IconFont name='&#xe650;' size={70} color={commonStyle.redColor}/> 
+                  {/* </View> */}
                   <Text style={styles.item_title}>品牌与市场促进服务</Text>
                   </Touchable>
 
                   <Touchable style={styles.item_button} onPress={()=>this.handleSubmenuShow(6)}>
-                  <View style={[styles.item_iconbg,styles.item_iconbg6]}>
-                    <IconFont name='&#xe61a;' size={60} /> 
-                  </View>
+                  {/* <View style={[styles.item_iconbg,styles.item_iconbg6]}> */}
+                    <IconFont name='&#xe655;' size={70} color={commonStyle.purpleColor}/> 
+                  {/* </View> */}
                   <Text style={styles.item_title}>政策咨询服务</Text>
                   </Touchable>
               </View>
@@ -230,19 +229,31 @@ renderBanner() {
             </View>
 
             <View style={[styles.content_block,styles.content_block2]}>
-            <View style={styles.block_title}>
+            <View style={styles.block_title2}>
+                <View style={styles.title_left}>
                 <Text style={styles.title_redIcon}/>
                 <Text style={styles.title_text}>企业信息</Text>
+                </View>
+                <View style={styles.title_right}>
+                <Text style={[styles.title_text,styles.title_text2]}>更多 </Text>
+                <Text style={[styles.title_text,styles.title_text2]}>{`>`}</Text>
+                </View>
             </View>
-            <CompanyInfos style={{marginBottom:17}}/>
+            <CompanyInfos />
             </View>
 
             <View style={[styles.content_block,styles.content_block2]}>
-            <View style={styles.block_title}>
+            <View style={styles.block_title2}>
+            <View style={styles.title_left}>
                 <Text style={styles.title_redIcon}/>
                 <Text style={styles.title_text}>成果展示</Text>
+                </View>
+                <View style={styles.title_right}>
+                <Text style={[styles.title_text,styles.title_text2]}>更多 </Text>
+                <Text style={[styles.title_text,styles.title_text2]}>{`>`}</Text>
+                </View>
             </View>
-            <CompanyInfos style={{marginBottom:17}}/>
+            <AchiveInfos />
             </View>
 
         </View>
@@ -320,17 +331,25 @@ const styles = StyleSheet.create({
       width,
       paddingTop:20,
       paddingBottom:22,
-      
     },
   content_block2:{
       marginTop:6,
-      height:300,
+      paddingBottom:11
+      // height:300,
     },
   block_title:{
       marginLeft:15,
       flexDirection:'row',
-      // justifyContent:'center',
-       alignItems:'center',
+      alignItems:'center',
+    },
+    block_title2:{
+      flexDirection:'row',
+      paddingHorizontal:16,
+      justifyContent:'space-between',
+      alignItems:'center'
+    },
+    title_left:{
+      flexDirection:'row'  
     },
   title_redIcon:{
       width: 4,
@@ -339,18 +358,26 @@ const styles = StyleSheet.create({
       backgroundColor: commonStyle.themeColor,
       marginRight:6
     },
-  title_text:{
+    title_text:{
       fontFamily: commonStyle.PFregular,
       fontSize: commonStyle.h31Size,
       color: commonStyle.themeColor
     },
+    title_text2:{
+      color:commonStyle.h2Color,
+    },
+    title_right:{
+      flexDirection:'row',
+      alignItems:'center',
+    },  
     item_row:{
       flexDirection:'row',
       // justifyContent:'space-around'
     },
     item_button:{
       flex:1,
-      alignItems:'center'
+      alignItems:'center',
+      marginTop:18,
     },
     item_title:{
       fontFamily: commonStyle.PFregular,
@@ -359,12 +386,9 @@ const styles = StyleSheet.create({
       marginTop:5,
     },
     item_iconbg:{
-      marginTop:18,
-      width: 61,
-      height: 61,
       backgroundColor: commonStyle.blueColor,
       borderRadius:30,
-       alignItems:'center',
+      alignItems:'center',
       justifyContent:'center',
     },
     item_iconbg2:{
