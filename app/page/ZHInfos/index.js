@@ -13,15 +13,6 @@ import { NavigationActions } from '../../utils'
 const {width,height}=Dimensions.get('window')
 @connect()
 class ZHInfos extends Component {
-  static navigationOptions = {
-    tabBarLabel: '昭化资讯',
-    tabBarIcon: ({ focused, tintColor }) => (
-      focused?<Text style={{fontFamily:'iconfont',fontSize:26,color:'#d81519'}}>&#xe654;</Text>
-      :
-      <Text style={{fontFamily:'iconfont',fontSize:26,color:'#353434'}}>&#xe64e;</Text>
-
-    ),
-  }
 
   gotoDetail = () => {
     this.props.dispatch(NavigationActions.navigate({ routeName: 'Sorry' }))

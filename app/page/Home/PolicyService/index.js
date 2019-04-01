@@ -18,17 +18,17 @@ handleSubmenuShow=()=>{
               <View style={styles.item_row}>
 
                 <View style={styles.item_each}>
-                  <IconFont name='&#xe61f;' size={22} color={commonStyle.purpleColor}/>
+                  <IconFont name='&#xe635;' size={22} color={commonStyle.purpleColor}/>
                   <Text style={styles.icon_text}>文件库</Text>
                 </View>
 
                 <View style={styles.item_each}>
-                  <IconFont name='&#xe61f;' size={22} color={commonStyle.purpleColor}/>
+                  <IconFont name='&#xe639;' size={22} color={commonStyle.purpleColor}/>
                   <Text style={styles.icon_text}>专题政策</Text>
                 </View>
 
                 <View style={styles.item_each}>
-                  <IconFont name='&#xe61f;' size={22} color={commonStyle.purpleColor}/>
+                  <IconFont name='&#xe637;' size={22} color={commonStyle.purpleColor}/>
                   <Text style={styles.icon_text}>法律法规</Text>
                 </View>
               </View>

@@ -18,7 +18,7 @@ handleSubmenuShow=()=>{
               <View style={styles.item_row}>
 
                 <View style={styles.item_each}>
-                  <IconFont name='&#xe61f;' size={22} color={commonStyle.redColor}/>
+                  <IconFont name='&#xe636;' size={22} color={commonStyle.redColor}/>
                   <Text style={styles.icon_text}>市场开拓</Text>
                 </View>
 

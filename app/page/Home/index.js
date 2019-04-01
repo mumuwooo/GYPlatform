@@ -19,17 +19,6 @@ const bannerImg=require('../../assets/images/banner1.png')
 
 @connect()
 class Home extends Component {
-
-  static navigationOptions = {
-    tabBarLabel: '6S服务',
-    tabBarIcon: ({ focused, tintColor }) => (
-      focused?<Text style={{fontFamily:'iconfont',fontSize:26,color:'#d81519'}}>&#xe64b;</Text>
-      :
-      <Text style={{fontFamily:'iconfont',fontSize:26,color:'#353434'}}>&#xe638;</Text>
-
-    ),
-  }
-
   constructor(props) {
    super(props);
     this.state = {

@@ -8,7 +8,7 @@ import {commonStyle} from '../utils'
 export const Button = ({ text, children, style,type,size,disabled, gray, textStyle, ...rest }) => {
  
   return (
-  <Touchable style={[styles.button,style,btnType(type,disabled,gray),btnSize(size,disabled)]} {...rest} activeOpacity={disabled?1:0.6} onPress={disabled?()=>{}:rest.onPress}>
+  <Touchable style={[styles.button,style,btnType(type,disabled,gray),btnSize(size,disabled)]} {...rest} activeOpacity={disabled?1:0.8} onPress={disabled?()=>{}:rest.onPress}>
     <Text style={[styles.text, textStyle,textType(type,disabled),textSize(size,disabled)]}>{text || children}</Text>
   </Touchable>
 )}
@@ -122,7 +122,7 @@ const styles = {
   },
   text: {
     fontSize: 16,
-    color: '#037aff',
+    color: '#000',
   }
 }
 export default Button

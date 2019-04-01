@@ -7,16 +7,8 @@ import { Button } from '../../components'
 import { createAction, NavigationActions } from '../../utils'
 
 @connect(({ app }) => ({ ...app }))
-class Account extends Component {
-  static navigationOptions = {
-    tabBarLabel: '我的',
-    tabBarIcon: ({ focused, tintColor }) => (
-      focused?<Text style={{fontFamily:'iconfont',fontSize:26,color:'#d81519'}}>&#xe64d;</Text>
-      :
-      <Text style={{fontFamily:'iconfont',fontSize:26,color:'#353434'}}>&#xe63b;</Text>
-    ),
-  }
-
+class Personal extends Component {
+  
   gotoLogin = () => {
     this.props.dispatch(NavigationActions.navigate({ routeName: 'Login' }))
   }
@@ -51,4 +43,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Account
+export default Personal

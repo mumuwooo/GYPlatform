@@ -12,21 +12,89 @@ import {
 } from 'react-navigation-redux-helpers'
 import { connect } from 'react-redux'
 
+import IconFont from './components/IconFont'
+import {commonStyle} from './utils'
 import Loading from './page/Loading'
 import Login from './page/Login'
 import Home from './page/Home'
 import ZHInfos from './page/ZHInfos'
 import InvestZH from './page/InvestZH'
-import Account from './page/My'
+import Personal from './page/My'
 import Detail from './page/Detail'
 import Sorry from './page/others/sorry'
 
-const HomeNavigator = createBottomTabNavigator({
-  Home: { screen: Home },
-  InvestZH: { screen: InvestZH },
-  ZHInfos: { screen: ZHInfos },
-  Account: { screen: Account },
-})
+
+const {iconSize} = commonStyle
+const styles = {
+  tabBarIcon:commonStyle.tabBarIconStyle,
+  tabBarStyle:commonStyle.tabBarStyle,
+  mime:{position: 'relative',
+  width:30,height: 30,alignItems: 'center',justifyContent: 'center',},
+  
+}
+
+const HomeNavigator = createBottomTabNavigator(
+  {
+  Home: { screen: Home,
+    navigationOptions: {
+      tabBarLabel: '6S服务',
+      tabBarIcon: ({ focused }) => (
+        focused?
+        <IconFont name="&#xe64b;" size={iconSize} color={commonStyle.themeColor} style={styles.tabBarIcon} />
+      :
+        <IconFont name="&#xe638;" size={iconSize} color='gray' style={styles.tabBarIcon} />
+      )
+      }
+    },
+  InvestZH: { screen: InvestZH,
+    navigationOptions: {
+      tabBarLabel: '投资昭化',
+      tabBarIcon: ({ focused }) => (
+        focused?
+        <IconFont name="&#xe64a;" size={iconSize} color={commonStyle.themeColor} style={styles.tabBarIcon} />
+      :
+        <IconFont name="&#xe63a;" size={iconSize} color='gray' style={styles.tabBarIcon} />
+      )
+      }
+},
+  ZHInfos: { screen: ZHInfos,
+    navigationOptions: {
+      tabBarLabel: '昭化资讯',
+      tabBarIcon: ({ focused }) => (
+        focused?
+        <IconFont name="&#xe654;" size={iconSize} color={commonStyle.themeColor} style={styles.tabBarIcon} />
+      :
+        <IconFont name="&#xe64e;" size={iconSize} color='gray' style={styles.tabBarIcon} />
+      )
+      }
+  },
+  Personal: { screen: Personal,
+    navigationOptions: {
+      tabBarLabel: '用户中心',
+      tabBarIcon: ({ focused }) => (
+        focused?
+        <IconFont name="&#xe64d;" size={iconSize} color={commonStyle.themeColor} style={styles.tabBarIcon} />
+      :
+        <IconFont name="&#xe63b;" size={iconSize} color='gray' style={styles.tabBarIcon} />
+      )
+      } 
+    },
+},
+{
+  initialRouteName: 'Home',    // tabBarPosition: 'bottom',// tabbar放在底部
+  swipeEnabled: true,// 滑动切换
+  animationEnabled: true,// 切换动画
+  lazy: false,
+  tabBarOptions: {
+    activeTintColor: commonStyle.themeColor,
+    style:styles.tabBarStyle,
+    labelStyle: {
+      fontSize: commonStyle.tabBarFontSize, // 文字大小
+    }
+  },
+  indicatorStyle: { height: 0 }
+}
+)
 
 HomeNavigator.navigationOptions = ({ navigation }) => {
   const { routeName } = navigation.state.routes[navigation.state.index]
