@@ -19,7 +19,7 @@ import Login from './page/Login'
 import Home from './page/Home'
 import ZHInfos from './page/ZHInfos'
 import InvestZH from './page/InvestZH'
-import Personal from './page/My'
+import Personal from './page/Personal'
 import Detail from './page/Detail'
 import Sorry from './page/others/sorry'
 
@@ -96,40 +96,40 @@ const HomeNavigator = createBottomTabNavigator(
 }
 )
 
-HomeNavigator.navigationOptions = ({ navigation }) => {
-  const { routeName } = navigation.state.routes[navigation.state.index]
-  return {
-     headerTitle: <Image source={require('./assets/images/logo.png')} style={{ width:180, height:30, flex: 1,}} resizeMode="contain" />,
-    headerStyle: {
-      backgroundColor: '#FFF',
-    },
-    // headerTintColor: '#fff',
+// HomeNavigator.navigationOptions = ({ navigation }) => {
+//   const { routeName } = navigation.state.routes[navigation.state.index]
+//   return {
+//      headerTitle: <Image source={require('./assets/images/logo.png')} style={{ width:180, height:30, flex: 1,}} resizeMode="contain" />,
+//     headerStyle: {
+//       backgroundColor: '#FFF',
+//     },
+//     // headerTintColor: '#fff',
 
-  }
-}
+//   }
+// }
 
-const MainNavigator = createStackNavigator(
-  {
-    HomeNavigator: { screen: HomeNavigator },
-    Detail: { screen: Detail },
-  },
-  {
-    headerMode: 'float',
-  }
-)
+// const MainNavigator = createStackNavigator(
+//   {
+//     HomeNavigator: { screen: HomeNavigator },
+//     Detail: { screen: Detail },
+//   },
+//   {
+//     headerMode: 'float',
+//   }
+// )
 
 const AppNavigator = createStackNavigator(
   {
-    Main: { screen: MainNavigator },
-    Login: { screen: Login },
-    Sorry:{screen: Sorry}
+    Main: { screen: HomeNavigator, navigationOptions: { header: null } },
+    Login: { screen: Login,navigationOptions: { header: null } },
+    Sorry:{screen: Sorry,navigationOptions: { header: null }}
 
   },
   {
-    headerMode: 'none',
+    headerMode: null,
     mode: 'modal',
     navigationOptions: {
-      gesturesEnabled: false,
+      gesturesEnabled: true,  // 是否允许右滑返回
     },
     transitionConfig: () => ({
       transitionSpec: {

@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
-import { StyleSheet, View, Image,Text,Dimensions,ImageBackground,ScrollView } from 'react-native'
+import React from 'react'
+import { StyleSheet, View, Image,Text,Dimensions,ImageBackground,ScrollView,StatusBar } from 'react-native'
 import { connect } from 'react-redux'
+import { NavigationBar, NavigationPage } from 'teaset'
 import Swiper from 'react-native-swiper'
-import { Touchable,Button,IconFont } from '../../components'
+import { Touchable,Button,IconFont,NavBar } from '../../components'
 import { NavigationActions, commonStyle } from '../../utils'
 import CompanyService from './CompanyService'
 import ProjectService from './ProjectService'
@@ -18,7 +19,7 @@ const { width, height } = Dimensions.get('window');
 const bannerImg=require('../../assets/images/banner1.png')
 
 @connect()
-class Home extends Component {
+class Home extends NavigationPage {
   constructor(props) {
    super(props);
     this.state = {
@@ -31,7 +32,25 @@ class Home extends Component {
     policyShow:false,
  };
 }
-
+renderNavigationBar() {
+  return (
+    <NavigationBar style={{width,backgroundColor:commonStyle.themeColor,}}
+    title={
+      <Image source={require('../../assets/images/logo.png')} style={{ width:180, height:30,marginBottom:10}} resizeMode="contain" />
+    }
+      />
+    // <NavigationBar
+    // style={{ backgroundColor:'#fff',paddingLeft:10,paddingRight:10}}
+    // type='ios'
+    // tintColor='white'
+    // title={
+    //    <View style={{ flex: 1,paddingVertical:8, paddingHorizontal: 4, alignItems: 'center' }}>
+    //     <Image source={require('../../assets/images/logo.png')} style={{ width:180, height:30,}} resizeMode="contain" />        
+    //      </View>
+    // }
+    // />
+  )
+}
 componentDidMount() {
   setTimeout(()=>{
     this.setTimeout = this.setState({swiperShow:true});
@@ -131,7 +150,7 @@ renderBanner() {
         }
     }
 
-  render() {
+  renderPage() {
     const {companyShow, projectShow, techShow, bankShow, marketShow, policyShow}=this.state
     return (
       <View style={styles.container}>
@@ -338,7 +357,8 @@ const styles = StyleSheet.create({
       alignItems:'center'
     },
     title_left:{
-      flexDirection:'row'  
+      flexDirection:'row',
+      alignItems:'center'
     },
   title_redIcon:{
       width: 4,

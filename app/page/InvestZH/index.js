@@ -1,19 +1,23 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { StyleSheet, View, Image,Text } from 'react-native'
 import { connect } from 'react-redux'
-
-import { Button } from '../../components'
+import { NavigationPage } from 'teaset'
+import { Button,Divider, NavBar } from '../../components'
 
 import { NavigationActions } from '../../utils'
 
 @connect()
-class InvestZH extends Component {
+class InvestZH extends NavigationPage {
+  renderNavigationBar() {
+    return <NavBar title="投资昭化" />
+  }
+
 
   gotoDetail = () => {
     this.props.dispatch(NavigationActions.navigate({ routeName: 'Sorry' }))
   }
 
-  render() {
+  renderPage() {
     return (
       <View style={styles.container}>
         <Button text="Goto Detail" onPress={this.gotoDetail} />
