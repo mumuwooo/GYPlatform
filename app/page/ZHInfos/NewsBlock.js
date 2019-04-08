@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
   StyleSheet,
   Text,
@@ -13,21 +13,26 @@ import { Divider, Touchable, IconFont } from '../../components'
 
 const { width, height } = Dimensions.get('window');
 
-export const NewsBlock = ({
+const NewsBlock = ({
     text,
     data,
     style,
     type,
     size,
     disabled,
-    gray,
+    index,
     textStyle,
+    dispatch,
     ...rest
   }) => {
+   const gotoDetail=(index)=>{
+      dispatch(NavigationActions.navigate({ routeName: 'NewsDetail', params: { index } })
+      )
+    }
     // const dataImg={uri:data.img}
     const dataImg=require('../../assets/images/companginfos1.png')
     return (
-    <Touchable style={styles.eachitem} >
+    <Touchable style={styles.eachitem} onPress={()=>gotoDetail(index)}>
       <Image source={dataImg} style={styles.left_img} />
       <View style={styles.right_content}>
         <Text style={styles.right_title}>{data.title}</Text>
@@ -40,7 +45,7 @@ export const NewsBlock = ({
     )
   }
   
-  const styles = {
+  const styles = StyleSheet.create({
     eachitem: {
       flexDirection:'row',
       paddingLeft:14,
@@ -80,5 +85,7 @@ export const NewsBlock = ({
       color: commonStyle.h2Color,
       opacity: 0.8
     }
-  }
-  export default NewsBlock
+  })
+
+  export default connect()(NewsBlock)
+

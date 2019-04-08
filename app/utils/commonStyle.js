@@ -131,6 +131,7 @@ let commonStyle = {
     PFregular: 'PingFang-SC-Regular',
     PFbold: 'PingFang-SC-Bold',
     PFheavy: 'PingFang-SC-Heavy',
+    PFmedium:'PingFang-SC-Medium',
     Dbold: 'DIN-Bold',
     // Shouxie:'Lixuke',
     Shouxie:'Zhiyong Elegant',

@@ -20,6 +20,7 @@ import Home from './page/Home'
 import ZHInfos from './page/ZHInfos'
 import InvestZH from './page/InvestZH'
 import Personal from './page/Personal'
+import NewsDetail from './page/ZHInfos/NewsDetail'
 import Detail from './page/Detail'
 import Sorry from './page/others/sorry'
 
@@ -81,7 +82,7 @@ const HomeNavigator = createBottomTabNavigator(
     },
 },
 {
-  initialRouteName: 'Home',    // tabBarPosition: 'bottom',// tabbar放在底部
+  initialRouteName: 'ZHInfos',    // tabBarPosition: 'bottom',// tabbar放在底部
   swipeEnabled: true,// 滑动切换
   animationEnabled: true,// 切换动画
   lazy: false,
@@ -122,7 +123,8 @@ const AppNavigator = createStackNavigator(
   {
     Main: { screen: HomeNavigator, navigationOptions: { header: null } },
     Login: { screen: Login,navigationOptions: { header: null } },
-    Sorry:{screen: Sorry,navigationOptions: { header: null }}
+    Sorry:{screen: Sorry,navigationOptions: { header: null }},
+    NewsDetail:{screen: NewsDetail,navigationOptions: { header: null }},
 
   },
   {
