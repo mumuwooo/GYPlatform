@@ -82,7 +82,7 @@ const HomeNavigator = createBottomTabNavigator(
     },
 },
 {
-  initialRouteName: 'ZHInfos',    // tabBarPosition: 'bottom',// tabbar放在底部
+  initialRouteName: 'Personal',    // tabBarPosition: 'bottom',// tabbar放在底部
   swipeEnabled: true,// 滑动切换
   animationEnabled: true,// 切换动画
   lazy: false,
