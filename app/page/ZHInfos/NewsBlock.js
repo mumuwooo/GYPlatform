@@ -7,6 +7,7 @@ import {
   Image
 } from 'react-native'
 import { NavigationBar, NavigationPage, Button } from 'teaset'
+import moment from 'moment'
 import { connect } from 'react-redux'
 import { commonStyle, NavigationActions, Storage } from '../../utils'
 import { Divider, Touchable, IconFont } from '../../components'
@@ -35,9 +36,9 @@ const NewsBlock = ({
     <Touchable style={styles.eachitem} onPress={()=>gotoDetail(index)}>
       <Image source={dataImg} style={styles.left_img} />
       <View style={styles.right_content}>
-        <Text style={styles.right_title}>{data.title}</Text>
+        <Text style={styles.right_title}>{data.nTitle}</Text>
         <View style={styles.right_bottom}>
-          <Text style={styles.bottom_date}>{data.date}</Text>
+          <Text style={styles.bottom_date}>{moment(data.nAuditTime).format('YYYY-MM-DD')}</Text>
           <Text style={styles.bottom_source}>{data.source}</Text>
         </View>
       </View>

@@ -15,7 +15,7 @@ const { width, height } = Dimensions.get('window');
 
 const bannerImg=require('../../assets/images/banner1.png')
 
-@connect()
+@connect(({zhInfos})=>({zhInfos}))
 class ZHInfos extends NavigationPage {
   constructor(props) {
    super(props);
@@ -126,8 +126,8 @@ renderBanner() {
     }
 
 renderPage() {
-    const {companyShow, projectShow, techShow, bankShow, marketShow, policyShow}=this.state
-    return (
+    const {newsList}=this.props.zhInfos
+  return (
       <View style={styles.container}>
       <ScrollView style={{flex:1}}>
         {/* <Text style={{backgroundColor:'#ff5971',width:34,height:34,borderRadius:18,textAlign:'center',textAlignVertical:'center'}}>
@@ -144,8 +144,8 @@ renderPage() {
                   <Text style={styles.title_redIcon}/>
                   <Text style={styles.title_text}>昭化资讯</Text>
             </View>
-            {<FlatList
-            data={data}
+            {newsList&&<FlatList
+            data={newsList}
             keyExtractor={(item, index) => index.toString()}
             renderItem={this._renderItemView}
             // onRefresh={this._onRefresh}

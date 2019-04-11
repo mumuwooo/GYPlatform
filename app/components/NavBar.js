@@ -6,7 +6,7 @@ import {commonStyle} from '../utils/commonStyle'
 import IconFont from './IconFont'
 import Touchable from './Touchable';
 
-const NavBar = ({ title,leftView,rightView }) => (//leftView 默认为返回按钮
+const NavBar = ({ title,leftView,rightView, }) => (// leftView 默认为返回按钮
     <NavigationBar
     style={{ backgroundColor:commonStyle.themeColor,paddingLeft:10,paddingRight:10}}
     type='ios'

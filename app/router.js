@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { BackHandler, Animated, Easing,Image } from 'react-native'
+import { BackHandler, Animated, Easing,ToastAndroid } from 'react-native'
 import {
   createStackNavigator,
   createBottomTabNavigator,
@@ -24,6 +24,7 @@ import NewsDetail from './page/ZHInfos/NewsDetail'
 import Detail from './page/Detail'
 import Sorry from './page/others/sorry'
 
+let oldRoutes = []
 
 const {iconSize} = commonStyle
 const styles = {
@@ -82,7 +83,7 @@ const HomeNavigator = createBottomTabNavigator(
     },
 },
 {
-  initialRouteName: 'Personal',    // tabBarPosition: 'bottom',// tabbar放在底部
+  initialRouteName: 'Home',    // tabBarPosition: 'bottom',// tabbar放在底部
   swipeEnabled: true,// 滑动切换
   animationEnabled: true,// 切换动画
   lazy: false,
@@ -192,7 +193,15 @@ class Router extends PureComponent {
 
   backHandle = () => {
     const currentScreen = getActiveRouteName(this.props.router)
-    if (currentScreen === 'Login') {
+    if (currentScreen === 'Login' || currentScreen === 'Home') {
+      if (this.lastBackPressed && this.lastBackPressed + 2000 >= Date.now()) {
+        // 按第二次的时候，记录的时间+2000 >= 当前时间就可以退出
+        // 最近2秒内按过back键，可以退出应用。
+        BackHandler.exitApp() // 退出整个应用
+        return false
+      }
+      this.lastBackPressed = Date.now() // 按第一次的时候，记录时间
+      ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT) // 显示提示信息
       return true
     }
     if (currentScreen !== 'Home') {
@@ -204,7 +213,20 @@ class Router extends PureComponent {
 
   render() {
     const { app, dispatch, router } = this.props
-    if (app.loading) return <Loading />
+    // if (app.loading) return <Loading />
+    if (oldRoutes != router.routes) {
+      if (oldRoutes.length > router.routes.length) {
+        // 路由返回back
+        dispatch({ type: 'app/routesBack', routes: router.routes, oldRoutes })
+      } else {
+        // 路由跳转 navigate
+        dispatch({ type: 'app/routes', routes: router.routes })
+      }
+    } else {
+      // 路由重复
+      dispatch({ type: 'app/reRouter', routes: router.routes })
+    }
+    oldRoutes = router.routes
 
     return <App dispatch={dispatch} state={router} />
   }
