@@ -6,6 +6,7 @@ import ScrollableTabView, {ScrollableTabBar,} from 'react-native-scrollable-tab-
 
 import { Button,Divider, NavBar } from '../../components'
 import { NavigationActions, commonStyle } from '../../utils'
+import  EventsList  from "./EventsList";
 const { width, height } = Dimensions.get('window')
 
 @connect()
@@ -38,10 +39,7 @@ class InvestZH extends NavigationPage {
         tabBarTextStyle={styles.tabViewText}
       >
         <View style={styles.tabView_textStyle} tabLabel="昭化大事记">
-            <View>
-            <Text>昭化大事记</Text>
-            <Text>麻烦嵌套成组件写进来</Text>
-            </View>
+            <EventsList />
           </View>
           <View style={styles.tabView_textStyle} tabLabel="广元概况">
               <Text>广元概况</Text>
