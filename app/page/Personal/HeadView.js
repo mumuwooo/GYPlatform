@@ -11,7 +11,7 @@ import {
 } from 'react-native'
 import { Label } from 'teaset'
 
-import { commonStyle } from '../../utils'
+import { commonStyle, NavigationActions } from '../../utils'
 import { Touchable, } from '../../components'
 
 const isIOS = Platform.OS == 'ios'
@@ -36,7 +36,12 @@ class HeadView extends Component {
     this.state = { avatarSource: null, isModal: false }
   }
 
-
+  gotoNext=()=>{
+      this.navigateTo('Login')
+  }
+  navigateTo(routeName, params) {
+    this.props.dispatch( NavigationActions.navigate({ routeName, params }))
+  }
   render() {
     
     return (
@@ -45,7 +50,7 @@ class HeadView extends Component {
             <View style={styles.head_block}>
                 <Image source={require('../../assets/images/avatar.png')} style={{ width:107,height:107,borderRadius:53,marginLeft:33}}/>
                 <View style={styles.block_text}>
-                    <Text style={styles.text_top}>登录/注册</Text>
+                    <Text style={styles.text_top} onPress={this.gotoNext}>登录/注册</Text>
                     <Text style={styles.text_bottom}>登录后可使用更多功能</Text>
                 </View>
             </View>

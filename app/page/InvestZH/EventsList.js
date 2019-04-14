@@ -43,11 +43,7 @@ export default class EventsList extends Component {
           }}
           scrollEventThrottle={16}
           >
-          /**
-          |--------------------------------------------------
-          | 前景图需要切割，这样子不行，屏幕一变就烂了。
-          |--------------------------------------------------
-          */
+ 
             <ScaledImage getHeight={this._getFtHeight} uri={'https://s2.ax1x.com/2019/04/12/AqG5Ie.md.png'} width={width}>
               <View style={{ flexDirection: 'row', marginLeft:136, marginTop:73}}>
                 <View style={{width: 143, alignItems: 'center'}}>

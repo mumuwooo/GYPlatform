@@ -55,7 +55,7 @@ class NewsDetail extends NavigationPage {
             <View style={styles.content}>
             <HTML
             html={htmlContent}
-            imagesMaxWidth={width}
+            imagesMaxWidth={width*0.95}
             tagsStyles={{
               p: {
                 // fontFamily: "PingFang-SC-Medium",

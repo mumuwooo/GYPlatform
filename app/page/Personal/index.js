@@ -52,6 +52,26 @@ class Personal extends NavigationPage {
                 />
               }
             />
+          <RowLabel
+              title="修改密码"
+              icon={
+                <IconFont
+                  name="&#xe6f3;"
+                  size={commonStyle.h1Size}
+                  style={{ color: commonStyle.h1Color }}
+                />
+              }
+            />
+            <RowLabel
+              title="换绑手机"
+              icon={
+                <IconFont
+                  name="&#xe6f2;"
+                  size={commonStyle.h1Size}
+                  style={{ color: commonStyle.h1Color }}
+                />
+              }
+            />  
             <RowLabel
               title="帮助中心"
               icon={
@@ -101,7 +121,7 @@ const RowLabel = ({ icon, title, detail, ...rest }) => (
       <IconFont
         name="&#xe6eb;"
         style={styles.icon_right}
-        size={commonStyle.h3Size}
+        size={commonStyle.h4Size}
       />
     }
   />
@@ -156,6 +176,9 @@ const styles = StyleSheet.create({
     color: commonStyle.h4Color,
     fontFamily: commonStyle.PFregular,
     marginRight: 5,
+  },
+  icon_right:{
+    color:commonStyle.h2Color
   },
   button_logout: {
     alignSelf:'center',

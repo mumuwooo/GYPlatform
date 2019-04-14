@@ -35,7 +35,7 @@ class InvestZH extends NavigationPage {
         renderTabBar={() => <ScrollableTabBar style={styles.tabbar_view} />}
         tabBarUnderlineStyle={styles.tabView_lineStyle}
         tabBarActiveTextColor={commonStyle.themeColor}
-        tabBarInactiveTextColor={commonStyle.h4Color}
+        tabBarInactiveTextColor={commonStyle.h2Color}
         tabBarTextStyle={styles.tabViewText}
       >
         <View style={styles.tabView_textStyle} tabLabel="昭化大事记">
@@ -72,8 +72,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
   },
   tabViewText: {
-    fontFamily: commonStyle.PFbold,
-    fontSize: commonStyle.h2Size,
+    fontFamily: commonStyle.PFregular,
+    fontSize: commonStyle.h21Size,
   },
   tabView_textStyle: {
     alignItems: 'center',

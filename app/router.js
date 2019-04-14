@@ -15,7 +15,7 @@ import { connect } from 'react-redux'
 import IconFont from './components/IconFont'
 import {commonStyle} from './utils'
 import Loading from './page/Loading'
-import Login from './page/Login'
+import Login from './page/others/Login'
 import Home from './page/Home'
 import ZHInfos from './page/ZHInfos'
 import InvestZH from './page/InvestZH'
@@ -83,7 +83,7 @@ const HomeNavigator = createBottomTabNavigator(
     },
 },
 {
-  initialRouteName: 'Home',    // tabBarPosition: 'bottom',// tabbar放在底部
+  initialRouteName: 'Personal',    // tabBarPosition: 'bottom',// tabbar放在底部
   swipeEnabled: true,// 滑动切换
   animationEnabled: true,// 切换动画
   lazy: false,
