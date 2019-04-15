@@ -16,6 +16,7 @@ import IconFont from './components/IconFont'
 import {commonStyle} from './utils'
 import Loading from './page/Loading'
 import Login from './page/others/Login'
+import Register from './page/others/Register'
 import Home from './page/Home'
 import ZHInfos from './page/ZHInfos'
 import InvestZH from './page/InvestZH'
@@ -124,6 +125,7 @@ const AppNavigator = createStackNavigator(
   {
     Main: { screen: HomeNavigator, navigationOptions: { header: null } },
     Login: { screen: Login,navigationOptions: { header: null } },
+    Register: { screen: Register,navigationOptions: { header: null } },
     Sorry:{screen: Sorry,navigationOptions: { header: null }},
     NewsDetail:{screen: NewsDetail,navigationOptions: { header: null }},
 

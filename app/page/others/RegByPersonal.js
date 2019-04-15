@@ -12,21 +12,22 @@ import { Button, Toast, ModalIndicator } from 'teaset'
 import { commonStyle, NavigationActions, createAction } from '../../utils'
 import { IconFont } from '../../components'
 
-class LoginByPersonal extends Component {
+class RegByPersonal extends Component {
   constructor() {
     super()
     this.state = {
       isCleanShow: false,
       isShowPwd: true,
       // isLogin:false,
-      // inputNum:'43012119881108103x',
-      // inputPwd:'08103x'
-      // inputNum:'431126544554444',
-      // inputPwd:'554444',
-      // inputNum:'431126198855553333',
-      // inputPwd:'111111'
-      inputNum: window._IsRelease ? '' : '',
-      inputPwd: window._IsRelease ? '' : '',
+      // inputIDCard:'43012119881108103x',
+      // inputName:'08103x'
+      // inputIDCard:'431126544554444',
+      // inputName:'554444',
+      // inputIDCard:'431126198855553333',
+      // inputName:'111111'
+      inputIDCard: window._IsRelease ? '' : '',
+      inputName: window._IsRelease ? '' : '',
+      inputCode:'',
     }
   }
 
@@ -68,10 +69,10 @@ class LoginByPersonal extends Component {
   // 登录
   handleLogin = () => {
     // 请求前规则验证   loginType:1 密码登录
-    console.log(this.state.inputNum, this.state.inputPwd)
+    console.log(this.state.inputIDCard, this.state.inputName)
     const userInfo = {
-      CardNumber: this.toCDB(this.state.inputNum),
-      Password: this.toCDB(this.state.inputPwd),
+      CardNumber: this.toCDB(this.state.inputIDCard),
+      Password: this.toCDB(this.state.inputName),
       loginType: 1,
     }
     if (!userInfo.CardNumber.trim()) return Toast.info('请输入身份证号码')
@@ -101,23 +102,23 @@ class LoginByPersonal extends Component {
         <View style={styles.login_inputLine}>
           <IconFont name="&#xe6f1;" size={20} style={styles.login_icon} />
           <TextInput
-            style={styles.login_input}
-            placeholder="手机/身份证号"
+            style={styles.item_input}
+            placeholder="请输入身份证号"
             underlineColorAndroid="transparent"
             onFocus={() => {
               this.setState({ isCleanShow: true })
             }}
             onChangeText={text => {
-              this.setState({ inputNum: text })
+              this.setState({ inputIDCard: text })
             }}
-            value={this.state.inputNum}
+            value={this.state.inputIDCard}
           />
           {this.state.isCleanShow ? (
             <TouchableOpacity
               style={styles.cleanBox}
               onPress={() => {
                 this.setState({
-                  inputNum: '',
+                  inputIDCard: '',
                 })
               }}
             >
@@ -129,12 +130,12 @@ class LoginByPersonal extends Component {
             </TouchableOpacity>
           ) : null}
         </View>
+
         <View style={styles.login_inputLine}>
           <IconFont name="&#xe6f3;" size={20} style={styles.login_icon} />
-
           <TextInput
-            style={styles.login_input}
-            placeholder="密码"
+            style={styles.item_input}
+            placeholder="请输入真实姓名"
             underlineColorAndroid="transparent"
             secureTextEntry={!!this.state.isShowPwd}
             onFocus={() => {
@@ -143,40 +144,61 @@ class LoginByPersonal extends Component {
               })
             }}
             onChangeText={text => {
-              this.setState({ inputPwd: text })
+              this.setState({ inputName: text })
             }}
-            value={this.state.inputPwd}
+            value={this.state.inputName}
           />
-          <TouchableOpacity
-            style={styles.cleanBox}
-            onPress={this.handlePwdShow}
-          >
-            {this.state.isShowPwd ? (
-              <IconFont name="&#xe6fb;" size={20} style={{color:commonStyle.h2Color}}/>
-            ) : (
-              <IconFont name="&#xe6fa;" size={20} style={{color:commonStyle.h2Color}}/>
-            )}
-          </TouchableOpacity>
+        </View>
+        <View style={styles.login_inputLine}>
+          <IconFont name="&#xe6f2;" size={20} style={styles.login_icon} />
+          <TextInput
+            style={styles.item_input}
+            placeholder="请输入手机号"
+            underlineColorAndroid="transparent"
+            secureTextEntry={!!this.state.isShowPwd}
+            onFocus={() => {
+              this.setState({
+                isCleanShow: false,
+              })
+            }}
+            onChangeText={text => {
+              this.setState({ inputName: text })
+            }}
+            value={this.state.inputName}
+          />
+        </View>
+        <View style={styles.login_inputLine}>
+            <IconFont name="&#xe6f7;" size={20} style={styles.login_icon} />
+            <TextInput
+              style={[styles.item_input, styles.item_input2]}
+              placeholder="请输入动态码"
+              underlineColorAndroid="transparent"
+              keyboardType="numeric"
+              onChangeText={text => {
+                this.setState({ inputCode: text })
+              }}
+              value={this.state.inputCode}
+            />
+            <Button
+              // disabled={this.props.user.isSendingCode}
+              // title={this.props.user.tipText}
+               title='获取动态码'
+              onPress={this.handleSendCode}
+              style={styles.bind_sendCode}
+              titleStyle={styles.bind_sendCodeText}
+            />
         </View>
         <Text style={styles.loginTip}>
-          温馨提示：首次登录后请修改初始密码（身份证后6位）
+          温馨提示：初始密码为身份证后6位
         </Text>
         <Button
-          title="登录"
+          title="注册"
           // disabled={this.state.isLogin}
           style={styles.login_submit}
           titleStyle={styles.login_submitText}
           onPress={() => this.handleLogin()}
         />
 
-        <View style={styles.bottom_button}>
-          <Text style={styles.button_text} onPress={this.toForgotPwd}>
-            忘记密码？
-          </Text>
-          <Text style={styles.button_text} onPress={this.toRegister}>
-            去注册
-          </Text>
-        </View>
       </View>
     )
   }
@@ -209,13 +231,16 @@ const styles = StyleSheet.create({
     color:commonStyle.h2Color,
     marginLeft:12,
   },
-  login_input: {
+  item_input: {
     height: 20,
     width: width * 0.6,
     padding: 0,
     fontFamily: commonStyle.PFregular,
     fontSize: 14,
     color: '#333333',
+  },
+  item_input2: {
+    width: width * 0.5,
   },
   cleanBox: {
     position: 'absolute',
@@ -259,5 +284,22 @@ const styles = StyleSheet.create({
     lineHeight: 35,
     color: '#999999',
   },
+  bind_sendCode: {
+    position: 'absolute',
+    right: 5,
+    width: 90,
+    height: 30,
+    borderRadius: 2,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: commonStyle.themeColor,
+    alignItems: 'center',
+  },
+  bind_sendCodeText: {
+    fontFamily: commonStyle.PFregular,
+    fontSize: 12,
+    padding: 0,
+    color: commonStyle.themeColor,
+  },
 })
-export default connect()(LoginByPersonal)
+export default connect()(RegByPersonal)
