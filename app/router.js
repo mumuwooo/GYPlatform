@@ -21,6 +21,8 @@ import Home from './page/Home'
 import ZHInfos from './page/ZHInfos'
 import InvestZH from './page/InvestZH'
 import Personal from './page/Personal'
+import ChangePwd from './page/Personal/ChangePwd'
+import ChangePhone from './page/Personal/ChangePhone'
 import NewsDetail from './page/ZHInfos/NewsDetail'
 import Detail from './page/Detail'
 import Sorry from './page/others/sorry'
@@ -126,6 +128,8 @@ const AppNavigator = createStackNavigator(
     Main: { screen: HomeNavigator, navigationOptions: { header: null } },
     Login: { screen: Login,navigationOptions: { header: null } },
     Register: { screen: Register,navigationOptions: { header: null } },
+    ChangePwd: { screen: ChangePwd,navigationOptions: { header: null } },
+    ChangePhone:{ screen: ChangePhone,navigationOptions: { header: null } },
     Sorry:{screen: Sorry,navigationOptions: { header: null }},
     NewsDetail:{screen: NewsDetail,navigationOptions: { header: null }},
 

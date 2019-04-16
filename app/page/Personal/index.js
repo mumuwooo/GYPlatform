@@ -23,7 +23,9 @@ class Personal extends NavigationPage {
     this.props.dispatch(createAction('app/logout')())
   }
   
-
+  navigateTo(routeName, params) {
+    this.props.dispatch(NavigationActions.navigate({ routeName, params }))
+  }
 
   renderPage() {
     const { login } = this.props
@@ -61,6 +63,7 @@ class Personal extends NavigationPage {
                   style={{ color: commonStyle.h1Color }}
                 />
               }
+              onPress={() => this.navigateTo('ChangePwd')}
             />
             <RowLabel
               title="换绑手机"
@@ -71,6 +74,7 @@ class Personal extends NavigationPage {
                   style={{ color: commonStyle.h1Color }}
                 />
               }
+              onPress={() => this.navigateTo('ChangePhone')}
             />  
             <RowLabel
               title="帮助中心"
