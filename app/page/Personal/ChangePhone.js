@@ -2,9 +2,8 @@ import React from 'react'
 import { StyleSheet, View, Dimensions, Text, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationPage, Button, Toast } from 'teaset'
-import { Divider, IconFont } from '../../components'
+import { Divider, IconFont,NavBar } from '../../components'
 import { NavigationActions, commonStyle } from '../../utils'
-import NavBar from '../../components/NavBar'
 import { checkPhoneNum } from '../../utils/tools'
 
 const { width, height } = Dimensions.get('window')

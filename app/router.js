@@ -18,6 +18,7 @@ import Loading from './page/Loading'
 import Login from './page/others/Login'
 import Register from './page/others/Register'
 import Home from './page/Home'
+import MarketExtension from './page/Home/MarketService/MarketExtension'
 import ZHInfos from './page/ZHInfos'
 import InvestZH from './page/InvestZH'
 import Personal from './page/Personal'
@@ -86,7 +87,7 @@ const HomeNavigator = createBottomTabNavigator(
     },
 },
 {
-  initialRouteName: 'Personal',    // tabBarPosition: 'bottom',// tabbar放在底部
+  initialRouteName: 'Home',    // tabBarPosition: 'bottom',// tabbar放在底部
   swipeEnabled: true,// 滑动切换
   animationEnabled: true,// 切换动画
   lazy: false,
@@ -132,6 +133,7 @@ const AppNavigator = createStackNavigator(
     ChangePhone:{ screen: ChangePhone,navigationOptions: { header: null } },
     Sorry:{screen: Sorry,navigationOptions: { header: null }},
     NewsDetail:{screen: NewsDetail,navigationOptions: { header: null }},
+    MarketExtension:{screen: MarketExtension,navigationOptions: { header: null }},
 
   },
   {
