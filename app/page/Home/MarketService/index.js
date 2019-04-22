@@ -21,24 +21,17 @@ class MarketService extends Component {
     return (
     <View style={styles.container}>
             <Popover style={styles.content_block} arrow='top' paddingCorner={16}>
-              <View style={styles.item_row}>
 
-                <Touchable onPress={()=>{this.navigateTo('MarketExtension')}}>
-                {/* <Touchable > */}
-                <View style={styles.item_each}>
+                <Touchable onPress={()=>{this.navigateTo('MarketExtension')}} style={styles.item_each}>
                   <IconFont name='&#xe636;' size={22} color={commonStyle.redColor}/>
                   <Text style={styles.icon_text}>市场开拓</Text>
-                </View>
                 </Touchable>
 
-                <Touchable onPress={this.navigateTo}>
-                <View style={styles.item_each}>
+                <Touchable onPress={this.navigateTo} style={styles.item_each}>
                   <IconFont name='&#xe632;' size={22} color={commonStyle.redColor}/>
                   <Text style={styles.icon_text}>金字招牌工程</Text>
-                </View>
                 </Touchable>
 
-              </View>
             </Popover>
     </View>
 )
@@ -54,9 +47,6 @@ const styles = StyleSheet.create({
     width:width*0.9,
     paddingHorizontal:13,
     paddingVertical:20,
-    
-  },
-  item_row:{
     flexDirection:'row',
   },
   item_each:{
