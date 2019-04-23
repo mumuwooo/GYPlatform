@@ -27,7 +27,7 @@ class MarketService extends Component {
                   <Text style={styles.icon_text}>市场开拓</Text>
                 </Touchable>
 
-                <Touchable onPress={this.navigateTo} style={styles.item_each}>
+                <Touchable onPress={()=>{this.navigateTo('SignalProject')}} style={styles.item_each}>
                   <IconFont name='&#xe632;' size={22} color={commonStyle.redColor}/>
                   <Text style={styles.icon_text}>金字招牌工程</Text>
                 </Touchable>

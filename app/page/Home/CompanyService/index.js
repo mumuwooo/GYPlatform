@@ -1,15 +1,46 @@
 import React , { Component } from 'react'
 import { StyleSheet,View, Text ,Dimensions} from 'react-native'
-import {Popover} from 'teaset'
+import {Popover, Toast, } from 'teaset'
+import { connect } from 'react-redux'
 import { Touchable,IconFont } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
 
+
 const { width, height } = Dimensions.get('window');
 
-
+@connect()
 class CompanyService extends Component {
-handleSubmenuShow=()=>{
-        alert('二级菜单')
+
+    gotoDetail =(index)=>{
+      switch(index)
+      {
+        case 1:
+        Toast.message('暂无权限')
+        break;
+        case 2:
+        this.props.dispatch(NavigationActions.navigate({routeName:'FactorGuarantee'}))
+        break;
+        case 3:
+        this.props.dispatch(NavigationActions.navigate({routeName:'SocialService'}))
+        break;
+        case 4:
+        this.props.dispatch(NavigationActions.navigate({routeName:'TaxService'}))
+        break;
+        case 5:
+        this.props.dispatch(NavigationActions.navigate({routeName:'AdmApproval'}))
+        break;
+        case 6:
+        this.props.dispatch(NavigationActions.navigate({routeName:'FourIdentification'}))
+        break;
+        case 7:
+        this.props.dispatch(NavigationActions.navigate({routeName:'LegalAid'}))
+        break;
+        case 8:
+        this.props.dispatch(NavigationActions.navigate({routeName:'DemandForm'}))
+        break;
+        default:
+        break;
+      }
     }
     render(){
     return (
@@ -17,50 +48,50 @@ handleSubmenuShow=()=>{
             <Popover style={styles.content_block} arrow='topLeft' paddingCorner={44}>
               <View style={styles.item_row}>
 
-                <View style={styles.item_each}>
+                <Touchable style={styles.item_each} onPress={()=>this.gotoDetail(1)}>
                   <IconFont name='&#xe624;' size={22} color={commonStyle.blueColor}/>
                   <Text style={styles.icon_text}>企业运行分析</Text>
-                </View>
+                </Touchable>
 
-                <View style={styles.item_each}>
+                <Touchable style={styles.item_each} onPress={()=>this.gotoDetail(2)}>
                   <IconFont name='&#xe62c;' size={22} color={commonStyle.blueColor}/>
                   <Text style={styles.icon_text}>要素保障服务</Text>
-                </View>
+                </Touchable>
 
-                <View style={styles.item_each}>
+                <Touchable style={styles.item_each} onPress={()=>this.gotoDetail(3)}>
                   <IconFont name='&#xe628;' size={22} color={commonStyle.blueColor}/>
                   <Text style={styles.icon_text}>社保服务直通车</Text>
-                </View>
+                </Touchable>
               </View>
 
                <View style={styles.item_row}>
 
-                <View style={styles.item_each}>
+                <Touchable style={styles.item_each} onPress={()=>this.gotoDetail(4)}>
                   <IconFont name='&#xe626;' size={22} color={commonStyle.blueColor}/>
                   <Text style={styles.icon_text}>税务服务直通车</Text>
-                </View>
+                </Touchable>
 
-                <View style={styles.item_each}>
+                <Touchable style={styles.item_each} onPress={()=>this.gotoDetail(5)}>
                   <IconFont name='&#xe625;' size={22} color={commonStyle.blueColor}/>
                   <Text style={styles.icon_text}>行政审批事项</Text>
-                </View>
+                </Touchable>
 
-                <View style={styles.item_each}>
+                <Touchable style={styles.item_each} onPress={()=>this.gotoDetail(6)}>
                   <IconFont name='&#xe62a;' size={22} color={commonStyle.blueColor}/>
                   <Text style={styles.icon_text}>四上企业申报</Text>
-                </View>
+                </Touchable>
                 </View>
 
                 <View style={[styles.item_row,styles.item_row2]}>
-                <View style={[styles.item_each,styles.item_each2]}>
+                <Touchable style={[styles.item_each,styles.item_each2]} onPress={()=>this.gotoDetail(7)}>
                   <IconFont name='&#xe627;' size={22} color={commonStyle.blueColor}/>
                   <Text style={styles.icon_text}>法律援助服务</Text>
-                </View>
+                </Touchable>
 
-                <View style={styles.item_each}>
+                <Touchable style={styles.item_each} onPress={()=>this.gotoDetail(8)}>
                   <IconFont name='&#xe62b;' size={22} color={commonStyle.blueColor}/>
                   <Text style={styles.icon_text}>我要诉求</Text>
-                </View>
+                </Touchable>
 
                 </View> 
             </Popover>

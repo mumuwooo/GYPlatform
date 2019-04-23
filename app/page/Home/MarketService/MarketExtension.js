@@ -112,7 +112,7 @@ class MarketExtension extends NavigationPage {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop:52,
+    paddingTop:15,
     paddingLeft:18,
     backgroundColor:'#fff'
   },
