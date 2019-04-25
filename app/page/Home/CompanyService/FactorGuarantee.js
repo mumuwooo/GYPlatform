@@ -120,6 +120,7 @@ class FactorGuarantee extends NavigationPage {
               },
             }}
           />
+          
           <Divider type = "bottomSpace" color='#fff'/>
         </View>
       </ScrollView>

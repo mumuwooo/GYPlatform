@@ -19,7 +19,7 @@ let commonStyle = {
     /** 主题色 **/
     themeColor, // 政府红
     // themeColor: '#6495ed',//矢車菊藍 
-    // themeColor:'#3b5998', //facebook
+     bluebuttonColor:'#3b5998', //facebook
     // themeColor:'#1da1f3', //twitter
     // themeColor:"#337ab7",
     blueColor:'#399cda',
