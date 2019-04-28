@@ -63,7 +63,7 @@ const styles = {
 
 const HomeNavigator = createBottomTabNavigator(
   {
-  Home: { screen: SocialService,
+  Home: { screen: Home,
     navigationOptions: {
       tabBarLabel: '6S服务',
       tabBarIcon: ({ focused }) => (
