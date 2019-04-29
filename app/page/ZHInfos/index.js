@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     height: width*40/75,
   },
   wrapper: {
-    width,
+    // width,
   },
   slide: {
     flex: 1,
@@ -200,9 +200,10 @@ const styles = StyleSheet.create({
     width:width*0.75,
     fontFamily: commonStyle.PFregular,
     fontSize: commonStyle.h21Size,
-    color: "#ffffff",
-    justifyContent:'center',
-    textAlignVertical:'center',
+    color: "#fff",
+    marginTop:15,
+    // justifyContent:'center',
+    // textAlignVertical:'center',
     },
   paginationStyle: {
       bottom:20,

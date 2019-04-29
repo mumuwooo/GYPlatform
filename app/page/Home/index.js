@@ -95,9 +95,13 @@ handleSubmenuShow=(type)=>{
     }
   }
 
-gotoDetail = () => {
+  gotoDetail = () => {
     this.props.dispatch(NavigationActions.navigate({ routeName: 'Sorry' }))
   }  
+
+  handleGetMore=()=>{
+    // this.props.dispatch(NavigationActions.navigate({ routeName: 'Test' }))    
+  }
 
 // 轮播图
 renderBanner() {
@@ -154,7 +158,7 @@ renderBanner() {
     const {companyShow, projectShow, techShow, bankShow, marketShow, policyShow}=this.state
     return (
       <View style={styles.container}>
-      <ScrollView style={{flex:1}}>
+      <ScrollView style={{flex:1}} >
         {/* <Text style={{backgroundColor:'#ff5971',width:34,height:34,borderRadius:18,textAlign:'center',textAlignVertical:'center'}}>
           <Text style={{fontFamily:'iconfont',fontSize:32,color:'#fff'}}>&#xe618;</Text>
         </Text> */}
@@ -242,10 +246,10 @@ renderBanner() {
                 <Text style={styles.title_redIcon}/>
                 <Text style={styles.title_text}>企业信息</Text>
                 </View>
-                <View style={styles.title_right}>
+                <Touchable style={styles.title_right} onPress={this.handleGetMore}>
                 <Text style={[styles.title_text,styles.title_text2]}>更多 </Text>
                 <Text style={[styles.title_text,styles.title_text2]}>{`>`}</Text>
-                </View>
+                </Touchable>
             </View>
             <CompanyInfos />
             </View>
@@ -280,7 +284,7 @@ const styles = StyleSheet.create({
     height: width*40/75,
   },
   wrapper: {
-    width,
+    // width,
   },
   slide: {
     flex: 1,
@@ -306,8 +310,9 @@ const styles = StyleSheet.create({
     fontFamily: commonStyle.PFregular,
     fontSize: commonStyle.h21Size,
     color: "#ffffff",
-    justifyContent:'center',
-    textAlignVertical:'center',
+    // justifyContent:'center',
+    // textAlignVertical:'center',
+    marginTop:15,
     },
   paginationStyle: {
       bottom:20,

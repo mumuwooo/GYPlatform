@@ -49,6 +49,7 @@ import ChangePhone from './page/Personal/ChangePhone'
 import NewsDetail from './page/ZHInfos/NewsDetail'
 import Detail from './page/Detail'
 import Sorry from './page/others/sorry'
+import Test from './page/others/Test'
 
 let oldRoutes = []
 
@@ -154,6 +155,7 @@ const AppNavigator = createStackNavigator(
     ChangePwd: { screen: ChangePwd,navigationOptions: { header: null } },
     ChangePhone:{ screen: ChangePhone,navigationOptions: { header: null } },
     Sorry:{screen: Sorry,navigationOptions: { header: null }},
+    Test:{screen: Test,navigationOptions: { header: null }},
     NewsDetail:{screen: NewsDetail,navigationOptions: { header: null }},
     MarketExtension:{screen: MarketExtension,navigationOptions: { header: null }},
     FactorGuarantee:{screen: FactorGuarantee,navigationOptions: { header: null }},
