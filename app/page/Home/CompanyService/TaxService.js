@@ -2,17 +2,13 @@ import React, { Component } from 'react'
 import {
   StyleSheet,
   View,
-  Image,
   Dimensions,
-  Alert,
   Text,
-  TextInput,
 } from 'react-native'
 import { connect } from 'react-redux'
-import { NavigationBar, NavigationPage, Label, Toast } from 'teaset'
-import { Divider, Button,IconFont } from '../../../components'
+import { NavigationBar, NavigationPage,} from 'teaset'
+import { NavBar, Button,IconFont } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
-import NavBar from '../../../components/NavBar'
 
 const { width, height } = Dimensions.get('window')
 

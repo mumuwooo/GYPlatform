@@ -1,18 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
   StyleSheet,
   View,
-  Image,
   Dimensions,
-  Alert,
   Text,
-  TextInput,
 } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationBar, NavigationPage, Label, Toast } from 'teaset'
-import { Divider, Button } from '../../../components'
+import { NavBar, Button,IconFont } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
-import NavBar from '../../../components/NavBar'
+
 
 const { width, height } = Dimensions.get('window')
 
@@ -36,15 +33,64 @@ class OnlineInvest extends NavigationPage {
   renderPage() {
     return (
       <View style={styles.container}>
-      <Text>投资在线审批服务</Text>
-      <Button
-          style={styles.button_save}
+      <View style={styles.content}>
+      <View style={styles.eachitem}>
+        <IconFont name='&#xe63f;' size={35} color={commonStyle.orangeColor}/>
+        <Text style={styles.item_text}>国定资产投资项目节能审查（企业技术改造项目）</Text>
+        <Button
+          style={styles.submitBtn}
+          textStyle={styles.button_text}
+          onPress={this.handleSubmit}
+        >
+          办理
+        </Button>
+      </View>
+
+      <View style={styles.eachitem}>
+        <IconFont name='&#xe641;' size={35} color={commonStyle.orangeColor}/>
+        <Text style={styles.item_text}>水利工程可行性研究报告审查</Text>
+        <Button
+          style={styles.submitBtn}
+          textStyle={styles.button_text}
+          onPress={this.handleSubmit}
+        >
+          办理
+        </Button>
+      </View>
+
+      <View style={styles.eachitem}>
+        <IconFont name='&#xe63f;' size={35} color={commonStyle.orangeColor}/>
+        <Text style={styles.item_text}>国定资产投资项目节能审查（企业技术改造项目）</Text>
+        <Button
+          style={styles.submitBtn}
+          textStyle={styles.button_text}
+          onPress={this.handleSubmit}
+        >
+          办理
+        </Button>
+      </View>
+
+      <View style={styles.eachitem}>
+        <IconFont name='&#xe64c;' size={35} color={commonStyle.orangeColor}/>
+        <Text style={styles.item_text}>地震监测设施和观测环境保护范的确定</Text>
+        <Button
+          style={styles.submitBtn}
+          textStyle={styles.button_text}
+          onPress={this.handleSubmit}
+        >
+          办理
+        </Button>
+      </View>
+
+      </View>
+      {/* <Button
+          style={styles.submitBtn}
           textStyle={styles.button_text}
           onPress={this.handleSubmit}
           type="theme"
         >
           点击此处办理后跳转到外部链接
-        </Button>
+        </Button> */}
       </View>
 
     )
@@ -55,19 +101,40 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  button_save: {
-    marginTop: 25,
-    width: 310,
-    height: 50,
+  content:{
+    marginTop:31,
+  },  
+  eachitem:{
+    backgroundColor:'#fff',
+    marginHorizontal:15,
+    borderRadius: 10,
+    flexDirection:'row',
+    // justifyContent:'center',
+    alignItems:'center',
+    paddingVertical:10,
+    paddingLeft:14,
+    marginBottom:14,
+  },
+  item_text:{
+    fontFamily: commonStyle.PFregular,
+    fontSize: 15,
+    color: "#3a3a3a",
+    width:194,
+    marginLeft:10,
+    marginRight:24,
+  },
+  submitBtn: {
+    width: 57,
+    height: 23,
     borderRadius: 4,
-    borderColor: commonStyle.themeColor,
-    backgroundColor: commonStyle.themeColor,
+    borderColor: commonStyle.orangeColor,
+    backgroundColor: commonStyle.orangeColor,
+    marginLeft:20,
   },
   button_text: {
     fontFamily: commonStyle.PFregular,
-    fontSize: commonStyle.h1Size,
-    lineHeight: 35,
-    color: '#fffefe',
+    fontSize: commonStyle.h21Size,
+    color: '#fff',
   },
 })
 export default OnlineInvest

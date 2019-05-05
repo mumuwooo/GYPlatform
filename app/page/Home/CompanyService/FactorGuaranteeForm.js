@@ -1,10 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
   StyleSheet,
   View,
-  Image,
   Dimensions,
-  Alert,
   Text,
   TextInput,
 } from 'react-native'

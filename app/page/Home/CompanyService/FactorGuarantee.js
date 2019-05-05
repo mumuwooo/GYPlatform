@@ -7,14 +7,12 @@ import {
   ScrollView,
   Text,
   ImageBackground,
-  
 } from 'react-native'
 import { connect } from 'react-redux'
 import HTML from 'react-native-render-html'
-import { NavigationBar, NavigationPage, Label, Toast } from 'teaset'
-import { Divider, Button } from '../../../components'
+import { NavigationBar, NavigationPage,  } from 'teaset'
+import { NavBar, Divider, Button } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
-import NavBar from '../../../components/NavBar'
 
 const { width, height } = Dimensions.get('window')
 
