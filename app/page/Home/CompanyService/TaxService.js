@@ -82,14 +82,6 @@ class TaxService extends NavigationPage {
         </View>
 
         </View>
-        {/* <Button
-            style={styles.submitBtn}
-            textStyle={styles.button_text}
-            onPress={this.handleSubmit}
-            type="theme"
-          >
-            点击此处办理后跳转到外部链接
-          </Button> */}
         </View>
   
       )

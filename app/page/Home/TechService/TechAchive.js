@@ -2,17 +2,14 @@ import React, { Component } from 'react'
 import {
   StyleSheet,
   View,
-  Image,
+  ImageBackground,
   Dimensions,
-  Alert,
   Text,
-  TextInput,
 } from 'react-native'
 import { connect } from 'react-redux'
-import { NavigationBar, NavigationPage, Label, Toast } from 'teaset'
-import { Divider, Button } from '../../../components'
+import { NavigationBar, NavigationPage,} from 'teaset'
+import { Divider, NavBar, IconFont,Button, Touchable } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
-import NavBar from '../../../components/NavBar'
 
 const { width, height } = Dimensions.get('window')
 
@@ -27,7 +24,7 @@ class ProjectReport extends NavigationPage {
 
  
   renderNavigationBar() {
-    return <NavBar title="项目申报须知" />
+    return <NavBar title="科技成果服务" />
   }
 
   handleSubmit=(index)=>{
@@ -48,33 +45,101 @@ class ProjectReport extends NavigationPage {
   renderPage() {
     return (
       <View style={styles.container}>
-      <Text>项目申报须知</Text>
-      <Button onPress={()=>this.handleSubmit(1)}>在线成果定制</Button>
-      <Button onPress={()=>this.handleSubmit(2)}>高校合作直通车</Button>
-      <Button onPress={()=>this.handleSubmit(3)}>在线成果库</Button>
-      </View>
+        <View style={styles.top}>
+          <ImageBackground source={require('../../../assets/images/tech_bg.png')} style={styles.top_imageBg}>
+            <View style={styles.top_text}>
+                <Text style={styles.text_title}>服务指南</Text>
+                <Text style={styles.text_eng}>SERVICE INFORMATION</Text>
+            </View>
+          </ImageBackground>
+        </View>
+        <View style={styles.content}>
+       
+        <Touchable style={styles.eachitem} onPress={()=>this.handleSubmit(1)}>
+          <View style={styles.item_left}>
+          <IconFont name='&#xe657;' size={35} color={commonStyle.pinkColor}/>
+          <Text style={styles.item_text}>在线成果定制</Text>
+          </View>
+          <IconFont name='&#xe6eb;' size={19} style={styles.item_right}/>          
+        </Touchable>
+  
+        <Touchable style={styles.eachitem} onPress={()=>this.handleSubmit(2)}>
+          <View style={styles.item_left}>
+          <IconFont name='&#xe645;' size={35} color={commonStyle.pinkColor}/>
+          <Text style={styles.item_text}>高校合作直通车</Text>
+          </View>
+          <IconFont name='&#xe6eb;' size={19} style={styles.item_right}/>          
+        </Touchable>
 
+        <Touchable style={styles.eachitem} onPress={()=>this.handleSubmit(3)}>
+          <View style={styles.item_left}>
+          <IconFont name='&#xe649;' size={35} color={commonStyle.pinkColor}/>
+          <Text style={styles.item_text}>在线成果库</Text>
+          </View>
+          <IconFont name='&#xe6eb;' size={19} style={styles.item_right}/>          
+        </Touchable>
+        </View>
+      </View>
+  
     )
   }
-}
-
-const styles = StyleSheet.create({
+  }
+  
+  const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:'#f1f1f1'
   },
-  button_save: {
-    marginTop: 25,
-    width: 310,
-    height: 50,
-    borderRadius: 4,
-    borderColor: commonStyle.themeColor,
-    backgroundColor: commonStyle.themeColor,
+  top_imageBg:{
+    width,
+    height:153,
+    alignItems:'center',
+    justifyContent:'center',
+    
   },
-  button_text: {
+  top_text:{
+    justifyContent:'center',
+    alignItems:'center',
+  },
+  text_title:{
+    color:'#fff',
+    fontFamily: commonStyle.PFmedium,
+    fontSize: commonStyle.hSize,
+    marginBottom:9,
+  },
+  text_eng:{
     fontFamily: commonStyle.PFregular,
-    fontSize: commonStyle.h1Size,
-    lineHeight: 35,
-    color: '#fffefe',
+    fontSize: 8,
+    color: "#ffffff"
+  },
+  content:{
+    marginTop:24,
+  },  
+  eachitem:{
+    backgroundColor:'#fff',
+    marginHorizontal:15,
+    borderRadius: 10,
+    flexDirection:'row',
+    justifyContent:'space-between',
+    paddingHorizontal:16,
+    alignItems:'center',
+    paddingVertical:10,
+    marginBottom:14,
+  },
+  item_text:{
+    fontFamily: commonStyle.PFregular,
+    fontSize: 15,
+    color: "#3a3a3a",
+    width:210,
+    marginLeft:10,
+    marginRight:24,
+  },
+  item_left:{
+    flexDirection:'row',
+    alignItems:'center',
+  },
+  item_right:{
+    color:commonStyle.h2Color,
   },
 })
 export default ProjectReport
