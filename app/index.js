@@ -11,7 +11,6 @@ import dva from './utils/dva'
 import { commonStyle } from './utils'
 
 
-
 const app = dva({
   initialState: {},
   models: [

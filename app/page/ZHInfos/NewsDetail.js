@@ -4,13 +4,14 @@ import {
   View,
   Dimensions,
   ScrollView,
-  Text,
+  Text
 } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationPage, } from 'teaset'
 import moment from 'moment'
 // import HTMLView from 'react-native-htmlview'
-import HTML from 'react-native-render-html'
+// import HTML from 'react-native-render-html-image-resizable'
+import HTML from 'react-native-render-html-for-maxwidth'
 import {IconFont, NavBar, Divider} from '../../components'
 import { commonStyle } from '../../utils'
 import { htmlDecodeByRegExp } from '../../utils/tools'
@@ -35,7 +36,8 @@ class NewsDetail extends NavigationPage {
      const { index } = this.props.navigation.state.params
     let htmlContent = null
     if (newsList.length > index) {
-      htmlContent =htmlDecodeByRegExp(newsList[index].nContent)
+      htmlContent =htmlDecodeByRegExp(newsList[index].content)
+      console.log("htmlContent",htmlContent);
     }
     // const htmlContent =`
     // <p style="text-align: center;"><b>我是一个标题很长的标题的标题的标题总之就是很长就看你换不换行</b> </p><p style="text-align: center;"><img src="http://ctfive.oss-cn-hangzhou.aliyuncs.com/Course/2019/01/09/2417b42526634e3a82e94a3e64cff5fb0012.png" style="max-width:100%;"><br></p><p style="text-align: center;">开局一张图，后面全靠编。</p><p>        对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！<br></p>
@@ -45,10 +47,10 @@ class NewsDetail extends NavigationPage {
         <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
             <View style={styles.top}>
                 <Text style={styles.top_title}>
-                    {newsList[index].nTitle}
+                    {newsList[index].title}
                 </Text>
                 <View style={styles.top_bottom}>
-                    <Text style={styles.bottom_text}>发布时间：{moment(newsList[index].nAuditTime).format('YYYY-MM-DD')} </Text>
+                    <Text style={styles.bottom_text}>发布时间：{moment(newsList[index].customTime).format('YYYY-MM-DD')} </Text>
                     <Text style={styles.bottom_text}>来源：广元市昭化区招商局</Text>
                 </View>
             </View>
