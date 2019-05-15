@@ -262,7 +262,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontFamily: commonStyle.PFregular,
     fontSize: commonStyle.h4Size,
-    lineHeight: 35,
     color: commonStyle.h4Color,
   },
   bind_sendCode: {

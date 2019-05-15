@@ -41,6 +41,7 @@ import FinanceGuaranteeForm from './page/Home/BankService/FinanceGuaranteeForm'
 import BankConnect from './page/Home/BankService/BankConnect'
 import SignalProject from './page/Home/MarketService/SignalProject'
 import SignalApplyForm from './page/Home/MarketService/SignalApplyForm'
+import Libraries from './page/Home/PolicyService/Libraries'
 import ZHInfos from './page/ZHInfos'
 import InvestZH from './page/InvestZH'
 import Personal from './page/Personal'
@@ -180,7 +181,9 @@ const AppNavigator = createStackNavigator(
     BankConnect:{screen: BankConnect,navigationOptions: { header: null }},
     SignalProject:{screen: SignalProject,navigationOptions: { header: null }},
     SignalApplyForm:{screen: SignalApplyForm,navigationOptions: { header: null }},
-    // BankConnect:{screen: BankConnect,navigationOptions: { header: null }},
+    Libraries:{screen: Libraries,navigationOptions: { header: null }},
+    // Libraries:{screen: Libraries,navigationOptions: { header: null }},
+
   },
   {
     headerMode: null,

@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 50,
     textAlign: 'center',
-    lineHeight: 50,
     marginBottom: 60,
   },
   loaded: {

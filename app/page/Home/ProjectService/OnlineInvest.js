@@ -4,11 +4,13 @@ import {
   View,
   Dimensions,
   Text,
+  Platform
 } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationBar, NavigationPage, Label, Toast } from 'teaset'
 import { NavBar, Button,IconFont } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
+
 
 
 const { width, height } = Dimensions.get('window')
@@ -28,7 +30,10 @@ class OnlineInvest extends NavigationPage {
   }
 
   handleSubmit=()=>{
-    this.props.dispatch(NavigationActions.navigate({routeName:'WebviewLinks',params:{title:'投资在线审批办理详情'}}))
+    console.log('====================================');
+    console.log(Platform);
+    console.log('====================================');
+    // this.props.dispatch(NavigationActions.navigate({routeName:'WebviewLinks',params:{title:'投资在线审批办理详情'}}))
   }
   renderPage() {
     return (
@@ -119,17 +124,17 @@ const styles = StyleSheet.create({
     fontFamily: commonStyle.PFregular,
     fontSize: 15,
     color: "#3a3a3a",
-    width:194,
+    width:width*0.49,
     marginLeft:10,
     marginRight:24,
   },
   submitBtn: {
     width: 57,
-    height: 23,
+    height: Platform.OS==='ios'?30:23,
     borderRadius: 4,
     borderColor: commonStyle.orangeColor,
     backgroundColor: commonStyle.orangeColor,
-    marginLeft:20,
+    marginLeft:10,
   },
   button_text: {
     fontFamily: commonStyle.PFregular,

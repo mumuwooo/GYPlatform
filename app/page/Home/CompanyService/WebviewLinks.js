@@ -61,7 +61,6 @@ const styles = StyleSheet.create({
   button_text: {
     fontFamily: commonStyle.PFregular,
     fontSize: commonStyle.h1Size,
-    lineHeight: 35,
     color: '#fffefe',
   },
 })

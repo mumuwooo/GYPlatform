@@ -281,7 +281,6 @@ const styles = StyleSheet.create({
   button_text: {
     fontFamily: commonStyle.PFregular,
     fontSize: 12,
-    lineHeight: 35,
     color: '#999999',
   },
   bind_sendCode: {

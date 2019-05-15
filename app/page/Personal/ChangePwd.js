@@ -159,7 +159,6 @@ const styles = StyleSheet.create({
     width: width * 0.2,
     fontFamily: commonStyle.PFbold,
     fontSize: commonStyle.h21Size,
-    lineHeight: 55,
     color: commonStyle.h1Color,
     marginLeft: 12,
     marginRight: 20,
@@ -173,7 +172,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontFamily: commonStyle.PFregular,
     fontSize: commonStyle.h4Size,
-    lineHeight: 35,
     color: commonStyle.h4Color,
   },
   button_save: {
@@ -187,7 +185,6 @@ const styles = StyleSheet.create({
   button_text: {
     fontFamily: commonStyle.PFregular,
     fontSize: commonStyle.h1Size,
-    lineHeight: 35,
     color: '#fffefe',
   },
 })
