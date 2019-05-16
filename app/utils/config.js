@@ -16,7 +16,7 @@
 
   module.exports = {
     // BASE_URL : window._IsRelease?"https://gateway.chutoukj.com/":"https://gateway.dev.chutoukj.com/",
-    BASE_URL : 'http://47.105.200.15',
+    BASE_URL : 'http://6s.pinpin.pro:8000',
     // X_HOST: window._IsRelease?window._XHost:'www2.gcxkh.test.chutoukj.com',
     X_HOST: '6s.pinpin.pro',
   };
