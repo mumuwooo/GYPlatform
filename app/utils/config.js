@@ -1,4 +1,4 @@
-
+import _baseURLGlobal from './global'
 // ===手动配置信息==================================================================================================
   window._PLATVERSION = "DEV"  // HN|HB|SD|DEV
   window._VERSION = "0.0.1"
@@ -16,7 +16,7 @@
 
   module.exports = {
     // BASE_URL : window._IsRelease?"https://gateway.chutoukj.com/":"https://gateway.dev.chutoukj.com/",
-    BASE_URL : 'http://6s.pinpin.pro:8000',
+    BASE_URL : _baseURLGlobal,
     // X_HOST: window._IsRelease?window._XHost:'www2.gcxkh.test.chutoukj.com',
     X_HOST: '6s.pinpin.pro',
   };
