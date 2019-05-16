@@ -12,6 +12,8 @@ import { connect } from 'react-redux'
 import { commonStyle, NavigationActions, Storage } from '../../utils'
 import { Divider, Touchable, IconFont } from '../../components'
 
+import _baseUrlGlobal from '../../utils/global'
+
 const { width, height } = Dimensions.get('window');
 
 const NewsBlock = ({
@@ -30,16 +32,17 @@ const NewsBlock = ({
       dispatch(NavigationActions.navigate({ routeName: 'NewsDetail', params: { index } })
       )
     }
-    // const dataImg={uri:data.img}
-    const dataImg=require('../../assets/images/companginfos1.png')
+    const dataImg={uri:_baseUrlGlobal+data.pictureUrl}
+    // const dataImg=require('../../assets/images/companginfos1.png')
     return (
     <Touchable style={styles.eachitem} onPress={()=>gotoDetail(index)}>
       <Image source={dataImg} style={styles.left_img} />
+      {/* <Image source={{uri: "http://6s.pinpin.pro/Uploads/190515233732.png"}} style={styles.left_img} /> */}
       <View style={styles.right_content}>
-        <Text style={styles.right_title}>{data.nTitle}</Text>
+        <Text style={styles.right_title}>{data.title}</Text>
         <View style={styles.right_bottom}>
-          <Text style={styles.bottom_date}>{moment(data.nAuditTime).format('YYYY-MM-DD')}</Text>
-          <Text style={styles.bottom_source}>{data.source}</Text>
+          <Text style={styles.bottom_date}>{moment(data.customeTime).format('YYYY-MM-DD')}</Text>
+          <Text style={styles.bottom_source}>{data.contentSource}</Text>
         </View>
       </View>
     </Touchable>

@@ -116,6 +116,7 @@ function requestGET(url, params) {
   return new Promise(function (resolve, reject) {
     fetch( requestOBJ[0],requestOBJ[1])
       .then((response) => {
+        console.log("did I get", response);
         if (response.ok) {
           return response.json();
         } else {
@@ -246,6 +247,7 @@ function consoleReq(response,requestOBJ,status,params){
   if(status=='success'){
     res = {...response}
     res.__REQUEST_DATA = {_URL:requestOBJ[0].split('?')[0],url:requestOBJ[0],_PARAMS:params,_METHOD:requestOBJ[1].method,requestOBJ:requestOBJ[1]}
+    res.response = response
      if(!window._IsRelease){// 非正式环境
       console.log(res)
      }
@@ -253,6 +255,7 @@ function consoleReq(response,requestOBJ,status,params){
     res = {...response}
     res.TypeError = response.Message
     res.__REQUEST_DATA = {_URL:requestOBJ[0].split('?')[0],_PARAMS:params,_METHOD:requestOBJ[1].method,requestOBJ:requestOBJ[1]}
+    res.response = response
     if(!window._IsRelease){// 非正式环境
       console.warn(res)
     }
