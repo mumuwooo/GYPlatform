@@ -4,7 +4,7 @@ import { BASE_URL ,X_HOST} from './config';
 import storage from './storage';
 
 const CONFIG_HEADERS =  {
-  "Referrer":".sdu.edu.cn",
+  "Referrer":"6s.pinpin.pro",
   'Content-Type': 'application/json; charset=utf-8',
   'Access-Control-Allow-Origin': '*',
   'X-Host':X_HOST
@@ -14,7 +14,7 @@ const CONFIG_HEADERS_XML =  {
   'Access-Control-Allow-Origin': '*',
 }
 const CONFIG_FILE_HEADERS ={
-  // 'X-Host':'www2.gcxkh.test.chutoukj.com'
+  // 'X-Host':'6s.pinpin.pro'
   'X-Host':X_HOST
 }
 function prevController(params={}){

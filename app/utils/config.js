@@ -1,7 +1,7 @@
 
 // ===手动配置信息==================================================================================================
   window._PLATVERSION = "DEV"  // HN|HB|SD|DEV
-  window._VERSION = "1.0.5"
+  window._VERSION = "0.0.1"
 // =====================================================================================================
 
   window._IsRelease = (window._PLATVERSION!="DEV")            // 是否为正式环境
@@ -15,8 +15,10 @@
   window._PlanType = 1;                                       // 根据计划改变：1,1,2
 
   module.exports = {
-    BASE_URL : window._IsRelease?"https://gateway.chutoukj.com/":"https://gateway.dev.chutoukj.com/",
-    X_HOST: window._IsRelease?window._XHost:'www2.gcxkh.test.chutoukj.com',
+    // BASE_URL : window._IsRelease?"https://gateway.chutoukj.com/":"https://gateway.dev.chutoukj.com/",
+    BASE_URL : 'http://47.105.200.15',
+    // X_HOST: window._IsRelease?window._XHost:'www2.gcxkh.test.chutoukj.com',
+    X_HOST: '6s.pinpin.pro',
   };
 
 /** 

@@ -339,7 +339,7 @@ export function getfileType(path){// 获取文件类型
 }
 
 export function xmlToJson(xmlStr) {
-  xmlStr= xmlStr.replace(/&lt;/g,'<');//防止有转义字符
+  xmlStr= xmlStr.replace(/&lt;/g,'<');// 防止有转义字符
   xmlStr=  xmlStr.replace(/&gt;/g,'>');
   xmlStr=  xmlStr.replace(/&amp;/g,'&');
   var str1 = "",str2 = "",str3 = "";

@@ -62,8 +62,8 @@ class MarketExtension extends NavigationPage {
 
 
   renderDetail(rowData, sectionID, rowID) {
-    let title = <Text style={[styles.title]}>{rowData.title}</Text>
-    var desc = null
+    const title = <Text style={[styles.title]}>{rowData.title}</Text>
+    let desc = null
     if(rowData.description && rowData.imageUrl)
       desc = (
         <View style={styles.descriptionContainer}>   
