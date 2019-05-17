@@ -16,7 +16,7 @@ import NewsBlock from './NewsBlock'
 
 const { width, height } = Dimensions.get('window')
 
-@connect(({ user }) => ({ user }))
+@connect(({ libraries }) => ({ libraries }))
 class Libraries extends NavigationPage {
   constructor(props) {
     super(props)
@@ -129,6 +129,7 @@ class Libraries extends NavigationPage {
   }
   renderPage() {
     const {sortType}=this.state
+    const {newsList} = this.props.libraries
     return (
       <ScrollView style={styles.container}>
         <View style={styles.top}>
@@ -157,7 +158,7 @@ class Libraries extends NavigationPage {
           </Button>
         </View>
         <View style={styles.content}>
-       {data.map((item,index)=> (<NewsBlock data={item} index={index} key={index}/>))}
+       {newsList.map((item,index)=> (<NewsBlock data={item} index={index} key={index}/>))}
         <Divider type='bottomSpace' />
         </View>
       </ScrollView>
@@ -242,34 +243,34 @@ class Libraries extends NavigationPage {
   },
 })
 
-const data=[
-  {title:'关于印发《昭化区2019年度特种设备日常监督检查计划及重点监督检查单位目录》的通知',
-  source:'广元市质量技术监督局昭化区分局',
-  date:'2019-04-21'
-},
-{title:'关于印发《昭化区2019年度特种设备日常监督检查计划及重点监督检查单位目录》的通知',
-  source:'广元市质量技术监督局昭化区分局',
-  date:'2019-03-20'
-},
-{title:'关于印发《昭化区2019年度特种设备日常监督检查计划及重点监督检查单位目录》的通知',
-  source:'广元市质量技术监督局昭化区分局',
-  date:'2019-03-08'
-},
-{title:'关于印发《昭化区2019年度特种设备日常监督检查计划及重点监督检查单位目录》的通知',
-  source:'广元市质量技术监督局昭化区分局',
-  date:'2019-02-21'
-},
-{title:'关于印发《昭化区2019年度特种设备日常监督检查计划及重点监督检查单位目录》的通知',
-  source:'广元市质量技术监督局昭化区分局',
-  date:'2019-02-21'
-},
-{title:'关于印发《昭化区2019年度特种设备日常监督检查计划及重点监督检查单位目录》的通知',
-  source:'广元市质量技术监督局昭化区分局',
-  date:'2019-02-21'
-},
-{title:'关于印发《昭化区2019年度特种设备日常监督检查计划及重点监督检查单位目录》的通知',
-  source:'广元市质量技术监督局昭化区分局',
-  date:'2019-02-21'
-},
-]
+// const data=[
+//   {title:'关于印发《昭化区2019年度特种设备日常监督检查计划及重点监督检查单位目录》的通知',
+//   source:'广元市质量技术监督局昭化区分局',
+//   date:'2019-04-21'
+// },
+// {title:'关于印发《昭化区2019年度特种设备日常监督检查计划及重点监督检查单位目录》的通知',
+//   source:'广元市质量技术监督局昭化区分局',
+//   date:'2019-03-20'
+// },
+// {title:'关于印发《昭化区2019年度特种设备日常监督检查计划及重点监督检查单位目录》的通知',
+//   source:'广元市质量技术监督局昭化区分局',
+//   date:'2019-03-08'
+// },
+// {title:'关于印发《昭化区2019年度特种设备日常监督检查计划及重点监督检查单位目录》的通知',
+//   source:'广元市质量技术监督局昭化区分局',
+//   date:'2019-02-21'
+// },
+// {title:'关于印发《昭化区2019年度特种设备日常监督检查计划及重点监督检查单位目录》的通知',
+//   source:'广元市质量技术监督局昭化区分局',
+//   date:'2019-02-21'
+// },
+// {title:'关于印发《昭化区2019年度特种设备日常监督检查计划及重点监督检查单位目录》的通知',
+//   source:'广元市质量技术监督局昭化区分局',
+//   date:'2019-02-21'
+// },
+// {title:'关于印发《昭化区2019年度特种设备日常监督检查计划及重点监督检查单位目录》的通知',
+//   source:'广元市质量技术监督局昭化区分局',
+//   date:'2019-02-21'
+// },
+// ]
 export default Libraries

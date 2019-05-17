@@ -71,20 +71,43 @@ export default {
       ${currentRouter} param:${params && JSON.stringify(params)}
       ${oldRouter} oldParam:${params && JSON.stringify(oldParams)}`)
       switch (currentRouter) {
+        //Under Home
         case 'Home': {
+          dispatch({ type: 'slideIndex/getNewsList', payload: { paging } })
           break
         }
-        case 'Lesson': {
+
+        //Home/MarketService
+        case 'MarketExtension': {
+          dispatch({ type: 'marketExtensions/getNewsList', payload: { paging } })
           break
         }
-        case '4disErr': {
-              yield select(state => state)
+
+        //Home/PolicyService
+        case 'PoliticTopics': {
+          dispatch({ type: 'politicTopics/getNewsList', payload: { paging } })
           break
         }
+        case 'LawRules': {
+          dispatch({ type: 'lawRules/getNewsList', payload: { paging } })
+          break
+        }
+        case 'Libraries': {
+          dispatch({ type: 'libraries/getNewsList', payload: { paging } })
+          break
+        }
+
+        //InvestZH
+
+        //ZHInfos
         case 'ZHInfos': {
           dispatch({ type: 'zhInfos/getNewsList', payload: { paging } })
+          dispatch({ type: 'slideNews/getNewsList', payload: { paging } })
           break
         }
+
+
+        //other rubbish
         case 'Course': {
          
           break
@@ -93,6 +116,12 @@ export default {
          
           break
         }
+        case '4disErr': {
+              yield select(state => state)
+          break
+        }
+
+        //other userful
         case 'Notification': {
           // dispatch({type:'notification/getNewList',payload:{AssignObject:4,IsPust:1,...paging}})
           break
@@ -114,19 +143,40 @@ export default {
       )
       // const hasCache = yield select(state =>state.app.hasCache)
       switch (currentRouter) {
+        //Home
         case 'Home': {
-          
+          dispatch({ type: 'slideIndex/getNewsList', payload: { paging } })
          
           break
         }
-        case 'Lesson': {
-         
+
+        //Home/MarketService
+        case 'MarketExtension': {
+          dispatch({ type: 'marketExtensions/getNewsList', payload: { paging } })
           break
         }
+        //Home/PolicyService
+        case 'PoliticTopics': {
+          dispatch({ type: 'politicTopics/getNewsList', payload: { paging } })
+          break
+        }
+        case 'LawRules': {
+          dispatch({ type: 'lawRules/getNewsList', payload: { paging } })
+          break
+        }
+        case 'Libraries': {
+          dispatch({ type: 'libraries/getNewsList', payload: { paging } })
+          break
+        }
+
+
+        //ZHInfos
         case 'ZHInfos': {
           dispatch({ type: 'zhInfos/getNewsList', payload: { paging } })
+          dispatch({ type: 'slideNews/getNewsList', payload: { paging } })
           break
         }
+
         default:
           break
       }

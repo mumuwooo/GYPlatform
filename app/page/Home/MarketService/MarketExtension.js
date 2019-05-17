@@ -9,7 +9,11 @@ import Timeline from 'react-native-timeline-listview'
 import { NavigationPage, Button, Toast } from 'teaset'
 import { Divider, IconFont,NavBar } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
+import { connect } from 'react-redux';
 
+import _baseURLGlobal from '../../../utils/global'
+
+@connect(({marketExtensions})=>({marketExtensions}))
 class MarketExtension extends NavigationPage {
   constructor(){
     super()
@@ -64,14 +68,14 @@ class MarketExtension extends NavigationPage {
   renderDetail(rowData, sectionID, rowID) {
     const title = <Text style={[styles.title]}>{rowData.title}</Text>
     let desc = null
-    if(rowData.description && rowData.imageUrl)
+    if(rowData.pictureUrl && rowData.content)
       desc = (
         <View style={styles.descriptionContainer}>   
           <View style={styles.description_row}>
-          <Text style={[styles.textDescription]}>{rowData.description}</Text>
+          <Text style={[styles.textDescription]}>{rowData.contentSource}</Text>
           <Text style={styles.textDescription_right}>{'详情 >'}</Text>
           </View>
-          <Image source={{uri: rowData.imageUrl}} style={styles.image}/>
+          <Image source={{uri: _baseURLGlobal+rowData.pictureUrl}} style={styles.image}/>
         </View>
       )
     
@@ -84,11 +88,13 @@ class MarketExtension extends NavigationPage {
   }
 
   renderPage() {
+    const {newsList} = this.props.marketExtensions;
     return (
       <View style={styles.container}>
         <Timeline 
           style={styles.list}
-          data={this.data}
+          // data={this.data}
+          data={newsList}
           circleSize={20}
           renderFullLine
           circleColor='rgba(0,0,0,0)'

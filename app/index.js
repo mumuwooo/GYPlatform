@@ -7,6 +7,12 @@ import { Theme } from 'teaset'
 import Router, { routerMiddleware, routerReducer } from './router'
 import appModel from './models/app'
 import zhInfos from './models/zhInfos'
+import lawRules from './models/lawRules'
+import libraries from './models/libraries'
+import politicTopics from './models/politicTopics'
+import marketExtensions from './models/marketExtensions'
+import slideNews from './models/slideNews'
+import slideIndex from './models/slideIndex'
 import dva from './utils/dva'
 import { commonStyle } from './utils'
 
@@ -16,6 +22,12 @@ const app = dva({
   models: [
     appModel,
     zhInfos,
+    politicTopics,
+    libraries,
+    lawRules,
+    marketExtensions,
+    slideNews,
+    slideIndex
   ],
   extraReducers: { router: routerReducer },
   onAction: [routerMiddleware],

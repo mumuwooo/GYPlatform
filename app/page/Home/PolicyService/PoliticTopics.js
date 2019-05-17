@@ -15,7 +15,7 @@ const { width, height } = Dimensions.get('window');
 
 const bannerImg=require('../../../assets/images/banner1.png')
 
-@connect(({zhInfos})=>({zhInfos}))
+@connect(({politicTopics})=>({politicTopics}))
 class PoliticTopics extends NavigationPage {
   constructor(props) {
    super(props);
@@ -35,6 +35,7 @@ gotoDetail = () => {
   this.props.dispatch(NavigationActions.navigate({ routeName: 'Sorry' }))
 }  
 
+
 componentDidMount() {
   setTimeout(()=>{
     this.setTimeout = this.setState({swiperShow:true});
@@ -45,7 +46,7 @@ componentDidMount() {
 componentWillUnmount(){
   this.setTimeout && clearTimeout(this.setTimeout);
 }
-_renderItemView = ({ item, index }) => (
+_renderItemView = ({item, index }) => (
   <NewsBlock data={item} key={index} index={index} />
 )
 //  触底更新
@@ -75,7 +76,7 @@ _renderFooter = () =>
 
 
 renderPage() {
-    const {newsList}=this.props.zhInfos
+  const {newsList}=this.props.politicTopics;
   return (
       <View style={styles.container}>
       <ScrollView style={{flex:1}}>
@@ -92,11 +93,14 @@ renderPage() {
             </View>
             {newsList&&<FlatList
             data={newsList}
+            extraData={newsList}
             keyExtractor={(item, index) => index.toString()}
             renderItem={this._renderItemView}
+
             // onRefresh={this._onRefresh}
             // refreshing={this.state.isRefresh}
             // ListHeaderComponent={this._renderHeader}
+            ListEmptyComponent={<Text>网络加载中</Text>}
             ListFooterComponent={this._renderFooter}
             onEndReached={this._onEndReached.bind(this)}
             onEndReachedThreshold={0.1}

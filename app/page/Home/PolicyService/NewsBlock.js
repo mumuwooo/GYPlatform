@@ -10,8 +10,10 @@ const { width } = Dimensions.get('window')
 
 const NewsBlock = ({text,data,style,type,size,disable,dispatch,index,...rest})=>{
  const  goToDetail=(index)=>{
-        alert(index)
+    //   dispatch(NavigationActions.navigate({ routeName: 'NewsDetail', params: { index, listName: 'politicTopics' } }))
+    alert(index)
     }
+    
 
     return(
         <Touchable style={styles.container} onPress={()=>goToDetail(index)}>
@@ -20,8 +22,9 @@ const NewsBlock = ({text,data,style,type,size,disable,dispatch,index,...rest})=>
                 <View style={styles.item_right}>
                     <Text style={styles.right_title}>{data.title}</Text>
                     <View style={styles.right_bottom}>
-                    <Text style={styles.bottom_text}>来源：{data.source}</Text>
-                    <Text style={styles.bottom_text}>{data.date}</Text>
+                    {data.contentSource&&
+                    <Text style={styles.bottom_text}>来源：{data.contentSource}</Text>}
+                    <Text style={styles.bottom_text}>{moment(data.customeTime).format('YYYY-MM-DD')}</Text>
                     </View>
                 </View>
             </View>

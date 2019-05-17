@@ -51,6 +51,7 @@ import BankConnect from './page/Home/BankService/BankConnect'
 
 import Libraries from './page/Home/PolicyService/Libraries'
 import PoliticTopics from './page/Home/PolicyService/PoliticTopics'
+import LawRules from './page/Home/PolicyService/LawRules'
 
 import ZHInfos from './page/ZHInfos'
 import InvestZH from './page/InvestZH'
@@ -194,6 +195,7 @@ const AppNavigator = createStackNavigator(
     SignalApplyForm:{screen: SignalApplyForm,navigationOptions: { header: null }},
     Libraries:{screen: Libraries,navigationOptions: { header: null }},
     PoliticTopics:{screen: PoliticTopics,navigationOptions: { header: null }},
+    LawRules:{screen: LawRules,navigationOptions: { header: null }},
     // Libraries:{screen: Libraries,navigationOptions: { header: null }},
 
   },

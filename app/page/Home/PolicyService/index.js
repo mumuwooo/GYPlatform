@@ -31,7 +31,7 @@ class PolicyService extends Component {
                   <Text style={styles.icon_text}>专题政策</Text>
                 </Touchable>
 
-                <Touchable style={styles.item_each} onPress={()=>{this.navigateTo('MarketExtension')}}>
+                <Touchable style={styles.item_each} onPress={()=>{this.navigateTo('LawRules')}}>
                   <IconFont name='&#xe637;' size={22} color={commonStyle.purpleColor}/>
                   <Text style={styles.icon_text}>法律法规</Text>
                 </Touchable>

@@ -3,21 +3,20 @@ import { StyleSheet, View, Image,Text,Dimensions,ImageBackground,ScrollView,Flat
 import { connect } from 'react-redux'
 import { NavigationBar, NavigationPage } from 'teaset'
 import Swiper from 'react-native-swiper'
-import { Touchable,Button,IconFont,NavBar } from '../../components'
-import { NavigationActions, commonStyle } from '../../utils'
+import { Touchable,Button,IconFont,NavBar } from '../../../components'
+import { NavigationActions, commonStyle } from '../../../utils'
 import NewsBlock from './NewsBlock'
-import { pageInit } from '../../utils/tools'
-import _baseURLGlobal from '../../utils/global'
+import { pageInit } from '../../../utils/tools'
 
 const paging = pageInit()
 
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
 
-const bannerImg=require('../../assets/images/banner1.png')
+const bannerImg=require('../../../assets/images/banner1.png')
 
-@connect(({zhInfos,slideNews})=>({zhInfos, slideNews}))
-class ZHInfos extends NavigationPage {
+@connect(({lawRules})=>({lawRules}))
+class LawRules extends NavigationPage {
   constructor(props) {
    super(props);
     this.state = {
@@ -29,12 +28,13 @@ class ZHInfos extends NavigationPage {
 }
 
 renderNavigationBar() {
-  return <NavBar title="昭化资讯" />
+  return <NavBar title="专题政策" />
 }
 
 gotoDetail = () => {
   this.props.dispatch(NavigationActions.navigate({ routeName: 'Sorry' }))
 }  
+
 
 componentDidMount() {
   setTimeout(()=>{
@@ -46,7 +46,7 @@ componentDidMount() {
 componentWillUnmount(){
   this.setTimeout && clearTimeout(this.setTimeout);
 }
-_renderItemView = ({ item, index }) => (
+_renderItemView = ({item, index }) => (
   <NewsBlock data={item} key={index} index={index} />
 )
 //  触底更新
@@ -75,44 +75,8 @@ _renderFooter = () =>
   )
 
 
-// 轮播图
-renderBanner(slides) {
-        if (this.state.swiperShow) {
-            return (
-                <Swiper 
-                    style={styles.wrapper} 
-                    showsButtons={false} 
-                    autoplay
-                    paginationStyle={styles.paginationStyle} 
-                    dotStyle={styles.dotStyle} 
-                    activeDotStyle={styles.activeDotStyle}
-                >
-                {slides.map(item=>
-                <View >
-                  <Touchable onPress={this.gotoDetail}>
-                    <ImageBackground source={{ uri: _baseURLGlobal+item.pictureUrl}} style={styles.bannerImg} >
-                        <View style={styles.textBox}>
-                        <Text style={styles.bannerText} numberOfLines={1}>{item.title}</Text>
-                        </View>
-                    </ImageBackground>
-                  </Touchable>
-                </View>
-                  )}
-
-                </Swiper>
-            )
-        } else {
-            return (
-                <View style={{ height: width*40/75 }}>
-                    <Image source={bannerImg} style={styles.bannerImg} />
-                </View>
-            );
-        }
-    }
-
 renderPage() {
-    const {newsList}=this.props.zhInfos
-    const {slides} = this.props.slideNews
+  const {newsList}=this.props.lawRules;
   return (
       <View style={styles.container}>
       <ScrollView style={{flex:1}}>
@@ -120,20 +84,19 @@ renderPage() {
           <Text style={{fontFamily:'iconfont',fontSize:32,color:'#fff'}}>&#xe618;</Text>
         </Text> */}
         {/* <Iconfont name='&#xe618;' style={{backgroundColor:'#ff5971',width:34,height:34,borderRadius:18,textAlign:'center',textAlignVertical:'center'}}/> */}
-        <View style={styles.bannerBox}>
-        {this.renderBanner(slides)}
-        </View>
 
         <View style={styles.content}>
         <View style={styles.content_block}>
             <View style={styles.block_title}>
                   <Text style={styles.title_redIcon}/>
-                  <Text style={styles.title_text}>昭化资讯</Text>
+                  <Text style={styles.title_text}>专题政策</Text>
             </View>
             {newsList&&<FlatList
             data={newsList}
+            extraData={newsList}
             keyExtractor={(item, index) => index.toString()}
             renderItem={this._renderItemView}
+
             // onRefresh={this._onRefresh}
             // refreshing={this.state.isRefresh}
             // ListHeaderComponent={this._renderHeader}
@@ -312,4 +275,4 @@ const data = [
 
 ]
 
-export default ZHInfos
+export default LawRules
