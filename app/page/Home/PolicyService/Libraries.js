@@ -16,7 +16,7 @@ import NewsBlock from './NewsBlock'
 
 const { width, height } = Dimensions.get('window')
 
-@connect(({ libraries }) => ({ libraries }))
+@connect(({ policyService }) => ({ policyService }))
 class Libraries extends NavigationPage {
   constructor(props) {
     super(props)
@@ -129,7 +129,7 @@ class Libraries extends NavigationPage {
   }
   renderPage() {
     const {sortType}=this.state
-    const {newsList} = this.props.libraries
+    const {libList} = this.props.policyService
     return (
       <ScrollView style={styles.container}>
         <View style={styles.top}>
@@ -158,7 +158,7 @@ class Libraries extends NavigationPage {
           </Button>
         </View>
         <View style={styles.content}>
-       {newsList.map((item,index)=> (<NewsBlock data={item} index={index} key={index}/>))}
+       {libList&&libList.map((item,index)=> (<NewsBlock data={item} index={index} key={index}/>))}
         <Divider type='bottomSpace' />
         </View>
       </ScrollView>

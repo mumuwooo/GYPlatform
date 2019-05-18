@@ -1,16 +1,16 @@
 import { Toast, ModalIndicator } from 'teaset'
-import * as services from '../services/libraries'
+import * as services from '../services/marketService'
 import { Storage, NavigationActions } from '../utils'
 import { pageInit } from '../utils/tools'
 
 const paging = pageInit()
 export default {
-  namespace: 'libraries',
+  namespace: 'marketService',
   state: {
     loading: true,
     refresh: true,
     newListPaging: paging, // 分页对象
-    newsList: [],
+    newsList: null,
   },
   reducers: {
     updateLoadStatus(state, payload) {

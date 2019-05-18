@@ -7,3 +7,10 @@ export async function getNewsList(params) {
       '/api/VMNewsZHs',
   })
 }
+
+export async function fetchZhSlides() {
+  return GET({
+    url:
+      '/api/VMSlideNews',
+  })
+}

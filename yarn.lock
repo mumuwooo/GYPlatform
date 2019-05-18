@@ -5144,10 +5144,10 @@ react-native-image-picker@^0.28.1:
   resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-0.28.1.tgz#1127460522e0c9741fc62f3d040271d298fb6a6e"
   integrity sha512-CW2dm+cjsdW2fjBW2WD/cSufNG0x0UpljwGHrjSzyB0TckoW+tjYv44UWtckCWxr1JtCg+QrYDO/MzlRyFcjwQ==
 
-react-native-render-html-for-maxwidth@^4.1.2:
-  version "4.1.2"
-  resolved "https://registry.npm.taobao.org/react-native-render-html-for-maxwidth/download/react-native-render-html-for-maxwidth-4.1.2.tgz#e95221fe6a1573152185d12c1214772135df1287"
-  integrity sha1-6VIh/moVcxUhhdEsEhR3ITXfEoc=
+react-native-render-html-for-maxwidth@^4.1.3:
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/react-native-render-html-for-maxwidth/-/react-native-render-html-for-maxwidth-4.1.3.tgz#0fcaa2783aa3574120af5ad973881781727880f3"
+  integrity sha512-5Jc13Xlr2rP1oUzK1kbdzSRa9OgpgUYJqwupJ5N19Ef4DBfoFSOWxZotvR6UUa/shuAwKHgK5EiT2hIkGWFNBA==
   dependencies:
     buffer "^4.5.1"
     events "^1.1.0"
@@ -5201,6 +5201,11 @@ react-native-tab-view@^1.0.0:
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-1.0.2.tgz#66e0bc6d38a227ed2b212e3a256b7902f6ce02ed"
   dependencies:
     prop-types "^15.6.1"
+
+react-native-timeline-listview-touchable@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/react-native-timeline-listview-touchable/-/react-native-timeline-listview-touchable-0.2.3.tgz#1e3015c62e71911a708df2ef95616afaf0f2085c"
+  integrity sha512-KT+tu5LDnrB1wDvZYbtTX99ibzC6TlK40RZBFdZ+yL/gsBqEYhr9FoyP55vkijwDIChX+lszkGJIH9AXV4/H1Q==
 
 react-native-timeline-listview@^0.2.3:
   version "0.2.3"

@@ -16,7 +16,7 @@ const { width, height } = Dimensions.get('window');
 
 const bannerImg=require('../../assets/images/banner1.png')
 
-@connect(({zhInfos,slideNews})=>({zhInfos, slideNews}))
+@connect(({zhInfos})=>({zhInfos}))
 class ZHInfos extends NavigationPage {
   constructor(props) {
    super(props);
@@ -76,43 +76,40 @@ _renderFooter = () =>
 
 
 // 轮播图
-renderBanner(slides) {
-        if (this.state.swiperShow) {
-            return (
-                <Swiper 
-                    style={styles.wrapper} 
-                    showsButtons={false} 
-                    autoplay
-                    paginationStyle={styles.paginationStyle} 
-                    dotStyle={styles.dotStyle} 
-                    activeDotStyle={styles.activeDotStyle}
-                >
-                {slides.map(item=>
-                <View >
-                  <Touchable onPress={this.gotoDetail}>
-                    <ImageBackground source={{ uri: _baseURLGlobal+item.pictureUrl}} style={styles.bannerImg} >
-                        <View style={styles.textBox}>
-                        <Text style={styles.bannerText} numberOfLines={1}>{item.title}</Text>
-                        </View>
-                    </ImageBackground>
-                  </Touchable>
-                </View>
-                  )}
-
-                </Swiper>
-            )
-        } else {
-            return (
-                <View style={{ height: width*40/75 }}>
-                    <Image source={bannerImg} style={styles.bannerImg} />
-                </View>
-            );
-        }
+renderBanner(slidesZh) {
+  if (slidesZh&&this.state.swiperShow) {
+    return (
+        <Swiper 
+        style={styles.wrapper} 
+        showsButtons={false} 
+        autoplay
+        paginationStyle={styles.paginationStyle} 
+        dotStyle={styles.dotStyle} 
+        activeDotStyle={styles.activeDotStyle}
+    >
+    {slidesZh.map((item,index)=>
+            <Touchable onPress={this.gotoDetail} key={index}>
+              <ImageBackground source={{ uri: _baseURLGlobal+item.pictureUrl}} style={styles.bannerImg} >
+                  <View style={styles.textBox}>
+                  <Text style={styles.bannerText} numberOfLines={1}>{item.title}</Text>
+                  </View>
+              </ImageBackground>
+            </Touchable>
+        )}
+    </Swiper>
+    )
+      } 
+      // else {
+      //     return (
+      //         <View style={{ height: width*40/75 }}>
+      //             <Image source={bannerImg} style={styles.bannerImg} />
+      //         </View>
+      //     );
+      // }
     }
 
 renderPage() {
-    const {newsList}=this.props.zhInfos
-    const {slides} = this.props.slideNews
+    const {newsList,slidesZh}=this.props.zhInfos
   return (
       <View style={styles.container}>
       <ScrollView style={{flex:1}}>
@@ -121,7 +118,7 @@ renderPage() {
         </Text> */}
         {/* <Iconfont name='&#xe618;' style={{backgroundColor:'#ff5971',width:34,height:34,borderRadius:18,textAlign:'center',textAlignVertical:'center'}}/> */}
         <View style={styles.bannerBox}>
-        {this.renderBanner(slides)}
+        {slidesZh&&this.renderBanner(slidesZh)}
         </View>
 
         <View style={styles.content}>
@@ -155,63 +152,63 @@ renderPage() {
 
 const styles = StyleSheet.create({
   container: {
-     flex: 1,
-     backgroundColor:'#fff',
-  },
-  bannerBox:{
-    height: width*40/75,
-  },
-  wrapper: {
-    // width,
-  },
-  slide: {
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'transparent'
-  },  
-  bannerImg: {
-      height: width*40/75,
-      width
-  },
-  textBox:{
-    width,
-    height:50,
-    backgroundColor:'#000',
-    opacity:0.6,
-    position:'absolute',
-    bottom:0,
-  },
-    bannerText:{
-    marginLeft:15,
-    height:50,
-    width:width*0.75,
-    fontFamily: commonStyle.PFregular,
-    fontSize: commonStyle.h21Size,
-    color: "#fff",
-    marginTop:15,
-    // justifyContent:'center',
-    // textAlignVertical:'center',
-    },
-  paginationStyle: {
-      bottom:20,
-      left:null,
-      right:10,
-    },
-  dotStyle: {
-        width: 7,
-        height: 7,
-        backgroundColor:'#fff',
-        opacity: 0.4,
-        borderRadius: 4,
-        marginRight:10,   
-    },
-  activeDotStyle: {
-        width: 7,
-        height: 7,
-        backgroundColor:'#de1d21',
-        borderRadius: 4,
-        marginRight:10,   
-    },
+    backgroundColor:'#fff',
+ },
+ bannerBox:{
+   height: width*40/75,
+ },
+ wrapper: {
+   // width,
+ },
+ slide: {
+   flex: 1,
+   justifyContent: 'center',
+   backgroundColor: 'transparent'
+ },  
+ bannerImg: {
+     height: width*40/75,
+     width
+ },
+ textBox:{
+   width,
+   height:50,
+   backgroundColor:'#000',
+   opacity:0.6,
+   position:'absolute',
+   bottom:0,
+ },
+   bannerText:{
+   marginLeft:15,
+   height:50,
+   width:width*0.75,
+   fontFamily: commonStyle.PFregular,
+   fontSize: commonStyle.h21Size,
+   color: "#ffffff",
+   // justifyContent:'center',
+   // textAlignVertical:'center',
+   marginTop:15,
+   },
+ paginationStyle: {
+     bottom:20,
+     left:null,
+     right:10,
+   },
+ dotStyle: {
+       width: 7,
+       height: 7,
+       backgroundColor:'#fff',
+       opacity: 0.4,
+       borderRadius: 4,
+       marginRight:10,   
+   },
+ activeDotStyle: {
+       width: 7,
+       height: 7,
+       backgroundColor:'#de1d21',
+       borderRadius: 4,
+       marginRight:10,   
+   },
   content:{
         alignItems: 'center',
         justifyContent: 'center',
@@ -272,44 +269,6 @@ const styles = StyleSheet.create({
     },
 })
 
-const data = [
-  {
-    img:'../../assets/images/companginfos1.png',
-    title: '区人大常委会主任贾小玲主持召开区七届人大常委会第十八次会议。',
-    date: '2019-03-23',
-    source: '昭化区人民政府网',
-  },
-  {
-    img:'../../assets/images/companginfos2.png',
-    title: '关于社会机构假四川大学名义违规办学的通告',
-    date: '2019-01-07',
-    source: '昭化区人民政府网',
-  },
-  {
-    img:'../../assets/images/companginfos3.png',
-    title: '区人大常委会主任贾小玲主持召开区七届人大常委会第十八次会议。',
-    date: '2018-10-23',
-    source: '昭化区人民政府网',
-  },
-  {
-    img:'../../assets/images/companginfos1.png',
-    title: '区人大常委会主任贾小玲主持召开区七届人大常委会第十八次会议。',
-    date: '2019-03-23',
-    source: '昭化区人民政府网',
-  },
-  {
-    img:'../../assets/images/companginfos2.png',
-    title: '关于社会机构假四川大学名义违规办学的通告',
-    date: '2019-01-07',
-    source: '昭化区人民政府网',
-  },
-  {
-    img:'../../assets/images/companginfos3.png',
-    title: '区人大常委会主任贾小玲主持召开区七届人大常委会第十八次会议。',
-    date: '2018-10-23',
-    source: '昭化区人民政府网',
-  },
-
-]
 
 export default ZHInfos
+

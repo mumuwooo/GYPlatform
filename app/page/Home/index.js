@@ -20,7 +20,7 @@ import _baseURLGlobal from './../../utils/global'
 const { width, height } = Dimensions.get('window');
 const bannerImg=require('../../assets/images/banner1.png')
 
-@connect(({slideIndex})=>({slideIndex}))
+@connect(({home})=>({home}))
 class Home extends NavigationPage {
   constructor(props) {
    super(props);
@@ -117,31 +117,30 @@ renderBanner(slides) {
                     dotStyle={styles.dotStyle} 
                     activeDotStyle={styles.activeDotStyle}
                 >
-                  {slides.map(
-                    item=><View >
-                      <Touchable onPress={this.gotoDetail}>
+                  {slides.map((item,index)=>
+                      <Touchable onPress={this.gotoDetail} key={index}>
                         <ImageBackground source={{ uri: _baseURLGlobal+item.pictureUrl}} style={styles.bannerImg} >
                             <View style={styles.textBox}>
                             <Text style={styles.bannerText} numberOfLines={1}>{item.title}</Text>
                             </View>
                         </ImageBackground>
                       </Touchable>
-                    </View>
                   )}
                 </Swiper>
             )
-        } else {
-            return (
-                <View style={{ height: width*40/75 }}>
-                    <Image source={bannerImg} style={styles.bannerImg} />
-                </View>
-            );
-        }
+        } 
+        // else {
+        //     return (
+        //         <View style={{ height: width*40/75 }}>
+        //             <Image source={bannerImg} style={styles.bannerImg} />
+        //         </View>
+        //     );
+        // }
     }
 
   renderPage() {
     const {companyShow, projectShow, techShow, bankShow, marketShow, policyShow}=this.state
-    const {slides} = this.props.slideIndex
+    const {slides} = this.props.home
     return (
       <View style={styles.container}>
       <ScrollView style={{flex:1}} >

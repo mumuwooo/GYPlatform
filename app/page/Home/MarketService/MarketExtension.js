@@ -5,15 +5,16 @@ import {
   View,
   Image
 } from 'react-native';
-import Timeline from 'react-native-timeline-listview'
+// import Timeline from 'react-native-timeline-listview'
+import Timeline from 'react-native-timeline-listview-touchable'
 import { NavigationPage, Button, Toast } from 'teaset'
+import {connect} from 'react-redux'
 import { Divider, IconFont,NavBar } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
-import { connect } from 'react-redux';
 
 import _baseURLGlobal from '../../../utils/global'
 
-@connect(({marketExtensions})=>({marketExtensions}))
+@connect(({marketService})=>({marketService}))
 class MarketExtension extends NavigationPage {
   constructor(){
     super()
@@ -88,9 +89,9 @@ class MarketExtension extends NavigationPage {
   }
 
   renderPage() {
-    const {newsList} = this.props.marketExtensions;
+    const {newsList} = this.props.marketService;
     return (
-      <View style={styles.container}>
+      newsList&&<View style={styles.container}>
         <Timeline 
           style={styles.list}
           // data={this.data}

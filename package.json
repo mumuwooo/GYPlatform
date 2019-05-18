@@ -24,6 +24,7 @@
     "react-native-scrollable-tab-view": "^0.10.0",
     "react-native-swiper": "^1.5.14",
     "react-native-timeline-listview": "^0.2.3",
+    "react-native-timeline-listview-touchable": "^0.2.3",
     "react-navigation": "^2.5.1",
     "react-navigation-redux-helpers": "^2.0.2",
     "react-redux": "^5.0.7",

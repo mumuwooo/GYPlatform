@@ -71,19 +71,19 @@ export default {
       ${currentRouter} param:${params && JSON.stringify(params)}
       ${oldRouter} oldParam:${params && JSON.stringify(oldParams)}`)
       switch (currentRouter) {
-        //Under Home
+        // Under Home
         case 'Home': {
           dispatch({ type: 'slideIndex/getNewsList', payload: { paging } })
           break
         }
 
-        //Home/MarketService
+        // Home/MarketService
         case 'MarketExtension': {
-          dispatch({ type: 'marketExtensions/getNewsList', payload: { paging } })
+          dispatch({ type: 'marketService/getNewsList', payload: { paging } })
           break
         }
 
-        //Home/PolicyService
+        // Home/PolicyService
         case 'PoliticTopics': {
           dispatch({ type: 'politicTopics/getNewsList', payload: { paging } })
           break
@@ -97,17 +97,17 @@ export default {
           break
         }
 
-        //InvestZH
+        // InvestZH
 
-        //ZHInfos
+        // ZHInfos
         case 'ZHInfos': {
           dispatch({ type: 'zhInfos/getNewsList', payload: { paging } })
-          dispatch({ type: 'slideNews/getNewsList', payload: { paging } })
+          dispatch({ type: 'zhInfos/getZhSlides' })
           break
         }
 
 
-        //other rubbish
+        // other rubbish
         case 'Course': {
          
           break
@@ -121,7 +121,7 @@ export default {
           break
         }
 
-        //other userful
+        // other userful
         case 'Notification': {
           // dispatch({type:'notification/getNewList',payload:{AssignObject:4,IsPust:1,...paging}})
           break
@@ -145,27 +145,27 @@ export default {
       switch (currentRouter) {
         //Home
         case 'Home': {
-          dispatch({ type: 'slideIndex/getNewsList', payload: { paging } })
+          dispatch({ type: 'home/getHomeSlides', payload: { paging } })
          
           break
         }
 
-        //Home/MarketService
+        // Home/MarketService
         case 'MarketExtension': {
-          dispatch({ type: 'marketExtensions/getNewsList', payload: { paging } })
+          dispatch({ type: 'marketService/getNewsList', payload: { paging } })
           break
         }
         //Home/PolicyService
         case 'PoliticTopics': {
-          dispatch({ type: 'politicTopics/getNewsList', payload: { paging } })
+          dispatch({ type: 'policyService/getPoliticList', payload: { paging } })
           break
         }
         case 'LawRules': {
-          dispatch({ type: 'lawRules/getNewsList', payload: { paging } })
+          dispatch({ type: 'policyService/getLawList', payload: { paging } })
           break
         }
         case 'Libraries': {
-          dispatch({ type: 'libraries/getNewsList', payload: { paging } })
+          dispatch({ type: 'policyService/getLibList', payload: { paging } })
           break
         }
 
@@ -173,7 +173,7 @@ export default {
         //ZHInfos
         case 'ZHInfos': {
           dispatch({ type: 'zhInfos/getNewsList', payload: { paging } })
-          dispatch({ type: 'slideNews/getNewsList', payload: { paging } })
+          dispatch({ type: 'zhInfos/getZhSlides'})
           break
         }
 

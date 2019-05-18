@@ -15,7 +15,7 @@ const { width, height } = Dimensions.get('window');
 
 const bannerImg=require('../../../assets/images/banner1.png')
 
-@connect(({politicTopics})=>({politicTopics}))
+@connect(({policyService})=>({policyService}))
 class PoliticTopics extends NavigationPage {
   constructor(props) {
    super(props);
@@ -76,7 +76,7 @@ _renderFooter = () =>
 
 
 renderPage() {
-  const {newsList}=this.props.politicTopics;
+  const {politicList}=this.props.policyService;
   return (
       <View style={styles.container}>
       <ScrollView style={{flex:1}}>
@@ -91,9 +91,9 @@ renderPage() {
                   <Text style={styles.title_redIcon}/>
                   <Text style={styles.title_text}>专题政策</Text>
             </View>
-            {newsList&&<FlatList
-            data={newsList}
-            extraData={newsList}
+            {politicList&&<FlatList
+            data={politicList}
+            extraData={politicList}
             keyExtractor={(item, index) => index.toString()}
             renderItem={this._renderItemView}
 

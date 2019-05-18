@@ -15,7 +15,7 @@ const { width, height } = Dimensions.get('window');
 
 const bannerImg=require('../../../assets/images/banner1.png')
 
-@connect(({lawRules})=>({lawRules}))
+@connect(({policyService})=>({policyService}))
 class LawRules extends NavigationPage {
   constructor(props) {
    super(props);
@@ -28,7 +28,7 @@ class LawRules extends NavigationPage {
 }
 
 renderNavigationBar() {
-  return <NavBar title="专题政策" />
+  return <NavBar title="法律法规" />
 }
 
 gotoDetail = () => {
@@ -76,7 +76,7 @@ _renderFooter = () =>
 
 
 renderPage() {
-  const {newsList}=this.props.lawRules;
+  const {lawList}=this.props.policyService;
   return (
       <View style={styles.container}>
       <ScrollView style={{flex:1}}>
@@ -89,11 +89,11 @@ renderPage() {
         <View style={styles.content_block}>
             <View style={styles.block_title}>
                   <Text style={styles.title_redIcon}/>
-                  <Text style={styles.title_text}>专题政策</Text>
+                  <Text style={styles.title_text}>法律法规</Text>
             </View>
-            {newsList&&<FlatList
-            data={newsList}
-            extraData={newsList}
+            {lawList&&<FlatList
+            data={lawList}
+            extraData={lawList}
             keyExtractor={(item, index) => index.toString()}
             renderItem={this._renderItemView}
 

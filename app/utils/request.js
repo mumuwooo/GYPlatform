@@ -116,7 +116,7 @@ function requestGET(url, params) {
   return new Promise(function (resolve, reject) {
     fetch( requestOBJ[0],requestOBJ[1])
       .then((response) => {
-        console.log("did I get", response);
+        console.log(response);
         if (response.ok) {
           return response.json();
         } else {

@@ -1,24 +1,24 @@
 import { Toast, ModalIndicator } from 'teaset'
-import * as services from '../services/slideIndex'
+import * as services from '../services/home'
 import { Storage, NavigationActions } from '../utils'
 import { pageInit } from '../utils/tools'
 
 const paging = pageInit()
 export default {
-  namespace: 'slideIndex',
+  namespace: 'home',
   state: {
-    slides: [],
+    slides: null,
   },
   reducers: {
-    updateNewsList(state, { payload, paging }) {
+    updateHomeSlides(state, { payload, paging }) {
       return { ...state, slides: payload }
     },
   },
   effects: {
-    *getNewsList({ payload }, { call, put }) {
-      const res = yield call(services.getNewsList)
+    *getHomeSlides({ payload }, { call, put }) {
+      const res = yield call(services.fetchHomeSlides)
       if (res.successResponse) {
-           yield put({type:'updateNewsList',payload:res.data})
+           yield put({type:'updateHomeSlides',payload:res.data})
       } else {
         Toast.fail(res.Message)
       }

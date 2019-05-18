@@ -10,7 +10,8 @@ export default {
     loading: true,
     refresh: true,
     newListPaging: paging, // 分页对象
-    newsList: [],
+    newsList: null,
+    slidesZh: null,
   },
   reducers: {
     updateLoadStatus(state, payload) {
@@ -26,6 +27,9 @@ export default {
     //   }
       return { ...state, newsList: payload }
     },
+    updateZhSlides(state, { payload}) {
+      return { ...state, slidesZh: payload }
+    },
   },
   effects: {
     *getNewsList({ payload }, { call, put }) {
@@ -33,6 +37,14 @@ export default {
       const { PageIndex, PageSize, PageStatus } = payload
       if (res.successResponse) {
            yield put({type:'updateNewsList',payload:res.data})
+      } else {
+        Toast.fail(res.Message)
+      }
+    },
+    *getZhSlides({ payload }, { call, put }) {
+      const res = yield call(services.fetchZhSlides)
+      if (res.successResponse) {
+           yield put({type:'updateZhSlides',payload:res.data})
       } else {
         Toast.fail(res.Message)
       }

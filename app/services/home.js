@@ -1,6 +1,6 @@
 import request, { GET, XML } from '../utils/request'
 
-export async function getNewsList(params) {
+export async function fetchHomeSlides(params) {
   return GET({
     url:
       '/api/VMSlideIndexes',
