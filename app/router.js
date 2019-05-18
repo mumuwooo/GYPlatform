@@ -15,10 +15,16 @@ import { connect } from 'react-redux'
 import IconFont from './components/IconFont'
 import {commonStyle} from './utils'
 import Loading from './page/Loading'
+
 import Login from './page/others/Login'
 import Register from './page/others/Register'
+
 import Home from './page/Home'
+
 import MarketExtension from './page/Home/MarketService/MarketExtension'
+import SignalProject from './page/Home/MarketService/SignalProject'
+import SignalApplyForm from './page/Home/MarketService/SignalApplyForm'
+
 import FactorGuarantee from './page/Home/CompanyService/FactorGuarantee'
 import FactorGuaranteeForm from './page/Home/CompanyService/FactorGuaranteeForm'
 import SocialService from './page/Home/CompanyService/SocialService'
@@ -29,25 +35,31 @@ import WebviewLinks from './page/Home/CompanyService/WebviewLinks'
 import FourIdentification from './page/Home/CompanyService/FourIdentification'
 import FourIdentifiForm from './page/Home/CompanyService/FourIdentifiForm'
 import DemandForm from './page/Home/CompanyService/DemandForm'
+
 import OnlineInvest from './page/Home/ProjectService/OnlineInvest'
 import ProjectReport from './page/Home/ProjectService/ProjectReport'
 import ProjectCoordinateForm from './page/Home/ProjectService/ProjectCoordinateForm'
+
 import PatentReport from './page/Home/TechService/PatentReport'
 import TechProject from './page/Home/TechService/TechProject'
 import TechAchive from './page/Home/TechService/TechAchive'
 import OnlineAchiveForm from './page/Home/TechService/OnlineAchiveForm'
+
 import FinanceDemandForm from './page/Home/BankService/FinanceDemandForm'
 import FinanceGuaranteeForm from './page/Home/BankService/FinanceGuaranteeForm'
 import BankConnect from './page/Home/BankService/BankConnect'
-import SignalProject from './page/Home/MarketService/SignalProject'
-import SignalApplyForm from './page/Home/MarketService/SignalApplyForm'
+
 import Libraries from './page/Home/PolicyService/Libraries'
+import PoliticTopics from './page/Home/PolicyService/PoliticTopics'
+import LawRules from './page/Home/PolicyService/LawRules'
+
 import ZHInfos from './page/ZHInfos'
 import InvestZH from './page/InvestZH'
 import Personal from './page/Personal'
 import ChangePwd from './page/Personal/ChangePwd'
 import ChangePhone from './page/Personal/ChangePhone'
 import NewsDetail from './page/ZHInfos/NewsDetail'
+
 import Detail from './page/Detail'
 import Sorry from './page/others/sorry'
 import Test from './page/others/Test'
@@ -182,6 +194,8 @@ const AppNavigator = createStackNavigator(
     SignalProject:{screen: SignalProject,navigationOptions: { header: null }},
     SignalApplyForm:{screen: SignalApplyForm,navigationOptions: { header: null }},
     Libraries:{screen: Libraries,navigationOptions: { header: null }},
+    PoliticTopics:{screen: PoliticTopics,navigationOptions: { header: null }},
+    LawRules:{screen: LawRules,navigationOptions: { header: null }},
     // Libraries:{screen: Libraries,navigationOptions: { header: null }},
 
   },

@@ -14,11 +14,13 @@ import PolicyService from './PolicyService'
 import CompanyInfos from './CompanyInfos'
 import AchiveInfos from './AchiveInfos'
 
+import _baseURLGlobal from './../../utils/global'
+
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
 const bannerImg=require('../../assets/images/banner1.png')
 
-@connect()
+@connect(({slideIndex})=>({slideIndex}))
 class Home extends NavigationPage {
   constructor(props) {
    super(props);
@@ -104,8 +106,8 @@ handleSubmenuShow=(type)=>{
   }
 
 // 轮播图
-renderBanner() {
-        if (this.state.swiperShow) {
+renderBanner(slides) {
+        if (slides&&this.state.swiperShow) {
             return (
                 <Swiper 
                     style={styles.wrapper} 
@@ -115,34 +117,17 @@ renderBanner() {
                     dotStyle={styles.dotStyle} 
                     activeDotStyle={styles.activeDotStyle}
                 >
-                <View >
-              <Touchable onPress={this.gotoDetail}>
-                <ImageBackground source={bannerImg} style={styles.bannerImg} >
-                    <View style={styles.textBox}>
-                    <Text style={styles.bannerText} numberOfLines={1}>李克强总理视察园区坐谈会</Text>
+                  {slides.map(
+                    item=><View >
+                      <Touchable onPress={this.gotoDetail}>
+                        <ImageBackground source={{ uri: _baseURLGlobal+item.pictureUrl}} style={styles.bannerImg} >
+                            <View style={styles.textBox}>
+                            <Text style={styles.bannerText} numberOfLines={1}>{item.title}</Text>
+                            </View>
+                        </ImageBackground>
+                      </Touchable>
                     </View>
-                </ImageBackground>
-              </Touchable>
-
-                </View>
-                <View >
-              <Touchable onPress={this.gotoDetail}>
-                <ImageBackground source={bannerImg} style={styles.bannerImg} >
-                    <View style={styles.textBox}>
-                    <Text style={styles.bannerText} numberOfLines={1}>习近平总书记视察园区坐谈会</Text>
-                    </View>
-                </ImageBackground>
-              </Touchable>
-                </View>                
-                <View >
-              <Touchable onPress={this.gotoDetail}>
-                <ImageBackground source={bannerImg} style={styles.bannerImg} >
-                    <View style={styles.textBox}>
-                    <Text style={styles.bannerText} numberOfLines={1}>李克强总理视察园区坐谈会</Text>
-                    </View>
-                </ImageBackground>
-              </Touchable>
-                </View>
+                  )}
                 </Swiper>
             )
         } else {
@@ -156,6 +141,7 @@ renderBanner() {
 
   renderPage() {
     const {companyShow, projectShow, techShow, bankShow, marketShow, policyShow}=this.state
+    const {slides} = this.props.slideIndex
     return (
       <View style={styles.container}>
       <ScrollView style={{flex:1}} >
@@ -164,7 +150,7 @@ renderBanner() {
         </Text> */}
         {/* <Iconfont name='&#xe618;' style={{backgroundColor:'#ff5971',width:34,height:34,borderRadius:18,textAlign:'center',textAlignVertical:'center'}}/> */}
         <View style={styles.bannerBox}>
-        {this.renderBanner()}
+        {this.renderBanner(slides)}
         </View>
 
         <View style={styles.content}>
