@@ -109,7 +109,7 @@ renderBanner(slidesZh) {
     }
 
 renderPage() {
-    const {newsList,slidesZh}=this.props.zhInfos
+    const {zhInfoList,slidesZh}=this.props.zhInfos
   return (
       <View style={styles.container}>
       <ScrollView style={{flex:1}}>
@@ -127,8 +127,8 @@ renderPage() {
                   <Text style={styles.title_redIcon}/>
                   <Text style={styles.title_text}>昭化资讯</Text>
             </View>
-            {newsList&&<FlatList
-            data={newsList}
+            {zhInfoList&&<FlatList
+            data={zhInfoList}
             keyExtractor={(item, index) => index.toString()}
             renderItem={this._renderItemView}
             // onRefresh={this._onRefresh}

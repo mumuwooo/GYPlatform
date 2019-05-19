@@ -11,12 +11,12 @@ import { NavigationPage, } from 'teaset'
 import moment from 'moment'
 // import HTMLView from 'react-native-htmlview'
 import HTML from 'react-native-render-html-for-maxwidth'
-import {IconFont, NavBar, Divider} from '../../components'
-import { commonStyle } from '../../utils'
-import { htmlDecodeByRegExp } from '../../utils/tools'
+import {IconFont, NavBar, Divider} from '.'
+import { commonStyle } from '../utils'
+import { htmlDecodeByRegExp } from '../utils/tools'
 
 
-const { width, height } = Dimensions.get('window')
+const { width } = Dimensions.get('window')
 
 class NewsDetail extends NavigationPage {
   constructor(props) {
@@ -27,16 +27,23 @@ class NewsDetail extends NavigationPage {
   }
 
   renderNavigationBar() {
-    return <NavBar title="昭化资讯" />
+    const {navTitle}=this.props.navigation.state.params
+    return <NavBar title={navTitle} />
   }
 
   renderPage() {
-     const { newsList } = this.props.zhInfos
-     const { index} = this.props.navigation.state.params
+    let newsList=null;
+    //  const { zhInfoList } = this.props.zhInfos
+     const { data} = this.props.navigation.state.params
+      console.log('====================================');
+      console.log(data);
+      console.log('====================================');
+    newsList=data
     let htmlContent = null
-    if (newsList.length > index) {
-      htmlContent =htmlDecodeByRegExp(newsList[index].content)
+    if (newsList) {
+      htmlContent =htmlDecodeByRegExp(newsList.content)
     }
+    
     // const htmlContent =`
     // <p style="text-align: center;"><b>你头上有一个很长很长的犄角。。。。。。。。我是一个标题很长的标题的标题的标题总之就是很长就看你换不换行</b> </p><p style="text-align: center;"><img src="http://ctfive.oss-cn-hangzhou.aliyuncs.com/Course/2019/01/09/2417b42526634e3a82e94a3e64cff5fb0012.png" style="max-width:100%;"><br></p><p style="text-align: center;">开局一张图，后面全靠编。</p><p>        对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！<br></p>
     // `;
@@ -45,11 +52,11 @@ class NewsDetail extends NavigationPage {
         <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
             <View style={styles.top}>
                 <Text style={styles.top_title}>
-                    {newsList[index].title}
+                    {newsList.title}
                 </Text>
                 <View style={styles.top_bottom}>
-                    <Text style={styles.bottom_text}>发布时间：{moment(newsList[index].customTime).format('YYYY-MM-DD')} </Text>
-                    <Text style={styles.bottom_text}>来源：{newsList[index].contentSource}</Text>
+                    <Text style={styles.bottom_text}>发布时间：{moment(newsList.customTime).format('YYYY-MM-DD')} </Text>
+                    {newsList.contentSource&&<Text style={styles.bottom_text}>来源：{newsList.contentSource}</Text>}
                 </View>
             </View>
             <View style={styles.content}>
@@ -158,7 +165,4 @@ const styles = StyleSheet.create({
 })
 
 // export default NewsDetail
-export default connect(({zhInfos})=>{
-  return {zhInfos}
-}
-  )(NewsDetail)
+export default connect(({zhInfos})=>({zhInfos}))(NewsDetail)

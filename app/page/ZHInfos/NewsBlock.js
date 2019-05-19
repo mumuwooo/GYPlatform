@@ -29,7 +29,7 @@ const NewsBlock = ({
     ...rest
   }) => {
    const gotoDetail=(index)=>{
-      dispatch(NavigationActions.navigate({ routeName: 'NewsDetail', params: { index } })
+      dispatch(NavigationActions.navigate({ routeName: 'NewsDetail', params: { navTile:'昭化资讯',data } })
       )
     }
     const dataImg={uri:_baseUrlGlobal+data.pictureUrl}
@@ -42,7 +42,7 @@ const NewsBlock = ({
         <Text style={styles.right_title}>{data.title}</Text>
         <View style={styles.right_bottom}>
           <Text style={styles.bottom_date}>{moment(data.customeTime).format('YYYY-MM-DD')}</Text>
-          <Text style={styles.bottom_source}>{data.contentSource}</Text>
+          {<Text style={styles.bottom_source}>{data.contentSource}</Text>}
         </View>
       </View>
     </Touchable>

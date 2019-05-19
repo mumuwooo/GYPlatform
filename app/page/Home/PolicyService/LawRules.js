@@ -3,7 +3,7 @@ import { StyleSheet, View, Image,Text,Dimensions,ImageBackground,ScrollView,Flat
 import { connect } from 'react-redux'
 import { NavigationBar, NavigationPage } from 'teaset'
 import Swiper from 'react-native-swiper'
-import { Touchable,Button,IconFont,NavBar } from '../../../components'
+import { Touchable,Button,Loading,NavBar } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
 import NewsBlock from './NewsBlock'
 import { pageInit } from '../../../utils/tools'
@@ -47,7 +47,7 @@ componentWillUnmount(){
   this.setTimeout && clearTimeout(this.setTimeout);
 }
 _renderItemView = ({item, index }) => (
-  <NewsBlock data={item} key={index} index={index} />
+  <NewsBlock data={item} key={index} index={index} navTitle='法律法规'/>
 )
 //  触底更新
 _onEndReached = () => {
@@ -77,21 +77,25 @@ _renderFooter = () =>
 
 renderPage() {
   const {lawList}=this.props.policyService;
+  console.log('===========lawList=========================');
+  console.log(lawList);
+  console.log('====================================');
   return (
       <View style={styles.container}>
-      <ScrollView style={{flex:1}}>
+      {lawList==null&&<Loading />}
+      {/* {lawList==null&&<Text>查询中...</Text>} */}
+      {lawList?<ScrollView style={{flex:1}}>
         {/* <Text style={{backgroundColor:'#ff5971',width:34,height:34,borderRadius:18,textAlign:'center',textAlignVertical:'center'}}>
           <Text style={{fontFamily:'iconfont',fontSize:32,color:'#fff'}}>&#xe618;</Text>
         </Text> */}
         {/* <Iconfont name='&#xe618;' style={{backgroundColor:'#ff5971',width:34,height:34,borderRadius:18,textAlign:'center',textAlignVertical:'center'}}/> */}
-
         <View style={styles.content}>
         <View style={styles.content_block}>
             <View style={styles.block_title}>
                   <Text style={styles.title_redIcon}/>
                   <Text style={styles.title_text}>法律法规</Text>
             </View>
-            {lawList&&<FlatList
+            <FlatList
             data={lawList}
             extraData={lawList}
             keyExtractor={(item, index) => index.toString()}
@@ -107,10 +111,10 @@ renderPage() {
             showsVerticalScrollIndicator={false}
             enabled
             // ItemSeparatorComponent={this._separator}
-          />}
+          />
           </View>
         </View>
-    </ScrollView>
+    </ScrollView>:null}
       </View>
     )
   }

@@ -58,7 +58,7 @@ import InvestZH from './page/InvestZH'
 import Personal from './page/Personal'
 import ChangePwd from './page/Personal/ChangePwd'
 import ChangePhone from './page/Personal/ChangePhone'
-import NewsDetail from './page/ZHInfos/NewsDetail'
+import NewsDetail from './components/NewsDetail'
 
 import Detail from './page/Detail'
 import Sorry from './page/others/sorry'

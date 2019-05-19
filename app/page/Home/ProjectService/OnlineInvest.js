@@ -30,10 +30,7 @@ class OnlineInvest extends NavigationPage {
   }
 
   handleSubmit=()=>{
-    console.log('====================================');
-    console.log(Platform);
-    console.log('====================================');
-    // this.props.dispatch(NavigationActions.navigate({routeName:'WebviewLinks',params:{title:'投资在线审批办理详情'}}))
+    this.props.dispatch(NavigationActions.navigate({routeName:'WebviewLinks',params:{title:'投资在线审批办理详情'}}))
   }
   renderPage() {
     return (

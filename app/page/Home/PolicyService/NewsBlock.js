@@ -8,10 +8,9 @@ import { Divider, Touchable, IconFont } from '../../../components'
 const { width } = Dimensions.get('window')
 
 
-const NewsBlock = ({text,data,style,type,size,disable,dispatch,index,...rest})=>{
+const NewsBlock = ({text,data,style,type,size,disable,dispatch,index,navTitle,...rest})=>{
  const  goToDetail=(index)=>{
-    //   dispatch(NavigationActions.navigate({ routeName: 'NewsDetail', params: { index, listName: 'politicTopics' } }))
-    alert(index)
+    dispatch(NavigationActions.navigate({ routeName: 'NewsDetail', params: { navTitle,data } }))
     }
     
 

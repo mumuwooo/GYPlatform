@@ -10,7 +10,7 @@ export default {
     loading: true,
     refresh: true,
     newListPaging: paging, // 分页对象
-    newsList: null,
+    zhInfoList: null,
     slidesZh: null,
   },
   reducers: {
@@ -25,7 +25,7 @@ export default {
     //       return { ...state }
     //     }
     //   }
-      return { ...state, newsList: payload }
+      return { ...state, zhInfoList: payload }
     },
     updateZhSlides(state, { payload}) {
       return { ...state, slidesZh: payload }

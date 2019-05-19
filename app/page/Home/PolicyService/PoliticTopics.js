@@ -47,7 +47,7 @@ componentWillUnmount(){
   this.setTimeout && clearTimeout(this.setTimeout);
 }
 _renderItemView = ({item, index }) => (
-  <NewsBlock data={item} key={index} index={index} />
+  <NewsBlock data={item} key={index} index={index} navTitle='专题政策'/>
 )
 //  触底更新
 _onEndReached = () => {
