@@ -146,6 +146,7 @@ export default {
         //Home
         case 'Home': {
           dispatch({ type: 'home/getHomeSlides', payload: { paging } })
+          dispatch({ type: 'home/getVMCompanyInfo'})
          
           break
         }

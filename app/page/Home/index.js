@@ -14,7 +14,7 @@ import PolicyService from './PolicyService'
 import CompanyInfos from './CompanyInfos'
 import AchiveInfos from './AchiveInfos'
 
-import _baseURLGlobal from './../../utils/global'
+import _baseURLGlobal from '../../utils/global'
 
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
@@ -140,7 +140,7 @@ renderBanner(slides) {
 
   renderPage() {
     const {companyShow, projectShow, techShow, bankShow, marketShow, policyShow}=this.state
-    const {slides} = this.props.home
+    const {slides,VMCompanyInfoList} = this.props.home
     return (
       <View style={styles.container}>
       <ScrollView style={{flex:1}} >
@@ -231,12 +231,12 @@ renderBanner(slides) {
                 <Text style={styles.title_redIcon}/>
                 <Text style={styles.title_text}>企业信息</Text>
                 </View>
-                <Touchable style={styles.title_right} onPress={this.handleGetMore}>
+                {/* <Touchable style={styles.title_right} onPress={this.handleGetMore}>
                 <Text style={[styles.title_text,styles.title_text2]}>更多 </Text>
                 <Text style={[styles.title_text,styles.title_text2]}>{`>`}</Text>
-                </Touchable>
+                </Touchable> */}
             </View>
-            <CompanyInfos />
+            {VMCompanyInfoList&&<CompanyInfos data={VMCompanyInfoList}/>}
             </View>
 
             <View style={[styles.content_block,styles.content_block2]}>

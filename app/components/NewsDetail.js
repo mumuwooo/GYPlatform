@@ -35,9 +35,6 @@ class NewsDetail extends NavigationPage {
     let newsList=null;
     //  const { zhInfoList } = this.props.zhInfos
      const { data} = this.props.navigation.state.params
-      console.log('====================================');
-      console.log(data);
-      console.log('====================================');
     newsList=data
     let htmlContent = null
     if (newsList) {

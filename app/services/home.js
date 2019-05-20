@@ -6,3 +6,10 @@ export async function fetchHomeSlides(params) {
       '/api/VMSlideIndexes',
   })
 }
+
+export async function fetchVMCompanyInfo() {
+  return GET({
+    url:
+      '/api/VMCompanyInfoes',
+  })
+}

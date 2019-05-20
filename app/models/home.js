@@ -8,11 +8,15 @@ export default {
   namespace: 'home',
   state: {
     slides: null,
+    VMCompanyInfoList:null,
   },
   reducers: {
     updateHomeSlides(state, { payload, paging }) {
       return { ...state, slides: payload }
     },
+    updateVMCompanyInfo(state,{payload}){
+      return {...state,VMCompanyInfoList:payload}
+    }
   },
   effects: {
     *getHomeSlides({ payload }, { call, put }) {
@@ -23,6 +27,14 @@ export default {
         Toast.fail(res.Message)
       }
     },
+    *getVMCompanyInfo({payload},{call,put}){
+      const res=yield call(services.fetchVMCompanyInfo)
+      if(res.successResponse){
+        yield put({type:'updateVMCompanyInfo',payload:res.data})
+      }else {
+        Toast.fail(res.Message)
+      }
+    }
   },
   subscriptions: {
     setup({ dispatch }) {},

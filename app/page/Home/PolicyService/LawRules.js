@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image,Text,Dimensions,ImageBackground,ScrollView,FlatList } from 'react-native'
+import { StyleSheet, View, Image,Text,Dimensions,ScrollView,FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationBar, NavigationPage } from 'teaset'
-import Swiper from 'react-native-swiper'
 import { Touchable,Button,Loading,NavBar } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
 import NewsBlock from './NewsBlock'
@@ -77,9 +76,6 @@ _renderFooter = () =>
 
 renderPage() {
   const {lawList}=this.props.policyService;
-  console.log('===========lawList=========================');
-  console.log(lawList);
-  console.log('====================================');
   return (
       <View style={styles.container}>
       {lawList==null&&<Loading />}
