@@ -59,7 +59,7 @@ export function hasRouterCache(routerHistory){
 // 初始化的paging对象
 export function pageInit(){
   return {
-    PageSize:10,
+    PageSize:2,
     PageIndex:1,
     PageStatus:1
   }
@@ -72,7 +72,23 @@ export function checkPhoneNum(value){// 验证手机规则
   }
   return true;
 }
+  // 验证姓名 
+  export function  checkName (value){
+    const name = /^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/
+    if (value && !name.test(value)) {
+      return false
+    }
+    return true
+  }
 
+  // 验证身份证号
+  export function  checkIdCard (value){
+    const idCard = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/
+    if (value && value.trim() != '' && !idCard.test(value.trim())) {
+      return false
+    }
+    return true
+  }
 export function htmlDecodeByRegExp(str) {
   // html 转义字符
   let s = "";

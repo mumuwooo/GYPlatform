@@ -97,8 +97,9 @@ handleSubmenuShow=(type)=>{
     }
   }
 
-  gotoDetail = () => {
-    this.props.dispatch(NavigationActions.navigate({ routeName: 'Sorry' }))
+  gotoDetail = (item) => {
+    const data=item.article
+    this.props.dispatch(NavigationActions.navigate({ routeName: 'NewsDetail', params: { navTitle:'新闻快讯', data } }))
   }  
 
   handleGetMore=()=>{
@@ -118,7 +119,7 @@ renderBanner(slides) {
                     activeDotStyle={styles.activeDotStyle}
                 >
                   {slides.map((item,index)=>
-                      <Touchable onPress={this.gotoDetail} key={index}>
+                      <Touchable onPress={()=>this.gotoDetail(item)} key={index}>
                         <ImageBackground source={{ uri: _baseURLGlobal+item.pictureUrl}} style={styles.bannerImg} >
                             <View style={styles.textBox}>
                             <Text style={styles.bannerText} numberOfLines={1}>{item.title}</Text>
@@ -140,7 +141,7 @@ renderBanner(slides) {
 
   renderPage() {
     const {companyShow, projectShow, techShow, bankShow, marketShow, policyShow}=this.state
-    const {slides,VMCompanyInfoList} = this.props.home
+    const {slides, VMCompanyInfoList, VMAchiveInfoList} = this.props.home
     return (
       <View style={styles.container}>
       <ScrollView style={{flex:1}} >
@@ -245,12 +246,12 @@ renderBanner(slides) {
                 <Text style={styles.title_redIcon}/>
                 <Text style={styles.title_text}>成果展示</Text>
                 </View>
-                <View style={styles.title_right}>
+                {/* <View style={styles.title_right}>
                 <Text style={[styles.title_text,styles.title_text2]}>更多 </Text>
                 <Text style={[styles.title_text,styles.title_text2]}>{`>`}</Text>
-                </View>
+                </View> */}
             </View>
-            <AchiveInfos />
+            {VMAchiveInfoList&&<AchiveInfos data={VMAchiveInfoList}/>}
             </View>
 
         </View>

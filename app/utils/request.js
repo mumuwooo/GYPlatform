@@ -1,13 +1,13 @@
 
 import fetch from 'dva/fetch';
 import { BASE_URL ,X_HOST} from './config';
-import storage from './storage';
+import Storage from './storage';
 
 const CONFIG_HEADERS =  {
   "Referrer":"6s.pinpin.pro",
   'Content-Type': 'application/json; charset=utf-8',
   'Access-Control-Allow-Origin': '*',
-  'X-Host':X_HOST
+  'X-Host':X_HOST,
 }
 const CONFIG_HEADERS_XML =  {
   'Content-Type': 'text/html',
@@ -105,12 +105,18 @@ function requestGET(url, params) {
   if(url.search('/datastore/Discipline/GetAllDisciplineInfoOnly')>=0){
     url = url + '?' + new Date().getTime() + Math.random();
   }
+  let headers
+  if(window._userToken){
+    headers={...CONFIG_HEADERS,'Authorization':window._userToken}
+  }else{
+    headers=CONFIG_HEADERS
+  }
   const requestOBJ = [
     url, {
       method: 'GET',
       credentials: 'include',
       cache:"no-cache",
-      headers:CONFIG_HEADERS
+      headers,
     }
    ]
   return new Promise(function (resolve, reject) {
@@ -137,6 +143,7 @@ function requestGET(url, params) {
     alert('err')
   })
 }
+
 function requestPOST(url, params) {
   const requestOBJ = [
     url, {

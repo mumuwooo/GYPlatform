@@ -9,6 +9,7 @@ export default {
   state: {
     slides: null,
     VMCompanyInfoList:null,
+    VMAchiveInfoList:null,
   },
   reducers: {
     updateHomeSlides(state, { payload, paging }) {
@@ -16,7 +17,10 @@ export default {
     },
     updateVMCompanyInfo(state,{payload}){
       return {...state,VMCompanyInfoList:payload}
-    }
+    },
+    updateVMAchiveInfo(state,{payload}){
+      return {...state,VMAchiveInfoList:payload}
+    },
   },
   effects: {
     *getHomeSlides({ payload }, { call, put }) {
@@ -31,6 +35,14 @@ export default {
       const res=yield call(services.fetchVMCompanyInfo)
       if(res.successResponse){
         yield put({type:'updateVMCompanyInfo',payload:res.data})
+      }else {
+        Toast.fail(res.Message)
+      }
+    },
+    *getVMAchiveInfo({payload},{call,put}){
+      const res=yield call(services.fetchVMAchiveInfo)
+      if(res.successResponse){
+        yield put({type:'updateVMAchiveInfo',payload:res.data})
       }else {
         Toast.fail(res.Message)
       }

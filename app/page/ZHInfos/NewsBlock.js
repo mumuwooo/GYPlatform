@@ -29,7 +29,7 @@ const NewsBlock = ({
     ...rest
   }) => {
    const gotoDetail=(index)=>{
-      dispatch(NavigationActions.navigate({ routeName: 'NewsDetail', params: { navTile:'昭化资讯',data } })
+      dispatch(NavigationActions.navigate({ routeName: 'NewsDetail', params: { navTitle:'昭化资讯',data } })
       )
     }
     const dataImg={uri:_baseUrlGlobal+data.pictureUrl}

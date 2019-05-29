@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 import { Button, Toast, ModalIndicator } from 'teaset'
 import { commonStyle, NavigationActions, createAction } from '../../utils'
 import { IconFont } from '../../components'
+import { checkPhoneNum } from '../../utils/tools'
 
 class LoginByPersonal extends Component {
   constructor() {
@@ -18,47 +19,11 @@ class LoginByPersonal extends Component {
     this.state = {
       isCleanShow: false,
       isShowPwd: true,
-      // isLogin:false,
-      // inputNum:'43012119881108103x',
-      // inputPwd:'08103x'
-      // inputNum:'431126544554444',
-      // inputPwd:'554444',
-      // inputNum:'431126198855553333',
-      // inputPwd:'111111'
-      inputNum: window._IsRelease ? '' : '',
-      inputPwd: window._IsRelease ? '' : '',
+      inputPhone: '18692205772',
+      password:'205772',
     }
   }
 
-  // 身份证正则校验
-  checkIdCard = value => {
-    const idCard = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/
-    if (value && value.trim() != '' && !idCard.test(value.trim())) {
-      return false
-    }
-    return true
-  }
-
-  checkTWIdCard = value =>{
-    const TWIdCard=/[A-Za-z][0-9]{6}\([0-9A]\)$/
-    if(value&&value.trim()!=''&&!TWIdCard.test(value.trim())){
-      return false
-    }
-    return true
-  } 
-
- toCDB= str =>{
-    let tmp = "";
-    for (let i = 0; i < str.length; i++) {
-        if (str.charCodeAt(i) > 65248 && str.charCodeAt(i) < 65375) {
-            tmp += String.fromCharCode(str.charCodeAt(i) - 65248);
-        }
-        else {
-            tmp += String.fromCharCode(str.charCodeAt(i));
-        }
-    }
-    return tmp
-}
   // 密码显示/隐藏
   handlePwdShow = () => {
     this.setState({
@@ -67,22 +32,16 @@ class LoginByPersonal extends Component {
   }
   // 登录
   handleLogin = () => {
-    // 请求前规则验证   loginType:1 密码登录
-    console.log(this.state.inputNum, this.state.inputPwd)
+    // 请求前规则验证   
+    console.log(this.state.inputPhone, this.state.password)
     const userInfo = {
-      CardNumber: this.toCDB(this.state.inputNum),
-      Password: this.toCDB(this.state.inputPwd),
-      loginType: 1,
+      PhoneNum: this.state.inputPhone,
+      Password: this.state.password,
     }
-    if (!userInfo.CardNumber.trim()) return Toast.info('请输入身份证号码')
+    if (!userInfo.PhoneNum.trim() || !checkPhoneNum(userInfo.PhoneNum))
+    return Toast.info('请输入正确的手机号')
+
     if (!userInfo.Password.trim()) return Toast.info('密码不能为空！')
-    if(userInfo.CardNumber.trim().length===18||userInfo.CardNumber.trim().length===15){
-      if (!this.checkIdCard(userInfo.CardNumber))
-      return Toast.info('请输入正确的身份证号码!')
-    }else{
-      if (!this.checkTWIdCard(userInfo.CardNumber))
-      return Toast.info('请输入正确的身份证号码!')
-    }
     ModalIndicator.show(`登录中，请稍后`)
     this.props.dispatch({ type: 'login/login', payload: userInfo })
   }
@@ -102,22 +61,22 @@ class LoginByPersonal extends Component {
           <IconFont name="&#xe6f1;" size={20} style={styles.login_icon} />
           <TextInput
             style={styles.login_input}
-            placeholder="手机/身份证号"
+            placeholder="请输入手机号"
             underlineColorAndroid="transparent"
             onFocus={() => {
               this.setState({ isCleanShow: true })
             }}
             onChangeText={text => {
-              this.setState({ inputNum: text })
+              this.setState({ inputPhone: text })
             }}
-            value={this.state.inputNum}
+            value={this.state.inputPhone}
           />
           {this.state.isCleanShow ? (
             <TouchableOpacity
               style={styles.cleanBox}
               onPress={() => {
                 this.setState({
-                  inputNum: '',
+                  inputPhone: '',
                 })
               }}
             >
@@ -134,7 +93,7 @@ class LoginByPersonal extends Component {
 
           <TextInput
             style={styles.login_input}
-            placeholder="密码"
+            placeholder="请输入密码"
             underlineColorAndroid="transparent"
             secureTextEntry={!!this.state.isShowPwd}
             onFocus={() => {
@@ -143,9 +102,9 @@ class LoginByPersonal extends Component {
               })
             }}
             onChangeText={text => {
-              this.setState({ inputPwd: text })
+              this.setState({ password: text })
             }}
-            value={this.state.inputPwd}
+            value={this.state.password}
           />
           <TouchableOpacity
             style={styles.cleanBox}
@@ -159,7 +118,7 @@ class LoginByPersonal extends Component {
           </TouchableOpacity>
         </View>
         <Text style={styles.loginTip}>
-          温馨提示：首次登录后请修改初始密码（身份证后6位）
+          温馨提示：首次登录后请修改初始密码（手机号后6位）
         </Text>
         <Button
           title="登录"

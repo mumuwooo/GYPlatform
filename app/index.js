@@ -10,6 +10,7 @@ import zhInfos from './models/zhInfos'
 import policyService from './models/policyService'
 import marketService from './models/marketService'
 import home from './models/home'
+import login from './models/login'
 import dva from './utils/dva'
 import { commonStyle } from './utils'
 
@@ -21,7 +22,8 @@ const app = dva({
     zhInfos,
     policyService,
     marketService,
-    home
+    home,
+    login,
   ],
   extraReducers: { router: routerReducer },
   onAction: [routerMiddleware],

@@ -11,92 +11,56 @@ import { connect } from 'react-redux'
 import { Button, Toast, ModalIndicator } from 'teaset'
 import { commonStyle, NavigationActions, createAction } from '../../utils'
 import { IconFont } from '../../components'
+import { checkPhoneNum, checkIdCard, checkName } from '../../utils/tools'
 
 class RegByPersonal extends Component {
   constructor() {
     super()
     this.state = {
-      isCleanShow: false,
-      isShowPwd: true,
-      // isLogin:false,
-      // inputIDCard:'43012119881108103x',
-      // inputName:'08103x'
-      // inputIDCard:'431126544554444',
-      // inputName:'554444',
-      // inputIDCard:'431126198855553333',
-      // inputName:'111111'
-      inputIDCard: window._IsRelease ? '' : '',
-      inputName: window._IsRelease ? '' : '',
+      isCleanShow: false, // 清除输入
+      inputIDCard: '430524199909090098',
+      inputName: '萨尔',
+      inputPhone: '18692205772',
       inputCode:'',
     }
   }
 
-  // 身份证正则校验
-  checkIdCard = value => {
-    const idCard = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/
-    if (value && value.trim() != '' && !idCard.test(value.trim())) {
-      return false
-    }
-    return true
-  }
 
-  checkTWIdCard = value =>{
-    const TWIdCard=/[A-Za-z][0-9]{6}\([0-9A]\)$/
-    if(value&&value.trim()!=''&&!TWIdCard.test(value.trim())){
-      return false
-    }
-    return true
-  } 
-
- toCDB= str =>{
-    let tmp = "";
-    for (let i = 0; i < str.length; i++) {
-        if (str.charCodeAt(i) > 65248 && str.charCodeAt(i) < 65375) {
-            tmp += String.fromCharCode(str.charCodeAt(i) - 65248);
-        }
-        else {
-            tmp += String.fromCharCode(str.charCodeAt(i));
-        }
-    }
-    return tmp
-}
-  // 密码显示/隐藏
-  handlePwdShow = () => {
-    this.setState({
-      isShowPwd: !this.state.isShowPwd,
-    })
-  }
   // 登录
   handleLogin = () => {
-    // 请求前规则验证   loginType:1 密码登录
+    // 请求前规则验证   
     console.log(this.state.inputIDCard, this.state.inputName)
     const userInfo = {
-      CardNumber: this.toCDB(this.state.inputIDCard),
-      Password: this.toCDB(this.state.inputName),
-      loginType: 1,
+      CardNumber: this.state.inputIDCard,
+      userName:this.state.inputName,
+      phonenum:this.state.inputPhone,
+      securityCode:this.state.inputCode
     }
     if (!userInfo.CardNumber.trim()) return Toast.info('请输入身份证号码')
-    if (!userInfo.Password.trim()) return Toast.info('密码不能为空！')
-    if(userInfo.CardNumber.trim().length===18||userInfo.CardNumber.trim().length===15){
-      if (!this.checkIdCard(userInfo.CardNumber))
-      return Toast.info('请输入正确的身份证号码!')
-    }else{
-      if (!this.checkTWIdCard(userInfo.CardNumber))
+    if(userInfo.CardNumber.trim().length!==18&&!checkIdCard(userInfo.CardNumber)){
       return Toast.info('请输入正确的身份证号码!')
     }
-    ModalIndicator.show(`登录中，请稍后`)
-    this.props.dispatch({ type: 'login/login', payload: userInfo })
+    if (!userInfo.userName.trim() || !checkName(userInfo.userName))
+    return Toast.info('请输入合法姓名')
+    if (!userInfo.phonenum.trim() || !checkPhoneNum(userInfo.phonenum))
+    return Toast.info('请输入正确的手机号')
+    if (!userInfo.securityCode.trim()) return Toast.info('验证码不能为空')
+    ModalIndicator.show(`注册中，请稍后`)
+    this.props.dispatch({ type: 'login/Register', payload: userInfo })
   }
 
-  toRegister = () => {
-    // this.props.dispatch({ type: 'app/firstPage', page: 'Register' })
-     this.props.dispatch(NavigationActions.navigate({routeName:'Register'}))
+
+  handleSendCode = () => {
+    const { inputPhone } = this.state
+    if(inputPhone.trim()&&checkPhoneNum(inputPhone)){
+       this.props.dispatch({type:'login/getVerifiCode',payload:{ phonenum:inputPhone }})
+    }else{
+      return Toast.info('请输入正确的手机号码!')
+    }
   }
 
-  toForgotPwd = () => {
-    Toast.info('请联系管理员修改密码')
-  }
   render() {
+    const { tipText, isSendingCode }=this.props.login
     return (
       <View style={styles.container}>
         <View style={styles.login_inputLine}>
@@ -137,12 +101,6 @@ class RegByPersonal extends Component {
             style={styles.item_input}
             placeholder="请输入真实姓名"
             underlineColorAndroid="transparent"
-            secureTextEntry={!!this.state.isShowPwd}
-            onFocus={() => {
-              this.setState({
-                isCleanShow: false,
-              })
-            }}
             onChangeText={text => {
               this.setState({ inputName: text })
             }}
@@ -155,16 +113,10 @@ class RegByPersonal extends Component {
             style={styles.item_input}
             placeholder="请输入手机号"
             underlineColorAndroid="transparent"
-            secureTextEntry={!!this.state.isShowPwd}
-            onFocus={() => {
-              this.setState({
-                isCleanShow: false,
-              })
-            }}
             onChangeText={text => {
-              this.setState({ inputName: text })
+              this.setState({ inputPhone: text })
             }}
-            value={this.state.inputName}
+            value={this.state.inputPhone}
           />
         </View>
         <View style={styles.login_inputLine}>
@@ -180,9 +132,8 @@ class RegByPersonal extends Component {
               value={this.state.inputCode}
             />
             <Button
-              // disabled={this.props.user.isSendingCode}
-              // title={this.props.user.tipText}
-               title='获取动态码'
+               disabled={isSendingCode}
+               title={tipText}
               onPress={this.handleSendCode}
               style={styles.bind_sendCode}
               titleStyle={styles.bind_sendCodeText}
@@ -301,4 +252,4 @@ const styles = StyleSheet.create({
     color: commonStyle.themeColor,
   },
 })
-export default connect()(RegByPersonal)
+export default connect(({login})=>({login}))(RegByPersonal)

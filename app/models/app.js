@@ -60,6 +60,28 @@ export default {
 
   },
   effects: {
+    *initApp(action, { put, call }) {
+      // 获取 基础信息
+      console.log('initApp')
+      // 已登录判断  后续加载完成loading
+      yield put({ type: 'loginJudge', loading: true })
+      // 用户信息
+      // yield put({ type: 'user/updateBasicInfo', payload: _baseInfo })
+    },
+       // 登录判断
+    *loginJudge({ loading }, { call, put }) {
+      console.log('122113132131313')
+        const _userToken = yield call(Storage.get, '_userToken')
+        console.log(_userToken)
+        if (!_userToken) {
+          yield put({ type: 'isLogout' }) // 已退出
+        } else {
+          window._userToken = 'bearer '+ _userToken
+        }
+        console.log('window._userToken');
+        console.log(window._userToken);
+        
+      },
     *routesBack({ routes, oldRoutes }, { select }) {
       const { dispatch } = window
       // 路由回退触发  可初始化数据
@@ -147,7 +169,8 @@ export default {
         case 'Home': {
           dispatch({ type: 'home/getHomeSlides', payload: { paging } })
           dispatch({ type: 'home/getVMCompanyInfo'})
-         
+          dispatch({ type: 'home/getVMAchiveInfo'})
+        
           break
         }
 
@@ -186,7 +209,7 @@ export default {
   subscriptions: {
     setup({ dispatch }) {
       // loading加载
-      // dispatch({ type: 'initApp' })
+      dispatch({ type: 'initApp' })
       // 监听网络变化事件
      
       window.dispatch = dispatch

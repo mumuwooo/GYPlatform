@@ -32,8 +32,12 @@ renderNavigationBar() {
   return <NavBar title="昭化资讯" />
 }
 
-gotoDetail = () => {
-  this.props.dispatch(NavigationActions.navigate({ routeName: 'Sorry' }))
+gotoDetail = (item) => {
+  const data=item.article
+  console.log('====================================');
+  console.log(item);
+  console.log('====================================');
+  // this.props.dispatch(NavigationActions.navigate({ routeName: 'NewsDetail', params: { navTitle:'新闻快讯', data } }))
 }  
 
 componentDidMount() {
@@ -51,17 +55,17 @@ _renderItemView = ({ item, index }) => (
 )
 //  触底更新
 _onEndReached = () => {
-  // const { newListPaging } = this.props.notification
-  // const paging = { ...newListPaging, PageIndex: newListPaging.PageIndex + 1 }
-  // if (
-  //   newListPaging.PageIndex * newListPaging.PageSize <
-  //   newListPaging.TotalCount
-  // ) {
-  //   const payload = { AssignObject: 4, IsPust: 1, ...paging }
-  //   this.props.dispatch({ type: 'notification/getNewList', payload })
-  // }
-  // const { loading } = this.props.notification
-  // this.setState({ loading })
+  const { newListPaging } = this.props.zhInfos
+  const paging = { ...newListPaging, PageIndex: newListPaging.PageIndex + 1 }
+  if (
+    newListPaging.PageIndex * newListPaging.PageSize <
+    newListPaging.TotalCount
+  ) {
+    const payload = {...paging }
+    // this.props.dispatch({ type: 'zhInfos/getNewsList', payload })
+  }
+  const { loading } = this.props.zhInfos
+  this.setState({ loading })
 }
 _renderFooter = () =>
   this.state.loading ? (
@@ -88,7 +92,7 @@ renderBanner(slidesZh) {
         activeDotStyle={styles.activeDotStyle}
     >
     {slidesZh.map((item,index)=>
-            <Touchable onPress={this.gotoDetail} key={index}>
+            <Touchable onPress={()=>this.gotoDetail(item)} key={index}>
               <ImageBackground source={{ uri: _baseURLGlobal+item.pictureUrl}} style={styles.bannerImg} >
                   <View style={styles.textBox}>
                   <Text style={styles.bannerText} numberOfLines={1}>{item.title}</Text>

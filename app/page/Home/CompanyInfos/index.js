@@ -20,10 +20,10 @@ const gotoDetail=(index)=>{
             {data.map((item,index)=>(
             <Touchable style={styles.item_view} key={index} onPress={()=>gotoDetail(index)} >
             <View style={styles.item_top}>
-            <Image style={{width: 123, height: 83,marginRight:10,}} resizeMode='contain' source={{ uri: _baseURLGlobal+item.pictureUrl}} />
+            <Image style={{width: 154, height: 96}} resizeMode='contain' source={{ uri: _baseURLGlobal+item.pictureUrl}} />
             <View style={styles.item_text}>
                 <Text style={styles.text_title}>{item.title}</Text>
-                <Text style={styles.text_content} numberOfLines={3}>点击查看详情</Text>
+                {/* <Text style={styles.text_content} numberOfLines={3}>点击查看详情</Text> */}
             </View>
             </View>
             </Touchable>
@@ -40,54 +40,26 @@ const styles = StyleSheet.create({
     paddingHorizontal:15,
     marginBottom:10,
   },
-  item_dot:{
-    width: 6,
-    height: 6,
-    borderRadius:3,
-    backgroundColor: "#b5b5b5",
-    margin:6,
-    marginTop:7,
-    // position:'relative'
-  },
-  item_activeDot:{
-    // position:'relative',
-    marginTop:7,
-    width: 6,
-    height: 6,
-    borderRadius:3,
-    margin:6,
-	  backgroundColor: "#e44a4c"
-  },
   item_top:{
-    flexDirection:'row',
-    justifyContent:'space-around',
     alignItems:'center',
-    paddingTop:27
-  },
-  crossLine:{
-    width,
-	height: 1,
-	opacity: 0.2,
-    backgroundColor: '#8b8b8b',
-    marginVertical:13,
-  },
-  item_bottom:{
-    paddingTop:12,
+    paddingTop:27,
+    paddingRight:25,
   },
   item_text:{
       paddingTop:9,
-      width:width*0.6,
+      width:width*0.32,
   },
   text_title:{
+    textAlign:'center',
     fontFamily: commonStyle.PFregular,
-	fontSize: commonStyle.h21Size,
-    color: commonStyle.themeColor,
+	  fontSize: commonStyle.h4Size,
+    color: commonStyle.h2Color,
     paddingBottom:9,
   },
   text_content:{
     fontFamily: commonStyle.PFregular,
-	fontSize: commonStyle.h4Size,
-	color: commonStyle.h2Color,
+    fontSize: commonStyle.h4Size,
+    color: commonStyle.h2Color,
   },
 
 })

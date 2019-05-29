@@ -13,3 +13,10 @@ export async function fetchVMCompanyInfo() {
       '/api/VMCompanyInfoes',
   })
 }
+
+export async function fetchVMAchiveInfo() {
+  return GET({
+    url:
+      '/api/VMResultShows',
+  })
+}
