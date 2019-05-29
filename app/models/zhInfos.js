@@ -18,16 +18,16 @@ export default {
       return { ...state, loading: payload.loading, refresh: payload.refresh }
     },
     updateNewsList(state, { payload, paging }) {
-    //   if (paging) {
-    //     state.newListPaging = paging
-    //     if (paging.PageIndex > 1) {
-    //       state.newList.push(...payload)
-    //       return { ...state }
-    //     }
-    //   }
+      //   if (paging) {
+      //     state.newListPaging = paging
+      //     if (paging.PageIndex > 1) {
+      //       state.newList.push(...payload)
+      //       return { ...state }
+      //     }
+      //   }
       return { ...state, zhInfoList: payload }
     },
-    updateZhSlides(state, { payload}) {
+    updateZhSlides(state, { payload }) {
       return { ...state, slidesZh: payload }
     },
   },
@@ -36,7 +36,7 @@ export default {
       const res = yield call(services.getNewsList, payload)
       const { PageIndex, PageSize, PageStatus } = payload
       if (res.successResponse) {
-           yield put({type:'updateNewsList',payload:res.data})
+        yield put({ type: 'updateNewsList', payload: res.data })
       } else {
         Toast.fail(res.Message)
       }
@@ -44,7 +44,7 @@ export default {
     *getZhSlides({ payload }, { call, put }) {
       const res = yield call(services.fetchZhSlides)
       if (res.successResponse) {
-           yield put({type:'updateZhSlides',payload:res.data})
+        yield put({ type: 'updateZhSlides', payload: res.data })
       } else {
         Toast.fail(res.Message)
       }

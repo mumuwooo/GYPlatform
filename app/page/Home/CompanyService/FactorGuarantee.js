@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import HTML from 'react-native-render-html'
-import { NavigationBar, NavigationPage,  } from 'teaset'
+import { NavigationBar, NavigationPage } from 'teaset'
 import { NavBar, Divider, Button } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
 
@@ -20,22 +20,21 @@ const { width, height } = Dimensions.get('window')
 class FactorGuarantee extends NavigationPage {
   constructor(props) {
     super(props)
-    this.state = {
-     
-    }
+    this.state = {}
   }
 
- 
   renderNavigationBar() {
     return <NavBar title="要素保障服务" />
   }
 
-  handleSubmit=()=>{
-    this.props.dispatch(NavigationActions.navigate({routeName:'FactorGuaranteeForm'}))
+  handleSubmit = () => {
+    this.props.dispatch(
+      NavigationActions.navigate({ routeName: 'FactorGuaranteeForm' })
+    )
   }
   renderPage() {
     // let htmlContent = null
-    const htmlContent=`
+    const htmlContent = `
     <p style="color:#e0161b;font-size:13px;margin-top:10px">
     <b>1、能源保障服务</b> 
     </p>
@@ -79,23 +78,26 @@ class FactorGuarantee extends NavigationPage {
     `
     return (
       <ScrollView style={styles.container}>
-      <View style={styles.top}>
-        <ImageBackground source={require('../../../assets/images/factor_bg.png')} style={styles.top_imageBg}>
-          <View style={styles.top_text}>
-            <Text style={styles.text_title}>在线服务流程:</Text>
-            <View style={styles.text_block}>
-              <Text style={styles.text_item}>网上申请</Text>
-              <Text style={styles.line}/>
-              <Text style={styles.text_item}>在线审批</Text>
-              <Text style={styles.line}/>
-              <Text style={styles.text_item}>受理</Text>
-              <Text style={styles.line}/>
-              <Text style={styles.text_item}>办结</Text>
+        <View style={styles.top}>
+          <ImageBackground
+            source={require('../../../assets/images/factor_bg.png')}
+            style={styles.top_imageBg}
+          >
+            <View style={styles.top_text}>
+              <Text style={styles.text_title}>在线服务流程:</Text>
+              <View style={styles.text_block}>
+                <Text style={styles.text_item}>网上申请</Text>
+                <Text style={styles.line} />
+                <Text style={styles.text_item}>在线审批</Text>
+                <Text style={styles.line} />
+                <Text style={styles.text_item}>受理</Text>
+                <Text style={styles.line} />
+                <Text style={styles.text_item}>办结</Text>
+              </View>
             </View>
-          </View>
-        </ImageBackground>
-      </View>
-      <Button
+          </ImageBackground>
+        </View>
+        <Button
           style={styles.button_save}
           textStyle={styles.button_text}
           onPress={this.handleSubmit}
@@ -108,7 +110,7 @@ class FactorGuarantee extends NavigationPage {
           <Text style={styles.content_title}>服务介绍</Text>
           <HTML
             html={htmlContent}
-            imagesMaxWidth={width*0.95}
+            imagesMaxWidth={width * 0.95}
             tagsStyles={{
               p: {
                 // fontFamily: "PingFang-SC-Medium",
@@ -118,11 +120,10 @@ class FactorGuarantee extends NavigationPage {
               },
             }}
           />
-          
-          <Divider type = "bottomSpace" color='#fff'/>
+
+          <Divider type="bottomSpace" color="#fff" />
         </View>
       </ScrollView>
-
     )
   }
 }
@@ -130,40 +131,39 @@ class FactorGuarantee extends NavigationPage {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#f1f1f1'
+    backgroundColor: '#f1f1f1',
   },
-  top_imageBg:{
+  top_imageBg: {
     width,
-    height:112,
-    alignItems:'center',
-    justifyContent:'center',
-    
+    height: 112,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  text_title:{
-    color:'#fff',
+  text_title: {
+    color: '#fff',
     fontFamily: commonStyle.PFmedium,
     fontSize: commonStyle.h21Size,
-    marginBottom:14,
+    marginBottom: 14,
   },
-  text_block:{
-    flexDirection:'row',
-    justifyContent:'center',
-    alignItems:'center',
+  text_block: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  text_item:{
-    color:'#fff',
+  text_item: {
+    color: '#fff',
     fontFamily: commonStyle.PFregular,
     fontSize: commonStyle.h31Size,
     borderRadius: 11,
     borderWidth: 1,
-    borderColor: "#ffffff",
-    paddingVertical:5,
-    paddingHorizontal:13,
+    borderColor: '#ffffff',
+    paddingVertical: 5,
+    paddingHorizontal: 13,
   },
-  line:{
+  line: {
     width: 27,
     height: 1,
-    backgroundColor:'#fff',
+    backgroundColor: '#fff',
   },
   button_save: {
     marginTop: 18,
@@ -172,35 +172,35 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: commonStyle.themeColor,
     backgroundColor: commonStyle.themeColor,
-    alignSelf:'center',
+    alignSelf: 'center',
   },
   button_text: {
     fontFamily: commonStyle.PFregular,
     fontSize: commonStyle.h21Size,
     color: '#ffff',
   },
-  content:{
-    backgroundColor:'#fff',
-    marginHorizontal:14,
-    marginTop:18,
-    marginBottom:27,
+  content: {
+    backgroundColor: '#fff',
+    marginHorizontal: 14,
+    marginTop: 18,
+    marginBottom: 27,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: "#bababa",
-    paddingHorizontal:16,
+    borderColor: '#bababa',
+    paddingHorizontal: 16,
     // height:200,
   },
-  content_title:{
-    width:90,
+  content_title: {
+    width: 90,
     fontFamily: commonStyle.PFmedium,
     fontSize: commonStyle.h31Size,
-    color: "#ffffff",
-    paddingVertical:4,
-    paddingHorizontal:16,
+    color: '#ffffff',
+    paddingVertical: 4,
+    paddingHorizontal: 16,
     borderRadius: 10,
-    backgroundColor:commonStyle.themeColor,
-    marginTop:19,
-    marginBottom:26,
+    backgroundColor: commonStyle.themeColor,
+    marginTop: 19,
+    marginBottom: 26,
   },
 })
 export default FactorGuarantee

@@ -57,7 +57,6 @@ export default {
     setRouterParams(state, action) {
       return { ...state, routerParams: action.payload }
     },
-
   },
   effects: {
     *routesBack({ routes, oldRoutes }, { select }) {
@@ -106,18 +105,15 @@ export default {
           break
         }
 
-
         // other rubbish
         case 'Course': {
-         
           break
         }
         case 'Personal': {
-         
           break
         }
         case '4disErr': {
-              yield select(state => state)
+          yield select(state => state)
           break
         }
 
@@ -143,11 +139,11 @@ export default {
       )
       // const hasCache = yield select(state =>state.app.hasCache)
       switch (currentRouter) {
-        //Home
+        // Home
         case 'Home': {
           dispatch({ type: 'home/getHomeSlides', payload: { paging } })
-          dispatch({ type: 'home/getVMCompanyInfo'})
-         
+          dispatch({ type: 'home/getVMCompanyInfo' })
+
           break
         }
 
@@ -156,9 +152,12 @@ export default {
           dispatch({ type: 'marketService/getNewsList', payload: { paging } })
           break
         }
-        //Home/PolicyService
+        // Home/PolicyService
         case 'PoliticTopics': {
-          dispatch({ type: 'policyService/getPoliticList', payload: { paging } })
+          dispatch({
+            type: 'policyService/getPoliticList',
+            payload: { paging },
+          })
           break
         }
         case 'LawRules': {
@@ -170,11 +169,10 @@ export default {
           break
         }
 
-
-        //ZHInfos
+        // ZHInfos
         case 'ZHInfos': {
           dispatch({ type: 'zhInfos/getNewsList', payload: { paging } })
-          dispatch({ type: 'zhInfos/getZhSlides'})
+          dispatch({ type: 'zhInfos/getZhSlides' })
           break
         }
 
@@ -188,7 +186,7 @@ export default {
       // loading加载
       // dispatch({ type: 'initApp' })
       // 监听网络变化事件
-     
+
       window.dispatch = dispatch
     },
   },

@@ -8,33 +8,33 @@ export default {
   namespace: 'home',
   state: {
     slides: null,
-    VMCompanyInfoList:null,
+    VMCompanyInfoList: null,
   },
   reducers: {
     updateHomeSlides(state, { payload, paging }) {
       return { ...state, slides: payload }
     },
-    updateVMCompanyInfo(state,{payload}){
-      return {...state,VMCompanyInfoList:payload}
-    }
+    updateVMCompanyInfo(state, { payload }) {
+      return { ...state, VMCompanyInfoList: payload }
+    },
   },
   effects: {
     *getHomeSlides({ payload }, { call, put }) {
       const res = yield call(services.fetchHomeSlides)
       if (res.successResponse) {
-           yield put({type:'updateHomeSlides',payload:res.data})
+        yield put({ type: 'updateHomeSlides', payload: res.data })
       } else {
         Toast.fail(res.Message)
       }
     },
-    *getVMCompanyInfo({payload},{call,put}){
-      const res=yield call(services.fetchVMCompanyInfo)
-      if(res.successResponse){
-        yield put({type:'updateVMCompanyInfo',payload:res.data})
-      }else {
+    *getVMCompanyInfo({ payload }, { call, put }) {
+      const res = yield call(services.fetchVMCompanyInfo)
+      if (res.successResponse) {
+        yield put({ type: 'updateVMCompanyInfo', payload: res.data })
+      } else {
         Toast.fail(res.Message)
       }
-    }
+    },
   },
   subscriptions: {
     setup({ dispatch }) {},

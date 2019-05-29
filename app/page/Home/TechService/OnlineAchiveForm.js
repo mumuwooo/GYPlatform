@@ -1,13 +1,7 @@
 import React from 'react'
-import {
-  StyleSheet,
-  View,
-  Dimensions,
-  Text,
-  TextInput,
-} from 'react-native'
+import { StyleSheet, View, Dimensions, Text, TextInput } from 'react-native'
 import { connect } from 'react-redux'
-import { NavigationBar, NavigationPage, Button, } from 'teaset'
+import { NavigationBar, NavigationPage, Button } from 'teaset'
 import { Divider, NavBar, IconFont, Touchable } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
 
@@ -18,11 +12,10 @@ class OnlineAchiveForm extends NavigationPage {
   constructor(props) {
     super(props)
     this.state = {
-      progress: 1, //  1信息登记 2联系方式      
+      progress: 1, //  1信息登记 2联系方式
     }
   }
 
- 
   renderNavigationBar() {
     return <NavBar title="在线成果定制服务" />
   }
@@ -36,21 +29,18 @@ class OnlineAchiveForm extends NavigationPage {
     }
   }
 
-  gotoLast=()=>{
-    this.setState({progress:1})
+  gotoLast = () => {
+    this.setState({ progress: 1 })
   }
   handleProgress = index => {
     this.setState({ progress: index })
   }
 
-  handleSubmit=()=>{
+  handleSubmit = () => {
     alert('提交表单')
   }
   renderPage() {
-    const {
-      progress,
-      
-    } = this.state
+    const { progress } = this.state
     return (
       <View style={styles.container}>
         <View style={styles.content}>
@@ -68,7 +58,11 @@ class OnlineAchiveForm extends NavigationPage {
             <IconFont
               name="&#xe6eb;"
               size={15}
-              style={{ marginRight: 5, marginLeft: 5, color:commonStyle.h2Color }}
+              style={{
+                marginRight: 5,
+                marginLeft: 5,
+                color: commonStyle.h2Color,
+              }}
             />
             <Text
               style={
@@ -81,10 +75,10 @@ class OnlineAchiveForm extends NavigationPage {
               2.需求描述
             </Text>
           </View>
-          {progress === 1 ? 
+          {progress === 1 ? (
             <View>
-                <View style={styles.eachItem}>
-                  <TextInput
+              <View style={styles.eachItem}>
+                <TextInput
                   style={styles.item_input}
                   placeholder="请输入企业名称"
                   underlineColorAndroid="transparent"
@@ -92,15 +86,13 @@ class OnlineAchiveForm extends NavigationPage {
                   onChangeText={text => {
                     this.setState({ inputPhone: text })
                   }}
-                  onBlur={() => {
-                   
-                  }}
+                  onBlur={() => {}}
                   value={this.state.inputPhone}
                 />
-                </View>
-               
-                <View style={styles.eachItem}>
-                  <TextInput
+              </View>
+
+              <View style={styles.eachItem}>
+                <TextInput
                   style={styles.item_input}
                   placeholder="请输入联系人姓名"
                   underlineColorAndroid="transparent"
@@ -108,14 +100,12 @@ class OnlineAchiveForm extends NavigationPage {
                   onChangeText={text => {
                     this.setState({ inputPhone: text })
                   }}
-                  onBlur={() => {
-                   
-                  }}
+                  onBlur={() => {}}
                   value={this.state.inputPhone}
                 />
-                </View>
-                <View style={styles.eachItem}>
-                  <TextInput
+              </View>
+              <View style={styles.eachItem}>
+                <TextInput
                   style={styles.item_input}
                   placeholder="请输入联系人电话"
                   underlineColorAndroid="transparent"
@@ -123,14 +113,12 @@ class OnlineAchiveForm extends NavigationPage {
                   onChangeText={text => {
                     this.setState({ inputPhone: text })
                   }}
-                  onBlur={() => {
-                   
-                  }}
+                  onBlur={() => {}}
                   value={this.state.inputPhone}
                 />
-                </View>
-                <View style={styles.eachItem}>
-                  <TextInput
+              </View>
+              <View style={styles.eachItem}>
+                <TextInput
                   style={styles.item_input}
                   placeholder="请输入所属行业"
                   underlineColorAndroid="transparent"
@@ -138,45 +126,43 @@ class OnlineAchiveForm extends NavigationPage {
                   onChangeText={text => {
                     this.setState({ inputPhone: text })
                   }}
-                  onBlur={() => {
-                   
-                  }}
+                  onBlur={() => {}}
                   value={this.state.inputPhone}
                 />
-                </View>
+              </View>
             </View>
-            : 
+          ) : (
             <View style={styles.next_content}>
-                <Text style={styles.next_title}>需求描述</Text>
-                <TextInput
-                  maxLength={140}
-                  placeholder="请输入内容，不超过140字"
-                  underlineColorAndroid="transparent"
-                  multiline
-                  style={styles.userInput}
-                  onChangeText={demandText => this.setState({ demandText })}
-                  value={this.state.demandText}
-                />
+              <Text style={styles.next_title}>需求描述</Text>
+              <TextInput
+                maxLength={140}
+                placeholder="请输入内容，不超过140字"
+                underlineColorAndroid="transparent"
+                multiline
+                style={styles.userInput}
+                onChangeText={demandText => this.setState({ demandText })}
+                value={this.state.demandText}
+              />
             </View>
-           }
+          )}
         </View>
         <View style={styles.buttons}>
-        {progress==2?<Button
-          style={[styles.submitBtn,styles.submitBtn2]}
-          titleStyle={styles.submitText}
-          title='上一步'
-          onPress={this.gotoLast}
-        />:null}
+          {progress == 2 ? (
+            <Button
+              style={[styles.submitBtn, styles.submitBtn2]}
+              titleStyle={styles.submitText}
+              title="上一步"
+              onPress={this.gotoLast}
+            />
+          ) : null}
 
-        <Button
-          style={styles.submitBtn}
-          titleStyle={styles.submitText}
-          title={progress === 2 ? '提交' : '下一步'}
-          onPress={this.gotoNext}
-        />
-
+          <Button
+            style={styles.submitBtn}
+            titleStyle={styles.submitText}
+            title={progress === 2 ? '提交' : '下一步'}
+            onPress={this.gotoNext}
+          />
         </View>
-        
 
         <Divider type="bottomSpace" />
       </View>
@@ -225,7 +211,7 @@ const styles = StyleSheet.create({
   item_input: {
     width: width * 0.7,
     padding: 0,
-    paddingLeft:15,
+    paddingLeft: 15,
   },
   item_input2: {
     width: width * 0.5,
@@ -278,14 +264,13 @@ const styles = StyleSheet.create({
   school_title: {
     width: '83%',
     color: '#999999',
-    paddingLeft:15,
-
+    paddingLeft: 15,
   },
-  buttons:{
-    flexDirection:'row'
+  buttons: {
+    flexDirection: 'row',
   },
   submitBtn: {
-    width: (width - 145)/2,
+    width: (width - 145) / 2,
     height: 45,
     borderRadius: 4,
     backgroundColor: commonStyle.themeColor,
@@ -293,36 +278,36 @@ const styles = StyleSheet.create({
     borderColor: commonStyle.themeColor,
     alignItems: 'center',
   },
-  submitBtn2:{
-    backgroundColor:commonStyle.bluebuttonColor,
-    borderColor:commonStyle.bluebuttonColor,
-    marginRight:42,
+  submitBtn2: {
+    backgroundColor: commonStyle.bluebuttonColor,
+    borderColor: commonStyle.bluebuttonColor,
+    marginRight: 42,
   },
   submitText: {
     fontFamily: commonStyle.PFregular,
     fontSize: commonStyle.h1Size,
     color: '#fffefe',
   },
-  next_content:{
-    width:width*0.9,
-    backgroundColor:'#fff',
-    alignSelf:'center',
-    paddingVertical:36,
-    paddingHorizontal:29,
+  next_content: {
+    width: width * 0.9,
+    backgroundColor: '#fff',
+    alignSelf: 'center',
+    paddingVertical: 36,
+    paddingHorizontal: 29,
   },
-  next_title:{
+  next_title: {
     fontFamily: commonStyle.PFregular,
     fontSize: 15,
-    color: "#3a3a3a"
-  },  
+    color: '#3a3a3a',
+  },
   userInput: {
     marginTop: 25,
     padding: 15,
     textAlignVertical: 'top',
     backgroundColor: commonStyle.bgColor,
-    width:'100%',
+    width: '100%',
     height: 270,
-    alignSelf:'center',
+    alignSelf: 'center',
   },
 })
 export default OnlineAchiveForm

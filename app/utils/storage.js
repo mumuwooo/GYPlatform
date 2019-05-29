@@ -5,8 +5,8 @@ function clear() {
 }
 
 function get(key, defaultValue = null) {
-  return AsyncStorage.getItem(key).then(
-    value => (value !== null ? JSON.parse(value) : defaultValue)
+  return AsyncStorage.getItem(key).then(value =>
+    value !== null ? JSON.parse(value) : defaultValue
   )
 }
 
@@ -14,7 +14,7 @@ function set(key, value) {
   return AsyncStorage.setItem(key, JSON.stringify(value))
 }
 
- // 删除单个数据
+// 删除单个数据
 function remove(key) {
   return AsyncStorage.removeItem(key)
 }

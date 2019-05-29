@@ -1,13 +1,18 @@
-/** 设备信息 **/
+/** 设备信息 * */
 
-import {Dimensions, Platform, PixelRatio} from 'react-native'
+import { Dimensions, Platform, PixelRatio } from 'react-native'
 // import DeviceInfo from 'react-native-device-info'
 export const deviceInfo = {
   // 设备宽度
   deviceWidth: Dimensions.get('window').width,
   // 设备高度
-  deviceHeight: Platform.OS === 'ios' ? Dimensions.get('window').height : Dimensions.get('window').height - 24,
-  isIphoneX: Dimensions.get('window').width === 375 && Dimensions.get('window').height === 812,
+  deviceHeight:
+    Platform.OS === 'ios'
+      ? Dimensions.get('window').height
+      : Dimensions.get('window').height - 24,
+  isIphoneX:
+    Dimensions.get('window').width === 375 &&
+    Dimensions.get('window').height === 812,
   // 设备系统
   deviceOS: Platform.OS,
   // 当前config: debug \ release
@@ -15,5 +20,5 @@ export const deviceInfo = {
   // 最小线宽
   onePix: 1 / PixelRatio.get(),
   // 设备分辨率
-  PixelRatios: PixelRatio.get()
+  PixelRatios: PixelRatio.get(),
 }

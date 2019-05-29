@@ -27,7 +27,7 @@ class RegByPersonal extends Component {
       // inputName:'111111'
       inputIDCard: window._IsRelease ? '' : '',
       inputName: window._IsRelease ? '' : '',
-      inputCode:'',
+      inputCode: '',
     }
   }
 
@@ -40,26 +40,25 @@ class RegByPersonal extends Component {
     return true
   }
 
-  checkTWIdCard = value =>{
-    const TWIdCard=/[A-Za-z][0-9]{6}\([0-9A]\)$/
-    if(value&&value.trim()!=''&&!TWIdCard.test(value.trim())){
+  checkTWIdCard = value => {
+    const TWIdCard = /[A-Za-z][0-9]{6}\([0-9A]\)$/
+    if (value && value.trim() != '' && !TWIdCard.test(value.trim())) {
       return false
     }
     return true
-  } 
+  }
 
- toCDB= str =>{
-    let tmp = "";
+  toCDB = str => {
+    let tmp = ''
     for (let i = 0; i < str.length; i++) {
-        if (str.charCodeAt(i) > 65248 && str.charCodeAt(i) < 65375) {
-            tmp += String.fromCharCode(str.charCodeAt(i) - 65248);
-        }
-        else {
-            tmp += String.fromCharCode(str.charCodeAt(i));
-        }
+      if (str.charCodeAt(i) > 65248 && str.charCodeAt(i) < 65375) {
+        tmp += String.fromCharCode(str.charCodeAt(i) - 65248)
+      } else {
+        tmp += String.fromCharCode(str.charCodeAt(i))
+      }
     }
     return tmp
-}
+  }
   // 密码显示/隐藏
   handlePwdShow = () => {
     this.setState({
@@ -77,20 +76,21 @@ class RegByPersonal extends Component {
     }
     if (!userInfo.CardNumber.trim()) return Toast.info('请输入身份证号码')
     if (!userInfo.Password.trim()) return Toast.info('密码不能为空！')
-    if(userInfo.CardNumber.trim().length===18||userInfo.CardNumber.trim().length===15){
+    if (
+      userInfo.CardNumber.trim().length === 18 ||
+      userInfo.CardNumber.trim().length === 15
+    ) {
       if (!this.checkIdCard(userInfo.CardNumber))
-      return Toast.info('请输入正确的身份证号码!')
-    }else{
-      if (!this.checkTWIdCard(userInfo.CardNumber))
-      return Toast.info('请输入正确的身份证号码!')
-    }
+        return Toast.info('请输入正确的身份证号码!')
+    } else if (!this.checkTWIdCard(userInfo.CardNumber))
+        return Toast.info('请输入正确的身份证号码!')
     ModalIndicator.show(`登录中，请稍后`)
     this.props.dispatch({ type: 'login/login', payload: userInfo })
   }
 
   toRegister = () => {
     // this.props.dispatch({ type: 'app/firstPage', page: 'Register' })
-     this.props.dispatch(NavigationActions.navigate({routeName:'Register'}))
+    this.props.dispatch(NavigationActions.navigate({ routeName: 'Register' }))
   }
 
   toForgotPwd = () => {
@@ -125,7 +125,7 @@ class RegByPersonal extends Component {
               <IconFont
                 name="&#xe6f8;"
                 size={20}
-                style={{color:commonStyle.h2Color}}
+                style={{ color: commonStyle.h2Color }}
               />
             </TouchableOpacity>
           ) : null}
@@ -168,29 +168,27 @@ class RegByPersonal extends Component {
           />
         </View>
         <View style={styles.login_inputLine}>
-            <IconFont name="&#xe6f7;" size={20} style={styles.login_icon} />
-            <TextInput
-              style={[styles.item_input, styles.item_input2]}
-              placeholder="请输入动态码"
-              underlineColorAndroid="transparent"
-              keyboardType="numeric"
-              onChangeText={text => {
-                this.setState({ inputCode: text })
-              }}
-              value={this.state.inputCode}
-            />
-            <Button
-              // disabled={this.props.user.isSendingCode}
-              // title={this.props.user.tipText}
-               title='获取动态码'
-              onPress={this.handleSendCode}
-              style={styles.bind_sendCode}
-              titleStyle={styles.bind_sendCodeText}
-            />
+          <IconFont name="&#xe6f7;" size={20} style={styles.login_icon} />
+          <TextInput
+            style={[styles.item_input, styles.item_input2]}
+            placeholder="请输入动态码"
+            underlineColorAndroid="transparent"
+            keyboardType="numeric"
+            onChangeText={text => {
+              this.setState({ inputCode: text })
+            }}
+            value={this.state.inputCode}
+          />
+          <Button
+            // disabled={this.props.user.isSendingCode}
+            // title={this.props.user.tipText}
+            title="获取动态码"
+            onPress={this.handleSendCode}
+            style={styles.bind_sendCode}
+            titleStyle={styles.bind_sendCodeText}
+          />
         </View>
-        <Text style={styles.loginTip}>
-          温馨提示：初始密码为身份证后6位
-        </Text>
+        <Text style={styles.loginTip}>温馨提示：初始密码为身份证后6位</Text>
         <Button
           title="注册"
           // disabled={this.state.isLogin}
@@ -198,7 +196,6 @@ class RegByPersonal extends Component {
           titleStyle={styles.login_submitText}
           onPress={() => this.handleLogin()}
         />
-
       </View>
     )
   }
@@ -208,7 +205,7 @@ const styles = StyleSheet.create({
   container: {
     // flex: 1,
     width,
-    marginTop:18,
+    marginTop: 18,
     // backgroundColor: '#fff',
     // justifyContent: 'center',
     alignItems: 'center',
@@ -228,8 +225,8 @@ const styles = StyleSheet.create({
     width: 22,
     height: 22,
     marginRight: 9,
-    color:commonStyle.h2Color,
-    marginLeft:12,
+    color: commonStyle.h2Color,
+    marginLeft: 12,
   },
   item_input: {
     height: 20,

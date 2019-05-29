@@ -13,16 +13,9 @@ import home from './models/home'
 import dva from './utils/dva'
 import { commonStyle } from './utils'
 
-
 const app = dva({
   initialState: {},
-  models: [
-    appModel,
-    zhInfos,
-    policyService,
-    marketService,
-    home
-  ],
+  models: [appModel, zhInfos, policyService, marketService, home],
   extraReducers: { router: routerReducer },
   onAction: [routerMiddleware],
   onError(e) {
@@ -32,7 +25,11 @@ const app = dva({
 
 const App = app.start(<Router />)
 
-console.ignoredYellowBox = ['Warning: BackAndroid is deprecated. Please use BackHandler instead.','source.uri should not be an empty string','Invalid props.style key'];
+console.ignoredYellowBox = [
+  'Warning: BackAndroid is deprecated. Please use BackHandler instead.',
+  'source.uri should not be an empty string',
+  'Invalid props.style key',
+]
 console.disableYellowBox = true // 关闭全部黄色警告
 
 AppRegistry.registerComponent('GYPlatform', () => App)

@@ -1,6 +1,7 @@
 // import * as navigation from 'react-navigation'
 import { ListView } from 'react-native'
-export { NavigationActions,StackActions}   from 'react-navigation';
+
+export { NavigationActions, StackActions } from 'react-navigation'
 export { commonStyle } from './commonStyle'
 export { formatTime } from './formatTime'
 export { deviceInfo } from './deviceInfo'
@@ -20,7 +21,8 @@ export const createAction = type => payload => ({ type, payload })
 // }
 
 /** 数据格式转换 */
-export function DataSourceFormat (data){ //ListView  datasource 转换
-  const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+export function DataSourceFormat(data) {
+  // ListView  datasource 转换
+  const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
   return ds.cloneWithRows(data)
 }

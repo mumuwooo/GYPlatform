@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Dimensions, Text, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationPage, Button, Toast } from 'teaset'
-import { Divider, IconFont,NavBar } from '../../components'
+import { Divider, IconFont, NavBar } from '../../components'
 import { NavigationActions, commonStyle } from '../../utils'
 import { checkPhoneNum } from '../../utils/tools'
 
@@ -107,7 +107,7 @@ class ChangePhone extends NavigationPage {
             <Button
               // disabled={this.props.user.isSendingCode}
               // title={this.props.user.tipText}
-              title='获取动态码'
+              title="获取动态码"
               onPress={this.handleSendCode}
               style={styles.bind_sendCode}
               titleStyle={styles.bind_sendCodeText}

@@ -2,111 +2,141 @@ import React from 'react'
 import { StyleSheet, Text } from 'react-native'
 
 import Touchable from './Touchable'
-import {commonStyle} from '../utils'
+import { commonStyle } from '../utils'
 
+export const Button = ({
+  text,
+  children,
+  style,
+  type,
+  size,
+  disabled,
+  gray,
+  textStyle,
+  ...rest
+}) => (
+    <Touchable
+      style={[
+        styles.button,
+        style,
+        btnType(type, disabled, gray),
+        btnSize(size, disabled),
+      ]}
+      {...rest}
+      activeOpacity={disabled ? 1 : 0.8}
+      onPress={disabled ? () => {} : rest.onPress}
+    >
+      <Text
+        style={[
+          styles.text,
+          textStyle,
+          textType(type, disabled),
+          textSize(size, disabled),
+        ]}
+      >
+        {text || children}
+      </Text>
+    </Touchable>
+  )
 
-export const Button = ({ text, children, style,type,size,disabled, gray, textStyle, ...rest }) => {
- 
-  return (
-  <Touchable style={[styles.button,style,btnType(type,disabled,gray),btnSize(size,disabled)]} {...rest} activeOpacity={disabled?1:0.8} onPress={disabled?()=>{}:rest.onPress}>
-    <Text style={[styles.text, textStyle,textType(type,disabled),textSize(size,disabled)]}>{text || children}</Text>
-  </Touchable>
-)}
-
-const btnType = (type='default',disabled)=>{
-  if(disabled){
+const btnType = (type = 'default', disabled) => {
+  if (disabled) {
     return {
-      backgroundColor: commonStyle.lightGrayColor||commonStyle.h4Color,
-      borderColor:  '#d9d9d9'||commonStyle.h4Color,
+      backgroundColor: commonStyle.lightGrayColor || commonStyle.h4Color,
+      borderColor: '#d9d9d9' || commonStyle.h4Color,
     }
   }
-  switch (type){
+  switch (type) {
     case 'theme':
       return {
-      backgroundColor: commonStyle.themeColor,
-      borderColor: commonStyle.themeColor,
-    }
+        backgroundColor: commonStyle.themeColor,
+        borderColor: commonStyle.themeColor,
+      }
     case 'green':
       return {
-      backgroundColor: commonStyle.greenColor,
-      borderColor: commonStyle.greenColor,
-    } 
+        backgroundColor: commonStyle.greenColor,
+        borderColor: commonStyle.greenColor,
+      }
     case 'gray':
       return {
-      backgroundColor: commonStyle.grayColor,
-      borderColor: commonStyle.tintColor,
-    } 
+        backgroundColor: commonStyle.grayColor,
+        borderColor: commonStyle.tintColor,
+      }
     case 'white':
       return {
-      backgroundColor: 'transparent',
-      borderColor: 'white',
-    } 
+        backgroundColor: 'transparent',
+        borderColor: 'white',
+      }
     case 'black':
       return {
-      backgroundColor: "#fff",
-      borderColor: commonStyle.tintColor,
-    } 
-    default: return {}
+        backgroundColor: '#fff',
+        borderColor: commonStyle.tintColor,
+      }
+    default:
+      return {}
   }
 }
-const textType = (type='default',disabled)=>{
-  if(disabled){
+const textType = (type = 'default', disabled) => {
+  if (disabled) {
     return {
       color: commonStyle.h4Color,
     }
   }
-  switch (type){
+  switch (type) {
     case 'theme':
       return {
-      color: '#fff',
-    }
+        color: '#fff',
+      }
     case 'green':
       return {
-      color: '#fff',
-    }
+        color: '#fff',
+      }
     case 'gray':
       return {
         color: commonStyle.h4Color,
       }
     case 'white':
       return {
-      color: 'white',
-    } 
+        color: 'white',
+      }
     case 'black':
       return {
         color: commonStyle.h4Color,
       }
-    default: return {}
+    default:
+      return {}
   }
 }
-const btnSize = (type='default')=>{
-  switch (type){
+const btnSize = (type = 'default') => {
+  switch (type) {
     case 'big':
       return {
-      paddingVertical: 10,
-      paddingHorizontal: 34,
-      borderRadius:6
-    } 
+        paddingVertical: 10,
+        paddingHorizontal: 34,
+        borderRadius: 6,
+      }
     case 'small':
       return {
-      borderRadius:2,
-      paddingVertical: 5,
-      paddingHorizontal: 12,
-    } 
-    default: return {}
+        borderRadius: 2,
+        paddingVertical: 5,
+        paddingHorizontal: 12,
+      }
+    default:
+      return {}
   }
 }
-const textSize = (type='default')=>{
-  switch (type){
+const textSize = (type = 'default') => {
+  switch (type) {
     case 'big':
-        return {
-          fontSize: commonStyle.h1Size,
-        }
+      return {
+        fontSize: commonStyle.h1Size,
+      }
     case 'small':
-        return {
-          fontSize: commonStyle.h4Size,
-        }
-    default: return {}
+      return {
+        fontSize: commonStyle.h4Size,
+      }
+    default:
+      return {}
   }
 }
 const styles = {
@@ -123,6 +153,6 @@ const styles = {
   text: {
     fontSize: 16,
     color: '#000',
-  }
+  },
 }
 export default Button

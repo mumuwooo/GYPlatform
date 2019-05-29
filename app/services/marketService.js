@@ -3,7 +3,6 @@ import request, { GET, XML } from '../utils/request'
 export async function getNewsList(params) {
   return GET({
     params,
-    url:
-      '/api/VMMarketHistories',
+    url: '/api/VMMarketHistories',
   })
 }
