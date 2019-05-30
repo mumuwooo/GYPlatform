@@ -5,28 +5,54 @@ import {
   Dimensions,
   Text,
   TextInput,
+  Image
 } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationBar, NavigationPage, PullPicker, Button } from 'teaset'
+// import ImagePicker from 'react-native-image-picker'
 import { Divider, NavBar, IconFont, Touchable } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
 
 const { width, height } = Dimensions.get('window')
+const options = {
+  title: '选择图片', 
+  cancelButtonTitle: '取消',
+  takePhotoButtonTitle: '拍照', 
+  chooseFromLibraryButtonTitle: '选择照片', 
+  customButtons: [
+      {name: 'fb', title: 'Choose Photo from Facebook'},
+    ],
+  cameraType: 'back',
+  mediaType: 'photo',
+  videoQuality: 'high', 
+  durationLimit: 10, 
+  maxWidth: 300,
+  maxHeight: 300,
+  quality: 0.8, 
+  angle: 0,
+  allowsEditing: false, 
+  noData: false,
+  storageOptions: {
+      skipBackup: true  
+  }
+};
 
 @connect(({ user }) => ({ user }))
+
 class FinanceDemandForm extends NavigationPage {
   constructor(props) {
     super(props)
     this.state = {
       progress: 1, //  1信息登记 2联系方式 
       typeName: '请选择行业类型',
+      avatarSource:null,
     }
   }
 
- 
   renderNavigationBar() {
     return <NavBar title="融资需求登记" />
   }
+
   gotoNext = () => {
     let { progress } = this.state
     if (progress >= 3) {
@@ -63,9 +89,40 @@ class FinanceDemandForm extends NavigationPage {
     this.setState({ progress: index })
   }
 
-  handleSubmit=()=>{
+  handleSubmit = () => {
     alert('提交表单')
   }
+
+
+ // 选择图片
+ selectPhotoTapped = () => {
+   console.log('===========ImagePicker=========================');
+   console.log(ImagePicker);
+   console.log('====================================');
+  ImagePicker.showImagePicker(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+          console.log('User cancelled photo picker');
+      }
+      else if (response.error) {
+          console.log('ImagePicker Error: ', response.error);
+      }
+      else if (response.customButton) {
+          console.log('User tapped custom button: ', response.customButton);
+      }
+      else {
+          let source = { uri: response.uri };
+
+          // You can also display the image using data:
+          // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+          this.setState({
+              avatarSource: source
+          })
+      }
+  })
+}
   renderPage() {
     const {
       progress,
@@ -200,16 +257,13 @@ class FinanceDemandForm extends NavigationPage {
             </View>
             : progress===2?
             <View style={styles.next_content}>
-                <Text style={styles.next_title}>问题、诉求描述</Text>
-                <TextInput
-                  maxLength={140}
-                  placeholder="请输入内容，不超过140字"
-                  underlineColorAndroid="transparent"
-                  multiline
-                  style={styles.userInput}
-                  onChangeText={demandText => this.setState({ demandText })}
-                  value={this.state.demandText}
-                />
+                 <Touchable onPress={this.selectPhotoTapped.bind(this)}>
+                    <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 30}]}>
+                        { this.state.avatarSource === null ? <Text>选择照片</Text> :
+                            <Image style={styles.avatar} source={this.state.avatarSource} />
+                        }
+                    </View>
+                </Touchable>
             </View>
             : 
             <View>

@@ -77,7 +77,7 @@ const styles = {
 
 const HomeNavigator = createBottomTabNavigator(
   {
-  Home: { screen: Home,
+  Home: { screen: FinanceDemandForm,
     navigationOptions: {
       tabBarLabel: '6S服务',
       tabBarIcon: ({ focused }) => (
