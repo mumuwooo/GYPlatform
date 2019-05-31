@@ -25,7 +25,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-              new DplusReactPackage()
+          new DplusReactPackage()
       );
     }
 
@@ -47,5 +47,15 @@ public class MainApplication extends Application implements ReactApplication {
       RNUMConfigure.init(this, "5cebed2f4ca3572b24000e74", "Umeng", UMConfigure.DEVICE_TYPE_PHONE,
               "");
 //      PlatformConfig.setWeixin();
+  }
+
+  {
+
+    PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0");
+    //豆瓣RENREN平台目前只能在服务器端配置
+    PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad", "http://sns.whalecloud.com");
+    PlatformConfig.setYixin("yxc0614e80c9304c11b0391514d09f13bf");
+    PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
+
   }
 }

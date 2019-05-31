@@ -11,7 +11,8 @@ const Divider = ({
   text,
   bgcolor,
   style,
-}) => !type ? (
+}) =>
+  !type ? (
     <View
       style={[
         {

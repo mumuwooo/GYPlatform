@@ -22,8 +22,8 @@ export default class TimeCalc extends React.Component {
         this.timerMinus()
       }
     } else if (!this.state.timerObj.times || this.state.timerObj.times < 0) {
-        this.timerPlus()
-      }
+      this.timerPlus()
+    }
 
     if (nextProps && this.props.pause != nextProps.pause) {
       const { pause } = nextProps

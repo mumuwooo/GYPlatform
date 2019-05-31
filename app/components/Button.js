@@ -15,29 +15,29 @@ export const Button = ({
   textStyle,
   ...rest
 }) => (
-    <Touchable
+  <Touchable
+    style={[
+      styles.button,
+      style,
+      btnType(type, disabled, gray),
+      btnSize(size, disabled),
+    ]}
+    {...rest}
+    activeOpacity={disabled ? 1 : 0.8}
+    onPress={disabled ? () => {} : rest.onPress}
+  >
+    <Text
       style={[
-        styles.button,
-        style,
-        btnType(type, disabled, gray),
-        btnSize(size, disabled),
+        styles.text,
+        textStyle,
+        textType(type, disabled),
+        textSize(size, disabled),
       ]}
-      {...rest}
-      activeOpacity={disabled ? 1 : 0.8}
-      onPress={disabled ? () => {} : rest.onPress}
     >
-      <Text
-        style={[
-          styles.text,
-          textStyle,
-          textType(type, disabled),
-          textSize(size, disabled),
-        ]}
-      >
-        {text || children}
-      </Text>
-    </Touchable>
-  )
+      {text || children}
+    </Text>
+  </Touchable>
+)
 
 const btnType = (type = 'default', disabled) => {
   if (disabled) {

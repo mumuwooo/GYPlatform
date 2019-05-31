@@ -83,7 +83,7 @@ class RegByCompany extends Component {
       if (!this.checkIdCard(userInfo.CardNumber))
         return Toast.info('请输入正确的身份证号码!')
     } else if (!this.checkTWIdCard(userInfo.CardNumber))
-        return Toast.info('请输入正确的身份证号码!')
+      return Toast.info('请输入正确的身份证号码!')
     ModalIndicator.show(`登录中，请稍后`)
     this.props.dispatch({ type: 'login/login', payload: userInfo })
   }

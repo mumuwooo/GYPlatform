@@ -9,10 +9,10 @@ window._XHost =
   window._PLATVERSION == 'SD'
     ? 'www.zk.sdu.edu.cn' // 山东域名
     : window._PLATVERSION == 'HN'
-    ? 'hn.selfstudent.smartchutou.com' // 湖南域名
-    : window._PLATVERSION == 'HB'
-    ? 'manage.qxin100.com' // 湖北域名
-    : 'www2.gcxkh.test.chutoukj.com' // 测试域名
+      ? 'hn.selfstudent.smartchutou.com' // 湖南域名
+      : window._PLATVERSION == 'HB'
+        ? 'manage.qxin100.com' // 湖北域名
+        : 'www2.gcxkh.test.chutoukj.com' // 测试域名
 
 window._PayOnline = window._PLATVERSION != 'SD' // 在线支付 支付宝、微信
 window._PlanType = 1 // 根据计划改变：1,1,2

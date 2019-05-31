@@ -58,7 +58,8 @@ class Status extends Component {
               <StatusBar barStyle={barStyle} hidden={hidden} />
             </LinearGradient>
           )
-        } if (Platform.OS === 'android') {
+        }
+        if (Platform.OS === 'android') {
           return (
             <LinearGradient
               colors={lineColors}
@@ -95,7 +96,8 @@ class Status extends Component {
               <StatusBar barStyle={barStyle} hidden={hidden} />
             </View>
           )
-        } if (Platform.OS === 'android') {
+        }
+        if (Platform.OS === 'android') {
           return (
             <View
               style={{
@@ -117,64 +119,66 @@ class Status extends Component {
         }
       }
     } else if (line) {
-        if (Platform.OS === 'ios') {
-          return (
-            <LinearGradient
-              colors={lineColors}
-              start={lineStart}
-              end={lineEnd}
-              style={{ height: deviceInfo.isIphoneX ? 44 : 20 }}
-            >
-              <StatusBar barStyle={barStyle} hidden={hidden} />
-            </LinearGradient>
-          )
-        } if (Platform.OS === 'android') {
-          return (
-            <LinearGradient
-              colors={lineColors}
-              start={lineStart}
-              end={lineEnd}
-              style={{ height: StatusBar.currentHeight }}
-            >
-              <StatusBar
-                backgroundColor="rgba(0, 0, 0, 0.0)"
-                barStyle={barStyle}
-                hidden={hidden}
-                translucent
-              />
-            </LinearGradient>
-          )
-        }
-      } else {
-        if (Platform.OS === 'ios') {
-          return (
-            <View
-              style={{
-                height: deviceInfo.isIphoneX ? 44 : 20,
-                backgroundColor,
-              }}
-            >
-              <StatusBar barStyle={barStyle} hidden={hidden} />
-            </View>
-          )
-        } if (Platform.OS === 'android') {
-          return (
-            <View
-              style={{
-                height: StatusBar.currentHeight,
-                backgroundColor,
-              }}
-            >
-              <StatusBar
-                backgroundColor="rgba(0, 0, 0, 0.0)"
-                barStyle={barStyle}
-                hidden={hidden}
-                translucent
-              />
-            </View>
-          )
-        }
+      if (Platform.OS === 'ios') {
+        return (
+          <LinearGradient
+            colors={lineColors}
+            start={lineStart}
+            end={lineEnd}
+            style={{ height: deviceInfo.isIphoneX ? 44 : 20 }}
+          >
+            <StatusBar barStyle={barStyle} hidden={hidden} />
+          </LinearGradient>
+        )
       }
+      if (Platform.OS === 'android') {
+        return (
+          <LinearGradient
+            colors={lineColors}
+            start={lineStart}
+            end={lineEnd}
+            style={{ height: StatusBar.currentHeight }}
+          >
+            <StatusBar
+              backgroundColor="rgba(0, 0, 0, 0.0)"
+              barStyle={barStyle}
+              hidden={hidden}
+              translucent
+            />
+          </LinearGradient>
+        )
+      }
+    } else {
+      if (Platform.OS === 'ios') {
+        return (
+          <View
+            style={{
+              height: deviceInfo.isIphoneX ? 44 : 20,
+              backgroundColor,
+            }}
+          >
+            <StatusBar barStyle={barStyle} hidden={hidden} />
+          </View>
+        )
+      }
+      if (Platform.OS === 'android') {
+        return (
+          <View
+            style={{
+              height: StatusBar.currentHeight,
+              backgroundColor,
+            }}
+          >
+            <StatusBar
+              backgroundColor="rgba(0, 0, 0, 0.0)"
+              barStyle={barStyle}
+              hidden={hidden}
+              translucent
+            />
+          </View>
+        )
+      }
+    }
   }
 }
 

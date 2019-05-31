@@ -6,13 +6,15 @@ const formatTime = {
   formatMediaTime: duration => {
     let min = Math.floor(duration / 60)
     let second = duration - min * 60
-    min = min >= 10 ? min : `0${  min}`
-    second = second >= 10 ? second : `0${  second}`
-    return `${min  }:${  second}`
+    min = min >= 10 ? min : `0${min}`
+    second = second >= 10 ? second : `0${second}`
+    return `${min}:${second}`
   },
 
   timeTohhmmss: seconds => {
-    let hh; let mm; let ss
+    let hh
+    let mm
+    let ss
 
     if (seconds === null || seconds < 0) return
 
@@ -24,7 +26,7 @@ const formatTime = {
     pseconds = parseInt(pseconds) - parseInt(hh) * 3600
 
     if (parseInt(hh) < 10) {
-      hh = `0${  hh}`
+      hh = `0${hh}`
     }
 
     if (parseInt(hh) >= 24) {
@@ -38,14 +40,14 @@ const formatTime = {
     ss = parseInt(pseconds) - parseInt(mm) * 60
 
     if (parseInt(mm) < 10) {
-      mm = `0${  mm}`
+      mm = `0${mm}`
     }
 
     if (parseInt(ss) < 10) {
-      ss = `0${  ss}`
+      ss = `0${ss}`
     }
 
-    return `${hh  }:${  mm  }:${  ss}`
+    return `${hh}:${mm}:${ss}`
   },
 
   getTodayDate: () => {
@@ -61,7 +63,7 @@ const formatTime = {
     day[4] = '星期四'
     day[5] = '星期五'
     day[6] = '星期六'
-    return `${yy  }年${  mm  }月${  dd  }日 ${  day[now.getDay()]}`
+    return `${yy}年${mm}月${dd}日 ${day[now.getDay()]}`
   },
 }
 

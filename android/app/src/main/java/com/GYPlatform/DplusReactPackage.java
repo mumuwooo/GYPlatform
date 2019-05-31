@@ -1,9 +1,9 @@
 package com.GYPlatform;
 
+import com.GYPlatform.nativeComponents.ShareModule;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.modules.share.ShareModule;
 import com.facebook.react.uimanager.ViewManager;
 
 import java.util.ArrayList;

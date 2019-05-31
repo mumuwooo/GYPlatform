@@ -1,5 +1,12 @@
 import React from 'react'
-import { StyleSheet, View, Dimensions, ScrollView, Text } from 'react-native'
+import {
+  TouchableHighlight,
+  StyleSheet,
+  View,
+  Dimensions,
+  ScrollView,
+  Text,
+} from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationPage } from 'teaset'
 import moment from 'moment'
@@ -9,13 +16,29 @@ import { IconFont, NavBar, Divider } from '.'
 import { commonStyle } from '../utils'
 import { htmlDecodeByRegExp } from '../utils/tools'
 
+import ShareUtile from '../native/ShareUtil'
+
 const { width } = Dimensions.get('window')
 
 class NewsDetail extends NavigationPage {
   constructor(props) {
     super(props)
+    this.state = { result: '结果' }
   }
   componentDidMount = () => {}
+
+  _onSharePress = () => {
+    ShareUtile.share(
+      'sssss',
+      'http://dev.umeng.com/images/tab2_1.png',
+      'http://www.umeng.com/',
+      'title',
+      1,
+      (code, message) => {
+        this.setState({ result: message })
+      }
+    )
+  }
 
   renderNavigationBar() {
     const { navTitle } = this.props.navigation.state.params
@@ -78,7 +101,7 @@ class NewsDetail extends NavigationPage {
                 <Text style={styles.content_text}>
                 会议强调，2019年，全区司法行政系统充分发挥职能优势，按照“五年三步走”发展规划，对标“一年一变化、三年铸特色、五年创一流”的战略部署，围绕区委区政府重大决策，扎实有序推进各项工作。一是认真贯彻落实中央省市区重要会议精神，强化思想政治建设、履职能力建设、作风纪律建设、班子和干部队伍建设，保持奋发有为的精神状态和真抓实干的工作作风，打造忠诚干净担当的司法行政队伍；二是始终坚持以人民中心，以依法治区统揽司法行政各项工作，逐步推进依法治区和法治政府建设相互融合，抓实法律援助、特殊人员管控、人民调解三项重要工作，抓住普法教育中干部队伍、青少年、农村人群三个关键少数，切实提高人民群众法治意识，维护自身合法权益；三是严格落实“一年打基础，二年做推进，三年全建成”工作思路，扎实推进公共法律服务体系建设，充分整合法律服务保障职能，优化办事环境，提升工作效率，为全区人民群众提供普惠、均等、优质、高效的法律服务；四是自觉践行社会主义法治理念，聚焦能力建设、组织建设，强化矛盾纠纷多元化解，助力基层依法治理，奋力开创全区司法行政工作新局面，努力为建设现代化产城一体城乡融合绿色发展的昭化新区做出新的更大的贡献。                </Text> */}
           </View>
-
+          <Text>{this.state.result}</Text>
           <View style={styles.bottom}>
             <View style={styles.bottom_item}>
               <IconFont name="&#xe638;" size={30} color="gray" />
@@ -88,10 +111,12 @@ class NewsDetail extends NavigationPage {
               <IconFont name="&#xe638;" size={30} color="gray" />
               <Text style={styles.item_text}>收藏</Text>
             </View>
-            <View style={styles.bottom_item}>
-              <IconFont name="&#xe638;" size={30} color="gray" />
-              <Text style={styles.item_text}>分享</Text>
-            </View>
+            <TouchableHighlight onPress={this._onSharePress}>
+              <View style={styles.bottom_item}>
+                <IconFont name="&#xe638;" size={30} color="gray" />
+                <Text style={styles.item_text}>分享hahfahf</Text>
+              </View>
+            </TouchableHighlight>
           </View>
         </ScrollView>
       </View>

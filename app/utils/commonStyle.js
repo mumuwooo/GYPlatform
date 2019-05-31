@@ -137,9 +137,9 @@ let commonStyle = {
     paddingBottom: 8,
   },
   /** 阴影 */
-  shadow: (w = 6, opacity = 0.1) => 
+  shadow: (w = 6, opacity = 0.1) =>
     // w:阴影宽度 需多预留一点宽度
-     ({
+    ({
       elevation: w,
       shadowColor: '#ddd',
       shadowOpacity: opacity,
@@ -147,11 +147,10 @@ let commonStyle = {
       shadowOffset: {
         height: w,
       },
-    })
-  ,
-  shadowTop: (w = 3, opacity = 0.1) => 
+    }),
+  shadowTop: (w = 3, opacity = 0.1) =>
     // w:阴影宽度 需多预留一点宽度
-     ({
+    ({
       elevation: w,
       shadowColor: '#ddd',
       shadowOpacity: opacity,
@@ -159,8 +158,7 @@ let commonStyle = {
       shadowOffset: {
         height: w,
       },
-    })
-  ,
+    }),
 }
 const minStyle = {
   // 夜神

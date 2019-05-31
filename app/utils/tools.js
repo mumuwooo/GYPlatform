@@ -405,9 +405,9 @@ export function xmlToJson(xmlStr) {
   xmlStr = xmlStr.replace(/&lt;/g, '<') // 防止有转义字符
   xmlStr = xmlStr.replace(/&gt;/g, '>')
   xmlStr = xmlStr.replace(/&amp;/g, '&')
-  let str1 = '';
-    let str2 = '';
-    const str3 = ''
+  let str1 = ''
+  let str2 = ''
+  const str3 = ''
   const str = xmlStr
   let start1 = false
   let start2 = false
@@ -439,7 +439,7 @@ export function xmlToJson(xmlStr) {
   for (let i = 0; i < arr.length - 2; i++) {
     let strtemp = arr[i + 2]
 
-    if (strtemp.length > 2 && strtemp === `/${  arr[i]}`) {
+    if (strtemp.length > 2 && strtemp === `/${arr[i]}`) {
       strtemp = strtemp.substring(1, strtemp.length)
 
       if (arr[i] === strtemp) {

@@ -94,17 +94,17 @@ function requestGET(url, params) {
   if (params) {
     const paramsArray = []
     Object.keys(params).forEach(key =>
-      paramsArray.push(`${key  }=${  params[key]}`)
+      paramsArray.push(`${key}=${params[key]}`)
     )
     if (url.search(/\?/) === -1) {
-      url += `?${  paramsArray.join('&')}`
+      url += `?${paramsArray.join('&')}`
     } else {
-      url += `&${  paramsArray.join('&')}`
+      url += `&${paramsArray.join('&')}`
     }
   }
   // 请求参数
   if (url.search('/datastore/Discipline/GetAllDisciplineInfoOnly') >= 0) {
-    url = `${url  }?${  new Date().getTime()  }${Math.random()}`
+    url = `${url}?${new Date().getTime()}${Math.random()}`
   }
   const requestOBJ = [
     url,
@@ -115,15 +115,14 @@ function requestGET(url, params) {
       headers: CONFIG_HEADERS,
     },
   ]
-  return new Promise(((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     fetch(requestOBJ[0], requestOBJ[1])
       .then(response => {
         console.log('llllloooooookkkkkkkiiiiiiiii', response)
         if (response.ok) {
           return response.json()
-        } 
-          consoleReq(response, requestOBJ, 'error', params)
-        
+        }
+        consoleReq(response, requestOBJ, 'error', params)
       })
       .then(response => {
         if (typeof response != 'object') return
@@ -133,9 +132,8 @@ function requestGET(url, params) {
       })
       .catch(response => {
         consoleReq(response, requestOBJ, 'error', params)
-        
       })
-  })).catch((err) => {
+  }).catch(err => {
     alert('err')
   })
 }
@@ -150,16 +148,14 @@ function requestPOST(url, params) {
       credentials: 'include',
     },
   ]
-  return new Promise(((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     fetch(requestOBJ[0], requestOBJ[1])
       .then(response => {
         if (response.ok) {
           return response.json()
-        } 
-          // 错误提示信息
-          consoleReq(response, requestOBJ, 'error', params)
-          
-        
+        }
+        // 错误提示信息
+        consoleReq(response, requestOBJ, 'error', params)
       })
       .then(response => {
         if (typeof response != 'object') return
@@ -169,9 +165,8 @@ function requestPOST(url, params) {
       })
       .catch(response => {
         consoleReq(response, requestOBJ, 'error', params)
-        
       })
-  })).catch((err) => {
+  }).catch(err => {
     alert('err')
   })
 }
@@ -186,14 +181,13 @@ function requestXML(url) {
     },
   ]
   //  console.log(requestOBJ)
-  return new Promise(((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     fetch(requestOBJ[0], requestOBJ[1])
       .then(response => {
         if (response.ok) {
           return response.text()
-        } 
-          consoleReq(response, requestOBJ)
-        
+        }
+        consoleReq(response, requestOBJ)
       })
       .then(response => {
         if (typeof response != 'object') return
@@ -203,9 +197,8 @@ function requestXML(url) {
       })
       .catch(response => {
         consoleReq(response, requestOBJ, 1)
-        
       })
-  })).catch((err) => {
+  }).catch(err => {
     alert('err')
   })
 }
@@ -224,14 +217,13 @@ function requestFILE(url, params) {
     },
   ]
   //  console.log(requestOBJ)
-  return new Promise(((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     fetch(requestOBJ[0], requestOBJ[1])
       .then(response => {
         if (response.ok) {
           return response.json()
-        } 
-          consoleReq(response, requestOBJ)
-        
+        }
+        consoleReq(response, requestOBJ)
       })
       .then(response => {
         if (typeof response != 'object') return
@@ -241,9 +233,8 @@ function requestFILE(url, params) {
       })
       .catch(response => {
         consoleReq(response, requestOBJ, 1)
-        
       })
-  })).catch((err) => {
+  }).catch(err => {
     alert('err')
   })
 }
