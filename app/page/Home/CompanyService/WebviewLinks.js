@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react'
 import {
   StyleSheet,
@@ -21,27 +20,22 @@ const { width, height } = Dimensions.get('window')
 class WebviewLinks extends NavigationPage {
   constructor(props) {
     super(props)
-    this.state = {
-     
-    }
+    this.state = {}
   }
 
- 
   renderNavigationBar() {
-    console.log('====================================');
-    console.log(this.props);
-    console.log('====================================');
-    const {title}=this.props.navigation.state.params
+    console.log('====================================')
+    console.log(this.props)
+    console.log('====================================')
+    const { title } = this.props.navigation.state.params
     return <NavBar title={title} />
   }
 
   renderPage() {
     return (
       <View style={styles.container}>
-      <Text>链接到外部的webview</Text>
-      
+        <Text>链接到外部的webview</Text>
       </View>
-
     )
   }
 }

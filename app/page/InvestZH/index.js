@@ -1,12 +1,15 @@
 import React from 'react'
-import { StyleSheet, View, Image,Text, Dimensions } from 'react-native'
+import { StyleSheet, View, Image, Text, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationPage } from 'teaset'
-import ScrollableTabView, {ScrollableTabBar,} from 'react-native-scrollable-tab-view'
+import ScrollableTabView, {
+  ScrollableTabBar,
+} from 'react-native-scrollable-tab-view'
 
-import { Button,Divider, NavBar } from '../../components'
+import { Button, Divider, NavBar } from '../../components'
 import { NavigationActions, commonStyle } from '../../utils'
-import  EventsList  from "./EventsList";
+import EventsList from './EventsList'
+
 const { width, height } = Dimensions.get('window')
 
 @connect()
@@ -15,7 +18,6 @@ class InvestZH extends NavigationPage {
     return <NavBar title="投资昭化" />
   }
 
-
   gotoDetail = () => {
     this.props.dispatch(NavigationActions.navigate({ routeName: 'Sorry' }))
   }
@@ -23,36 +25,34 @@ class InvestZH extends NavigationPage {
   // tab切换
   handleTabSwitch = obj => {
     this.setState({ curIndex: obj.i })
-    
   }
   renderPage() {
     return (
       <View style={styles.tabView}>
-      <ScrollableTabView
-        onChangeTab={obj => {
-          this.handleTabSwitch(obj)
-        }}
-        renderTabBar={() => <ScrollableTabBar style={styles.tabbar_view} />}
-        tabBarUnderlineStyle={styles.tabView_lineStyle}
-        tabBarActiveTextColor={commonStyle.themeColor}
-        tabBarInactiveTextColor={commonStyle.h2Color}
-        tabBarTextStyle={styles.tabViewText}
-      >
-        <View style={styles.tabView_textStyle} tabLabel="昭化大事记">
+        <ScrollableTabView
+          onChangeTab={obj => {
+            this.handleTabSwitch(obj)
+          }}
+          renderTabBar={() => <ScrollableTabBar style={styles.tabbar_view} />}
+          tabBarUnderlineStyle={styles.tabView_lineStyle}
+          tabBarActiveTextColor={commonStyle.themeColor}
+          tabBarInactiveTextColor={commonStyle.h2Color}
+          tabBarTextStyle={styles.tabViewText}
+        >
+          <View style={styles.tabView_textStyle} tabLabel="昭化大事记">
             <EventsList />
           </View>
           <View style={styles.tabView_textStyle} tabLabel="广元概况">
-              <Text>广元概况</Text>
+            <Text>广元概况</Text>
           </View>
           <View style={styles.tabView_textStyle} tabLabel="昭化概况">
-              <Text>昭化概况</Text>
+            <Text>昭化概况</Text>
           </View>
           <View style={styles.tabView_textStyle} tabLabel="投资合作">
-              <Text>投资合作</Text>
+            <Text>投资合作</Text>
           </View>
         </ScrollableTabView>
       </View>
-
     )
   }
 }

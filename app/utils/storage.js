@@ -14,7 +14,7 @@ function set(key, value) {
   return AsyncStorage.setItem(key, JSON.stringify(value))
 }
 
- // 删除单个数据
+// 删除单个数据
 function remove(key) {
   return AsyncStorage.removeItem(key)
 }

@@ -21,46 +21,50 @@ class RegByPersonal extends Component {
       inputIDCard: '430524199909090098',
       inputName: '萨尔',
       inputPhone: '18692205772',
-      inputCode:'',
+      inputCode: '',
     }
   }
 
-
   // 登录
   handleLogin = () => {
-    // 请求前规则验证   
+    // 请求前规则验证
     console.log(this.state.inputIDCard, this.state.inputName)
     const userInfo = {
       CardNumber: this.state.inputIDCard,
-      userName:this.state.inputName,
-      phonenum:this.state.inputPhone,
-      securityCode:this.state.inputCode
+      userName: this.state.inputName,
+      phonenum: this.state.inputPhone,
+      securityCode: this.state.inputCode,
     }
     if (!userInfo.CardNumber.trim()) return Toast.info('请输入身份证号码')
-    if(userInfo.CardNumber.trim().length!==18&&!checkIdCard(userInfo.CardNumber)){
+    if (
+      userInfo.CardNumber.trim().length !== 18 &&
+      !checkIdCard(userInfo.CardNumber)
+    ) {
       return Toast.info('请输入正确的身份证号码!')
     }
     if (!userInfo.userName.trim() || !checkName(userInfo.userName))
-    return Toast.info('请输入合法姓名')
+      return Toast.info('请输入合法姓名')
     if (!userInfo.phonenum.trim() || !checkPhoneNum(userInfo.phonenum))
-    return Toast.info('请输入正确的手机号')
+      return Toast.info('请输入正确的手机号')
     if (!userInfo.securityCode.trim()) return Toast.info('验证码不能为空')
     ModalIndicator.show(`注册中，请稍后`)
     this.props.dispatch({ type: 'login/Register', payload: userInfo })
   }
 
-
   handleSendCode = () => {
     const { inputPhone } = this.state
-    if(inputPhone.trim()&&checkPhoneNum(inputPhone)){
-       this.props.dispatch({type:'login/getVerifiCode',payload:{ phonenum:inputPhone }})
-    }else{
+    if (inputPhone.trim() && checkPhoneNum(inputPhone)) {
+      this.props.dispatch({
+        type: 'login/getVerifiCode',
+        payload: { phonenum: inputPhone },
+      })
+    } else {
       return Toast.info('请输入正确的手机号码!')
     }
   }
 
   render() {
-    const { tipText, isSendingCode }=this.props.login
+    const { tipText, isSendingCode } = this.props.login
     return (
       <View style={styles.container}>
         <View style={styles.login_inputLine}>
@@ -89,7 +93,7 @@ class RegByPersonal extends Component {
               <IconFont
                 name="&#xe6f8;"
                 size={20}
-                style={{color:commonStyle.h2Color}}
+                style={{ color: commonStyle.h2Color }}
               />
             </TouchableOpacity>
           ) : null}
@@ -120,28 +124,26 @@ class RegByPersonal extends Component {
           />
         </View>
         <View style={styles.login_inputLine}>
-            <IconFont name="&#xe6f7;" size={20} style={styles.login_icon} />
-            <TextInput
-              style={[styles.item_input, styles.item_input2]}
-              placeholder="请输入动态码"
-              underlineColorAndroid="transparent"
-              keyboardType="numeric"
-              onChangeText={text => {
-                this.setState({ inputCode: text })
-              }}
-              value={this.state.inputCode}
-            />
-            <Button
-               disabled={isSendingCode}
-               title={tipText}
-              onPress={this.handleSendCode}
-              style={styles.bind_sendCode}
-              titleStyle={styles.bind_sendCodeText}
-            />
+          <IconFont name="&#xe6f7;" size={20} style={styles.login_icon} />
+          <TextInput
+            style={[styles.item_input, styles.item_input2]}
+            placeholder="请输入动态码"
+            underlineColorAndroid="transparent"
+            keyboardType="numeric"
+            onChangeText={text => {
+              this.setState({ inputCode: text })
+            }}
+            value={this.state.inputCode}
+          />
+          <Button
+            disabled={isSendingCode}
+            title={tipText}
+            onPress={this.handleSendCode}
+            style={styles.bind_sendCode}
+            titleStyle={styles.bind_sendCodeText}
+          />
         </View>
-        <Text style={styles.loginTip}>
-          温馨提示：初始密码为身份证后6位
-        </Text>
+        <Text style={styles.loginTip}>温馨提示：初始密码为身份证后6位</Text>
         <Button
           title="注册"
           // disabled={this.state.isLogin}
@@ -149,7 +151,6 @@ class RegByPersonal extends Component {
           titleStyle={styles.login_submitText}
           onPress={() => this.handleLogin()}
         />
-
       </View>
     )
   }
@@ -159,7 +160,7 @@ const styles = StyleSheet.create({
   container: {
     // flex: 1,
     width,
-    marginTop:18,
+    marginTop: 18,
     // backgroundColor: '#fff',
     // justifyContent: 'center',
     alignItems: 'center',
@@ -179,8 +180,8 @@ const styles = StyleSheet.create({
     width: 22,
     height: 22,
     marginRight: 9,
-    color:commonStyle.h2Color,
-    marginLeft:12,
+    color: commonStyle.h2Color,
+    marginLeft: 12,
   },
   item_input: {
     height: 20,
@@ -252,4 +253,4 @@ const styles = StyleSheet.create({
     color: commonStyle.themeColor,
   },
 })
-export default connect(({login})=>({login}))(RegByPersonal)
+export default connect(({ login }) => ({ login }))(RegByPersonal)

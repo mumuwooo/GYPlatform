@@ -17,13 +17,13 @@ export default {
       return { ...state, loading: payload.loading, refresh: payload.refresh }
     },
     updateNewsList(state, { payload, paging }) {
-    //   if (paging) {
-    //     state.newListPaging = paging
-    //     if (paging.PageIndex > 1) {
-    //       state.newList.push(...payload)
-    //       return { ...state }
-    //     }
-    //   }
+      //   if (paging) {
+      //     state.newListPaging = paging
+      //     if (paging.PageIndex > 1) {
+      //       state.newList.push(...payload)
+      //       return { ...state }
+      //     }
+      //   }
       return { ...state, newsList: payload }
     },
   },
@@ -32,7 +32,7 @@ export default {
       const res = yield call(services.getNewsList, payload)
       const { PageIndex, PageSize, PageStatus } = payload
       if (res.successResponse) {
-           yield put({type:'updateNewsList',payload:res.data})
+        yield put({ type: 'updateNewsList', payload: res.data })
       } else {
         Toast.fail(res.Message)
       }

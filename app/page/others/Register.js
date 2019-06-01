@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
-import { NavigationPage, } from 'teaset'
-import ScrollableTabView, {ScrollableTabBar,} from 'react-native-scrollable-tab-view'
+import { NavigationPage } from 'teaset'
+import ScrollableTabView, {
+  ScrollableTabBar,
+} from 'react-native-scrollable-tab-view'
 
 import RegByPersonal from './RegByPersonal'
 import RegByCompany from './RegByCompany'
@@ -24,34 +26,33 @@ class Register extends NavigationPage {
     this.props.dispatch(NavigationActions.back())
   }
 
-    // tab切换
+  // tab切换
   handleTabSwitch = obj => {
-      this.setState({ curIndex: obj.i })
-      
-    }
+    this.setState({ curIndex: obj.i })
+  }
 
-renderNavigationBar() {
+  renderNavigationBar() {
     return <NavBar title="用户注册" />
   }
-renderPage() {
+  renderPage() {
     const { fetching } = this.props
     return (
       <View style={styles.tabView}>
-      <ScrollableTabView
-        onChangeTab={obj => {
-          this.handleTabSwitch(obj)
-        }}
-        renderTabBar={() => <ScrollableTabBar style={styles.tabbar_view} />}
-        tabBarUnderlineStyle={styles.tabView_lineStyle}
-        tabBarActiveTextColor={commonStyle.themeColor}
-        tabBarInactiveTextColor={commonStyle.h2Color}
-        tabBarTextStyle={styles.tabViewText}
-      >
+        <ScrollableTabView
+          onChangeTab={obj => {
+            this.handleTabSwitch(obj)
+          }}
+          renderTabBar={() => <ScrollableTabBar style={styles.tabbar_view} />}
+          tabBarUnderlineStyle={styles.tabView_lineStyle}
+          tabBarActiveTextColor={commonStyle.themeColor}
+          tabBarInactiveTextColor={commonStyle.h2Color}
+          tabBarTextStyle={styles.tabViewText}
+        >
           <View style={styles.tabView_textStyle} tabLabel="个人用户注册">
             <RegByPersonal />
           </View>
           <View style={styles.tabView_textStyle} tabLabel="企业用户注册">
-          <RegByCompany />
+            <RegByCompany />
           </View>
         </ScrollableTabView>
       </View>

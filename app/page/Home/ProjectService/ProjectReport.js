@@ -1,13 +1,7 @@
 import React from 'react'
-import {
-  StyleSheet,
-  View,
-  Dimensions,
-  Text,
-  ScrollView,
-} from 'react-native'
+import { StyleSheet, View, Dimensions, Text, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
-import { NavigationBar, NavigationPage, } from 'teaset'
+import { NavigationBar, NavigationPage } from 'teaset'
 import HTML from 'react-native-render-html'
 import { NavBar, Divider, Button } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
@@ -18,21 +12,23 @@ const { width, height } = Dimensions.get('window')
 class ProjectReport extends NavigationPage {
   constructor(props) {
     super(props)
-    this.state = {
-     
-    }
+    this.state = {}
   }
 
- 
   renderNavigationBar() {
     return <NavBar title="项目申报须知" />
   }
 
-  handleSubmit=()=>{
-    this.props.dispatch(NavigationActions.navigate({routeName:'WebviewLinks',params:{title:'项目申报详情'}}))
+  handleSubmit = () => {
+    this.props.dispatch(
+      NavigationActions.navigate({
+        routeName: 'WebviewLinks',
+        params: { title: '项目申报详情' },
+      })
+    )
   }
   renderPage() {
-    const htmlContent=`
+    const htmlContent = `
     <p style="color:#e0161b;font-size:14px;margin-top:10px">
     <b>1、能源保障服务</b> 
     </p>
@@ -58,11 +54,14 @@ class ProjectReport extends NavigationPage {
     return (
       <View style={styles.container}>
         <View style={styles.content}>
-          <ScrollView style={{height:height*0.65}} showsVerticalScrollIndicator={false}>
+          <ScrollView
+            style={{ height: height * 0.65 }}
+            showsVerticalScrollIndicator={false}
+          >
             <Text style={styles.content_title}>项目申报须知</Text>
             <HTML
               html={htmlContent}
-              imagesMaxWidth={width*0.95}
+              imagesMaxWidth={width * 0.95}
               tagsStyles={{
                 p: {
                   // fontFamily: "PingFang-SC-Medium",
@@ -72,11 +71,11 @@ class ProjectReport extends NavigationPage {
                 },
               }}
             />
-          
-            <Divider type = "bottomSpace" color='#fff'/>
-        </ScrollView>
+
+            <Divider type="bottomSpace" color="#fff" />
+          </ScrollView>
         </View>
-      <Button
+        <Button
           style={styles.button_save}
           textStyle={styles.button_text}
           onPress={this.handleSubmit}
@@ -85,7 +84,6 @@ class ProjectReport extends NavigationPage {
           立即申报
         </Button>
       </View>
-
     )
   }
 }
@@ -101,34 +99,34 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: commonStyle.themeColor,
     backgroundColor: commonStyle.themeColor,
-    alignSelf:'center',
+    alignSelf: 'center',
   },
   button_text: {
     fontFamily: commonStyle.PFregular,
     fontSize: commonStyle.h21Size,
     color: '#ffff',
   },
-  content:{
-    backgroundColor:'#fff',
-    marginHorizontal:14,
-    marginTop:18,
-    marginBottom:27,
+  content: {
+    backgroundColor: '#fff',
+    marginHorizontal: 14,
+    marginTop: 18,
+    marginBottom: 27,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: "#bababa",
-    paddingHorizontal:16,
+    borderColor: '#bababa',
+    paddingHorizontal: 16,
   },
-  content_title:{
-    width:161,
+  content_title: {
+    width: 161,
     fontFamily: commonStyle.PFmedium,
     fontSize: commonStyle.h31Size,
-    color: "#ffffff",
-    paddingVertical:8,
-    paddingHorizontal:38,
+    color: '#ffffff',
+    paddingVertical: 8,
+    paddingHorizontal: 38,
     borderRadius: 15,
-    backgroundColor:commonStyle.themeColor,
-    marginTop:19,
-    marginBottom:26,
+    backgroundColor: commonStyle.themeColor,
+    marginTop: 19,
+    marginBottom: 26,
   },
 })
 export default ProjectReport

@@ -13,30 +13,30 @@ export default {
     updateState(state, { payload }) {
       return { ...state, ...payload }
     },
-    updateVMCompanyInfo(state,{payload}){
-      return {...state,VMCompanyInfoList:payload}
-    }
+    updateVMCompanyInfo(state, { payload }) {
+      return { ...state, VMCompanyInfoList: payload }
+    },
   },
   effects: {
-    *login({ payload },{ call, put }){
-      const res=yield call(services.fetchLogin,payload)
-        Storage.set('_userToken', res.token)
-        window._userToken='bearer '+res.token
-      if(res){
+    *login({ payload }, { call, put }) {
+      const res = yield call(services.fetchLogin, payload)
+      Storage.set('_userToken', res.token)
+      window._userToken = `bearer ${  res.token}`
+      if (res) {
         yield put(NavigationActions.navigate({ routeName: 'Home' }))
-      }else{
+      } else {
         Toast.fail(res.Message)
       }
       ModalIndicator.hide()
     },
-    *Register({ payload },{ call, put }){
-      const res=yield call(services.fetchRegister,payload)
-      if(res.successResponse){
+    *Register({ payload }, { call, put }) {
+      const res = yield call(services.fetchRegister, payload)
+      if (res.successResponse) {
         yield put(NavigationActions.navigate({ routeName: 'Login' }))
-      }else{
+      } else {
         Toast.fail(res.Message)
       }
-        ModalIndicator.hide()
+      ModalIndicator.hide()
     },
     *getVerifiCode({ payload }, { call, put, select }) {
       let countdown = yield select(state => state.login.countdown)
@@ -46,30 +46,30 @@ export default {
         payload: { tipText: '发送中...', isSendingCode: true },
       })
       const res = yield call(services.fetchVerifiCode, payload)
-      console.log(res);
-      
+      console.log(res)
+
       if (res.successResponse) {
-          Toast.message('验证码已发')
-          while (countdown > 0) {
-            countdown--
-            yield call(delay, 1000)
+        Toast.message('验证码已发')
+        while (countdown > 0) {
+          countdown--
+          yield call(delay, 1000)
+          yield put({
+            type: 'updateState',
+            payload: { countdown, tipText: `${countdown}秒` },
+          })
+          if (countdown === 0) {
             yield put({
               type: 'updateState',
-              payload: { countdown, tipText: `${countdown}秒` },
-            })
-            if (countdown === 0) {
-              yield put({
-                type: 'updateState',
-                payload: { isSendingCode: false, countdown: 60 },
-              })
-            }
-          }
-          if (!isSendingCode) {
-            yield put({
-              type: 'updateState',
-              payload: { tipText: '获取动态码' },
+              payload: { isSendingCode: false, countdown: 60 },
             })
           }
+        }
+        if (!isSendingCode) {
+          yield put({
+            type: 'updateState',
+            payload: { tipText: '获取动态码' },
+          })
+        }
       } else {
         yield put({
           type: 'updateState',

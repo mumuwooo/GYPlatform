@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { BackHandler, Animated, Easing,ToastAndroid } from 'react-native'
+import { BackHandler, Animated, Easing, ToastAndroid } from 'react-native'
 import {
   createStackNavigator,
   createBottomTabNavigator,
@@ -13,7 +13,7 @@ import {
 import { connect } from 'react-redux'
 
 import IconFont from './components/IconFont'
-import {commonStyle} from './utils'
+import { commonStyle } from './utils'
 import Loading from './page/Loading'
 
 import Login from './page/others/Login'
@@ -66,76 +66,124 @@ import Test from './page/others/Test'
 
 let oldRoutes = []
 
-const {iconSize} = commonStyle
+const { iconSize } = commonStyle
 const styles = {
-  tabBarIcon:commonStyle.tabBarIconStyle,
-  tabBarStyle:commonStyle.tabBarStyle,
-  mime:{position: 'relative',
-  width:30,height: 30,alignItems: 'center',justifyContent: 'center',},
-  
+  tabBarIcon: commonStyle.tabBarIconStyle,
+  tabBarStyle: commonStyle.tabBarStyle,
+  mime: {
+    position: 'relative',
+    width: 30,
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 }
 
 const HomeNavigator = createBottomTabNavigator(
   {
-  Home: { screen: FinanceDemandForm,
-    navigationOptions: {
-      tabBarLabel: '6S服务',
-      tabBarIcon: ({ focused }) => (
-        focused?
-        <IconFont name="&#xe64b;" size={iconSize} color={commonStyle.themeColor} style={styles.tabBarIcon} />
-      :
-        <IconFont name="&#xe638;" size={iconSize} color='gray' style={styles.tabBarIcon} />
-      )
-      }
+    Home: {
+      screen: FinanceDemandForm,
+      navigationOptions: {
+        tabBarLabel: '6S服务',
+        tabBarIcon: ({ focused }) =>
+          focused ? (
+            <IconFont
+              name="&#xe64b;"
+              size={iconSize}
+              color={commonStyle.themeColor}
+              style={styles.tabBarIcon}
+            />
+          ) : (
+            <IconFont
+              name="&#xe638;"
+              size={iconSize}
+              color="gray"
+              style={styles.tabBarIcon}
+            />
+          ),
+      },
     },
-  InvestZH: { screen: InvestZH,
-    navigationOptions: {
-      tabBarLabel: '投资昭化',
-      tabBarIcon: ({ focused }) => (
-        focused?
-        <IconFont name="&#xe64a;" size={iconSize} color={commonStyle.themeColor} style={styles.tabBarIcon} />
-      :
-        <IconFont name="&#xe63a;" size={iconSize} color='gray' style={styles.tabBarIcon} />
-      )
-      }
-},
-  ZHInfos: { screen: ZHInfos,
-    navigationOptions: {
-      tabBarLabel: '昭化资讯',
-      tabBarIcon: ({ focused }) => (
-        focused?
-        <IconFont name="&#xe654;" size={iconSize} color={commonStyle.themeColor} style={styles.tabBarIcon} />
-      :
-        <IconFont name="&#xe64e;" size={iconSize} color='gray' style={styles.tabBarIcon} />
-      )
-      }
-  },
-  Personal: { screen: Personal,
-    navigationOptions: {
-      tabBarLabel: '用户中心',
-      tabBarIcon: ({ focused }) => (
-        focused?
-        <IconFont name="&#xe64d;" size={iconSize} color={commonStyle.themeColor} style={styles.tabBarIcon} />
-      :
-        <IconFont name="&#xe63b;" size={iconSize} color='gray' style={styles.tabBarIcon} />
-      )
-      } 
+    InvestZH: {
+      screen: InvestZH,
+      navigationOptions: {
+        tabBarLabel: '投资昭化',
+        tabBarIcon: ({ focused }) =>
+          focused ? (
+            <IconFont
+              name="&#xe64a;"
+              size={iconSize}
+              color={commonStyle.themeColor}
+              style={styles.tabBarIcon}
+            />
+          ) : (
+            <IconFont
+              name="&#xe63a;"
+              size={iconSize}
+              color="gray"
+              style={styles.tabBarIcon}
+            />
+          ),
+      },
     },
-},
-{
-  initialRouteName: 'Home',    // tabBarPosition: 'bottom',// tabbar放在底部
-  swipeEnabled: true,// 滑动切换
-  animationEnabled: true,// 切换动画
-  lazy: false,
-  tabBarOptions: {
-    activeTintColor: commonStyle.themeColor,
-    style:styles.tabBarStyle,
-    labelStyle: {
-      fontSize: commonStyle.tabBarFontSize, // 文字大小
-    }
+    ZHInfos: {
+      screen: ZHInfos,
+      navigationOptions: {
+        tabBarLabel: '昭化资讯',
+        tabBarIcon: ({ focused }) =>
+          focused ? (
+            <IconFont
+              name="&#xe654;"
+              size={iconSize}
+              color={commonStyle.themeColor}
+              style={styles.tabBarIcon}
+            />
+          ) : (
+            <IconFont
+              name="&#xe64e;"
+              size={iconSize}
+              color="gray"
+              style={styles.tabBarIcon}
+            />
+          ),
+      },
+    },
+    Personal: {
+      screen: Personal,
+      navigationOptions: {
+        tabBarLabel: '用户中心',
+        tabBarIcon: ({ focused }) =>
+          focused ? (
+            <IconFont
+              name="&#xe64d;"
+              size={iconSize}
+              color={commonStyle.themeColor}
+              style={styles.tabBarIcon}
+            />
+          ) : (
+            <IconFont
+              name="&#xe63b;"
+              size={iconSize}
+              color="gray"
+              style={styles.tabBarIcon}
+            />
+          ),
+      },
+    },
   },
-  indicatorStyle: { height: 0 }
-}
+  {
+    initialRouteName: 'Home', // tabBarPosition: 'bottom',// tabbar放在底部
+    swipeEnabled: true, // 滑动切换
+    animationEnabled: true, // 切换动画
+    lazy: false,
+    tabBarOptions: {
+      activeTintColor: commonStyle.themeColor,
+      style: styles.tabBarStyle,
+      labelStyle: {
+        fontSize: commonStyle.tabBarFontSize, // 文字大小
+      },
+    },
+    indicatorStyle: { height: 0 },
+  }
 )
 
 // HomeNavigator.navigationOptions = ({ navigation }) => {
@@ -163,47 +211,88 @@ const HomeNavigator = createBottomTabNavigator(
 const AppNavigator = createStackNavigator(
   {
     Main: { screen: HomeNavigator, navigationOptions: { header: null } },
-    Login: { screen: Login,navigationOptions: { header: null } },
-    Register: { screen: Register,navigationOptions: { header: null } },
-    ChangePwd: { screen: ChangePwd,navigationOptions: { header: null } },
-    ChangePhone:{ screen: ChangePhone,navigationOptions: { header: null } },
-    Sorry:{screen: Sorry,navigationOptions: { header: null }},
-    Test:{screen: Test,navigationOptions: { header: null }},
-    NewsDetail:{screen: NewsDetail,navigationOptions: { header: null }},
-    MarketExtension:{screen: MarketExtension,navigationOptions: { header: null }},
-    FactorGuarantee:{screen: FactorGuarantee,navigationOptions: { header: null }},
-    FactorGuaranteeForm:{screen: FactorGuaranteeForm,navigationOptions: { header: null }},
-    SocialService:{screen: SocialService,navigationOptions: { header: null }},
-    TaxService:{screen: TaxService,navigationOptions: { header: null }},
-    AdmApproval:{screen: AdmApproval,navigationOptions: { header: null }},
-    LegalAid:{screen: LegalAid,navigationOptions: { header: null }},
-    WebviewLinks:{screen: WebviewLinks,navigationOptions: { header: null }},
-    FourIdentification:{screen: FourIdentification,navigationOptions: { header: null }},
-    FourIdentifiForm:{screen: FourIdentifiForm,navigationOptions: { header: null }},
-    DemandForm:{screen: DemandForm,navigationOptions: { header: null }},
-    OnlineInvest:{screen: OnlineInvest,navigationOptions: { header: null }},
-    ProjectReport:{screen: ProjectReport,navigationOptions: { header: null }},
-    ProjectCoordinateForm:{screen: ProjectCoordinateForm,navigationOptions: { header: null }},
-    PatentReport:{screen: PatentReport,navigationOptions: { header: null }},
-    TechProject:{screen: TechProject,navigationOptions: { header: null }},
-    TechAchive:{screen: TechAchive,navigationOptions: { header: null }},
-    OnlineAchiveForm:{screen: OnlineAchiveForm,navigationOptions: { header: null }},
-    FinanceDemandForm:{screen: FinanceDemandForm,navigationOptions: { header: null }},
-    FinanceGuaranteeForm:{screen: FinanceGuaranteeForm,navigationOptions: { header: null }},
-    BankConnect:{screen: BankConnect,navigationOptions: { header: null }},
-    SignalProject:{screen: SignalProject,navigationOptions: { header: null }},
-    SignalApplyForm:{screen: SignalApplyForm,navigationOptions: { header: null }},
-    Libraries:{screen: Libraries,navigationOptions: { header: null }},
-    PoliticTopics:{screen: PoliticTopics,navigationOptions: { header: null }},
-    LawRules:{screen: LawRules,navigationOptions: { header: null }},
+    Login: { screen: Login, navigationOptions: { header: null } },
+    Register: { screen: Register, navigationOptions: { header: null } },
+    ChangePwd: { screen: ChangePwd, navigationOptions: { header: null } },
+    ChangePhone: { screen: ChangePhone, navigationOptions: { header: null } },
+    Sorry: { screen: Sorry, navigationOptions: { header: null } },
+    Test: { screen: Test, navigationOptions: { header: null } },
+    NewsDetail: { screen: NewsDetail, navigationOptions: { header: null } },
+    MarketExtension: {
+      screen: MarketExtension,
+      navigationOptions: { header: null },
+    },
+    FactorGuarantee: {
+      screen: FactorGuarantee,
+      navigationOptions: { header: null },
+    },
+    FactorGuaranteeForm: {
+      screen: FactorGuaranteeForm,
+      navigationOptions: { header: null },
+    },
+    SocialService: {
+      screen: SocialService,
+      navigationOptions: { header: null },
+    },
+    TaxService: { screen: TaxService, navigationOptions: { header: null } },
+    AdmApproval: { screen: AdmApproval, navigationOptions: { header: null } },
+    LegalAid: { screen: LegalAid, navigationOptions: { header: null } },
+    WebviewLinks: { screen: WebviewLinks, navigationOptions: { header: null } },
+    FourIdentification: {
+      screen: FourIdentification,
+      navigationOptions: { header: null },
+    },
+    FourIdentifiForm: {
+      screen: FourIdentifiForm,
+      navigationOptions: { header: null },
+    },
+    DemandForm: { screen: DemandForm, navigationOptions: { header: null } },
+    OnlineInvest: { screen: OnlineInvest, navigationOptions: { header: null } },
+    ProjectReport: {
+      screen: ProjectReport,
+      navigationOptions: { header: null },
+    },
+    ProjectCoordinateForm: {
+      screen: ProjectCoordinateForm,
+      navigationOptions: { header: null },
+    },
+    PatentReport: { screen: PatentReport, navigationOptions: { header: null } },
+    TechProject: { screen: TechProject, navigationOptions: { header: null } },
+    TechAchive: { screen: TechAchive, navigationOptions: { header: null } },
+    OnlineAchiveForm: {
+      screen: OnlineAchiveForm,
+      navigationOptions: { header: null },
+    },
+    FinanceDemandForm: {
+      screen: FinanceDemandForm,
+      navigationOptions: { header: null },
+    },
+    FinanceGuaranteeForm: {
+      screen: FinanceGuaranteeForm,
+      navigationOptions: { header: null },
+    },
+    BankConnect: { screen: BankConnect, navigationOptions: { header: null } },
+    SignalProject: {
+      screen: SignalProject,
+      navigationOptions: { header: null },
+    },
+    SignalApplyForm: {
+      screen: SignalApplyForm,
+      navigationOptions: { header: null },
+    },
+    Libraries: { screen: Libraries, navigationOptions: { header: null } },
+    PoliticTopics: {
+      screen: PoliticTopics,
+      navigationOptions: { header: null },
+    },
+    LawRules: { screen: LawRules, navigationOptions: { header: null } },
     // Libraries:{screen: Libraries,navigationOptions: { header: null }},
-
   },
   {
     headerMode: null,
     mode: 'modal',
     navigationOptions: {
-      gesturesEnabled: true,  // 是否允许右滑返回
+      gesturesEnabled: true, // 是否允许右滑返回
     },
     transitionConfig: () => ({
       transitionSpec: {

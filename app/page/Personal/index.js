@@ -1,10 +1,10 @@
 import React from 'react'
-import { StyleSheet, View, Text, Dimensions, ScrollView} from 'react-native'
+import { StyleSheet, View, Text, Dimensions, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
-import { NavigationPage,ListRow, Label } from 'teaset'
+import { NavigationPage, ListRow, Label } from 'teaset'
 
-import { IconFont, NavBar, Button} from '../../components'
-import { createAction, NavigationActions,commonStyle } from '../../utils'
+import { IconFont, NavBar, Button } from '../../components'
+import { createAction, NavigationActions, commonStyle } from '../../utils'
 import HeadView from './HeadView'
 
 const { width, height } = Dimensions.get('window')
@@ -22,7 +22,7 @@ class Personal extends NavigationPage {
   logout = () => {
     this.props.dispatch(createAction('app/logout')())
   }
-  
+
   navigateTo(routeName, params) {
     this.props.dispatch(NavigationActions.navigate({ routeName, params }))
   }
@@ -34,78 +34,86 @@ class Personal extends NavigationPage {
         <HeadView />
         <View style={styles.myContent}>
           <View style={styles.content_item}>
-              <IconFont name='&#xe661;' size={50} color={commonStyle.themeColor}/>
-              <Text style={styles.item_text}>我的办事</Text>
+            <IconFont
+              name="&#xe661;"
+              size={50}
+              color={commonStyle.themeColor}
+            />
+            <Text style={styles.item_text}>我的办事</Text>
           </View>
-          <View style={[styles.content_item,styles.content_item2]}>
-              <IconFont name='&#xe666;' size={50} color={commonStyle.themeColor}/>
-              <Text style={styles.item_text}>我要投诉</Text>
+          <View style={[styles.content_item, styles.content_item2]}>
+            <IconFont
+              name="&#xe666;"
+              size={50}
+              color={commonStyle.themeColor}
+            />
+            <Text style={styles.item_text}>我要投诉</Text>
           </View>
         </View>
 
         <View style={styles.listRow}>
-        <RowLabel
-              title="我的收藏"
-              icon={
-                <IconFont
-                  name="&#xe663;"
-                  size={commonStyle.hSize}
-                  style={{ color: commonStyle.h1Color }}
-                />
-              }
-            />
           <RowLabel
-              title="修改密码"
-              icon={
-                <IconFont
-                  name="&#xe6f3;"
-                  size={commonStyle.h1Size}
-                  style={{ color: commonStyle.h1Color }}
-                />
-              }
-              onPress={() => this.navigateTo('ChangePwd')}
-            />
-            <RowLabel
-              title="换绑手机"
-              icon={
-                <IconFont
-                  name="&#xe6f2;"
-                  size={commonStyle.h1Size}
-                  style={{ color: commonStyle.h1Color }}
-                />
-              }
-              onPress={() => this.navigateTo('ChangePhone')}
-            />  
-            <RowLabel
-              title="帮助中心"
-              icon={
-                <IconFont
-                  name="&#xe660;"
-                  size={commonStyle.hSize}
-                  style={{ color: commonStyle.h1Color }}
-                />
-              }
-            />
-            <RowLabel
-              title="推荐给朋友"
-              icon={
-                <IconFont
-                  name="&#xe668;"
-                  size={commonStyle.hSize}
-                  style={{ color: commonStyle.h1Color }}
-                />
-              }
-            />
+            title="我的收藏"
+            icon={
+              <IconFont
+                name="&#xe663;"
+                size={commonStyle.hSize}
+                style={{ color: commonStyle.h1Color }}
+              />
+            }
+          />
+          <RowLabel
+            title="修改密码"
+            icon={
+              <IconFont
+                name="&#xe6f3;"
+                size={commonStyle.h1Size}
+                style={{ color: commonStyle.h1Color }}
+              />
+            }
+            onPress={() => this.navigateTo('ChangePwd')}
+          />
+          <RowLabel
+            title="换绑手机"
+            icon={
+              <IconFont
+                name="&#xe6f2;"
+                size={commonStyle.h1Size}
+                style={{ color: commonStyle.h1Color }}
+              />
+            }
+            onPress={() => this.navigateTo('ChangePhone')}
+          />
+          <RowLabel
+            title="帮助中心"
+            icon={
+              <IconFont
+                name="&#xe660;"
+                size={commonStyle.hSize}
+                style={{ color: commonStyle.h1Color }}
+              />
+            }
+          />
+          <RowLabel
+            title="推荐给朋友"
+            icon={
+              <IconFont
+                name="&#xe668;"
+                size={commonStyle.hSize}
+                style={{ color: commonStyle.h1Color }}
+              />
+            }
+          />
         </View>
 
         <Button
-              style={styles.button_logout}
-              textStyle={styles.button_text}
-              // onPress={() => this.handleLogout()}
-              type="theme"
-            >
-              退出登录
-            </Button>
+          style={styles.button_logout}
+          textStyle={styles.button_text}
+          // onPress={() => this.handleLogout()}
+          type="theme"
+        >
+          退出登录
+        </Button>
       </ScrollView>
     )
   }
@@ -134,36 +142,34 @@ const RowLabel = ({ icon, title, detail, ...rest }) => (
 const styles = StyleSheet.create({
   container: {
     height,
-    backgroundColor:'#f1f1f1',
+    backgroundColor: '#f1f1f1',
     // alignItems: 'center',
     // justifyContent: 'center',
   },
-  myContent:{
-    backgroundColor:'#fff',
-    width:width*0.93,
-    flexDirection:'row',
-    alignItems:'center',
-    marginTop:19,
-    height:109,
-    justifyContent:'center',
-    alignSelf:'center',
+  myContent: {
+    backgroundColor: '#fff',
+    width: width * 0.93,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 19,
+    height: 109,
+    justifyContent: 'center',
+    alignSelf: 'center',
   },
-  content_item:{
-
+  content_item: {},
+  content_item2: {
+    marginLeft: 100,
   },
-  content_item2:{
-    marginLeft:100
-  },
-  item_text:{
+  item_text: {
     fontFamily: commonStyle.PFregular,
     fontSize: commonStyle.h4Size,
     color: commonStyle.h1Color,
-    marginTop:6,
+    marginTop: 6,
   },
-  listRow:{
-    alignSelf:'center',
-    width:width*0.93,
-    marginTop:15,
+  listRow: {
+    alignSelf: 'center',
+    width: width * 0.93,
+    marginTop: 15,
   },
   list_row: {
     height: 37,
@@ -181,18 +187,18 @@ const styles = StyleSheet.create({
     fontFamily: commonStyle.PFregular,
     marginRight: 5,
   },
-  icon_right:{
-    color:commonStyle.h2Color
+  icon_right: {
+    color: commonStyle.h2Color,
   },
   button_logout: {
-    alignSelf:'center',
+    alignSelf: 'center',
     marginTop: 25,
     width: 300,
     height: 37,
     borderRadius: 4,
     borderColor: commonStyle.themeColor,
     backgroundColor: commonStyle.themeColor,
-    marginBottom:44,
+    marginBottom: 44,
   },
 })
 

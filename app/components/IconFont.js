@@ -1,8 +1,8 @@
-import React from "react";
-import { Text } from "react-native";
+import React from 'react'
+import { Text } from 'react-native'
 import Touchable from './Touchable'
 
-const IconFont = ({ name, color , size = 18,style ,...extra}) => {
+const IconFont = ({ name, color, size = 18, style, ...extra }) => 
   // if(extra.onPress){
   //   const onPressFun = extra.onPress
   //   delete(extra.onPress)
@@ -21,18 +21,21 @@ const IconFont = ({ name, color , size = 18,style ,...extra}) => {
   //     </Touchable>
   //   );
   // }
-  return (
+   (
     <Text
       {...extra}
-      style={[{
-        fontFamily: "iconfont",
-        fontSize: size,
-        color:color||"#fff"
-      },style]}
+      style={[
+        {
+          fontFamily: 'iconfont',
+          fontSize: size,
+          color: color || '#fff',
+        },
+        style,
+      ]}
     >
       {name.toString()}
     </Text>
-  );
-};
+  )
 
-export default IconFont;
+
+export default IconFont

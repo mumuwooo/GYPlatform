@@ -57,7 +57,6 @@ export default {
     setRouterParams(state, action) {
       return { ...state, routerParams: action.payload }
     },
-
   },
   effects: {
     *initApp(action, { put, call }) {
@@ -68,20 +67,19 @@ export default {
       // 用户信息
       // yield put({ type: 'user/updateBasicInfo', payload: _baseInfo })
     },
-       // 登录判断
+    // 登录判断
     *loginJudge({ loading }, { call, put }) {
       console.log('122113132131313')
-        const _userToken = yield call(Storage.get, '_userToken')
-        console.log(_userToken)
-        if (!_userToken) {
-          yield put({ type: 'isLogout' }) // 已退出
-        } else {
-          window._userToken = 'bearer '+ _userToken
-        }
-        console.log('window._userToken');
-        console.log(window._userToken);
-        
-      },
+      const _userToken = yield call(Storage.get, '_userToken')
+      console.log(_userToken)
+      if (!_userToken) {
+        yield put({ type: 'isLogout' }) // 已退出
+      } else {
+        window._userToken = `bearer ${  _userToken}`
+      }
+      console.log('window._userToken')
+      console.log(window._userToken)
+    },
     *routesBack({ routes, oldRoutes }, { select }) {
       const { dispatch } = window
       // 路由回退触发  可初始化数据
@@ -128,18 +126,15 @@ export default {
           break
         }
 
-
         // other rubbish
         case 'Course': {
-         
           break
         }
         case 'Personal': {
-         
           break
         }
         case '4disErr': {
-              yield select(state => state)
+          yield select(state => state)
           break
         }
 
@@ -165,12 +160,12 @@ export default {
       )
       // const hasCache = yield select(state =>state.app.hasCache)
       switch (currentRouter) {
-        //Home
+        // Home
         case 'Home': {
           dispatch({ type: 'home/getHomeSlides', payload: { paging } })
-          dispatch({ type: 'home/getVMCompanyInfo'})
-          dispatch({ type: 'home/getVMAchiveInfo'})
-        
+          dispatch({ type: 'home/getVMCompanyInfo' })
+          dispatch({ type: 'home/getVMAchiveInfo' })
+
           break
         }
 
@@ -179,9 +174,12 @@ export default {
           dispatch({ type: 'marketService/getNewsList', payload: { paging } })
           break
         }
-        //Home/PolicyService
+        // Home/PolicyService
         case 'PoliticTopics': {
-          dispatch({ type: 'policyService/getPoliticList', payload: { paging } })
+          dispatch({
+            type: 'policyService/getPoliticList',
+            payload: { paging },
+          })
           break
         }
         case 'LawRules': {
@@ -193,11 +191,10 @@ export default {
           break
         }
 
-
-        //ZHInfos
+        // ZHInfos
         case 'ZHInfos': {
           dispatch({ type: 'zhInfos/getNewsList', payload: { paging } })
-          dispatch({ type: 'zhInfos/getZhSlides'})
+          dispatch({ type: 'zhInfos/getZhSlides' })
           break
         }
 
@@ -211,7 +208,7 @@ export default {
       // loading加载
       dispatch({ type: 'initApp' })
       // 监听网络变化事件
-     
+
       window.dispatch = dispatch
     },
   },

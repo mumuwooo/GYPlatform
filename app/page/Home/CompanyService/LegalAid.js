@@ -1,13 +1,7 @@
 import React, { Component } from 'react'
-import {
-  StyleSheet,
-  View,
-  Dimensions,
-  Text,
-  ScrollView
-} from 'react-native'
+import { StyleSheet, View, Dimensions, Text, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
-import { NavigationBar, NavigationPage,  } from 'teaset'
+import { NavigationBar, NavigationPage } from 'teaset'
 import HTML from 'react-native-render-html'
 import { Divider, Button } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
@@ -19,21 +13,23 @@ const { width, height } = Dimensions.get('window')
 class LegalAid extends NavigationPage {
   constructor(props) {
     super(props)
-    this.state = {
-     
-    }
+    this.state = {}
   }
 
- 
   renderNavigationBar() {
     return <NavBar title="法律援助服务" />
   }
 
-  handleSubmit=()=>{
-    this.props.dispatch(NavigationActions.navigate({routeName:'WebviewLinks',params:{title:'法律援助服务'}}))
+  handleSubmit = () => {
+    this.props.dispatch(
+      NavigationActions.navigate({
+        routeName: 'WebviewLinks',
+        params: { title: '法律援助服务' },
+      })
+    )
   }
   renderPage() {
-    const htmlContent=`
+    const htmlContent = `
   
     <p style="font-size:13px;text-indent:55px;margin-top:10px">
     一、规模以上工业企业
@@ -84,12 +80,15 @@ class LegalAid extends NavigationPage {
     `
     return (
       <View style={styles.container}>
-  <View style={styles.content}>
-          <ScrollView style={{height:height*0.65}} showsVerticalScrollIndicator={false}>
+        <View style={styles.content}>
+          <ScrollView
+            style={{ height: height * 0.65 }}
+            showsVerticalScrollIndicator={false}
+          >
             <Text style={styles.content_title}>法律援助注意事项</Text>
             <HTML
               html={htmlContent}
-              imagesMaxWidth={width*0.95}
+              imagesMaxWidth={width * 0.95}
               tagsStyles={{
                 p: {
                   // fontFamily: "PingFang-SC-Medium",
@@ -99,11 +98,11 @@ class LegalAid extends NavigationPage {
                 },
               }}
             />
-          
-            <Divider type = "bottomSpace" color='#fff'/>
-        </ScrollView>
+
+            <Divider type="bottomSpace" color="#fff" />
+          </ScrollView>
         </View>
-      <Button
+        <Button
           style={styles.button_save}
           textStyle={styles.button_text}
           onPress={this.handleSubmit}
@@ -112,7 +111,6 @@ class LegalAid extends NavigationPage {
           立即申请
         </Button>
       </View>
-
     )
   }
 }
@@ -128,34 +126,34 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     borderColor: commonStyle.themeColor,
     backgroundColor: commonStyle.themeColor,
-    alignSelf:'center',
+    alignSelf: 'center',
   },
   button_text: {
     fontFamily: commonStyle.PFregular,
     fontSize: commonStyle.h21Size,
     color: '#ffff',
   },
-  content:{
-    backgroundColor:'#fff',
-    marginHorizontal:14,
-    marginTop:18,
-    marginBottom:27,
+  content: {
+    backgroundColor: '#fff',
+    marginHorizontal: 14,
+    marginTop: 18,
+    marginBottom: 27,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: "#bababa",
-    paddingHorizontal:16,
+    borderColor: '#bababa',
+    paddingHorizontal: 16,
   },
-  content_title:{
-    width:161,
+  content_title: {
+    width: 161,
     fontFamily: commonStyle.PFmedium,
     fontSize: commonStyle.h31Size,
-    color: "#ffffff",
-    paddingVertical:8,
-    paddingHorizontal:21,
+    color: '#ffffff',
+    paddingVertical: 8,
+    paddingHorizontal: 21,
     borderRadius: 15,
-    backgroundColor:commonStyle.themeColor,
-    marginTop:19,
-    marginBottom:26,
+    backgroundColor: commonStyle.themeColor,
+    marginTop: 19,
+    marginBottom: 26,
   },
 })
 export default LegalAid

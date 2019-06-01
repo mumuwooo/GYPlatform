@@ -20,7 +20,7 @@ class LoginByPersonal extends Component {
       isCleanShow: false,
       isShowPwd: true,
       inputPhone: '18692205772',
-      password:'205772',
+      password: '205772',
     }
   }
 
@@ -32,14 +32,14 @@ class LoginByPersonal extends Component {
   }
   // 登录
   handleLogin = () => {
-    // 请求前规则验证   
+    // 请求前规则验证
     console.log(this.state.inputPhone, this.state.password)
     const userInfo = {
       PhoneNum: this.state.inputPhone,
       Password: this.state.password,
     }
     if (!userInfo.PhoneNum.trim() || !checkPhoneNum(userInfo.PhoneNum))
-    return Toast.info('请输入正确的手机号')
+      return Toast.info('请输入正确的手机号')
 
     if (!userInfo.Password.trim()) return Toast.info('密码不能为空！')
     ModalIndicator.show(`登录中，请稍后`)
@@ -48,7 +48,7 @@ class LoginByPersonal extends Component {
 
   toRegister = () => {
     // this.props.dispatch({ type: 'app/firstPage', page: 'Register' })
-     this.props.dispatch(NavigationActions.navigate({routeName:'Register'}))
+    this.props.dispatch(NavigationActions.navigate({ routeName: 'Register' }))
   }
 
   toForgotPwd = () => {
@@ -83,7 +83,7 @@ class LoginByPersonal extends Component {
               <IconFont
                 name="&#xe6f8;"
                 size={20}
-                style={{color:commonStyle.h2Color}}
+                style={{ color: commonStyle.h2Color }}
               />
             </TouchableOpacity>
           ) : null}
@@ -111,9 +111,17 @@ class LoginByPersonal extends Component {
             onPress={this.handlePwdShow}
           >
             {this.state.isShowPwd ? (
-              <IconFont name="&#xe6fb;" size={20} style={{color:commonStyle.h2Color}}/>
+              <IconFont
+                name="&#xe6fb;"
+                size={20}
+                style={{ color: commonStyle.h2Color }}
+              />
             ) : (
-              <IconFont name="&#xe6fa;" size={20} style={{color:commonStyle.h2Color}}/>
+              <IconFont
+                name="&#xe6fa;"
+                size={20}
+                style={{ color: commonStyle.h2Color }}
+              />
             )}
           </TouchableOpacity>
         </View>
@@ -145,7 +153,7 @@ const styles = StyleSheet.create({
   container: {
     // flex: 1,
     width,
-    marginTop:18,
+    marginTop: 18,
     // backgroundColor: '#fff',
     // justifyContent: 'center',
     alignItems: 'center',
@@ -165,8 +173,8 @@ const styles = StyleSheet.create({
     width: 22,
     height: 22,
     marginRight: 9,
-    color:commonStyle.h2Color,
-    marginLeft:12,
+    color: commonStyle.h2Color,
+    marginLeft: 12,
   },
   login_input: {
     height: 20,
