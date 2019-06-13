@@ -75,7 +75,7 @@ export default {
       if (!_userToken) {
         yield put({ type: 'isLogout' }) // 已退出
       } else {
-        window._userToken = `bearer ${  _userToken}`
+        window._userToken = `bearer ${_userToken}`
       }
       console.log('window._userToken')
       console.log(window._userToken)
@@ -118,6 +118,10 @@ export default {
         }
 
         // InvestZH
+        case 'InvestZH': {
+          dispatch({ type: 'investZH/getPages', payload: { paging } })
+          break
+        }
 
         // ZHInfos
         case 'ZHInfos': {
@@ -188,6 +192,12 @@ export default {
         }
         case 'Libraries': {
           dispatch({ type: 'policyService/getLibList', payload: { paging } })
+          break
+        }
+
+        //InvestZH
+        case 'InvestZH': {
+          dispatch({ type: 'investZH/getPages', payload: { paging } })
           break
         }
 

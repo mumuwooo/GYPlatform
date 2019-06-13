@@ -36,7 +36,7 @@ export default {
       const res = yield call(services.getNewsList, payload)
       const { PageIndex, PageSize, PageStatus } = payload
       if (res.successResponse) {
-        yield put({ type: 'updateNewsList', payload: res.data })
+        yield put({ type: 'updateNewsList', payload: res.data.list })
       } else {
         Toast.fail(res.Message)
       }

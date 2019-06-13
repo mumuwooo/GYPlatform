@@ -1,5 +1,3 @@
-
-
 Object.defineProperty(exports, '__esModule', {
   value: true,
 })
@@ -14,17 +12,15 @@ const _CollapsePanel2 = _interopRequireDefault(_CollapsePanel)
 function _interopRequireWildcard(obj) {
   if (obj && obj.__esModule) {
     return obj
-  } 
-    const newObj = {}
-    if (obj != null) {
-      for (const key in obj) {
-        if (Object.prototype.hasOwnProperty.call(obj, key))
-          newObj[key] = obj[key]
-      }
+  }
+  const newObj = {}
+  if (obj != null) {
+    for (const key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]
     }
-    newObj.default = obj
-    return newObj
-  
+  }
+  newObj.default = obj
+  return newObj
 }
 
 function _interopRequireDefault(obj) {

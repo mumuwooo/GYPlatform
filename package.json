@@ -17,6 +17,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.4.1",
     "react-native": "^0.55.4",
+    "react-native-auto-height-image": "^1.1.0",
     "react-native-datepicker": "^1.7.2",
     "react-native-image-picker": "^0.28.1",
     "react-native-render-html": "^4.1.2",

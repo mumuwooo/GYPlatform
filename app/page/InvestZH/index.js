@@ -10,9 +10,11 @@ import { Button, Divider, NavBar } from '../../components'
 import { NavigationActions, commonStyle } from '../../utils'
 import EventsList from './EventsList'
 
+import HTML from 'react-native-render-html-for-maxwidth';
+
 const { width, height } = Dimensions.get('window')
 
-@connect()
+@connect(({investZH})=>({investZH}))
 class InvestZH extends NavigationPage {
   renderNavigationBar() {
     return <NavBar title="投资昭化" />
@@ -27,6 +29,7 @@ class InvestZH extends NavigationPage {
     this.setState({ curIndex: obj.i })
   }
   renderPage() {
+    const {pages} = this.props.investZH;
     return (
       <View style={styles.tabView}>
         <ScrollableTabView
@@ -43,10 +46,25 @@ class InvestZH extends NavigationPage {
             <EventsList />
           </View>
           <View style={styles.tabView_textStyle} tabLabel="广元概况">
-            <Text>广元概况</Text>
+            <HTML
+              html={pages?pages[1].content:"加载中"}
+              // html="test,test"
+              imagesMaxWidth={width * 0.95}
+              tagsStyles={{
+                p: {
+                  // fontFamily: "PingFang-SC-Medium",
+                  // fontSize: 16,
+                  // lineHeight:24,
+                  // color: "#666"
+                },
+              }}
+            />
           </View>
           <View style={styles.tabView_textStyle} tabLabel="昭化概况">
-            <Text>昭化概况</Text>
+            <HTML
+              html={pages?pages[2].content:"加载中"}
+              imagesMaxWidth={width * 0.95}
+            />
           </View>
           <View style={styles.tabView_textStyle} tabLabel="投资合作">
             <Text>投资合作</Text>

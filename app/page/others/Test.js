@@ -11,12 +11,12 @@ const { width } = Dimensions.get('window')
 @connect(({ app }) => ({ ...app }))
 class Test extends NavigationPage {
   renderPagination = (index, total, context) => (
-      <View style={styles.paginationStyle}>
-        <Text style={{ color: 'grey' }}>
-          <Text style={styles.paginationText}>{index + 1}</Text>/{total}
-        </Text>
-      </View>
-    )
+    <View style={styles.paginationStyle}>
+      <Text style={{ color: 'grey' }}>
+        <Text style={styles.paginationText}>{index + 1}</Text>/{total}
+      </Text>
+    </View>
+  )
 
   renderNavigationBar() {
     return <NavBar title="Test" />
