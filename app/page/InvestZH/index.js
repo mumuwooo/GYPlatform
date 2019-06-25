@@ -1,19 +1,24 @@
 import React from 'react'
-import { StyleSheet, View, Image,Text, Dimensions } from 'react-native'
+import { StyleSheet, View, Image, Text, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationPage } from 'teaset'
-import ScrollableTabView, {ScrollableTabBar,} from 'react-native-scrollable-tab-view'
+import ScrollableTabView, {
+  ScrollableTabBar,
+} from 'react-native-scrollable-tab-view'
 
-import { Button,Divider, NavBar } from '../../components'
+import { Button, Divider, NavBar } from '../../components'
 import { NavigationActions, commonStyle } from '../../utils'
+import EventsList from './EventsList'
+
+import HTML from 'react-native-render-html-for-maxwidth';
+
 const { width, height } = Dimensions.get('window')
 
-@connect()
+@connect(({investZH})=>({investZH}))
 class InvestZH extends NavigationPage {
   renderNavigationBar() {
     return <NavBar title="投资昭化" />
   }
-
 
   gotoDetail = () => {
     this.props.dispatch(NavigationActions.navigate({ routeName: 'Sorry' }))
@@ -22,39 +27,50 @@ class InvestZH extends NavigationPage {
   // tab切换
   handleTabSwitch = obj => {
     this.setState({ curIndex: obj.i })
-    
   }
   renderPage() {
+    const {pages, events} = this.props.investZH;
     return (
       <View style={styles.tabView}>
-      <ScrollableTabView
-        onChangeTab={obj => {
-          this.handleTabSwitch(obj)
-        }}
-        renderTabBar={() => <ScrollableTabBar style={styles.tabbar_view} />}
-        tabBarUnderlineStyle={styles.tabView_lineStyle}
-        tabBarActiveTextColor={commonStyle.themeColor}
-        tabBarInactiveTextColor={commonStyle.h4Color}
-        tabBarTextStyle={styles.tabViewText}
-      >
-        <View style={styles.tabView_textStyle} tabLabel="昭化大事记">
-            <View>
-            <Text>昭化大事记</Text>
-            <Text>麻烦嵌套成组件写进来</Text>
-            </View>
+        <ScrollableTabView
+          onChangeTab={obj => {
+            this.handleTabSwitch(obj)
+          }}
+          renderTabBar={() => <ScrollableTabBar style={styles.tabbar_view} />}
+          tabBarUnderlineStyle={styles.tabView_lineStyle}
+          tabBarActiveTextColor={commonStyle.themeColor}
+          tabBarInactiveTextColor={commonStyle.h2Color}
+          tabBarTextStyle={styles.tabViewText}
+        >
+          <View style={styles.tabView_textStyle} tabLabel="昭化大事记">
+            <EventsList events={events} />
           </View>
           <View style={styles.tabView_textStyle} tabLabel="广元概况">
-              <Text>广元概况</Text>
+            <HTML
+              html={pages?pages[1].content:"加载中"}
+              // html="test,test"
+              imagesMaxWidth={width * 0.95}
+              tagsStyles={{
+                p: {
+                  // fontFamily: "PingFang-SC-Medium",
+                  // fontSize: 16,
+                  // lineHeight:24,
+                  // color: "#666"
+                },
+              }}
+            />
           </View>
           <View style={styles.tabView_textStyle} tabLabel="昭化概况">
-              <Text>昭化概况</Text>
+            <HTML
+              html={pages?pages[2].content:"加载中"}
+              imagesMaxWidth={width * 0.95}
+            />
           </View>
           <View style={styles.tabView_textStyle} tabLabel="投资合作">
-              <Text>投资合作</Text>
+            <Text>投资合作</Text>
           </View>
         </ScrollableTabView>
       </View>
-
     )
   }
 }
@@ -74,8 +90,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
   },
   tabViewText: {
-    fontFamily: commonStyle.PFbold,
-    fontSize: commonStyle.h2Size,
+    fontFamily: commonStyle.PFregular,
+    fontSize: commonStyle.h21Size,
   },
   tabView_textStyle: {
     alignItems: 'center',
@@ -90,7 +106,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 50,
     textAlign: 'center',
-    lineHeight: 50,
     marginBottom: 60,
   },
   loaded: {

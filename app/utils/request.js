@@ -1,278 +1,292 @@
+import fetch from 'dva/fetch'
+import { BASE_URL, X_HOST } from './config'
+import Storage from './storage'
 
-import fetch from 'dva/fetch';
-import { BASE_URL ,X_HOST} from './config';
-import storage from './storage';
-
-const CONFIG_HEADERS =  {
-  "Referrer":".sdu.edu.cn",
+const CONFIG_HEADERS = {
+  Referrer: '6s.pinpin.pro',
   'Content-Type': 'application/json; charset=utf-8',
   'Access-Control-Allow-Origin': '*',
-  'X-Host':X_HOST
+  'X-Host': X_HOST,
 }
-const CONFIG_HEADERS_XML =  {
+const CONFIG_HEADERS_XML = {
   'Content-Type': 'text/html',
   'Access-Control-Allow-Origin': '*',
 }
-const CONFIG_FILE_HEADERS ={
-  // 'X-Host':'www2.gcxkh.test.chutoukj.com'
-  'X-Host':X_HOST
+const CONFIG_FILE_HEADERS = {
+  // 'X-Host':'6s.pinpin.pro'
+  'X-Host': X_HOST,
 }
-function prevController(params={}){
+function prevController(params = {}) {
   // 需要翻页 自动展开paging对象
-  if(params&&params.paging){
-    const {PageSize,PageIndex,PageStatus }=params.paging // paging属性 PageStatus:1分页
-    params.PageSize = PageSize;
-    params.PageIndex = PageIndex;
-    params.PageStatus = PageStatus;
-    delete(params.paging);
+  if (params && params.paging) {
+    const { PageSize, PageIndex, PageStatus } = params.paging // paging属性 PageStatus:1分页
+    params.PageSize = PageSize
+    params.PageIndex = PageIndex
+    params.PageStatus = PageStatus
+    delete params.paging
   }
-   
+
   // 需要plantype
-  if(params&&params.hasPlanType){
-    if(window._PlanType>1){
+  if (params && params.hasPlanType) {
+    if (window._PlanType > 1) {
       params.PlanType = window._PlanType
     }
-    delete(params.hasPlanType);
+    delete params.hasPlanType
   }
-  
+
   // 存在StuDetail_ID
-  if(window._UserDetailKey){
+  if (window._UserDetailKey) {
     params.StuDetail_ID = window._UserDetailKey
   }
-  return params;
+  return params
 }
 
 export default function request(options) {
-  var result = "";
-  var params = prevController(options.params);
+  var result = ''
+  const params = prevController(options.params)
   let base = BASE_URL
-  if(options.url.search(/^http/)==0){
-    base=""
+  if (options.url.search(/^http/) == 0) {
+    base = ''
   }
-  if (options.method === "get") {
-      result = requestGET(base + options.url, params);
+  if (options.method === 'get') {
+    result = requestGET(base + options.url, params)
   } else {
-      var result = requestPOST(base + options.url, params);
+    var result = requestPOST(base + options.url, params)
   }
-  return result;
+  return result
 }
 
 export function POST(options) {
   let base = BASE_URL
-  if(options.url.search(/^http/)==0){
-    base=""
+  if (options.url.search(/^http/) == 0) {
+    base = ''
   }
-  var params = prevController(options.params);
-  var result = requestPOST(base + options.url, params);
-  return result;
+  const params = prevController(options.params)
+  const result = requestPOST(base + options.url, params)
+  return result
 }
 export function GET(options) {
   let base = BASE_URL
-  if(options.url.search(/^http/)==0){
-    base=""
+  if (options.url.search(/^http/) == 0) {
+    base = ''
   }
-  var params = prevController(options.params);
-  var result = requestGET(base + options.url, params);
-  return result;
-} 
+  const params = prevController(options.params)
+  const result = requestGET(base + options.url, params)
+  return result
+}
 
 export function FILE(options) {
   let base = BASE_URL
-  if(options.url.search(/^http/)==0){
-    base=""
+  if (options.url.search(/^http/) == 0) {
+    base = ''
   }
-  return requestFILE(base + options.url, options.data);
+  return requestFILE(base + options.url, options.data)
 }
 export function XML(options) {
   let base = BASE_URL
-  if(options.url.search(/^http/)==0){
-    base=""
+  if (options.url.search(/^http/) == 0) {
+    base = ''
   }
-  return requestXML(base + options.url, options.data);
+  return requestXML(base + options.url, options.data)
 }
- 
+
 function requestGET(url, params) {
   if (params) {
-    let paramsArray = [];
-    Object.keys(params).forEach(key => paramsArray.push(key + '=' + params[key]))
+    const paramsArray = []
+    Object.keys(params).forEach(key =>
+      paramsArray.push(`${key}=${params[key]}`)
+    )
     if (url.search(/\?/) === -1) {
-      url += '?' + paramsArray.join('&')
+      url += `?${paramsArray.join('&')}`
     } else {
-      url += '&' + paramsArray.join('&')
+      url += `&${paramsArray.join('&')}`
     }
   }
-   //请求参数
-  if(url.search('/datastore/Discipline/GetAllDisciplineInfoOnly')>=0){
-    url = url + '?' + new Date().getTime() + Math.random();
+  // 请求参数
+  if (url.search('/datastore/Discipline/GetAllDisciplineInfoOnly') >= 0) {
+    url = `${url}?${new Date().getTime()}${Math.random()}`
+  }
+  let headers
+  if (window._userToken) {
+    headers = { ...CONFIG_HEADERS, Authorization: window._userToken }
+  } else {
+    headers = CONFIG_HEADERS
   }
   const requestOBJ = [
-    url, {
+    url,
+    {
       method: 'GET',
       credentials: 'include',
-      cache:"no-cache",
-      headers:CONFIG_HEADERS
-    }
-   ]
-  return new Promise(function (resolve, reject) {
-    fetch( requestOBJ[0],requestOBJ[1])
-      .then((response) => {
+      cache: 'no-cache',
+      headers,
+    },
+  ]
+  return new Promise((resolve, reject) => {
+    fetch(requestOBJ[0], requestOBJ[1])
+      .then(response => {
+        console.log(response)
         if (response.ok) {
-          return response.json();
-        } else {
-          consoleReq(response,requestOBJ,"error",params)
+          return response.json()
         }
+        consoleReq(response, requestOBJ, 'error', params)
       })
-      .then((response) => {
-        if(typeof(response)!='object') return;
-        RequestCodeStatus(response);
-        resolve(response);
-        consoleReq(response,requestOBJ,"success",params)
+      .then(response => {
+        if (typeof response != 'object') return
+        RequestCodeStatus(response)
+        resolve(response)
+        consoleReq(response, requestOBJ, 'success', params)
       })
-      .catch((response) => {
-        consoleReq(response,requestOBJ,"error",params)
-        return 
+      .catch(response => {
+        consoleReq(response, requestOBJ, 'error', params)
       })
-  }).catch(function (err) {
+  }).catch(err => {
     alert('err')
   })
 }
+
 function requestPOST(url, params) {
   const requestOBJ = [
-    url, {
+    url,
+    {
       method: 'POST',
-      cache:"no-cache",
-      headers:CONFIG_HEADERS,
+      cache: 'no-cache',
+      headers: CONFIG_HEADERS,
       body: JSON.stringify(params),
       credentials: 'include',
-    }
-   ]
-  return new Promise(function (resolve, reject) {
-    fetch(requestOBJ[0],requestOBJ[1])
-      .then((response) => {
+    },
+  ]
+  return new Promise((resolve, reject) => {
+    fetch(requestOBJ[0], requestOBJ[1])
+      .then(response => {
         if (response.ok) {
-          return response.json();
-        } else {
-          // 错误提示信息
-          consoleReq(response,requestOBJ,"error",params)
-          return
+          return response.json()
         }
+        // 错误提示信息
+        consoleReq(response, requestOBJ, 'error', params)
       })
-      .then((response) => {
-        if(typeof(response)!='object') return;
-        RequestCodeStatus(response);
-        resolve(response);
-        consoleReq(response,requestOBJ,"success",params)
+      .then(response => {
+        if (typeof response != 'object') return
+        RequestCodeStatus(response)
+        resolve(response)
+        consoleReq(response, requestOBJ, 'success', params)
       })
-      .catch((response) => {
-        consoleReq(response,requestOBJ,"error",params)
-        return 
+      .catch(response => {
+        consoleReq(response, requestOBJ, 'error', params)
       })
-  }).catch(function (err) {
+  }).catch(err => {
     alert('err')
   })
 }
 
 function requestXML(url) {
   const requestOBJ = [
-    url, {
+    url,
+    {
       method: 'GET',
       credentials: 'include',
-      headers:CONFIG_HEADERS_XML,
-    }
-   ]
+      headers: CONFIG_HEADERS_XML,
+    },
+  ]
   //  console.log(requestOBJ)
-  return new Promise(function (resolve, reject) {
-    fetch( requestOBJ[0],requestOBJ[1])
-      .then((response) => {
+  return new Promise((resolve, reject) => {
+    fetch(requestOBJ[0], requestOBJ[1])
+      .then(response => {
         if (response.ok) {
-          return response.text();
-        } else {
-          consoleReq(response,requestOBJ)
+          return response.text()
         }
+        consoleReq(response, requestOBJ)
       })
-      .then((response) => {
-        if(typeof(response)!='object') return;
-        RequestCodeStatus(response);
-        resolve(response);
-        consoleReq(response,requestOBJ)
+      .then(response => {
+        if (typeof response != 'object') return
+        RequestCodeStatus(response)
+        resolve(response)
+        consoleReq(response, requestOBJ)
       })
-      .catch((response) => {
-        consoleReq(response,requestOBJ,1)
-        return 
+      .catch(response => {
+        consoleReq(response, requestOBJ, 1)
       })
-  }).catch(function (err) {
+  }).catch(err => {
     alert('err')
   })
 }
 function requestFILE(url, params) {
-  const filedata = new FormData();
+  const filedata = new FormData()
   if (params) {
-    filedata.append('file', params.file);
+    filedata.append('file', params.file)
   }
   const requestOBJ = [
-    url, {
+    url,
+    {
       method: 'POST',
       credentials: 'include',
-      headers:CONFIG_FILE_HEADERS,
+      headers: CONFIG_FILE_HEADERS,
       body: filedata,
-    }
-   ]
+    },
+  ]
   //  console.log(requestOBJ)
-  return new Promise(function (resolve, reject) {
-    fetch( requestOBJ[0],requestOBJ[1])
-      .then((response) => {
+  return new Promise((resolve, reject) => {
+    fetch(requestOBJ[0], requestOBJ[1])
+      .then(response => {
         if (response.ok) {
-          return response.json();
-        } else {
-          consoleReq(response,requestOBJ)
+          return response.json()
         }
+        consoleReq(response, requestOBJ)
       })
-      .then((response) => {
-        if(typeof(response)!='object') return;
-        RequestCodeStatus(response);
-        resolve(response);
-        consoleReq(response,requestOBJ)
+      .then(response => {
+        if (typeof response != 'object') return
+        RequestCodeStatus(response)
+        resolve(response)
+        consoleReq(response, requestOBJ)
       })
-      .catch((response) => {
-        consoleReq(response,requestOBJ,1)
-        return 
+      .catch(response => {
+        consoleReq(response, requestOBJ, 1)
       })
-  }).catch(function (err) {
+  }).catch(err => {
     alert('err')
   })
 }
-function consoleReq(response,requestOBJ,status,params){
+function consoleReq(response, requestOBJ, status, params) {
   let res = {}
-  if(status=='success'){
-    res = {...response}
-    res.__REQUEST_DATA = {_URL:requestOBJ[0].split('?')[0],url:requestOBJ[0],_PARAMS:params,_METHOD:requestOBJ[1].method,requestOBJ:requestOBJ[1]}
-     if(!window._IsRelease){// 非正式环境
+  if (status == 'success') {
+    res = { ...response }
+    res.__REQUEST_DATA = {
+      _URL: requestOBJ[0].split('?')[0],
+      url: requestOBJ[0],
+      _PARAMS: params,
+      _METHOD: requestOBJ[1].method,
+      requestOBJ: requestOBJ[1],
+    }
+    res.response = response
+    if (!window._IsRelease) {
+      // 非正式环境
       console.log(res)
-     }
-  }else{
-    res = {...response}
+    }
+  } else {
+    res = { ...response }
     res.TypeError = response.Message
-    res.__REQUEST_DATA = {_URL:requestOBJ[0].split('?')[0],_PARAMS:params,_METHOD:requestOBJ[1].method,requestOBJ:requestOBJ[1]}
-    if(!window._IsRelease){// 非正式环境
+    res.__REQUEST_DATA = {
+      _URL: requestOBJ[0].split('?')[0],
+      _PARAMS: params,
+      _METHOD: requestOBJ[1].method,
+      requestOBJ: requestOBJ[1],
+    }
+    res.response = response
+    if (!window._IsRelease) {
+      // 非正式环境
       console.warn(res)
     }
   }
 }
-function RequestCodeStatus(response){ 
-  const success = response.SuccessResponse;
+function RequestCodeStatus(response) {
+  const success = response.SuccessResponse
   const code = response.ResponseCode
-  const msg = response.Message;
-  if(code === 403 ){
+  const msg = response.Message
+  if (code === 403) {
     // 跳转到登录页  （建议记录当前路由页面，登录完成后再跳回来）
-    dispatch&&dispatch({type:"app/isLogout"}) 
-    return;// 403 不提示 未登录
+    dispatch && dispatch({ type: 'app/isLogout' })
+    return // 403 不提示 未登录
   }
-  if(!success){
+  if (!success) {
     // message.info(msg);// 提示信息
   }
 }
-
-
-
-
-
