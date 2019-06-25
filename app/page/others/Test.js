@@ -1,104 +1,93 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { StyleSheet, View, Text, Image, Dimensions } from 'react-native'
-import { connect } from 'react-redux'
 import { NavigationPage } from 'teaset'
-import Swiper from 'react-native-swiper'
-
-import { NavBar } from '../../components'
+import ImagePicker from 'react-native-image-picker';
 
 const { width } = Dimensions.get('window')
+const options = {
+  title: 'Select Avatar',
+  storageOptions: {
+    skipBackup: true,
+    path: 'images',
+  },
+};
 
-@connect(({ app }) => ({ ...app }))
-class Test extends NavigationPage {
-  renderPagination = (index, total, context) => (
-    <View style={styles.paginationStyle}>
-      <Text style={{ color: 'grey' }}>
-        <Text style={styles.paginationText}>{index + 1}</Text>/{total}
-      </Text>
-    </View>
-  )
 
-  renderNavigationBar() {
-    return <NavBar title="Test" />
+class Test extends Component
+{
+  constructor(props){
+    super(props);
+    this.state = {
+        loading:false,
+        avatarSource: null
+    }
   }
-  renderPage() {
+
+  componentWillUnmount(){
+    this._isMounted = false
+  }
+
+  componentWillMount(){
+    this._isMounted=true
+  }
+
+  choosePic() {
+    ImagePicker.showImagePicker(options, (response) => {
+    console.log('Response = ', response);
+
+    if (response.didCancel) {
+      console.log('用户取消了选择！');
+    }
+    else if (response.error) {
+      alert("ImagePicker发生错误：" + response.error);
+    }
+    else if (response.customButton) {
+      alert("自定义按钮点击：" + response.customButton);
+    }
+    else {
+      let source = { uri: response.uri };
+      // You can also display the image using data:
+      // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+      //用redux吧
+      // if(this._isMounted === true){
+        this.setState({
+          avatarSource: source
+        });
+      // }
+    }
+  });
+ }
+
+  render(){
+    console.log("avatarSource",this.state.avatarSource);
     return (
-      <Swiper
-        style={styles.wrapper}
-        renderPagination={this.renderPagination}
-        autoplay
-      >
-        <View
-          style={styles.slide}
-          title={
-            <Text numberOfLines={1}>Aussie tourist dies at Bali hotel</Text>
-          }
-        >
-          <Image
-            style={styles.image}
-            source={require('../../assets/images/banner1.png')}
-          />
-        </View>
-        <View
-          style={styles.slide}
-          title={<Text numberOfLines={1}>Big lie behind Nine’s new show</Text>}
-        >
-          <Image
-            style={styles.image}
-            source={require('../../assets/images/banner1.png')}
-          />
-        </View>
-        <View
-          style={styles.slide}
-          title={<Text numberOfLines={1}>Why Stone split from Garfield</Text>}
-        >
-          <Image
-            style={styles.image}
-            source={require('../../assets/images/banner1.png')}
-          />
-        </View>
-        <View
-          style={styles.slide}
-          title={
-            <Text numberOfLines={1}>Learn from Kim K to land that job</Text>
-          }
-        >
-          <Image
-            style={styles.image}
-            source={require('../../assets/images/banner1.png')}
-          />
-        </View>
-      </Swiper>
-    )
+      <View style={styles.container}>
+        <Text style={styles.item} onPress={this.choosePic.bind(this)}>选择照片</Text>
+        <Image source={this.state.avatarSource} style={styles.image} />
+     </View>
+    );
   }
 }
 
 const styles = StyleSheet.create({
-  wrapper: {},
-  slide: {
-    width,
-    height: 192,
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
+  container:{
+    flex: 1,
+    marginTop:25
   },
-  text: {
-    color: 'red',
-    fontSize: 30,
-    fontWeight: 'bold',
+  item:{
+    margin:15,
+    height:30,
+    borderWidth:1,
+    padding:6,
+    borderColor:'#ddd',
+    textAlign:'center'
   },
-  image: {
-    width,
-    height: 182,
-  },
-  // paginationStyle: {
-  //   position: 'absolute',
-  //   bottom: 10,
-  //   right: 10
-  // },
-  paginationText: {
-    color: 'red',
-    fontSize: 20,
-  },
-})
+  image:{
+   height:198,
+   width:300,
+   alignSelf:'center',
+ },
+});
 
 export default Test

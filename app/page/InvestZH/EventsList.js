@@ -24,31 +24,11 @@ export default class EventsList extends Component {
     this.setState({ ftHeight })
   }
 
-  render() {
-    // const {bgHeight, ftHeight} = this.state;
-    // const parallaxFactor=bgHeight/ftHeight;
+  renderEvents(events){
+    if(events){
+
     return (
-      <View style={{ height, width, position: 'relative' }}>
-        <ScrollView ref="backScroll" style={[styles.scrollBg]}>
-          <AutoHeightImage
-            getHeight={this._getBgHeight}
-            source={require('../../assets/images/events/BigBg.jpg')}
-            width={width}
-          />
-        </ScrollView>
-        <ScrollView
-          ref="frontScroll"
-          style={[styles.scrollBg, {paddingBottom: 200, marginBottom: 200}]}
-          onScroll={event => {
-            // console.log(parallaxFactor);
-            this.refs.backScroll.scrollTo({
-              y: event.nativeEvent.contentOffset.y * 0.4,
-            })
-          }}
-          scrollEventThrottle={16}
-        >
-
-
+      <View>
             <View
               style={ [styles.box, { marginTop: 73 }]}
             >
@@ -59,12 +39,12 @@ export default class EventsList extends Component {
                   <Text
                   style={styles.boxMainTitle}
                   >
-                    1989年8月15日
+                    {events[0].eventDate}
                   </Text>
                   <Text
                   style={styles.boxSubTitle}
                   >
-                    CE经国务院批准，国家民政部批复，建元坝区
+                    {events[0].title}
                   </Text>
                 </View>
                 <View style={styles.boxTimeBlock}>
@@ -76,7 +56,7 @@ export default class EventsList extends Component {
                     <Text
                     style={styles.boxTimeText}
                     >
-                      1989
+                      {events[0].eventYear}
                     </Text>
                   </ScaledImage>
                 </View>
@@ -99,7 +79,7 @@ export default class EventsList extends Component {
                     <Text
                     style={styles.boxTimeText}
                     >
-                      1989
+                      {events[1].eventYear}
                     </Text>
                   </ScaledImage>
                 </View>
@@ -107,12 +87,12 @@ export default class EventsList extends Component {
                   <Text
                   style={styles.boxMainTitle}
                   >
-                    1989年8月15日
+                    {events[1].eventDate}
                   </Text>
                   <Text
                   style={styles.boxSubTitle}
                   >
-                    CE经国务院批准，国家民政部批复，建元坝区
+                    {events[1].title}
                   </Text>
                 </View>
               </View>
@@ -129,12 +109,12 @@ export default class EventsList extends Component {
                   <Text
                   style={styles.boxMainTitle}
                   >
-                    1989年8月15日
+                    {events[2].eventDate}
                   </Text>
                   <Text
                   style={styles.boxSubTitle}
                   >
-                    CE经国务院批准，国家民政部批复，建元坝区
+                    {events[2].title}
                   </Text>
                 </View>
                 <View style={styles.boxTimeBlock}>
@@ -146,7 +126,7 @@ export default class EventsList extends Component {
                     <Text
                     style={styles.boxTimeText}
                     >
-                      1989
+                      {events[2].eventYear}
                     </Text>
                   </ScaledImage>
                 </View>
@@ -169,7 +149,7 @@ export default class EventsList extends Component {
                     <Text
                     style={styles.boxTimeText}
                     >
-                      1989
+                      {events[3].eventYear}
                     </Text>
                   </ScaledImage>
                 </View>
@@ -177,12 +157,12 @@ export default class EventsList extends Component {
                   <Text
                   style={styles.boxMainTitle}
                   >
-                    1989年8月15日
+                    {events[3].eventDate}
                   </Text>
                   <Text
                   style={styles.boxSubTitle}
                   >
-                    8经国务院批准，国家民政部批复，建元坝区
+                    {events[3].title}
                   </Text>
                 </View>
               </View>
@@ -199,12 +179,12 @@ export default class EventsList extends Component {
                   <Text
                   style={styles.boxMainTitle}
                   >
-                    1989年8月15日
+                    {events[4].eventDate}
                   </Text>
                   <Text
                   style={styles.boxSubTitle}
                   >
-                    CE经国务院批准，国家民政部批复，建元坝区
+                    {events[4].title}
                   </Text>
                 </View>
                 <View style={styles.boxTimeBlock}>
@@ -216,7 +196,7 @@ export default class EventsList extends Component {
                     <Text
                     style={styles.boxTimeText}
                     >
-                      1989
+                      {events[4].eventYear}
                     </Text>
                   </ScaledImage>
                 </View>
@@ -239,7 +219,7 @@ export default class EventsList extends Component {
                     <Text
                     style={styles.boxTimeText}
                     >
-                      1989
+                      {events[5].eventYear}
                     </Text>
                   </ScaledImage>
                 </View>
@@ -247,12 +227,12 @@ export default class EventsList extends Component {
                   <Text
                   style={styles.boxMainTitle}
                   >
-                    1989年8月15日
+                    {events[5].eventDate}
                   </Text>
                   <Text
                   style={styles.boxSubTitle}
                   >
-                    8经国务院批准，国家民政部批复，建元坝区
+                    {events[5].title}
                   </Text>
                 </View>
               </View>
@@ -269,12 +249,12 @@ export default class EventsList extends Component {
                   <Text
                   style={styles.boxMainTitle}
                   >
-                    1989年8月15日
+                    {events[6].eventDate}
                   </Text>
                   <Text
                   style={styles.boxSubTitle}
                   >
-                    CE经国务院批准，国家民政部批复，建元坝区
+                    {events[6].title}
                   </Text>
                 </View>
                 <View style={styles.boxTimeBlock}>
@@ -286,7 +266,7 @@ export default class EventsList extends Component {
                     <Text
                     style={styles.boxTimeText}
                     >
-                      1989
+                      {events[6].eventYear}
                     </Text>
                   </ScaledImage>
                 </View>
@@ -309,7 +289,7 @@ export default class EventsList extends Component {
                     <Text
                     style={styles.boxTimeText}
                     >
-                      1989
+                      {events[7].eventYear}
                     </Text>
                   </ScaledImage>
                 </View>
@@ -317,12 +297,12 @@ export default class EventsList extends Component {
                   <Text
                   style={styles.boxMainTitle}
                   >
-                    1989年8月15日
+                    {events[7].eventDate}
                   </Text>
                   <Text
                   style={styles.boxSubTitle}
                   >
-                    8经国务院批准，国家民政部批复，建元坝区
+                    {events[7].title}
                   </Text>
                 </View>
               </View>
@@ -340,12 +320,12 @@ export default class EventsList extends Component {
                   <Text
                   style={styles.boxMainTitle}
                   >
-                    1989年8月15日
+                    {events[8].eventDate}
                   </Text>
                   <Text
                   style={styles.boxSubTitle}
                   >
-                    CE经国务院批准，国家民政部批复，建元坝区
+                    {events[8].title}
                   </Text>
                 </View>
                 <View style={styles.boxTimeBlock}>
@@ -357,7 +337,7 @@ export default class EventsList extends Component {
                     <Text
                     style={styles.boxTimeText}
                     >
-                      1989
+                      {events[8].eventYear}
                     </Text>
                   </ScaledImage>
                 </View>
@@ -380,7 +360,7 @@ export default class EventsList extends Component {
                     <Text
                     style={styles.boxTimeText}
                     >
-                      1989
+                      {events[9].eventYear}
                     </Text>
                   </ScaledImage>
                 </View>
@@ -388,12 +368,12 @@ export default class EventsList extends Component {
                   <Text
                   style={styles.boxMainTitle}
                   >
-                    1989年8月15日
+                    {events[9].eventDate}
                   </Text>
                   <Text
                   style={styles.boxSubTitle}
                   >
-                    8经国务院批准，国家民政部批复，建元坝区
+                    {events[9].title}
                   </Text>
                 </View>
               </View>
@@ -410,12 +390,12 @@ export default class EventsList extends Component {
                   <Text
                   style={styles.boxMainTitle}
                   >
-                    1989年8月15日
+                    {events[10].eventDate}
                   </Text>
                   <Text
                   style={styles.boxSubTitle}
                   >
-                    CE经国务院批准，国家民政部批复，建元坝区
+                    {events[10].title}
                   </Text>
                 </View>
                 <View style={styles.boxTimeBlock}>
@@ -427,7 +407,7 @@ export default class EventsList extends Component {
                     <Text
                     style={styles.boxTimeText}
                     >
-                      1989
+                      {events[10].eventYear}
                     </Text>
                   </ScaledImage>
                 </View>
@@ -450,7 +430,7 @@ export default class EventsList extends Component {
                     <Text
                     style={styles.boxTimeText}
                     >
-                      1989
+                      {events[11].eventYear}
                     </Text>
                   </ScaledImage>
                 </View>
@@ -458,12 +438,12 @@ export default class EventsList extends Component {
                   <Text
                   style={styles.boxMainTitle}
                   >
-                    1989年8月15日
+                    {events[11].eventDate}
                   </Text>
                   <Text
                   style={styles.boxSubTitle}
                   >
-                    8经国务院批准，国家民政部批复，建元坝区
+                    {events[11].title}
                   </Text>
                 </View>
               </View>
@@ -480,12 +460,12 @@ export default class EventsList extends Component {
                   <Text
                   style={styles.boxMainTitle}
                   >
-                    1989年8月15日
+                    {events[12].eventDate}
                   </Text>
                   <Text
                   style={styles.boxSubTitle}
                   >
-                    CE经国务院批准，国家民政部批复，建元坝区
+                    {events[12].title}
                   </Text>
                 </View>
                 <View style={styles.boxTimeBlock}>
@@ -497,7 +477,7 @@ export default class EventsList extends Component {
                     <Text
                     style={styles.boxTimeText}
                     >
-                      1989
+                      {events[12].eventYear}
                     </Text>
                   </ScaledImage>
                 </View>
@@ -520,7 +500,7 @@ export default class EventsList extends Component {
                     <Text
                     style={styles.boxTimeText}
                     >
-                      1989
+                      {events[13].eventYear}
                     </Text>
                   </ScaledImage>
                 </View>
@@ -528,12 +508,12 @@ export default class EventsList extends Component {
                   <Text
                   style={styles.boxMainTitle}
                   >
-                    1989年8月15日
+                    {events[13].eventDate}
                   </Text>
                   <Text
                   style={styles.boxSubTitle}
                   >
-                    8经国务院批准，国家民政部批复，建元坝区
+                    {events[13].title}
                   </Text>
                 </View>
               </View>
@@ -550,12 +530,12 @@ export default class EventsList extends Component {
                   <Text
                   style={styles.boxMainTitle}
                   >
-                    1989年8月15日
+                    {events[14].eventDate}
                   </Text>
                   <Text
                   style={styles.boxSubTitle}
                   >
-                    CE经国务院批准，国家民政部批复，建元坝区
+                    {events[14].title}
                   </Text>
                 </View>
                 <View style={styles.boxTimeBlock}>
@@ -567,7 +547,7 @@ export default class EventsList extends Component {
                     <Text
                     style={styles.boxTimeText}
                     >
-                      1989
+                      {events[14].eventYear}
                     </Text>
                   </ScaledImage>
                 </View>
@@ -590,7 +570,7 @@ export default class EventsList extends Component {
                     <Text
                     style={styles.boxTimeText}
                     >
-                      1989
+                      {events[15].eventYear}
                     </Text>
                   </ScaledImage>
                 </View>
@@ -598,12 +578,12 @@ export default class EventsList extends Component {
                   <Text
                   style={styles.boxMainTitle}
                   >
-                    1989年8月15日
+                    {events[15].eventDate}
                   </Text>
                   <Text
                   style={styles.boxSubTitle}
                   >
-                    8经国务院批准，国家民政部批复，建元坝区
+                    {events[15].title}
                   </Text>
                 </View>
               </View>
@@ -620,12 +600,12 @@ export default class EventsList extends Component {
                   <Text
                   style={styles.boxMainTitle}
                   >
-                    1989年8月15日
+                    {events[16].eventDate}
                   </Text>
                   <Text
                   style={styles.boxSubTitle}
                   >
-                    CE经国务院批准，国家民政部批复，建元坝区
+                    {events[16].title}
                   </Text>
                 </View>
                 <View style={styles.boxTimeBlock}>
@@ -637,7 +617,7 @@ export default class EventsList extends Component {
                     <Text
                     style={styles.boxTimeText}
                     >
-                      1989
+                      {events[16].eventYear}
                     </Text>
                   </ScaledImage>
                 </View>
@@ -660,7 +640,7 @@ export default class EventsList extends Component {
                     <Text
                     style={styles.boxTimeText}
                     >
-                      1989
+                      {events[17].eventYear}
                     </Text>
                   </ScaledImage>
                 </View>
@@ -668,12 +648,12 @@ export default class EventsList extends Component {
                   <Text
                   style={styles.boxMainTitle}
                   >
-                    1989年8月15日
+                    {events[17].eventDate}
                   </Text>
                   <Text
                   style={styles.boxSubTitle}
                   >
-                    8经国务院批准，国家民政部批复，建元坝区
+                    {events[17].title}
                   </Text>
                 </View>
               </View>
@@ -682,10 +662,39 @@ export default class EventsList extends Component {
               </View>
             </View>
 
+          </View>
 
+    )
+  }
+  }
 
+  render() {
+    // const {bgHeight, ftHeight} = this.state;
+    // const parallaxFactor=bgHeight/ftHeight;
+    const events = this.props.events;
+    console.log("I'm events!!!!!!!!!!!!!!!!!!!!!!!!!", events);
+    return (
+      <View style={{ height, width, position: 'relative' }}>
+        <ScrollView ref="backScroll" style={[styles.scrollBg]}>
+          <AutoHeightImage
+            getHeight={this._getBgHeight}
+            source={require('../../assets/images/events/BigBg.jpg')}
+            width={width}
+          />
+        </ScrollView>
+        <ScrollView
+          ref="frontScroll"
+          style={[styles.scrollBg, {paddingBottom: 200, marginBottom: 200}]}
+          onScroll={event => {
+            // console.log(parallaxFactor);
+            this.refs.backScroll.scrollTo({
+              y: event.nativeEvent.contentOffset.y * 0.4,
+            })
+          }}
+          scrollEventThrottle={16}
+        >
 
-
+      {this.renderEvents(events)}
 
 
         </ScrollView>

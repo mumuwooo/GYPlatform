@@ -29,7 +29,7 @@ class InvestZH extends NavigationPage {
     this.setState({ curIndex: obj.i })
   }
   renderPage() {
-    const {pages} = this.props.investZH;
+    const {pages, events} = this.props.investZH;
     return (
       <View style={styles.tabView}>
         <ScrollableTabView
@@ -43,7 +43,7 @@ class InvestZH extends NavigationPage {
           tabBarTextStyle={styles.tabViewText}
         >
           <View style={styles.tabView_textStyle} tabLabel="昭化大事记">
-            <EventsList />
+            <EventsList events={events} />
           </View>
           <View style={styles.tabView_textStyle} tabLabel="广元概况">
             <HTML

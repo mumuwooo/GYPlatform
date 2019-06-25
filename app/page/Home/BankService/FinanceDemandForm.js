@@ -19,7 +19,7 @@ const options = {
   cancelButtonTitle: '取消',
   takePhotoButtonTitle: '拍照',
   chooseFromLibraryButtonTitle: '选择照片',
-  customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+  // customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
   cameraType: 'back',
   mediaType: 'photo',
   videoQuality: 'high',
@@ -35,7 +35,7 @@ const options = {
   },
 }
 
-@connect(({ user }) => ({ user }))
+@connect(({ picture }) => ({ picture }))
 class FinanceDemandForm extends NavigationPage {
   constructor(props) {
     super(props)
@@ -44,6 +44,12 @@ class FinanceDemandForm extends NavigationPage {
       typeName: '请选择行业类型',
       avatarSource: null,
     }
+  }
+
+  componentWillUnmount(){
+    this.setState = (state,callback)=>{
+      return;
+    };
   }
 
   renderNavigationBar() {
@@ -106,24 +112,26 @@ class FinanceDemandForm extends NavigationPage {
         console.log('User cancelled photo picker')
       } else if (response.error) {
         console.log('ImagePicker Error: ', response.error)
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton)
       } else {
         const source = { uri: response.uri }
 
         // You can also display the image using data:
         // let source = { uri: 'data:image/jpeg;base64,' + response.data };
 
-        this.setState({
-          avatarSource: source,
-        })
+        // this.setState({
+        //   avatarSource: source,
+        // })
+        dispatch({type: 'picture/updatePicture', payload: source})
       }
     })
   }
   renderPage() {
-    const { progress } = this.state
+    const { progress, avatarSource } = this.state
+    const { picture } = this.props.picture
+    console.log("I'm the image", picture)
     return (
       <View style={styles.container}>
+
         <View style={styles.content}>
           <View style={styles.topLine}>
             <Text
@@ -257,18 +265,18 @@ class FinanceDemandForm extends NavigationPage {
                     { marginBottom: 30 },
                   ]}
                 >
-                  {this.state.avatarSource === null ? (
+                  {picture === null ? (
                     <Text>选择照片</Text>
                   ) : (
                     <Image
                       style={styles.avatar}
-                      source={this.state.avatarSource}
+                      source={picture}
                     />
                   )}
                 </View>
               </Touchable>
             </View>
-          ) : (
+           ) : (
             <View>
               <View style={styles.eachItem}>
                 <TextInput
@@ -297,7 +305,7 @@ class FinanceDemandForm extends NavigationPage {
                 />
               </View>
             </View>
-          )}
+          )} 
         </View>
         <View style={styles.buttons}>
           {progress != 1 ? (
@@ -328,6 +336,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: commonStyle.bgColor,
+  },
+  avatar: {
+    width: width,
+    height: 200
+
   },
   content: {
     width,

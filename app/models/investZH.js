@@ -10,6 +10,7 @@ export default {
     loading: true,
     refresh: true,
     pages: null,
+    events: null,
   },
   reducers: {
     updateLoadStatus(state, payload) {
@@ -21,6 +22,9 @@ export default {
     updateZhSlides(state, { payload }) {
       return { ...state, slidesZh: payload }
     },
+    updateEvents(state, {payload}){
+      return {...state, events: payload}
+    }
   },
   effects: {
     *getPages({ payload }, { call, put }) {
@@ -29,6 +33,14 @@ export default {
       if (res.successResponse) {
         yield put({ type: 'updatePages', payload: res.data })
       } else {
+        Toast.fail(res.Message)
+      }
+    },
+    *getEvents({payload}, {call, put}){
+      const res = yield call(services.getEvents, payload);
+      if(res.successResponse){
+        yield put({type: 'updateEvents', payload: res.data})
+      }else{
         Toast.fail(res.Message)
       }
     },

@@ -12,12 +12,13 @@ import marketService from './models/marketService'
 import investZH from './models/investZH'
 import home from './models/home'
 import login from './models/login'
+import picture from './models/picture'
 import dva from './utils/dva'
 import { commonStyle } from './utils'
 
 const app = dva({
   initialState: {},
-  models: [appModel, zhInfos, policyService, marketService, home, login, investZH],
+  models: [appModel, zhInfos, policyService, marketService, home, login, investZH, picture],
   extraReducers: { router: routerReducer },
   onAction: [routerMiddleware],
   onError(e) {

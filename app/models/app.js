@@ -120,6 +120,7 @@ export default {
         // InvestZH
         case 'InvestZH': {
           dispatch({ type: 'investZH/getPages', payload: { paging } })
+          dispatch({ type: 'investZH/getEvents' })
           break
         }
 
@@ -198,6 +199,7 @@ export default {
         //InvestZH
         case 'InvestZH': {
           dispatch({ type: 'investZH/getPages', payload: { paging } })
+          dispatch({ type: 'investZH/getEvents' })
           break
         }
 
