@@ -12,6 +12,7 @@ import { NavigationBar, NavigationPage, PullPicker, Button } from 'teaset'
 import ImagePicker from 'react-native-image-picker'
 import { Divider, NavBar, IconFont, Touchable } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
+import {BASE_URL} from '../../../utils/config'
 
 const { width, height } = Dimensions.get('window')
 const options = {
@@ -35,7 +36,7 @@ const options = {
   },
 }
 
-@connect(({ picture }) => ({ picture }))
+@connect(({picture,  financeDemandForm }) => ({picture,  financeDemandForm }))
 class FinanceDemandForm extends NavigationPage {
   constructor(props) {
     super(props)
@@ -46,10 +47,10 @@ class FinanceDemandForm extends NavigationPage {
     }
   }
 
-  componentWillUnmount(){
-    this.setState = (state,callback)=>{
-      return;
-    };
+
+  componentWillMount() {
+    dispatch({type: "picture/emptyPicture"})
+    if(this.props.picture.loaded)this.setState({progress:2})
   }
 
   renderNavigationBar() {
@@ -69,12 +70,13 @@ class FinanceDemandForm extends NavigationPage {
   gotoLast = () => {
     this.setState({ progress: 1 })
   }
-  // 显示需求列表
+  显示需求列表
   handleTypeSelect = () => {
     const typeList = [
-      { Name: '制造业' },
-      { Name: '制造业' },
-      { Name: '制造业' },
+      { Name: '工业' },
+      { Name: '商贸服务业' },
+      { Name: '农业' },
+      { Name: '建筑与房地产业' },
     ]
     PullPicker.show(
       '请选择需求类型',
@@ -87,7 +89,8 @@ class FinanceDemandForm extends NavigationPage {
         //   type: 'register/getLevelList',
         //   payload: { School_ID: schoolID, IsCurStation: 1 },
         // })
-        this.setState({ typeName: item })
+        // this.setState({ typeName: item })
+        dispatch({type: "financeDemandForm/updateIndustryType", payload: item})
       }
     )
   }
@@ -97,11 +100,12 @@ class FinanceDemandForm extends NavigationPage {
   }
 
   handleSubmit = () => {
-    alert('提交表单')
+    dispatch({type:"financeDemandForm/postFinanceDemandForm", payload: this.props.financeDemandForm})
   }
 
   // 选择图片
   selectPhotoTapped = () => {
+    dispatch({type: "picture/makePictureLoaded"})
     console.log('===========ImagePicker=========================')
     console.log(ImagePicker)
     console.log('====================================')
@@ -121,14 +125,14 @@ class FinanceDemandForm extends NavigationPage {
         // this.setState({
         //   avatarSource: source,
         // })
-        dispatch({type: 'picture/updatePicture', payload: source})
+        dispatch({type: 'picture/uploadPicture', payload: source})
       }
     })
   }
   renderPage() {
-    const { progress, avatarSource } = this.state
     const { picture } = this.props.picture
-    console.log("I'm the image", picture)
+    const {industryType} = this.props.financeDemandForm
+    const { progress, avatarSource, typeName} = this.state
     return (
       <View style={styles.container}>
 
@@ -190,9 +194,10 @@ class FinanceDemandForm extends NavigationPage {
                   style={styles.item_input}
                   placeholder="请输入企业名称"
                   underlineColorAndroid="transparent"
-                  keyboardType="phone-pad"
+                  // keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    // this.setState({ inputPhone: text })
+                    dispatch({type: 'financeDemandForm/updateCompanyName', payload: text})
                   }}
                   onBlur={() => {}}
                   value={this.state.inputPhone}
@@ -204,7 +209,7 @@ class FinanceDemandForm extends NavigationPage {
                   onPress={this.handleTypeSelect}
                   style={styles.school_select}
                 >
-                  <Text style={styles.school_title}>{this.state.typeName}</Text>
+                  <Text style={styles.school_title}>{industryType}</Text>
                   <IconFont
                     name="&#xe738;"
                     size={18}
@@ -218,9 +223,8 @@ class FinanceDemandForm extends NavigationPage {
                   style={styles.item_input}
                   placeholder="请输入主营业务"
                   underlineColorAndroid="transparent"
-                  keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    dispatch({type: 'financeDemandForm/updateMajorBusiness', payload: text})
                   }}
                   onBlur={() => {}}
                   value={this.state.inputPhone}
@@ -232,9 +236,9 @@ class FinanceDemandForm extends NavigationPage {
                   style={styles.item_input}
                   placeholder="请输入总资产"
                   underlineColorAndroid="transparent"
-                  keyboardType="phone-pad"
+                  // keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    dispatch({type: "financeDemandForm", payload: text})
                   }}
                   onBlur={() => {}}
                   value={this.state.inputPhone}
@@ -248,7 +252,7 @@ class FinanceDemandForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    dispatch({type: "financeDemandForm/updateFinanceMethod", payload: text})
                   }}
                   onBlur={() => {}}
                   value={this.state.inputPhone}
@@ -270,7 +274,7 @@ class FinanceDemandForm extends NavigationPage {
                   ) : (
                     <Image
                       style={styles.avatar}
-                      source={picture}
+                      source={{uri: BASE_URL + picture}}
                     />
                   )}
                 </View>
@@ -283,9 +287,9 @@ class FinanceDemandForm extends NavigationPage {
                   style={styles.item_input}
                   placeholder="请输入联系人"
                   underlineColorAndroid="transparent"
-                  keyboardType="phone-pad"
+                  // keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    dispatch({type: "financeDemandForm/updateContact", payload: text})
                   }}
                   onBlur={() => {}}
                   value={this.state.inputPhone}
@@ -298,7 +302,7 @@ class FinanceDemandForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    dispatch({type: "financeDemandForm/updatePhone", payload: text})
                   }}
                   onBlur={() => {}}
                   value={this.state.inputPhone}

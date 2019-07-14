@@ -82,6 +82,7 @@ class FactorGuaranteeForm extends NavigationPage {
       Specialty_ID,
       Batch_ID,
     } = this.state
+    console.log("new form", this.props.user)
     return (
       <View style={styles.container}>
         <View style={styles.content}>

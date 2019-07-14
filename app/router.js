@@ -19,7 +19,7 @@ import Loading from './page/Loading'
 import Login from './page/others/Login'
 import Register from './page/others/Register'
 
-import Home from './page/Home'
+import Home from './page/Home' 
 
 import MarketExtension from './page/Home/MarketService/MarketExtension'
 import SignalProject from './page/Home/MarketService/SignalProject'
@@ -82,7 +82,7 @@ const styles = {
 const HomeNavigator = createBottomTabNavigator(
   {
     Home: {
-      // screen: Test,
+      // screen: FinanceDemandForm,
       screen: Home,
       navigationOptions: {
         tabBarLabel: '6S服务',

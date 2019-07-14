@@ -25,9 +25,7 @@ export const AchiveInfos = ({ style, data, dispatch, ...rest }) => {
       })
     )
   }
-  console.log('========AchiveInfos============================')
-  console.log(data)
-  console.log('====================================')
+
   return (
     <ScrollView
       style={[styles.container, style]}

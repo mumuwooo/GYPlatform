@@ -22,6 +22,7 @@ import MarketService from './MarketService'
 import PolicyService from './PolicyService'
 import CompanyInfos from './CompanyInfos'
 import AchiveInfos from './AchiveInfos'
+import {Storage} from '../../utils'
 
 import _baseURLGlobal from '../../utils/global'
 
@@ -205,6 +206,20 @@ class Home extends NavigationPage {
     // }
   }
 
+  handleTest = ()=>{
+    console.log("=========")
+
+
+    const value = new Promise((resolve,reject)=>{
+      Storage.get('_userToken')
+      .then(value=>resolve(value))
+    })
+
+    console.log("user key", value)
+
+    console.log("=========")
+  }
+
   renderPage() {
     const {
       companyShow,
@@ -217,6 +232,7 @@ class Home extends NavigationPage {
     const { slides, VMCompanyInfoList, VMAchiveInfoList } = this.props.home
     return (
       <View style={styles.container}>
+        <Button onPress={()=>this.handleTest()}>Test</Button>
         <ScrollView style={{ flex: 1 }}>
           {/* <Text style={{backgroundColor:'#ff5971',width:34,height:34,borderRadius:18,textAlign:'center',textAlignVertical:'center'}}>
           <Text style={{fontFamily:'iconfont',fontSize:32,color:'#fff'}}>&#xe618;</Text>

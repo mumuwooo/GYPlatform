@@ -672,7 +672,6 @@ export default class EventsList extends Component {
     // const {bgHeight, ftHeight} = this.state;
     // const parallaxFactor=bgHeight/ftHeight;
     const events = this.props.events;
-    console.log("I'm events!!!!!!!!!!!!!!!!!!!!!!!!!", events);
     return (
       <View style={{ height, width, position: 'relative' }}>
         <ScrollView ref="backScroll" style={[styles.scrollBg]}>

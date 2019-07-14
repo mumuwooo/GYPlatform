@@ -1,9 +1,10 @@
 import fetch from 'dva/fetch'
 import { BASE_URL, X_HOST } from './config'
 import Storage from './storage'
+import Toast from 'teaset/components/Toast/Toast';
 
 const CONFIG_HEADERS = {
-  Referrer: '6s.pinpin.pro',
+  'Referrer': '6s.pinpin.pro',
   'Content-Type': 'application/json; charset=utf-8',
   'Access-Control-Allow-Origin': '*',
   'X-Host': X_HOST,
@@ -72,6 +73,15 @@ export function GET(options) {
   }
   const params = prevController(options.params)
   const result = requestGET(base + options.url, params)
+  return result
+}
+
+export function POSTWithToken(options){
+  let base = BASE_URL
+  if (options.url.search(/^http/) == 0) {
+    base = ''
+  }
+  const result = requestPOSTWithToken(base + options.url, options.params)
   return result
 }
 
@@ -145,6 +155,7 @@ function requestGET(url, params) {
 }
 
 function requestPOST(url, params) {
+  console.log("in the requestPost", JSON.stringify(params))
   const requestOBJ = [
     url,
     {
@@ -152,7 +163,8 @@ function requestPOST(url, params) {
       cache: 'no-cache',
       headers: CONFIG_HEADERS,
       body: JSON.stringify(params),
-      credentials: 'include',
+      // body: params
+      // credentials: 'include',
     },
   ]
   return new Promise((resolve, reject) => {
@@ -173,6 +185,68 @@ function requestPOST(url, params) {
       .catch(response => {
         consoleReq(response, requestOBJ, 'error', params)
       })
+  }).catch(err => {
+    alert('err')
+  })
+}
+
+function requestPOSTWithToken(url, params){
+  const requestOBJ = [
+    url,
+    {
+      method: 'POST',
+      cache: 'no-cache',
+      headers: CONFIG_HEADERS,
+      body: JSON.stringify(params),
+      // body: params
+      // credentials: 'include',
+    },
+  ]
+
+  return new Promise((resolve, reject) => {
+    console.log("why not excute this")
+    Storage.get("_userToken")
+    .then(result=>{
+      console.log("userToken",result)
+      // resolve(result)
+      return result
+    })
+    .then(token=>{
+      console.log("the next step", token)
+      return new Promise((resolve,reject)=>{
+        if(token!==null){
+          headers={...CONFIG_HEADERS, Authorization: "bearer "+token}
+        }else{
+          headers = CONFIG_HEADERS
+        }
+        let requestBody = {
+          method: 'POST',
+          cache: 'no-cache',
+          headers: headers,
+          body: JSON.stringify(params),
+        }
+        fetch(url, requestBody)
+        .then(response => {
+          if (response.ok) {
+            return response.json()
+          }
+          // 错误提示信息
+          consoleReq(response, requestOBJ, 'error', params)
+        })
+        .then(response => {
+          if (typeof response != 'object') return
+          RequestCodeStatus(response)
+          resolve(response)
+          consoleReq(response, requestOBJ, 'success', params)
+        })
+        .catch(response => {
+          consoleReq(response, requestOBJ, 'error', params)
+        })
+        })
+    })
+    .catch(response=>{
+      console.log("userToken", response)
+    })
   }).catch(err => {
     alert('err')
   })
@@ -212,21 +286,22 @@ function requestXML(url) {
 function requestFILE(url, params) {
   const filedata = new FormData()
   if (params) {
-    filedata.append('file', params.file)
+    // filedata.append('file', params.file)
+    filedata.append('Picture', params.file)
   }
   const requestOBJ = [
     url,
     {
       method: 'POST',
-      credentials: 'include',
-      headers: CONFIG_FILE_HEADERS,
+      // credentials: 'include',
+      // headers: CONFIG_FILE_HEADERS,
       body: filedata,
     },
   ]
-  //  console.log(requestOBJ)
   return new Promise((resolve, reject) => {
     fetch(requestOBJ[0], requestOBJ[1])
       .then(response => {
+        console.log("I'm the step 1")
         if (response.ok) {
           return response.json()
         }
@@ -237,14 +312,17 @@ function requestFILE(url, params) {
         RequestCodeStatus(response)
         resolve(response)
         consoleReq(response, requestOBJ)
+        console.log("I'm the step 2")
       })
       .catch(response => {
         consoleReq(response, requestOBJ, 1)
+        console.log("I'm the step 3")
       })
   }).catch(err => {
     alert('err')
   })
 }
+
 function consoleReq(response, requestOBJ, status, params) {
   let res = {}
   if (status == 'success') {
