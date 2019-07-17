@@ -20,9 +20,9 @@ export default {
   effects: {
     *login({ payload }, { call, put }) {
       const res = yield call(services.fetchLogin, payload)
-      Storage.set('_userToken', res.token)
+      Storage.set('_userToken', `bearer `+res.token)
 
-      // window._userToken = `bearer ${res.token}`
+      window._userToken = `bearer ${res.token}`
       if (res) {
         yield put(NavigationActions.navigate({ routeName: 'Home' }))
       } else {
