@@ -130,6 +130,7 @@ class FinanceDemandForm extends NavigationPage {
     })
   }
   renderPage() {
+    console.log("render in sub-page")
     const { picture } = this.props.picture
     const {industryType} = this.props.financeDemandForm
     const { progress, avatarSource, typeName} = this.state

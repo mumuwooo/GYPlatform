@@ -82,7 +82,7 @@ const styles = {
 const HomeNavigator = createBottomTabNavigator(
   {
     Home: {
-      // screen: FinanceDemandForm,
+      // screen: Personal,
       screen: Home,
       navigationOptions: {
         tabBarLabel: '6S服务',

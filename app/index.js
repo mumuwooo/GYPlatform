@@ -13,13 +13,14 @@ import investZH from './models/investZH'
 import home from './models/home'
 import login from './models/login'
 import picture from './models/picture'
+import user from './models/user'
 import financeDemandForm from './models/forms/financeDemandForm'
 import dva from './utils/dva'
 import { commonStyle } from './utils'
 
 const app = dva({
   initialState: {},
-  models: [appModel, zhInfos, policyService, marketService, home, login, investZH, picture, financeDemandForm],
+  models: [appModel, zhInfos, policyService, marketService, home, login, investZH, picture, financeDemandForm, user],
   extraReducers: { router: routerReducer },
   onAction: [routerMiddleware],
   onError(e) {

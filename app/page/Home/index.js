@@ -25,6 +25,7 @@ import AchiveInfos from './AchiveInfos'
 import {Storage} from '../../utils'
 
 import _baseURLGlobal from '../../utils/global'
+import Toast from 'teaset/components/Toast/Toast';
 
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window')
@@ -207,20 +208,11 @@ class Home extends NavigationPage {
   }
 
   handleTest = ()=>{
-    console.log("=========")
-
-
-    const value = new Promise((resolve,reject)=>{
-      Storage.get('_userToken')
-      .then(value=>resolve(value))
-    })
-
-    console.log("user key", value)
-
-    console.log("=========")
+    Toast.success("测试")
   }
 
   renderPage() {
+    console.log("render in index")
     const {
       companyShow,
       projectShow,

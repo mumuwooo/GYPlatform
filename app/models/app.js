@@ -69,18 +69,16 @@ export default {
     },
     // 登录判断
     *loginJudge({ loading }, { call, put }) {
-      console.log('122113132131313')
+      console.log("judge execuded!!!")
       const _userToken = yield call(Storage.get, '_userToken')
-      console.log(_userToken)
       if (!_userToken) {
         yield put({ type: 'isLogout' }) // 已退出
       } else {
-        window._userToken = `bearer ${_userToken}`
+        window._userToken = _userToken
+        dispatch({type:'user/initUser'})
       }
-      console.log('window._userToken')
-      console.log(window._userToken)
     },
-    *routesBack({ routes, oldRoutes }, { select }) {
+    *routesBack({ routes, oldRoutes, force }, { select }) {
       const { dispatch } = window
       // 路由回退触发  可初始化数据
       const { currentRouter, params } = getCurrentRouter(routes)
@@ -136,6 +134,7 @@ export default {
           break
         }
         case 'Personal': {
+          dispatch({type: 'user/initUser'})
           break
         }
         case '4disErr': {
@@ -210,6 +209,11 @@ export default {
           break
         }
 
+        case 'Personal': {
+          // dispatch({type: 'loginJudge'})
+          break
+        }
+
         default:
           break
       }
@@ -220,7 +224,6 @@ export default {
       // loading加载
       dispatch({ type: 'initApp' })
       // 监听网络变化事件
-
       window.dispatch = dispatch
     },
   },

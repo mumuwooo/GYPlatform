@@ -24,7 +24,8 @@ export default {
 
       window._userToken = `bearer ${res.token}`
       if (res) {
-        yield put(NavigationActions.navigate({ routeName: 'Home' }))
+        yield dispatch({type:'user/initUser'})
+        yield put(NavigationActions.navigate({ routeName: 'Personal' }))
       } else {
         Toast.fail(res.Message)
       }

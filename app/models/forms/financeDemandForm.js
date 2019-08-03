@@ -4,15 +4,15 @@ import * as services from '../../services/forms'
 export default {
     namespace: 'financeDemandForm',
     state: {
-        companyName: null,
-        industryType: null,
-        majorBusiness: null,
-        totalAssets: null,
-        financeMethod: null,
-        pictureId: null,
-        pictureUrl: null,
-        contact: null,
-        phone: null
+        companyName: "",
+        industryType: "",
+        majorBusiness: "",
+        totalAssets: "",
+        financeMethod: "",
+        pictureId: "",
+        pictureUrl: "",
+        contact: "",
+        phone: ""
     },
     reducers: {
         updateCompanyName(state, {payload}){
@@ -45,9 +45,10 @@ export default {
         *postFinanceDemandForm({payload}, {call, put}){
             const res = yield call(services.postFinanceDemandForm, payload)
             console.log(res)
-            if(res.successResponse){
+            if(res){
                 //toast提交成功，跳转到用户界面
                 console.log(res)
+                Toast.success("提交成功")
             }else{
                 Toast.fail("网络错误")
             }

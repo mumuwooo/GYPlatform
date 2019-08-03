@@ -7,7 +7,6 @@ import { NavigationActions, commonStyle } from '../../../utils'
 
 const { width, height } = Dimensions.get('window')
 
-@connect(({ user }) => ({ user }))
 class FactorGuaranteeForm extends NavigationPage {
   constructor(props) {
     super(props)

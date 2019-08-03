@@ -11,22 +11,31 @@ import {
 } from 'react-native'
 import { Label } from 'teaset'
 
+import ImagePicker from 'react-native-image-picker'
+
 import { commonStyle, NavigationActions } from '../../utils'
 import { Touchable } from '../../components'
 
 const isIOS = Platform.OS == 'ios'
 const { width } = Dimensions.get('window')
-const photoOptions = {
-  title: '请选择',
-  quality: 0.8,
+const options = {
+  title: '选择图片',
   cancelButtonTitle: '取消',
   takePhotoButtonTitle: '拍照',
-  chooseFromLibraryButtonTitle: '选择相册',
-  allowsEditing: true,
-  noData: true,
+  chooseFromLibraryButtonTitle: '选择照片',
+  // customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+  cameraType: 'back',
+  mediaType: 'photo',
+  videoQuality: 'high',
+  durationLimit: 10,
+  maxWidth: 300,
+  maxHeight: 300,
+  quality: 0.8,
+  angle: 0,
+  allowsEditing: false,
+  noData: false,
   storageOptions: {
     skipBackup: true,
-    path: 'images',
   },
 }
 @connect(({ app, user }) => ({ app, user }))
@@ -36,17 +45,44 @@ class HeadView extends Component {
     this.state = { avatarSource: null, isModal: false }
   }
 
+  selectPhotoTapped = () => {
+    // dispatch({type: "picture/makePictureLoaded"})
+    ImagePicker.showImagePicker(options, response => {
+      console.log('Response = ', response)
+
+      if (response.didCancel) {
+        console.log('User cancelled photo picker')
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error)
+      } else {
+        const source = { uri: response.uri }
+
+        // You can also display the image using data:
+        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        // this.setState({
+        //   avatarSource: source,
+        // })
+        dispatch({type: 'picture/userUploadPicture', payload: source})
+      }
+    })
+  }
+
   gotoNext = () => {
+    console.log("ready to jump")
     this.navigateTo('Login')
   }
   navigateTo(routeName, params) {
     this.props.dispatch(NavigationActions.navigate({ routeName, params }))
   }
   render() {
+    //没登陆点击头像到登陆界面，登陆了点击头像到修改头像
+    const {user} = this.props
     return (
       <View style={styles.head_view}>
         <View style={styles.heade_bg} />
         <View style={styles.head_block}>
+          <Touchable onPress={this.selectPhotoTapped.bind(this)}>
           <Image
             source={require('../../assets/images/avatar.png')}
             style={{
@@ -56,6 +92,7 @@ class HeadView extends Component {
               marginLeft: 33,
             }}
           />
+          </Touchable>
           <View style={styles.block_text}>
             <Text style={styles.text_top} onPress={this.gotoNext}>
               登录/注册

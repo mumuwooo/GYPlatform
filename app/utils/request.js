@@ -76,14 +76,6 @@ export function GET(options) {
   return result
 }
 
-export function POSTWithToken(options){
-  let base = BASE_URL
-  if (options.url.search(/^http/) == 0) {
-    base = ''
-  }
-  const result = requestPOSTWithToken(base + options.url, options.params)
-  return result
-}
 
 export function FILE(options) {
   let base = BASE_URL
@@ -98,6 +90,110 @@ export function XML(options) {
     base = ''
   }
   return requestXML(base + options.url, options.data)
+}
+
+export function PutWithToken(options){
+  let dURL = BASE_URL+options.url
+  let headers
+  if (window._userToken) {
+    headers = { ...CONFIG_HEADERS, Authorization: window._userToken }
+  } else {
+    headers = CONFIG_HEADERS
+  }
+  console.log("token in PUT", window._userToken)
+  console.log("params", JSON.stringify(options.params))
+  return new Promise((resolve, reject)=>{
+    fetch(dURL,
+    {
+      method: 'PUT',
+      credentials: 'include',
+      cache: 'no-cache',
+      headers,
+      body: JSON.stringify(options.params)
+    }
+      )
+      .then(response => {
+          console.log("put response right",response)
+        if (response.ok) {
+          resolve(response)
+        }
+      })
+      .catch(response => {
+        console.log("setup 3", response)
+      })
+  }).catch(err=>{
+    console.log("error in request", err)
+  })
+}
+
+export function POSTWithToken(options){
+  let dURL = BASE_URL+options.url
+  let headers
+  if (window._userToken) {
+    headers = { ...CONFIG_HEADERS, Authorization: window._userToken }
+  } else {
+    headers = CONFIG_HEADERS
+  }
+  return new Promise((resolve, reject)=>{
+    fetch(dURL,
+    {
+      method: 'POST',
+      credentials: 'include',
+      cache: 'no-cache',
+      headers,
+      body: JSON.stringify(options.params)
+    }
+      )
+      .then(response => {
+          console.log("POST response right",response)
+        if (response.ok) {
+          return response.json()
+        }
+      })
+      .then(response => {
+        resolve(response)
+      })
+      .catch(response => {
+        console.log("setup 3", response)
+      })
+  }).catch(err=>{
+    console.log("error in request", err)
+  })
+}
+
+export function GetWithToken(url){
+  let dURL = BASE_URL+url.url
+  let headers
+  if (window._userToken) {
+    headers = { ...CONFIG_HEADERS, Authorization: window._userToken }
+  } else {
+    headers = CONFIG_HEADERS
+  }
+  console.log("token in GET", window._userToken)
+  return new Promise((resolve, reject)=>{
+    fetch(dURL,
+    {
+      method: 'GET',
+      credentials: 'include',
+      cache: 'no-cache',
+      headers,
+    }
+      )
+      .then(response => {
+        if (response.ok) {
+          console.log("test", response)
+          return response.json()
+        }
+      })
+      .then(response => {
+        resolve(response)
+      })
+      .catch(response => {
+        console.log("setup 3", response)
+      })
+  }).catch(err=>{
+    console.log("error in request", err)
+  })
 }
 
 function requestGET(url, params) {
@@ -171,12 +267,14 @@ function requestPOST(url, params) {
     fetch(requestOBJ[0], requestOBJ[1])
       .then(response => {
         if (response.ok) {
+          console.log("fuck this 1", response)
           return response.json()
         }
         // 错误提示信息
         consoleReq(response, requestOBJ, 'error', params)
       })
       .then(response => {
+          console.log("fuck this 2", response)
         if (typeof response != 'object') return
         RequestCodeStatus(response)
         resolve(response)
@@ -190,67 +288,6 @@ function requestPOST(url, params) {
   })
 }
 
-function requestPOSTWithToken(url, params){
-  const requestOBJ = [
-    url,
-    {
-      method: 'POST',
-      cache: 'no-cache',
-      headers: CONFIG_HEADERS,
-      body: JSON.stringify(params),
-      // body: params
-      // credentials: 'include',
-    },
-  ]
-
-  return new Promise((resolve, reject) => {
-    console.log("why not excute this")
-    Storage.get("_userToken")
-    .then(result=>{
-      console.log("userToken",result)
-      // resolve(result)
-      return result
-    })
-    .then(token=>{
-      console.log("the next step", token)
-      return new Promise((resolve,reject)=>{
-        if(token!==null){
-          headers={...CONFIG_HEADERS, Authorization: "bearer "+token}
-        }else{
-          headers = CONFIG_HEADERS
-        }
-        let requestBody = {
-          method: 'POST',
-          cache: 'no-cache',
-          headers: headers,
-          body: JSON.stringify(params),
-        }
-        fetch(url, requestBody)
-        .then(response => {
-          if (response.ok) {
-            return response.json()
-          }
-          // 错误提示信息
-          consoleReq(response, requestOBJ, 'error', params)
-        })
-        .then(response => {
-          if (typeof response != 'object') return
-          RequestCodeStatus(response)
-          resolve(response)
-          consoleReq(response, requestOBJ, 'success', params)
-        })
-        .catch(response => {
-          consoleReq(response, requestOBJ, 'error', params)
-        })
-        })
-    })
-    .catch(response=>{
-      console.log("userToken", response)
-    })
-  }).catch(err => {
-    alert('err')
-  })
-}
 
 function requestXML(url) {
   const requestOBJ = [

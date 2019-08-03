@@ -23,13 +23,13 @@ class Test extends Component
     }
   }
 
-  componentWillUnmount(){
-    this._isMounted = false
-  }
+  // componentWillUnmount(){
+  //   this._isMounted = false
+  // }
 
-  componentWillMount(){
-    this._isMounted=true
-  }
+  // componentWillMount(){
+  //   this._isMounted=true
+  // }
 
   choosePic() {
     ImagePicker.showImagePicker(options, (response) => {

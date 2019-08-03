@@ -19,8 +19,8 @@ class LoginByPersonal extends Component {
     this.state = {
       isCleanShow: false,
       isShowPwd: true,
-      inputPhone: '18692205772',
-      password: '205772',
+      inputPhone: '18570063440',
+      password: '063440',
     }
   }
 
@@ -55,6 +55,7 @@ class LoginByPersonal extends Component {
     Toast.info('请联系管理员修改密码')
   }
   render() {
+    console.warn("Login render once")
     return (
       <View style={styles.container}>
         <View style={styles.login_inputLine}>

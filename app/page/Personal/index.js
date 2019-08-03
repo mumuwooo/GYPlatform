@@ -9,18 +9,25 @@ import HeadView from './HeadView'
 
 const { width, height } = Dimensions.get('window')
 
-@connect(({ app }) => ({ ...app }))
+@connect(({ app, user }) => ({ ...app, user }))
 class Personal extends NavigationPage {
   renderNavigationBar() {
     return <NavBar title="用户中心" />
   }
 
+  
+  
+
+  
+
+
   gotoLogin = () => {
     this.props.dispatch(NavigationActions.navigate({ routeName: 'Login' }))
   }
 
-  logout = () => {
-    this.props.dispatch(createAction('app/logout')())
+  handleLogout = () => {
+    this.props.dispatch({type: 'user/logout'})
+    this.forceUpdate()
   }
 
   navigateTo(routeName, params) {
@@ -28,7 +35,8 @@ class Personal extends NavigationPage {
   }
 
   renderPage() {
-    const { login } = this.props
+    const { login, user } = this.props
+    console.log("user in Personal", user)
     return (
       <ScrollView style={styles.container}>
         <HeadView />
@@ -106,14 +114,16 @@ class Personal extends NavigationPage {
           />
         </View>
 
+{!!window._userToken&&
         <Button
           style={styles.button_logout}
           textStyle={styles.button_text}
-          // onPress={() => this.handleLogout()}
+          onPress={() => this.handleLogout()}
           type="theme"
         >
           退出登录
         </Button>
+}
       </ScrollView>
     )
   }
