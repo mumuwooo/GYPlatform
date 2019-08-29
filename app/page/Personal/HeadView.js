@@ -63,45 +63,76 @@ class HeadView extends Component {
         // this.setState({
         //   avatarSource: source,
         // })
-        dispatch({type: 'picture/userUploadPicture', payload: source})
+        dispatch({ type: 'picture/userUploadPicture', payload: source })
       }
     })
   }
 
   gotoNext = () => {
-    console.log("ready to jump")
+    console.log('ready to jump')
     this.navigateTo('Login')
   }
   navigateTo(routeName, params) {
     this.props.dispatch(NavigationActions.navigate({ routeName, params }))
   }
   render() {
-    //没登陆点击头像到登陆界面，登陆了点击头像到修改头像
-    const {user} = this.props
-    return (
-      <View style={styles.head_view}>
-        <View style={styles.heade_bg} />
-        <View style={styles.head_block}>
-          <Touchable onPress={this.selectPhotoTapped.bind(this)}>
-          <Image
-            source={require('../../assets/images/avatar.png')}
-            style={{
-              width: 107,
-              height: 107,
-              borderRadius: 53,
-              marginLeft: 33,
-            }}
-          />
-          </Touchable>
-          <View style={styles.block_text}>
-            <Text style={styles.text_top} onPress={this.gotoNext}>
-              登录/注册
-            </Text>
-            <Text style={styles.text_bottom}>登录后可使用更多功能</Text>
+    // 没登陆点击头像到登陆界面，登陆了点击头像到修改头像
+    const { userinfo } = this.props.user
+    console.log('user in header view', userinfo)
+    console.log('user in header view', window._userToken)
+    if (window._userToken && userinfo.customerId) {
+      return (
+        <View style={styles.head_view}>
+          <View style={styles.heade_bg} />
+          <View style={styles.head_block}>
+            <Touchable onPress={this.selectPhotoTapped.bind(this)}>
+              <Image
+                source={require('../../assets/images/avatar.png')}
+                style={{
+                  width: 107,
+                  height: 107,
+                  borderRadius: 53,
+                  marginLeft: 33,
+                }}
+              />
+            </Touchable>
+            <View style={styles.block_text}>
+              <Text style={styles.text_top} onPress={this.gotoNext}>
+                {userinfo.username}
+              </Text>
+              <Text style={styles.text_bottom}>
+                {userinfo.ifEnterprise ? '企业用户' : '个人用户'}
+              </Text>
+            </View>
           </View>
         </View>
-      </View>
-    )
+      )
+    } 
+      return (
+        <View style={styles.head_view}>
+          <View style={styles.heade_bg} />
+          <View style={styles.head_block}>
+            <Touchable onPress={this.gotoNext}>
+              <Image
+                source={require('../../assets/images/avatar.png')}
+                style={{
+                  width: 107,
+                  height: 107,
+                  borderRadius: 53,
+                  marginLeft: 33,
+                }}
+              />
+            </Touchable>
+            <View style={styles.block_text}>
+              <Text style={styles.text_top} onPress={this.gotoNext}>
+                登录/注册
+              </Text>
+              <Text style={styles.text_bottom}>登录后可使用更多功能</Text>
+            </View>
+          </View>
+        </View>
+      )
+    
   }
 }
 

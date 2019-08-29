@@ -7,6 +7,6 @@ export async function getPages(params) {
   })
 }
 
-export async function getEvents(params){
-  return GET({params, url: '/api/VMEventsZHs'});
+export async function getEvents(params) {
+  return GET({ params, url: '/api/VMEventsZHs' })
 }

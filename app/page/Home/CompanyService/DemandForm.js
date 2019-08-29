@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Dimensions, Text, TextInput } from 'react-native'
 import { connect } from 'react-redux'
-import { NavigationBar, NavigationPage, Button } from 'teaset'
+import { Toast, NavigationBar, NavigationPage, Button } from 'teaset'
 import { NavBar, Divider, Touchable, IconFont } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
 
@@ -16,6 +16,12 @@ class DemandForm extends NavigationPage {
     }
   }
 
+  componentWillMount() {
+    if (!window._userToken) {
+      this.props.dispatch(NavigationActions.navigate({ routeName: 'Personal' }))
+      Toast.stop('请先登陆')
+    }
+  }
   renderNavigationBar() {
     return <NavBar title="我要诉求" />
   }

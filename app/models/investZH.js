@@ -16,15 +16,15 @@ export default {
     updateLoadStatus(state, payload) {
       return { ...state, loading: payload.loading, refresh: payload.refresh }
     },
-    updatePages(state, {payload, paging}){
-      return { ...state, pages: payload}
+    updatePages(state, { payload, paging }) {
+      return { ...state, pages: payload }
     },
     updateZhSlides(state, { payload }) {
       return { ...state, slidesZh: payload }
     },
-    updateEvents(state, {payload}){
-      return {...state, events: payload}
-    }
+    updateEvents(state, { payload }) {
+      return { ...state, events: payload }
+    },
   },
   effects: {
     *getPages({ payload }, { call, put }) {
@@ -36,11 +36,11 @@ export default {
         Toast.fail(res.Message)
       }
     },
-    *getEvents({payload}, {call, put}){
-      const res = yield call(services.getEvents, payload);
-      if(res.successResponse){
-        yield put({type: 'updateEvents', payload: res.data})
-      }else{
+    *getEvents({ payload }, { call, put }) {
+      const res = yield call(services.getEvents, payload)
+      if (res.successResponse) {
+        yield put({ type: 'updateEvents', payload: res.data })
+      } else {
         Toast.fail(res.Message)
       }
     },

@@ -7,7 +7,7 @@ import { NavigationActions, commonStyle } from '../../../utils'
 
 const { width, height } = Dimensions.get('window')
 
-@connect(({ user }) => ({ user }))
+@connect(({ link }) => ({ link }))
 class BankConnect extends NavigationPage {
   constructor(props) {
     super(props)
@@ -17,31 +17,36 @@ class BankConnect extends NavigationPage {
   renderNavigationBar() {
     return <NavBar title="银行直通车" />
   }
-  handleSubmit = () => {
+  handleSubmit = (title, address) => {
     this.props.dispatch(
       NavigationActions.navigate({
         routeName: 'WebviewLinks',
-        params: { title: '银行直通车' },
+        params: { title, address },
       })
     )
   }
   renderPage() {
+    const { banks } = this.props.link
+    console.log('Bank Page', banks)
     return (
       <View style={styles.container}>
         <View style={styles.content}>
-          <View style={styles.eachitem}>
-            <IconFont name="&#xe659;" size={35} color="#a2011b" />
-            <Text style={styles.item_text}>中国银行</Text>
-            <Button
-              style={styles.submitBtn}
-              textStyle={styles.button_text}
-              onPress={this.handleSubmit}
-            >
-              办理
-            </Button>
-          </View>
+          {banks &&
+            banks.map((item, index) => (
+              <View style={styles.eachitem} key={index}>
+                <IconFont name="&#xe659;" size={35} color="#a2011b" />
+                <Text style={styles.item_text}>{item.title}</Text>
+                <Button
+                  style={styles.submitBtn}
+                  textStyle={styles.button_text}
+                  onPress={() => this.handleSubmit(item.title, item.address)}
+                >
+                  办理
+                </Button>
+              </View>
+            ))}
 
-          <View style={styles.eachitem}>
+          {/* <View style={styles.eachitem}>
             <IconFont name="&#xe65e;" size={35} color="#c90000" />
             <Text style={styles.item_text}>中国工商银行</Text>
             <Button
@@ -111,7 +116,7 @@ class BankConnect extends NavigationPage {
             >
               办理
             </Button>
-          </View>
+          </View> */}
         </View>
       </View>
     )
@@ -130,10 +135,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     borderRadius: 10,
     flexDirection: 'row',
-    // justifyContent:'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
     paddingVertical: 10,
-    paddingLeft: 14,
     marginBottom: 14,
   },
   item_text: {
@@ -141,8 +145,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '#3a3a3a',
     width: 194,
-    marginLeft: 10,
-    marginRight: 24,
   },
   submitBtn: {
     width: 57,
@@ -150,7 +152,6 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderColor: commonStyle.redColor,
     backgroundColor: commonStyle.redColor,
-    marginLeft: 20,
   },
   button_text: {
     fontFamily: commonStyle.PFregular,

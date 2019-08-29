@@ -8,7 +8,7 @@ import { NavigationActions, commonStyle } from '../../../utils'
 
 const { width, height } = Dimensions.get('window')
 
-@connect(({ user }) => ({ user }))
+@connect(({ link, page }) => ({ link, page }))
 class AdmApproval extends NavigationPage {
   constructor(props) {
     super(props)
@@ -19,11 +19,11 @@ class AdmApproval extends NavigationPage {
     return <NavBar title="行政审批须知" />
   }
 
-  handleSubmit = () => {
+  handleSubmit = address => {
     this.props.dispatch(
       NavigationActions.navigate({
         routeName: 'WebviewLinks',
-        params: { title: '行政审批须知' },
+        params: { title: '行政审批事项', address },
       })
     )
   }
@@ -51,6 +51,8 @@ class AdmApproval extends NavigationPage {
     
 
     `
+    const { admLink } = this.props.link
+    const { admPage } = this.props.page
     return (
       <View style={styles.container}>
         <View style={styles.content}>
@@ -60,7 +62,7 @@ class AdmApproval extends NavigationPage {
           >
             <Text style={styles.content_title}>行政审批须知</Text>
             <HTML
-              html={htmlContent}
+              html={admPage.content}
               imagesMaxWidth={width * 0.95}
               tagsStyles={{
                 p: {
@@ -78,7 +80,7 @@ class AdmApproval extends NavigationPage {
         <Button
           style={styles.button_save}
           textStyle={styles.button_text}
-          onPress={this.handleSubmit}
+          onPress={() => this.handleSubmit(admLink.address)}
           type="theme"
         >
           立即审批

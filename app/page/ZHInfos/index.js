@@ -89,61 +89,65 @@ class ZHInfos extends NavigationPage {
 
   // 轮播图
   renderBanner(slidesZh) {
+    console.log('render the slides')
     if (slidesZh && this.state.swiperShow) {
       return (
-        <Swiper
-          style={styles.wrapper}
-          showsButtons={false}
-          autoplay
-          paginationStyle={styles.paginationStyle}
-          dotStyle={styles.dotStyle}
-          activeDotStyle={styles.activeDotStyle}
-        >
-          {slidesZh.map((item, index) => (
-            <Touchable onPress={() => this.gotoDetail(item)} key={index}>
-              <ImageBackground
-                source={{ uri: _baseURLGlobal + item.pictureUrl }}
-                style={styles.bannerImg}
-              >
-                <View style={styles.textBox}>
-                  <Text style={styles.bannerText} numberOfLines={1}>
-                    {item.title}
-                  </Text>
-                </View>
-              </ImageBackground>
-            </Touchable>
-          ))}
-        </Swiper>
+        <View>
+          <Swiper
+            height={(width * 40) / 75}
+            style={styles.wrapper}
+            showsButtons={false}
+            autoplay
+            autoplayTimeout={4}
+            paginationStyle={styles.paginationStyle}
+            dotStyle={styles.dotStyle}
+            activeDotStyle={styles.activeDotStyle}
+          >
+            {slidesZh.map((item, index) => (
+              <Touchable onPress={() => this.gotoDetail(item)} key={index}>
+                <ImageBackground
+                  source={{ uri: _baseURLGlobal + item.pictureUrl }}
+                  style={styles.bannerImg}
+                >
+                  <View style={styles.textBox}>
+                    <Text style={styles.bannerText} numberOfLines={1}>
+                      {item.title}
+                    </Text>
+                  </View>
+                </ImageBackground>
+              </Touchable>
+            ))}
+          </Swiper>
+          <View style={styles.block_title}>
+            <Text style={styles.title_redIcon} />
+            <Text style={styles.title_text}>昭化资讯</Text>
+          </View>
+        </View>
       )
-    }
-    // else {
-    //     return (
-    //         <View style={{ height: width*40/75 }}>
-    //             <Image source={bannerImg} style={styles.bannerImg} />
-    //         </View>
-    //     );
-    // }
+    } 
+      return (
+        <View style={{ height: (width * 40) / 75 }}>
+          <Image source={bannerImg} style={styles.bannerImg} />
+        </View>
+      )
+    
   }
 
   renderPage() {
     const { zhInfoList, slidesZh } = this.props.zhInfos
     return (
       <View style={styles.container}>
-        <ScrollView style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
           {/* <Text style={{backgroundColor:'#ff5971',width:34,height:34,borderRadius:18,textAlign:'center',textAlignVertical:'center'}}>
           <Text style={{fontFamily:'iconfont',fontSize:32,color:'#fff'}}>&#xe618;</Text>
         </Text> */}
           {/* <Iconfont name='&#xe618;' style={{backgroundColor:'#ff5971',width:34,height:34,borderRadius:18,textAlign:'center',textAlignVertical:'center'}}/> */}
-          <View style={styles.bannerBox}>
+          {/* <View style={styles.bannerBox}>
             {slidesZh && this.renderBanner(slidesZh)}
-          </View>
+          </View> */}
 
           <View style={styles.content}>
             <View style={styles.content_block}>
-              <View style={styles.block_title}>
-                <Text style={styles.title_redIcon} />
-                <Text style={styles.title_text}>昭化资讯</Text>
-              </View>
               {zhInfoList && (
                 <FlatList
                   data={zhInfoList}
@@ -151,7 +155,8 @@ class ZHInfos extends NavigationPage {
                   renderItem={this._renderItemView}
                   // onRefresh={this._onRefresh}
                   // refreshing={this.state.isRefresh}
-                  // ListHeaderComponent={this._renderHeader}
+                  // removeClippedSubviews={false}
+                  ListHeaderComponent={() => this.renderBanner(slidesZh)}
                   ListEmptyComponent={<Text>网络加载中</Text>}
                   ListFooterComponent={this._renderFooter}
                   onEndReached={this._onEndReached.bind(this)}
@@ -163,7 +168,7 @@ class ZHInfos extends NavigationPage {
               )}
             </View>
           </View>
-        </ScrollView>
+        </View>
       </View>
     )
   }
@@ -236,7 +241,6 @@ const styles = StyleSheet.create({
   content_block: {
     backgroundColor: '#fff',
     width,
-    paddingTop: 20,
     paddingBottom: 22,
   },
   content_block2: {
@@ -248,6 +252,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: 5,
   },
   title_redIcon: {
     width: 4,

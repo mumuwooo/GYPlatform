@@ -12,6 +12,7 @@ import {
 import { connect } from 'react-redux'
 import { NavigationBar, NavigationPage } from 'teaset'
 import Swiper from 'react-native-swiper'
+import Toast from 'teaset/components/Toast/Toast'
 import { Touchable, Button, IconFont, NavBar } from '../../components'
 import { NavigationActions, commonStyle } from '../../utils'
 import CompanyService from './CompanyService'
@@ -22,10 +23,9 @@ import MarketService from './MarketService'
 import PolicyService from './PolicyService'
 import CompanyInfos from './CompanyInfos'
 import AchiveInfos from './AchiveInfos'
-import {Storage} from '../../utils'
+import { Storage } from '../../utils'
 
 import _baseURLGlobal from '../../utils/global'
-import Toast from 'teaset/components/Toast/Toast';
 
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window')
@@ -177,6 +177,7 @@ class Home extends NavigationPage {
           style={styles.wrapper}
           showsButtons={false}
           autoplay
+          autoplayTimeout={4}
           paginationStyle={styles.paginationStyle}
           dotStyle={styles.dotStyle}
           activeDotStyle={styles.activeDotStyle}
@@ -207,12 +208,21 @@ class Home extends NavigationPage {
     // }
   }
 
-  handleTest = ()=>{
-    Toast.success("测试")
+  handleTest = () => {
+    // let overlayView = (
+    //   <Overlay.PopView
+    //     style={{alignItems: 'center', justifyContent: 'center'}}
+    //     >
+    //     <View style={{backgroundColor: '#fff', minWidth: 260, minHeight: 180, borderRadius: 15, justifyContent: 'center', alignItems: 'center'}}>
+    //       <Text>Test</Text>
+    //     </View>
+    //   </Overlay.PopView>
+    // );
+    // Overlay.show(overlayView);
   }
 
   renderPage() {
-    console.log("render in index")
+    console.log('render in index')
     const {
       companyShow,
       projectShow,
@@ -224,7 +234,7 @@ class Home extends NavigationPage {
     const { slides, VMCompanyInfoList, VMAchiveInfoList } = this.props.home
     return (
       <View style={styles.container}>
-        <Button onPress={()=>this.handleTest()}>Test</Button>
+        {/* <Button onPress={()=>this.handleTest()}>Test</Button> */}
         <ScrollView style={{ flex: 1 }}>
           {/* <Text style={{backgroundColor:'#ff5971',width:34,height:34,borderRadius:18,textAlign:'center',textAlignVertical:'center'}}>
           <Text style={{fontFamily:'iconfont',fontSize:32,color:'#fff'}}>&#xe618;</Text>

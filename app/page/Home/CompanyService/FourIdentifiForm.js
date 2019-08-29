@@ -16,6 +16,12 @@ class FourIdentifiForm extends NavigationPage {
       progress: 1, //  1信息登记 2登记表上传 3企业照片上传
     }
   }
+  componentWillMount() {
+    if (!window._userToken) {
+      this.props.dispatch(NavigationActions.navigate({ routeName: 'Personal' }))
+      Toast.stop('请先登陆')
+    }
+  }
 
   renderNavigationBar() {
     return <NavBar title="四上企业申报" />

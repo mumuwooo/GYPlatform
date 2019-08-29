@@ -104,8 +104,8 @@ const styles = StyleSheet.create({
     fontFamily: commonStyle.PFmedium,
     fontSize: commonStyle.h1Size,
     color: '#414141',
-    marginBottom: 36,
-    marginTop: 46,
+    marginBottom: 16,
+    marginTop: 20,
   },
   top_bottom: {
     paddingHorizontal: 6,
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     marginBottom: 11,
   },
   content: {
-    paddingTop: 42,
+    paddingTop: 12,
   },
   content_text: {
     fontFamily: commonStyle.PFregular,

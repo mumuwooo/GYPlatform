@@ -19,7 +19,7 @@ import Loading from './page/Loading'
 import Login from './page/others/Login'
 import Register from './page/others/Register'
 
-import Home from './page/Home' 
+import Home from './page/Home'
 
 import MarketExtension from './page/Home/MarketService/MarketExtension'
 import SignalProject from './page/Home/MarketService/SignalProject'
@@ -44,6 +44,7 @@ import PatentReport from './page/Home/TechService/PatentReport'
 import TechProject from './page/Home/TechService/TechProject'
 import TechAchive from './page/Home/TechService/TechAchive'
 import OnlineAchiveForm from './page/Home/TechService/OnlineAchiveForm'
+import TechAchiveForm from './page/Home/TechService/TechAchiveForm'
 
 import FinanceDemandForm from './page/Home/BankService/FinanceDemandForm'
 import FinanceGuaranteeForm from './page/Home/BankService/FinanceGuaranteeForm'
@@ -82,7 +83,7 @@ const styles = {
 const HomeNavigator = createBottomTabNavigator(
   {
     Home: {
-      // screen: Personal,
+      // screen: ZHInfos,
       screen: Home,
       navigationOptions: {
         tabBarLabel: '6S服务',
@@ -262,6 +263,10 @@ const AppNavigator = createStackNavigator(
     TechAchive: { screen: TechAchive, navigationOptions: { header: null } },
     OnlineAchiveForm: {
       screen: OnlineAchiveForm,
+      navigationOptions: { header: null },
+    },
+    TechAchiveForm: {
+      screen: TechAchiveForm,
       navigationOptions: { header: null },
     },
     FinanceDemandForm: {

@@ -8,7 +8,7 @@ import { NavigationActions, commonStyle } from '../../../utils'
 
 const { width, height } = Dimensions.get('window')
 
-@connect(({ user }) => ({ user }))
+@connect(({ link }) => ({ link }))
 class ProjectReport extends NavigationPage {
   constructor(props) {
     super(props)
@@ -19,11 +19,11 @@ class ProjectReport extends NavigationPage {
     return <NavBar title="项目申报须知" />
   }
 
-  handleSubmit = () => {
+  handleSubmit = address => {
     this.props.dispatch(
       NavigationActions.navigate({
         routeName: 'WebviewLinks',
-        params: { title: '项目申报详情' },
+        params: { title: '项目申报详情', address },
       })
     )
   }
@@ -51,6 +51,8 @@ class ProjectReport extends NavigationPage {
     
 
     `
+    const { projectReport } = this.props.link
+
     return (
       <View style={styles.container}>
         <View style={styles.content}>
@@ -78,7 +80,7 @@ class ProjectReport extends NavigationPage {
         <Button
           style={styles.button_save}
           textStyle={styles.button_text}
-          onPress={this.handleSubmit}
+          onPress={() => this.handleSubmit(projectReport.address)}
           type="theme"
         >
           立即申报

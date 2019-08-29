@@ -7,7 +7,7 @@ import { NavigationActions, commonStyle } from '../../../utils'
 
 const { width, height } = Dimensions.get('window')
 
-@connect(({ user }) => ({ user }))
+@connect(({ link }) => ({ link }))
 class OnlineInvest extends NavigationPage {
   constructor(props) {
     super(props)
@@ -18,96 +18,38 @@ class OnlineInvest extends NavigationPage {
     return <NavBar title="投资在线审批服务" />
   }
 
-  handleSubmit = () => {
+  handleSubmit = address => {
     this.props.dispatch(
       NavigationActions.navigate({
         routeName: 'WebviewLinks',
-        params: { title: '投资在线审批办理详情' },
+        params: { title: '投资在线审批服务', address },
       })
     )
   }
   renderPage() {
+    const { onlineInvests } = this.props.link
     return (
       <View style={styles.container}>
         <View style={styles.content}>
-          <View style={styles.eachitem}>
-            <IconFont
-              name="&#xe63f;"
-              size={35}
-              color={commonStyle.orangeColor}
-            />
-            <Text style={styles.item_text}>
-              国定资产投资项目节能审查（企业技术改造项目）
-            </Text>
-            <Button
-              style={styles.submitBtn}
-              textStyle={styles.button_text}
-              onPress={this.handleSubmit}
-            >
-              办理
-            </Button>
-          </View>
-
-          <View style={styles.eachitem}>
-            <IconFont
-              name="&#xe641;"
-              size={35}
-              color={commonStyle.orangeColor}
-            />
-            <Text style={styles.item_text}>水利工程可行性研究报告审查</Text>
-            <Button
-              style={styles.submitBtn}
-              textStyle={styles.button_text}
-              onPress={this.handleSubmit}
-            >
-              办理
-            </Button>
-          </View>
-
-          <View style={styles.eachitem}>
-            <IconFont
-              name="&#xe63f;"
-              size={35}
-              color={commonStyle.orangeColor}
-            />
-            <Text style={styles.item_text}>
-              国定资产投资项目节能审查（企业技术改造项目）
-            </Text>
-            <Button
-              style={styles.submitBtn}
-              textStyle={styles.button_text}
-              onPress={this.handleSubmit}
-            >
-              办理
-            </Button>
-          </View>
-
-          <View style={styles.eachitem}>
-            <IconFont
-              name="&#xe64c;"
-              size={35}
-              color={commonStyle.orangeColor}
-            />
-            <Text style={styles.item_text}>
-              地震监测设施和观测环境保护范的确定
-            </Text>
-            <Button
-              style={styles.submitBtn}
-              textStyle={styles.button_text}
-              onPress={this.handleSubmit}
-            >
-              办理
-            </Button>
-          </View>
+          {onlineInvests &&
+            onlineInvests.map((item, index) => (
+              <View style={styles.eachitem} key={index}>
+                <IconFont
+                  name="&#xe63f;"
+                  size={35}
+                  color={commonStyle.blueColor}
+                />
+                <Text style={styles.item_text}>{item.title}</Text>
+                <Button
+                  style={styles.submitBtn}
+                  textStyle={styles.button_text}
+                  onPress={() => this.handleSubmit(item.address)}
+                >
+                  办理
+                </Button>
+              </View>
+            ))}
         </View>
-        {/* <Button
-          style={styles.submitBtn}
-          textStyle={styles.button_text}
-          onPress={this.handleSubmit}
-          type="theme"
-        >
-          点击此处办理后跳转到外部链接
-        </Button> */}
       </View>
     )
   }

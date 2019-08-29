@@ -7,6 +7,7 @@ import {
   Alert,
   Text,
   TextInput,
+  WebView,
 } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationBar, NavigationPage, Label, Toast } from 'teaset'
@@ -32,9 +33,11 @@ class WebviewLinks extends NavigationPage {
   }
 
   renderPage() {
+    const { address } = this.props.navigation.state.params
+    console.log('webview address', address)
     return (
       <View style={styles.container}>
-        <Text>链接到外部的webview</Text>
+        <WebView source={{ uri: address }} />
       </View>
     )
   }

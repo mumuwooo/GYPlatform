@@ -84,6 +84,7 @@ class PoliticTopics extends NavigationPage {
 
   renderPage() {
     const { politicList } = this.props.policyService
+    console.log('the politicList', politicList)
     return (
       <View style={styles.container}>
         <ScrollView style={{ flex: 1 }}>
@@ -100,8 +101,8 @@ class PoliticTopics extends NavigationPage {
               </View>
               {politicList && (
                 <FlatList
-                  data={politicList}
-                  extraData={politicList}
+                  data={politicList.list}
+                  extraData={politicList.list}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={this._renderItemView}
                   // onRefresh={this._onRefresh}

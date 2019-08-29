@@ -7,6 +7,7 @@ export { default as IconFont } from './IconFont'
 export { default as Loading } from './Loading'
 export { default as HeadView } from './HeadView'
 export { default as NavBar } from './NavBar'
+export { default as Update } from './Update'
 
 export { default as TimeCalc } from './TimeCalc'
 export { default as RENDER_FILE_ICON } from './IconFile'

@@ -19,7 +19,7 @@ import { NavigationActions, commonStyle } from '../../../utils'
 
 const { width, height } = Dimensions.get('window')
 
-@connect(({ user }) => ({ user }))
+@connect(({ link }) => ({ link }))
 class TechProject extends NavigationPage {
   constructor(props) {
     super(props)
@@ -30,15 +30,16 @@ class TechProject extends NavigationPage {
     return <NavBar title="科技项目服务" />
   }
 
-  handleSubmit = () => {
+  handleSubmit = (title, address) => {
     this.props.dispatch(
       NavigationActions.navigate({
         routeName: 'WebviewLinks',
-        params: { title: '科技项目详情' },
+        params: { title, address },
       })
     )
   }
   renderPage() {
+    const { techProject } = this.props.link
     return (
       <View style={styles.container}>
         <View style={styles.top}>
@@ -53,29 +54,24 @@ class TechProject extends NavigationPage {
           </ImageBackground>
         </View>
         <View style={styles.content}>
-          <Touchable style={styles.eachitem} onPress={this.handleSubmit}>
-            <View style={styles.item_left}>
-              <IconFont
-                name="&#xe656;"
-                size={35}
-                color={commonStyle.pinkColor}
-              />
-              <Text style={styles.item_text}>广元市科技项目综合管理平台</Text>
-            </View>
-            <IconFont name="&#xe6eb;" size={19} style={styles.item_right} />
-          </Touchable>
-
-          <Touchable style={styles.eachitem} onPress={this.handleSubmit}>
-            <View style={styles.item_left}>
-              <IconFont
-                name="&#xe646;"
-                size={35}
-                color={commonStyle.pinkColor}
-              />
-              <Text style={styles.item_text}>四川省科技管理信息系统</Text>
-            </View>
-            <IconFont name="&#xe6eb;" size={19} style={styles.item_right} />
-          </Touchable>
+          {techProject &&
+            techProject.map((item, index) => (
+              <Touchable
+                style={styles.eachitem}
+                onPress={() => this.handleSubmit(item.title, item.address)}
+                key={index}
+              >
+                <View style={styles.item_left}>
+                  <IconFont
+                    name="&#xe656;"
+                    size={35}
+                    color={commonStyle.pinkColor}
+                  />
+                  <Text style={styles.item_text}>{item.title}</Text>
+                </View>
+                <IconFont name="&#xe6eb;" size={19} style={styles.item_right} />
+              </Touchable>
+            ))}
         </View>
       </View>
     )

@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Dimensions, Text, TextInput } from 'react-native'
 import { connect } from 'react-redux'
-import { NavigationBar, NavigationPage, Button } from 'teaset'
+import { Toast, NavigationBar, NavigationPage, Button } from 'teaset'
 import { Divider, NavBar, IconFont, Touchable } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
 
@@ -13,6 +13,12 @@ class SignalApplyForm extends NavigationPage {
     super(props)
     this.state = {
       progress: 1, //  1信息登记 2联系方式
+    }
+  }
+  componentWillMount() {
+    if (!window._userToken) {
+      this.props.dispatch(NavigationActions.navigate({ routeName: 'Personal' }))
+      Toast.stop('请先登陆')
     }
   }
 

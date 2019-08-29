@@ -1,18 +1,54 @@
 import React from 'react'
 import { StyleSheet, View, Dimensions, Text, TextInput } from 'react-native'
 import { connect } from 'react-redux'
-import { NavigationBar, NavigationPage, Button } from 'teaset'
+import { Toast, NavigationBar, NavigationPage, Button } from 'teaset'
 import { Divider, NavBar, IconFont, Touchable } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
 
 const { width, height } = Dimensions.get('window')
 
-@connect(({ user }) => ({ user }))
+@connect(({ forms }) => ({ forms }))
 class ProjectCoordinateForm extends NavigationPage {
   constructor(props) {
     super(props)
     this.state = {
       progress: 1, //  1信息登记 2联系方式
+      // [Display(Name = "项目名称")]
+      ProjectName: '',
+      // [Display(Name = "业主单位")]
+      CompanyName: '',
+      // [Display(Name = "联系人")]
+      Contact: '',
+      // [Display(Name = "联系人电话")]
+      PhoneNum: '',
+      // [Display(Name = "所属行业")]
+      IndustryType: '',
+      // [Display(Name = "项目总投资")]
+      TotalFinance: '',
+      // [Display(Name = "建设地址")]
+      BuildingLoaction: '',
+      // [Display(Name = "开工日期")]
+      // [DataType(DataType.Date)]
+      StartDateTime: '',
+      // [Display(Name = "建成日期")]
+      // [DataType(DataType.Date)]
+      PlanDateTime: '',
+      // [Display(Name = "主要建设内容及规模")]
+      MajorBuildingContent: '',
+      // [Display(Name = "工程形象进度")]
+      BuildingProcess: '',
+      // [Display(Name ="办理责任人")]
+      Responsible: '',
+      // [Display(Name ="办理部门")]
+      Department: '',
+      // [Display(Name = "存在困难")]
+      Difficultyies: '',
+    }
+  }
+  componentWillMount() {
+    if (!window._userToken) {
+      this.props.dispatch(NavigationActions.navigate({ routeName: 'Personal' }))
+      Toast.stop('请先登陆')
     }
   }
 
@@ -21,7 +57,7 @@ class ProjectCoordinateForm extends NavigationPage {
   }
   gotoNext = () => {
     let { progress } = this.state
-    if (progress >= 2) {
+    if (progress >= 4) {
       this.handleSubmit()
     } else {
       progress++
@@ -30,14 +66,16 @@ class ProjectCoordinateForm extends NavigationPage {
   }
 
   gotoLast = () => {
-    this.setState({ progress: 1 })
+    let { progress } = this.state
+    progress--
+    this.setState({ progress })
   }
   handleProgress = index => {
     this.setState({ progress: index })
   }
 
   handleSubmit = () => {
-    alert('提交表单')
+    dispatch({ type: 'forms/postProjectCoordinateForm', payload: this.state })
   }
   renderPage() {
     const { progress } = this.state
@@ -53,7 +91,7 @@ class ProjectCoordinateForm extends NavigationPage {
               }
               onPress={() => this.handleProgress(1)}
             >
-              1.信息登记
+              1
             </Text>
             <IconFont
               name="&#xe6eb;"
@@ -72,7 +110,45 @@ class ProjectCoordinateForm extends NavigationPage {
               }
               onPress={() => this.handleProgress(2)}
             >
-              2.问题描述
+              2
+            </Text>
+            <IconFont
+              name="&#xe6eb;"
+              size={15}
+              style={{
+                marginRight: 5,
+                marginLeft: 5,
+                color: commonStyle.h2Color,
+              }}
+            />
+            <Text
+              style={
+                progress === 3
+                  ? styles.topText
+                  : [styles.topText, styles.topText2]
+              }
+              onPress={() => this.handleProgress(3)}
+            >
+              3
+            </Text>
+            <IconFont
+              name="&#xe6eb;"
+              size={15}
+              style={{
+                marginRight: 5,
+                marginLeft: 5,
+                color: commonStyle.h2Color,
+              }}
+            />
+            <Text
+              style={
+                progress === 4
+                  ? styles.topText
+                  : [styles.topText, styles.topText2]
+              }
+              onPress={() => this.handleProgress(4)}
+            >
+              4
             </Text>
           </View>
           {progress === 1 ? (
@@ -84,10 +160,10 @@ class ProjectCoordinateForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ ProjectName: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.ProjectName}
                 />
               </View>
               <View style={styles.eachItem}>
@@ -97,13 +173,51 @@ class ProjectCoordinateForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ CompanyName: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.CompanyName}
                 />
               </View>
-
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入所属行业"
+                  underlineColorAndroid="transparent"
+                  keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ IndustryType: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.IndustryType}
+                />
+              </View>
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入项目总投资"
+                  underlineColorAndroid="transparent"
+                  keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ TotalFinance: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.TotalFinance}
+                />
+              </View>
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入建设地址"
+                  underlineColorAndroid="transparent"
+                  keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ BuildingLoaction: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.BuildingLoaction}
+                />
+              </View>
               <View style={styles.eachItem}>
                 <TextInput
                   style={styles.item_input}
@@ -111,36 +225,54 @@ class ProjectCoordinateForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ StartDateTime: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.StartDateTime}
                 />
               </View>
               <View style={styles.eachItem}>
                 <TextInput
                   style={styles.item_input}
-                  placeholder="请输入工程进度"
+                  placeholder="请输入建成日期"
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ PlanDateTime: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.PlanDateTime}
                 />
               </View>
+            </View>
+          ) : progress === 2 ? (
+            <View style={styles.next_content}>
+              <Text style={styles.next_title}>主要建设内容及规模</Text>
+              <TextInput
+                maxLength={140}
+                placeholder="请输入内容，不超过140字"
+                underlineColorAndroid="transparent"
+                multiline
+                style={styles.userInput}
+                onChangeText={MajorBuildingContent =>
+                  this.setState({ MajorBuildingContent })
+                }
+                value={this.state.MajorBuildingContent}
+              />
+            </View>
+          ) : progress === 3 ? (
+            <View>
               <View style={styles.eachItem}>
                 <TextInput
                   style={styles.item_input}
-                  placeholder="请输入项目联系人姓名"
+                  placeholder="请输入联系人"
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ Contact: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.Contact}
                 />
               </View>
               <View style={styles.eachItem}>
@@ -150,30 +282,69 @@ class ProjectCoordinateForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ PhoneNum: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.PhoneNum}
+                />
+              </View>
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入工程形象进度"
+                  underlineColorAndroid="transparent"
+                  keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ BuildingProcess: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.BuildingProcess}
+                />
+              </View>
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入办理责任人"
+                  underlineColorAndroid="transparent"
+                  keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ Responsible: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.Responsible}
+                />
+              </View>
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入办理部门"
+                  underlineColorAndroid="transparent"
+                  keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ Department: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.Department}
                 />
               </View>
             </View>
           ) : (
             <View style={styles.next_content}>
-              <Text style={styles.next_title}>问题及需求描述</Text>
+              <Text style={styles.next_title}>存在困难</Text>
               <TextInput
                 maxLength={140}
                 placeholder="请输入内容，不超过140字"
                 underlineColorAndroid="transparent"
                 multiline
                 style={styles.userInput}
-                onChangeText={demandText => this.setState({ demandText })}
-                value={this.state.demandText}
+                onChangeText={Difficultyies => this.setState({ Difficultyies })}
+                value={this.state.Difficultyies}
               />
             </View>
           )}
         </View>
         <View style={styles.buttons}>
-          {progress == 2 ? (
+          {progress != 1 ? (
             <Button
               style={[styles.submitBtn, styles.submitBtn2]}
               titleStyle={styles.submitText}
@@ -185,7 +356,7 @@ class ProjectCoordinateForm extends NavigationPage {
           <Button
             style={styles.submitBtn}
             titleStyle={styles.submitText}
-            title={progress === 2 ? '提交' : '下一步'}
+            title={progress === 4 ? '提交' : '下一步'}
             onPress={this.gotoNext}
           />
         </View>

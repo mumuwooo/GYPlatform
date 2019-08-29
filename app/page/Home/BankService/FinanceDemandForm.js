@@ -8,49 +8,58 @@ import {
   Image,
 } from 'react-native'
 import { connect } from 'react-redux'
-import { NavigationBar, NavigationPage, PullPicker, Button } from 'teaset'
+import {
+  Toast,
+  NavigationBar,
+  NavigationPage,
+  PullPicker,
+  Button,
+} from 'teaset'
 import ImagePicker from 'react-native-image-picker'
 import { Divider, NavBar, IconFont, Touchable } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
-import {BASE_URL} from '../../../utils/config'
+import { BASE_URL } from '../../../utils/config'
 
 const { width, height } = Dimensions.get('window')
-const options = {
-  title: '选择图片',
-  cancelButtonTitle: '取消',
-  takePhotoButtonTitle: '拍照',
-  chooseFromLibraryButtonTitle: '选择照片',
-  // customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
-  cameraType: 'back',
-  mediaType: 'photo',
-  videoQuality: 'high',
-  durationLimit: 10,
-  maxWidth: 300,
-  maxHeight: 300,
-  quality: 0.8,
-  angle: 0,
-  allowsEditing: false,
-  noData: false,
-  storageOptions: {
-    skipBackup: true,
-  },
-}
 
-@connect(({picture,  financeDemandForm }) => ({picture,  financeDemandForm }))
+// @connect(({picture,  financeDemandForm }) => ({picture,  financeDemandForm }))
+@connect()
 class FinanceDemandForm extends NavigationPage {
   constructor(props) {
     super(props)
     this.state = {
       progress: 1, //  1信息登记 2联系方式
-      typeName: '请选择行业类型',
-      avatarSource: null,
+      CompanyName: '',
+      IndustryType: '请选择行业类型',
+      MajorBusiness: '',
+      EnterpriseKey: '',
+      RegisterAssets: '',
+      TotalAssets: '',
+      IncomeLastYear: '',
+      FinanceAmount: '',
+      FinanceMethod: '',
+      FinancePurpose: '',
+      FloatingAssets: '',
+      TotalOwes: '',
+      FloatingOwes: '',
+      OwePeopleSaved: '',
+      OweBankSaved: '',
+      FinanceTimeExpected: '',
+      RenterBank: '',
+      ValueOfPawn: '',
+      PawnCategory: '',
+      Contact: '',
+      Phone: '',
+      FinanceProcess: '',
+      Department: '',
     }
   }
 
-
   componentWillMount() {
-    dispatch({type: "picture/emptyPicture"})
-    if(this.props.picture.loaded)this.setState({progress:2})
+    if (!window._userToken) {
+      this.props.dispatch(NavigationActions.navigate({ routeName: 'Personal' }))
+      Toast.stop('请先登陆')
+    }
   }
 
   renderNavigationBar() {
@@ -59,7 +68,7 @@ class FinanceDemandForm extends NavigationPage {
 
   gotoNext = () => {
     let { progress } = this.state
-    if (progress >= 3) {
+    if (progress >= 5) {
       this.handleSubmit()
     } else {
       progress++
@@ -68,7 +77,9 @@ class FinanceDemandForm extends NavigationPage {
   }
 
   gotoLast = () => {
-    this.setState({ progress: 1 })
+    let { progress } = this.state
+    progress--
+    this.setState({ progress })
   }
   显示需求列表
   handleTypeSelect = () => {
@@ -89,8 +100,7 @@ class FinanceDemandForm extends NavigationPage {
         //   type: 'register/getLevelList',
         //   payload: { School_ID: schoolID, IsCurStation: 1 },
         // })
-        // this.setState({ typeName: item })
-        dispatch({type: "financeDemandForm/updateIndustryType", payload: item})
+        this.setState({ IndustryType: item })
       }
     )
   }
@@ -100,43 +110,15 @@ class FinanceDemandForm extends NavigationPage {
   }
 
   handleSubmit = () => {
-    dispatch({type:"financeDemandForm/postFinanceDemandForm", payload: this.props.financeDemandForm})
+    dispatch({ type: 'forms/postFinanceDemandForm', payload: this.state })
+    console.log('new states', this.state)
   }
 
-  // 选择图片
-  selectPhotoTapped = () => {
-    dispatch({type: "picture/makePictureLoaded"})
-    console.log('===========ImagePicker=========================')
-    console.log(ImagePicker)
-    console.log('====================================')
-    ImagePicker.showImagePicker(options, response => {
-      console.log('Response = ', response)
-
-      if (response.didCancel) {
-        console.log('User cancelled photo picker')
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error)
-      } else {
-        const source = { uri: response.uri }
-
-        // You can also display the image using data:
-        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-        // this.setState({
-        //   avatarSource: source,
-        // })
-        dispatch({type: 'picture/uploadPicture', payload: source})
-      }
-    })
-  }
   renderPage() {
-    console.log("render in sub-page")
-    const { picture } = this.props.picture
-    const {industryType} = this.props.financeDemandForm
-    const { progress, avatarSource, typeName} = this.state
+    console.log('render in sub-page')
+    const { progress } = this.state
     return (
       <View style={styles.container}>
-
         <View style={styles.content}>
           <View style={styles.topLine}>
             <Text
@@ -147,7 +129,7 @@ class FinanceDemandForm extends NavigationPage {
               }
               onPress={() => this.handleProgress(1)}
             >
-              1.信息登记
+              1
             </Text>
             <IconFont
               name="&#xe6eb;"
@@ -166,7 +148,7 @@ class FinanceDemandForm extends NavigationPage {
               }
               onPress={() => this.handleProgress(2)}
             >
-              2.商业计划书上传
+              2
             </Text>
             <IconFont
               name="&#xe6eb;"
@@ -185,7 +167,45 @@ class FinanceDemandForm extends NavigationPage {
               }
               onPress={() => this.handleProgress(3)}
             >
-              3.联系方式
+              3
+            </Text>
+            <IconFont
+              name="&#xe6eb;"
+              size={15}
+              style={{
+                marginRight: 5,
+                marginLeft: 5,
+                color: commonStyle.h2Color,
+              }}
+            />
+            <Text
+              style={
+                progress === 4
+                  ? styles.topText
+                  : [styles.topText, styles.topText2]
+              }
+              onPress={() => this.handleProgress(4)}
+            >
+              4
+            </Text>
+            <IconFont
+              name="&#xe6eb;"
+              size={15}
+              style={{
+                marginRight: 5,
+                marginLeft: 5,
+                color: commonStyle.h2Color,
+              }}
+            />
+            <Text
+              style={
+                progress === 5
+                  ? styles.topText
+                  : [styles.topText, styles.topText2]
+              }
+              onPress={() => this.handleProgress(5)}
+            >
+              5
             </Text>
           </View>
           {progress === 1 ? (
@@ -197,11 +217,23 @@ class FinanceDemandForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   // keyboardType="phone-pad"
                   onChangeText={text => {
-                    // this.setState({ inputPhone: text })
-                    dispatch({type: 'financeDemandForm/updateCompanyName', payload: text})
+                    this.setState({ CompanyName: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.CompanyName}
+                />
+              </View>
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="统一社会信用代码/注册号"
+                  underlineColorAndroid="transparent"
+                  // keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ EnterpriseKey: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.EnterpriseKey}
                 />
               </View>
 
@@ -210,7 +242,9 @@ class FinanceDemandForm extends NavigationPage {
                   onPress={this.handleTypeSelect}
                   style={styles.school_select}
                 >
-                  <Text style={styles.school_title}>{industryType}</Text>
+                  <Text style={styles.school_title}>
+                    {this.state.IndustryType}
+                  </Text>
                   <IconFont
                     name="&#xe738;"
                     size={18}
@@ -224,14 +258,27 @@ class FinanceDemandForm extends NavigationPage {
                   style={styles.item_input}
                   placeholder="请输入主营业务"
                   underlineColorAndroid="transparent"
+                  // keyboardType="phone-pad"
                   onChangeText={text => {
-                    dispatch({type: 'financeDemandForm/updateMajorBusiness', payload: text})
+                    this.setState({ MajorBusiness: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.MajorBusiness}
                 />
               </View>
-
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入注册资金"
+                  underlineColorAndroid="transparent"
+                  // keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ RegisterAssets: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.RegisterAssets}
+                />
+              </View>
               <View style={styles.eachItem}>
                 <TextInput
                   style={styles.item_input}
@@ -239,49 +286,218 @@ class FinanceDemandForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   // keyboardType="phone-pad"
                   onChangeText={text => {
-                    dispatch({type: "financeDemandForm", payload: text})
+                    this.setState({ TotalAssets: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.TotalAssets}
                 />
               </View>
-
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入上年收入"
+                  underlineColorAndroid="transparent"
+                  // keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ IncomeLastYear: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.IncomeLastYear}
+                />
+              </View>
+            </View>
+          ) : progress === 2 ? (
+            <View>
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入融资金额"
+                  underlineColorAndroid="transparent"
+                  // keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ FinanceAmount: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.FinanceAmount}
+                />
+              </View>
               <View style={styles.eachItem}>
                 <TextInput
                   style={styles.item_input}
                   placeholder="请输入融资方式"
                   underlineColorAndroid="transparent"
-                  keyboardType="phone-pad"
+                  // keyboardType="phone-pad"
                   onChangeText={text => {
-                    dispatch({type: "financeDemandForm/updateFinanceMethod", payload: text})
+                    this.setState({ FinanceMethod: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.FinanceMethod}
+                />
+              </View>
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入融资用途"
+                  underlineColorAndroid="transparent"
+                  // keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ FinancePurpose: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.FinancePurpose}
+                />
+              </View>
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入流动资产"
+                  underlineColorAndroid="transparent"
+                  // keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ FloatingAssets: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.FloatingAssets}
+                />
+              </View>
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入总负债"
+                  underlineColorAndroid="transparent"
+                  // keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ TotalOwes: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.TotalOwes}
+                />
+              </View>
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入流动负债"
+                  underlineColorAndroid="transparent"
+                  // keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ FloatingOwes: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.FloatingOwes}
+                />
+              </View>
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入民间借款余额"
+                  underlineColorAndroid="transparent"
+                  // keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ OwePeopleSaved: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.OwePeopleSaved}
+                />
+              </View>
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入银行贷款余额"
+                  underlineColorAndroid="transparent"
+                  // keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ OweBankSaved: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.OweBankSaved}
                 />
               </View>
             </View>
-          ) : progress === 2 ? (
-            <View style={styles.next_content}>
-              <Touchable onPress={this.selectPhotoTapped.bind(this)}>
-                <View
-                  style={[
-                    styles.avatar,
-                    styles.avatarContainer,
-                    { marginBottom: 30 },
-                  ]}
-                >
-                  {picture === null ? (
-                    <Text>选择照片</Text>
-                  ) : (
-                    <Image
-                      style={styles.avatar}
-                      source={{uri: BASE_URL + picture}}
-                    />
-                  )}
-                </View>
-              </Touchable>
+          ) : progress === 3 ? (
+            <View>
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入预计融资时间"
+                  underlineColorAndroid="transparent"
+                  // keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ FinanceTimeExpected: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.FinanceTimeExpected}
+                />
+              </View>
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入贷款银行"
+                  underlineColorAndroid="transparent"
+                  // keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ RenterBank: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.RenterBank}
+                />
+              </View>
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入抵押物估值"
+                  underlineColorAndroid="transparent"
+                  // keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ ValueOfPawn: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.ValueOfPawn}
+                />
+              </View>
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入抵押物类别"
+                  underlineColorAndroid="transparent"
+                  // keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ PawnCategory: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.PawnCategory}
+                />
+              </View>
             </View>
-           ) : (
+          ) : progress === 4 ? (
+            <View>
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入融资进展情况"
+                  underlineColorAndroid="transparent"
+                  // keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ FinanceProcess: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.FinanceProcess}
+                />
+              </View>
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入联挂责任部门"
+                  underlineColorAndroid="transparent"
+                  // keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ Department: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.Department}
+                />
+              </View>
+            </View>
+          ) : (
             <View>
               <View style={styles.eachItem}>
                 <TextInput
@@ -290,10 +506,10 @@ class FinanceDemandForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   // keyboardType="phone-pad"
                   onChangeText={text => {
-                    dispatch({type: "financeDemandForm/updateContact", payload: text})
+                    this.setState({ Contact: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.Contact}
                 />
               </View>
               <View style={styles.eachItem}>
@@ -303,14 +519,14 @@ class FinanceDemandForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    dispatch({type: "financeDemandForm/updatePhone", payload: text})
+                    this.setState({ Phone: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.Phone}
                 />
               </View>
             </View>
-          )} 
+          )}
         </View>
         <View style={styles.buttons}>
           {progress != 1 ? (
@@ -325,7 +541,7 @@ class FinanceDemandForm extends NavigationPage {
           <Button
             style={styles.submitBtn}
             titleStyle={styles.submitText}
-            title={progress === 3 ? '提交' : '下一步'}
+            title={progress === 5 ? '提交' : '下一步'}
             onPress={this.gotoNext}
           />
         </View>
@@ -343,9 +559,8 @@ const styles = StyleSheet.create({
     backgroundColor: commonStyle.bgColor,
   },
   avatar: {
-    width: width,
-    height: 200
-
+    width,
+    height: 200,
   },
   content: {
     width,

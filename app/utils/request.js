@@ -1,10 +1,10 @@
 import fetch from 'dva/fetch'
+import Toast from 'teaset/components/Toast/Toast'
 import { BASE_URL, X_HOST } from './config'
 import Storage from './storage'
-import Toast from 'teaset/components/Toast/Toast';
 
 const CONFIG_HEADERS = {
-  'Referrer': '6s.pinpin.pro',
+  Referrer: '6s.pinpin.pro',
   'Content-Type': 'application/json; charset=utf-8',
   'Access-Control-Allow-Origin': '*',
   'X-Host': X_HOST,
@@ -76,7 +76,6 @@ export function GET(options) {
   return result
 }
 
-
 export function FILE(options) {
   let base = BASE_URL
   if (options.url.search(/^http/) == 0) {
@@ -92,60 +91,56 @@ export function XML(options) {
   return requestXML(base + options.url, options.data)
 }
 
-export function PutWithToken(options){
-  let dURL = BASE_URL+options.url
+export function PutWithToken(options) {
+  const dURL = BASE_URL + options.url
   let headers
   if (window._userToken) {
     headers = { ...CONFIG_HEADERS, Authorization: window._userToken }
   } else {
     headers = CONFIG_HEADERS
   }
-  console.log("token in PUT", window._userToken)
-  console.log("params", JSON.stringify(options.params))
-  return new Promise((resolve, reject)=>{
-    fetch(dURL,
-    {
+  console.log('token in PUT', window._userToken)
+  console.log('params', JSON.stringify(options.params))
+  return new Promise((resolve, reject) => {
+    fetch(dURL, {
       method: 'PUT',
       credentials: 'include',
       cache: 'no-cache',
       headers,
-      body: JSON.stringify(options.params)
-    }
-      )
+      body: JSON.stringify(options.params),
+    })
       .then(response => {
-          console.log("put response right",response)
+        console.log('put response right', response)
         if (response.ok) {
           resolve(response)
         }
       })
       .catch(response => {
-        console.log("setup 3", response)
+        console.log('setup 3', response)
       })
-  }).catch(err=>{
-    console.log("error in request", err)
+  }).catch(err => {
+    console.log('error in request', err)
   })
 }
 
-export function POSTWithToken(options){
-  let dURL = BASE_URL+options.url
+export function POSTWithToken(options) {
+  const dURL = BASE_URL + options.url
   let headers
   if (window._userToken) {
     headers = { ...CONFIG_HEADERS, Authorization: window._userToken }
   } else {
     headers = CONFIG_HEADERS
   }
-  return new Promise((resolve, reject)=>{
-    fetch(dURL,
-    {
+  return new Promise((resolve, reject) => {
+    fetch(dURL, {
       method: 'POST',
       credentials: 'include',
       cache: 'no-cache',
       headers,
-      body: JSON.stringify(options.params)
-    }
-      )
+      body: JSON.stringify(options.params),
+    })
       .then(response => {
-          console.log("POST response right",response)
+        console.log('POST response right', response)
         if (response.ok) {
           return response.json()
         }
@@ -154,34 +149,33 @@ export function POSTWithToken(options){
         resolve(response)
       })
       .catch(response => {
-        console.log("setup 3", response)
+        console.log('setup 3', response)
       })
-  }).catch(err=>{
-    console.log("error in request", err)
+  }).catch(err => {
+    console.log('error in request', err)
   })
 }
 
-export function GetWithToken(url){
-  let dURL = BASE_URL+url.url
+export function GetWithToken(url) {
+  const dURL = BASE_URL + url.url
+  console.log('fuck the url', dURL)
   let headers
   if (window._userToken) {
     headers = { ...CONFIG_HEADERS, Authorization: window._userToken }
   } else {
     headers = CONFIG_HEADERS
   }
-  console.log("token in GET", window._userToken)
-  return new Promise((resolve, reject)=>{
-    fetch(dURL,
-    {
+  console.log('token in GET', window._userToken)
+  return new Promise((resolve, reject) => {
+    fetch(dURL, {
       method: 'GET',
       credentials: 'include',
       cache: 'no-cache',
       headers,
-    }
-      )
+    })
       .then(response => {
         if (response.ok) {
-          console.log("test", response)
+          console.log('test', response)
           return response.json()
         }
       })
@@ -189,10 +183,10 @@ export function GetWithToken(url){
         resolve(response)
       })
       .catch(response => {
-        console.log("setup 3", response)
+        console.log('setup 3', response)
       })
-  }).catch(err=>{
-    console.log("error in request", err)
+  }).catch(err => {
+    console.log('error in request', err)
   })
 }
 
@@ -251,7 +245,7 @@ function requestGET(url, params) {
 }
 
 function requestPOST(url, params) {
-  console.log("in the requestPost", JSON.stringify(params))
+  console.log('in the requestPost', JSON.stringify(params))
   const requestOBJ = [
     url,
     {
@@ -267,14 +261,14 @@ function requestPOST(url, params) {
     fetch(requestOBJ[0], requestOBJ[1])
       .then(response => {
         if (response.ok) {
-          console.log("fuck this 1", response)
+          console.log('fuck this 1', response)
           return response.json()
         }
         // 错误提示信息
         consoleReq(response, requestOBJ, 'error', params)
       })
       .then(response => {
-          console.log("fuck this 2", response)
+        console.log('fuck this 2', response)
         if (typeof response != 'object') return
         RequestCodeStatus(response)
         resolve(response)
@@ -287,7 +281,6 @@ function requestPOST(url, params) {
     alert('err')
   })
 }
-
 
 function requestXML(url) {
   const requestOBJ = [

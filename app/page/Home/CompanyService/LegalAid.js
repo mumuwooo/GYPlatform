@@ -9,7 +9,7 @@ import NavBar from '../../../components/NavBar'
 
 const { width, height } = Dimensions.get('window')
 
-@connect(({ user }) => ({ user }))
+@connect(({ link, page }) => ({ link, page }))
 class LegalAid extends NavigationPage {
   constructor(props) {
     super(props)
@@ -20,11 +20,11 @@ class LegalAid extends NavigationPage {
     return <NavBar title="法律援助服务" />
   }
 
-  handleSubmit = () => {
+  handleSubmit = address => {
     this.props.dispatch(
       NavigationActions.navigate({
         routeName: 'WebviewLinks',
-        params: { title: '法律援助服务' },
+        params: { title: '法律援助服务', address },
       })
     )
   }
@@ -78,6 +78,9 @@ class LegalAid extends NavigationPage {
     
 
     `
+    const { legalAidLink } = this.props.link
+    const { legalPage } = this.props.page
+    console.log('legal aid link', legalAidLink)
     return (
       <View style={styles.container}>
         <View style={styles.content}>
@@ -87,7 +90,7 @@ class LegalAid extends NavigationPage {
           >
             <Text style={styles.content_title}>法律援助注意事项</Text>
             <HTML
-              html={htmlContent}
+              html={legalPage.content}
               imagesMaxWidth={width * 0.95}
               tagsStyles={{
                 p: {
@@ -105,7 +108,7 @@ class LegalAid extends NavigationPage {
         <Button
           style={styles.button_save}
           textStyle={styles.button_text}
-          onPress={this.handleSubmit}
+          onPress={() => this.handleSubmit(legalAidLink.address)}
           type="theme"
         >
           立即申请

@@ -8,7 +8,7 @@ import { NavigationActions, commonStyle } from '../../../utils'
 
 const { width, height } = Dimensions.get('window')
 
-@connect(({ user }) => ({ user }))
+@connect(({ page }) => ({ page }))
 class FourIdentification extends NavigationPage {
   constructor(props) {
     super(props)
@@ -74,6 +74,7 @@ class FourIdentification extends NavigationPage {
     
 
     `
+    const { siShangPage } = this.props.page
     return (
       <View style={styles.container}>
         <View style={styles.content}>
@@ -83,7 +84,7 @@ class FourIdentification extends NavigationPage {
           >
             <Text style={styles.content_title}>四上企业申报指南</Text>
             <HTML
-              html={htmlContent}
+              html={siShangPage.content}
               imagesMaxWidth={width * 0.95}
               tagsStyles={{
                 p: {

@@ -20,11 +20,11 @@ export default {
   effects: {
     *login({ payload }, { call, put }) {
       const res = yield call(services.fetchLogin, payload)
-      Storage.set('_userToken', `bearer `+res.token)
+      Storage.set('_userToken', `bearer ${  res.token}`)
 
       window._userToken = `bearer ${res.token}`
       if (res) {
-        yield dispatch({type:'user/initUser'})
+        yield dispatch({ type: 'user/initUser' })
         yield put(NavigationActions.navigate({ routeName: 'Personal' }))
       } else {
         Toast.fail(res.Message)

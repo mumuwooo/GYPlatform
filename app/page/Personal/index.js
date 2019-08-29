@@ -9,24 +9,18 @@ import HeadView from './HeadView'
 
 const { width, height } = Dimensions.get('window')
 
-@connect(({ app, user }) => ({ ...app, user }))
+@connect(({ app, user }) => ({ app, user }))
 class Personal extends NavigationPage {
   renderNavigationBar() {
     return <NavBar title="用户中心" />
   }
-
-  
-  
-
-  
-
 
   gotoLogin = () => {
     this.props.dispatch(NavigationActions.navigate({ routeName: 'Login' }))
   }
 
   handleLogout = () => {
-    this.props.dispatch({type: 'user/logout'})
+    this.props.dispatch({ type: 'user/logout' })
     this.forceUpdate()
   }
 
@@ -36,7 +30,7 @@ class Personal extends NavigationPage {
 
   renderPage() {
     const { login, user } = this.props
-    console.log("user in Personal", user)
+    console.log('user in Personal', user)
     return (
       <ScrollView style={styles.container}>
         <HeadView />
@@ -112,18 +106,31 @@ class Personal extends NavigationPage {
               />
             }
           />
+          <RowLabel
+            title="检查更新"
+            icon={
+              <IconFont
+                name="&#xe73b;"
+                size={commonStyle.hSize}
+                style={{ color: commonStyle.h1Color }}
+              />
+            }
+            onPress={() => {
+              this.props.dispatch({ type: 'app/manualVersion' })
+            }}
+          />
         </View>
 
-{!!window._userToken&&
-        <Button
-          style={styles.button_logout}
-          textStyle={styles.button_text}
-          onPress={() => this.handleLogout()}
-          type="theme"
-        >
-          退出登录
-        </Button>
-}
+        {!!window._userToken && (
+          <Button
+            style={styles.button_logout}
+            textStyle={styles.button_text}
+            onPress={() => this.handleLogout()}
+            type="theme"
+          >
+            退出登录
+          </Button>
+        )}
       </ScrollView>
     )
   }

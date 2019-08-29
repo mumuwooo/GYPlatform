@@ -1,11 +1,13 @@
 import React from 'react'
-import { View, Linking, NetInfo, Platform } from 'react-native'
+import { Text, View, Linking, NetInfo, Platform } from 'react-native'
 import { Overlay, Label } from 'teaset'
 import { MyFilePicker } from 'NativeModules'
+import Toast from 'teaset/components/Toast/Toast'
 import { createAction, Storage, commonStyle } from '../utils'
-import { Button } from '../components'
+import { Button, Update } from '../components'
 import * as services from '../services/config'
 import { pageInit, xmlToJson } from '../utils/tools'
+import _version from '../utils/version'
 
 const isIOS = Platform.OS == 'ios'
 // 全局公共状态
@@ -19,6 +21,7 @@ const baseState = {
   routerParams: null, // 当前路由参数
   hasCache: false, // 存在路由缓存
   firstPage: 'Login', // 默认登录页
+  version: '',
 }
 
 const paging = pageInit()
@@ -59,23 +62,51 @@ export default {
     },
   },
   effects: {
-    *initApp(action, { put, call }) {
+    *initApp({ payload }, { put, call }) {
       // 获取 基础信息
       console.log('initApp')
       // 已登录判断  后续加载完成loading
       yield put({ type: 'loginJudge', loading: true })
+
+      yield put({ type: 'versionJudge' })
+
       // 用户信息
       // yield put({ type: 'user/updateBasicInfo', payload: _baseInfo })
     },
+    *versionJudge({ payload }, { put, call }) {
+      console.log('app version', _version)
+      const versionRemote = yield call(services.getVersion, payload)
+
+      console.log('Remote version', versionRemote)
+      if (versionRemote.version > _version) {
+        Overlay.show(<Update />)
+      }
+
+      // 版本更新
+    },
+    *manualVersion({ payload }, { put, call }) {
+      console.log('app version', _version)
+      const versionRemote = yield call(services.getVersion, payload)
+
+      console.log('Remote version', versionRemote)
+      if (versionRemote.version > _version) {
+        Overlay.show(<Update />)
+      } else {
+        Toast.success('已是最新版本！')
+      }
+
+      // 版本更新
+    },
+
     // 登录判断
     *loginJudge({ loading }, { call, put }) {
-      console.log("judge execuded!!!")
+      console.log('judge execuded!!!')
       const _userToken = yield call(Storage.get, '_userToken')
       if (!_userToken) {
         yield put({ type: 'isLogout' }) // 已退出
       } else {
         window._userToken = _userToken
-        dispatch({type:'user/initUser'})
+        dispatch({ type: 'user/initUser' })
       }
     },
     *routesBack({ routes, oldRoutes, force }, { select }) {
@@ -92,6 +123,57 @@ export default {
         // Under Home
         case 'Home': {
           dispatch({ type: 'slideIndex/getNewsList', payload: { paging } })
+          break
+        }
+        // Link
+        case 'SocialService': {
+          dispatch({ type: 'link/getSocialService', payload: { paging } })
+          break
+        }
+        case 'TaxService': {
+          dispatch({ type: 'link/getTaxService', payload: { paging } })
+          break
+        }
+        case 'AdmApproval': {
+          dispatch({ type: 'link/getAdmService', payload: { paging } })
+          dispatch({ type: 'page/getAdmPage', payload: { paging } })
+          break
+        }
+        case 'LegalAid': {
+          dispatch({ type: 'link/getLegalAidService', payload: { paging } })
+          dispatch({ type: 'page/getLegalPage', payload: { paging } })
+          break
+        }
+        case 'OnlineInvest': {
+          dispatch({ type: 'link/getOnlineInvests', payload: { paging } })
+          break
+        }
+
+        case 'ProjectReport': {
+          dispatch({ type: 'link/getProjectReport', payload: { paging } })
+          break
+        }
+
+        case 'PatentReport': {
+          dispatch({ type: 'link/getPatentReport', payload: { paging } })
+          break
+        }
+        case 'TechProject': {
+          dispatch({ type: 'link/getTechProject', payload: { paging } })
+          break
+        }
+        case 'TechAchive': {
+          dispatch({ type: 'link/getTechAchive', payload: { paging } })
+          break
+        }
+        case 'BankConnect': {
+          dispatch({ type: 'link/getBank', payload: { paging } })
+          break
+        }
+
+        // Page
+        case 'FourIdentification': {
+          dispatch({ type: 'page/getSiShangPage', payload: { paging } })
           break
         }
 
@@ -134,7 +216,7 @@ export default {
           break
         }
         case 'Personal': {
-          dispatch({type: 'user/initUser'})
+          dispatch({ type: 'user/initUser' })
           break
         }
         case '4disErr': {
@@ -173,6 +255,55 @@ export default {
           break
         }
 
+        // Home/CompanyService
+        case 'SocialService': {
+          dispatch({ type: 'link/getSocialService', payload: { paging } })
+          break
+        }
+        case 'TaxService': {
+          dispatch({ type: 'link/getTaxService', payload: { paging } })
+          break
+        }
+        case 'AdmApproval': {
+          dispatch({ type: 'link/getAdmService', payload: { paging } })
+          dispatch({ type: 'page/getAdmPage', payload: { paging } })
+          break
+        }
+        case 'LegalAid': {
+          dispatch({ type: 'link/getLegalAidService', payload: { paging } })
+          dispatch({ type: 'page/getLegalPage', payload: { paging } })
+          break
+        }
+        case 'OnlineInvest': {
+          dispatch({ type: 'link/getOnlineInvests', payload: { paging } })
+          break
+        }
+        case 'ProjectReport': {
+          dispatch({ type: 'link/getProjectReport', payload: { paging } })
+          break
+        }
+        case 'PatentReport': {
+          dispatch({ type: 'link/getPatentReport', payload: { paging } })
+          break
+        }
+        case 'TechProject': {
+          dispatch({ type: 'link/getTechProject', payload: { paging } })
+          break
+        }
+        case 'TechAchive': {
+          dispatch({ type: 'link/getTechAchive', payload: { paging } })
+          break
+        }
+        case 'BankConnect': {
+          dispatch({ type: 'link/getBank', payload: { paging } })
+          break
+        }
+        // Page
+        case 'FourIdentification': {
+          dispatch({ type: 'page/getSiShangPage', payload: { paging } })
+          break
+        }
+
         // Home/MarketService
         case 'MarketExtension': {
           dispatch({ type: 'marketService/getNewsList', payload: { paging } })
@@ -195,7 +326,7 @@ export default {
           break
         }
 
-        //InvestZH
+        // InvestZH
         case 'InvestZH': {
           dispatch({ type: 'investZH/getPages', payload: { paging } })
           dispatch({ type: 'investZH/getEvents' })

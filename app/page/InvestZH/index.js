@@ -1,20 +1,27 @@
 import React from 'react'
-import { StyleSheet, View, Image, Text, Dimensions } from 'react-native'
+import {
+  ScrollView,
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  Dimensions,
+} from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationPage } from 'teaset'
 import ScrollableTabView, {
   ScrollableTabBar,
 } from 'react-native-scrollable-tab-view'
 
+import HTML from 'react-native-render-html-for-maxwidth'
 import { Button, Divider, NavBar } from '../../components'
 import { NavigationActions, commonStyle } from '../../utils'
 import EventsList from './EventsList'
 
-import HTML from 'react-native-render-html-for-maxwidth';
 
 const { width, height } = Dimensions.get('window')
 
-@connect(({investZH})=>({investZH}))
+@connect(({ investZH }) => ({ investZH }))
 class InvestZH extends NavigationPage {
   renderNavigationBar() {
     return <NavBar title="投资昭化" />
@@ -29,7 +36,7 @@ class InvestZH extends NavigationPage {
     this.setState({ curIndex: obj.i })
   }
   renderPage() {
-    const {pages, events} = this.props.investZH;
+    const { pages, events } = this.props.investZH
     return (
       <View style={styles.tabView}>
         <ScrollableTabView
@@ -46,25 +53,29 @@ class InvestZH extends NavigationPage {
             <EventsList events={events} />
           </View>
           <View style={styles.tabView_textStyle} tabLabel="广元概况">
-            <HTML
-              html={pages?pages[1].content:"加载中"}
-              // html="test,test"
-              imagesMaxWidth={width * 0.95}
-              tagsStyles={{
-                p: {
-                  // fontFamily: "PingFang-SC-Medium",
-                  // fontSize: 16,
-                  // lineHeight:24,
-                  // color: "#666"
-                },
-              }}
-            />
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <HTML
+                html={pages ? pages[1].content : '加载中'}
+                // html="test,test"
+                imagesMaxWidth={width * 0.95}
+                tagsStyles={{
+                  p: {
+                    // fontFamily: "PingFang-SC-Medium",
+                    // fontSize: 16,
+                    // lineHeight:24,
+                    // color: "#666"
+                  },
+                }}
+              />
+            </ScrollView>
           </View>
           <View style={styles.tabView_textStyle} tabLabel="昭化概况">
-            <HTML
-              html={pages?pages[2].content:"加载中"}
-              imagesMaxWidth={width * 0.95}
-            />
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <HTML
+                html={pages ? pages[2].content : '加载中'}
+                imagesMaxWidth={width * 0.95}
+              />
+            </ScrollView>
           </View>
           <View style={styles.tabView_textStyle} tabLabel="投资合作">
             <Text>投资合作</Text>

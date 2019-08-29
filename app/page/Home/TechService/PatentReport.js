@@ -19,7 +19,7 @@ import { NavigationActions, commonStyle } from '../../../utils'
 
 const { width, height } = Dimensions.get('window')
 
-@connect(({ user }) => ({ user }))
+@connect(({ link }) => ({ link }))
 class PatentReport extends NavigationPage {
   constructor(props) {
     super(props)
@@ -30,15 +30,16 @@ class PatentReport extends NavigationPage {
     return <NavBar title="专利申报服务" />
   }
 
-  handleSubmit = () => {
+  handleSubmit = (title, address) => {
     this.props.dispatch(
       NavigationActions.navigate({
         routeName: 'WebviewLinks',
-        params: { title: '专利申报详情' },
+        params: { title, address },
       })
     )
   }
   renderPage() {
+    const { patentReport } = this.props.link
     return (
       <View style={styles.container}>
         <View style={styles.top}>
@@ -53,29 +54,24 @@ class PatentReport extends NavigationPage {
           </ImageBackground>
         </View>
         <View style={styles.content}>
-          <Touchable style={styles.eachitem} onPress={this.handleSubmit}>
-            <View style={styles.item_left}>
-              <IconFont
-                name="&#xe642;"
-                size={35}
-                color={commonStyle.pinkColor}
-              />
-              <Text style={styles.item_text}>专利电子申请</Text>
-            </View>
-            <IconFont name="&#xe6eb;" size={19} style={styles.item_right} />
-          </Touchable>
-
-          <Touchable style={styles.eachitem} onPress={this.handleSubmit}>
-            <View style={styles.item_left}>
-              <IconFont
-                name="&#xe648;"
-                size={35}
-                color={commonStyle.pinkColor}
-              />
-              <Text style={styles.item_text}>专利资助网上申报</Text>
-            </View>
-            <IconFont name="&#xe6eb;" size={19} style={styles.item_right} />
-          </Touchable>
+          {patentReport &&
+            patentReport.map((item, index) => (
+              <Touchable
+                style={styles.eachitem}
+                onPress={() => this.handleSubmit(item.title, item.address)}
+                key={index}
+              >
+                <View style={styles.item_left}>
+                  <IconFont
+                    name="&#xe642;"
+                    size={35}
+                    color={commonStyle.pinkColor}
+                  />
+                  <Text style={styles.item_text}>{item.title}</Text>
+                </View>
+                <IconFont name="&#xe6eb;" size={19} style={styles.item_right} />
+              </Touchable>
+            ))}
         </View>
       </View>
     )

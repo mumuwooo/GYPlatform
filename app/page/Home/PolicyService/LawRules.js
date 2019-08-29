@@ -82,6 +82,7 @@ class LawRules extends NavigationPage {
 
   renderPage() {
     const { lawList } = this.props.policyService
+    console.log('lawList', lawList)
     return (
       <View style={styles.container}>
         {lawList == null && <Loading />}
@@ -99,8 +100,8 @@ class LawRules extends NavigationPage {
                   <Text style={styles.title_text}>法律法规</Text>
                 </View>
                 <FlatList
-                  data={lawList}
-                  extraData={lawList}
+                  data={lawList.list}
+                  extraData={lawList.list}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={this._renderItemView}
                   // onRefresh={this._onRefresh}

@@ -19,7 +19,7 @@ import { NavigationActions, commonStyle } from '../../../utils'
 
 const { width, height } = Dimensions.get('window')
 
-@connect(({ user }) => ({ user }))
+@connect(({ link }) => ({ link }))
 class ProjectReport extends NavigationPage {
   constructor(props) {
     super(props)
@@ -30,34 +30,26 @@ class ProjectReport extends NavigationPage {
     return <NavBar title="科技成果服务" />
   }
 
-  handleSubmit = index => {
-    switch (index) {
-      case 1:
-        this.props.dispatch(
-          NavigationActions.navigate({ routeName: 'OnlineAchiveForm' })
-        )
-        break
-      case 2:
-        this.props.dispatch(
-          NavigationActions.navigate({
-            routeName: 'WebviewLinks',
-            params: { title: '高校合作直通车' },
-          })
-        )
-        break
-      case 3:
-        this.props.dispatch(
-          NavigationActions.navigate({
-            routeName: 'WebviewLinks',
-            params: { title: '在线成果库' },
-          })
-        )
-        break
-      default:
-        break
-    }
+  handleSubmit = (title, address) => {
+    this.props.dispatch(
+      NavigationActions.navigate({
+        routeName: 'WebviewLinks',
+        params: { title, address },
+      })
+    )
   }
+
+  handleToForm = () => {
+    this.props.dispatch(
+      NavigationActions.navigate({
+        // routeName: "OnlineAchiveForm"
+        routeName: 'OnlineAchiveForm',
+      })
+    )
+  }
+
   renderPage() {
+    const { techAchive } = this.props.link
     return (
       <View style={styles.container}>
         <View style={styles.top}>
@@ -74,7 +66,7 @@ class ProjectReport extends NavigationPage {
         <View style={styles.content}>
           <Touchable
             style={styles.eachitem}
-            onPress={() => this.handleSubmit(1)}
+            onPress={() => this.handleToForm()}
           >
             <View style={styles.item_left}>
               <IconFont
@@ -87,35 +79,24 @@ class ProjectReport extends NavigationPage {
             <IconFont name="&#xe6eb;" size={19} style={styles.item_right} />
           </Touchable>
 
-          <Touchable
-            style={styles.eachitem}
-            onPress={() => this.handleSubmit(2)}
-          >
-            <View style={styles.item_left}>
-              <IconFont
-                name="&#xe645;"
-                size={35}
-                color={commonStyle.pinkColor}
-              />
-              <Text style={styles.item_text}>高校合作直通车</Text>
-            </View>
-            <IconFont name="&#xe6eb;" size={19} style={styles.item_right} />
-          </Touchable>
-
-          <Touchable
-            style={styles.eachitem}
-            onPress={() => this.handleSubmit(3)}
-          >
-            <View style={styles.item_left}>
-              <IconFont
-                name="&#xe649;"
-                size={35}
-                color={commonStyle.pinkColor}
-              />
-              <Text style={styles.item_text}>在线成果库</Text>
-            </View>
-            <IconFont name="&#xe6eb;" size={19} style={styles.item_right} />
-          </Touchable>
+          {techAchive &&
+            techAchive.map((item, index) => (
+              <Touchable
+                style={styles.eachitem}
+                onPress={() => this.handleSubmit(item.title, item.address)}
+                key={index}
+              >
+                <View style={styles.item_left}>
+                  <IconFont
+                    name="&#xe656;"
+                    size={35}
+                    color={commonStyle.pinkColor}
+                  />
+                  <Text style={styles.item_text}>{item.title}</Text>
+                </View>
+                <IconFont name="&#xe6eb;" size={19} style={styles.item_right} />
+              </Touchable>
+            ))}
         </View>
       </View>
     )

@@ -7,91 +7,56 @@ const paging = pageInit()
 export default {
   namespace: 'user',
   state: {
-    customerId: "",
-    favoriteArticles: [],
-    financeDemands: [],
-    idNum: '',
-    avatarURL:"",
-    ifIdentified: false,
-    phoneNum: "",
-    password: "",
-    realName: "",
-    username: ""
-
+    userinfo: {},
+    avatarURL: '',
   },
   reducers: {
-    updateUserInfo(state, {payload}){
-      return { ...state, 
-        customerId: payload.customerId,
-        favoriteArticles: payload.favoriteArticles,
-        financeDemands: payload.financeDemands,
-        idNum: payload.idNum,
-        avatarURL:payload.avatarURL,
-        ifIdentified: payload.ifIdentified,
-        phoneNum: payload.phoneNum,
-        password: payload.password,
-        realName: payload.realName,
-        username: payload.username
-
-       }
+    updateUserInfo(state, { payload }) {
+      return { ...state, userinfo: payload }
     },
-    emptyUserInfo(state){
-      return {
-        ...state,
-        customerId: "",
-        favoriteArticles: [],
-        financeDemands: [],
-        idNum: '',
-        avatarURL:"",
-        ifIdentified: false,
-        phoneNum: "",
-        password: "",
-        realName: "",
-        username: ""
-
-      }
+    emptyUserInfo(state) {
+      return { ...state, userinfo: {} }
     },
-    updateUserAvatar(state,{payload}){
-      console.log("avatar payload", payload)
-      return {...state, avatarURL: payload.pictureUrl }
-    }
+    updateUserAvatar(state, { payload }) {
+      console.log('avatar payload', payload)
+      return { ...state, avatarURL: payload.pictureUrl }
+    },
   },
   effects: {
-    *initUser(action, {put, call}){
-      if(window._userToken){
+    *initUser(action, { put, call }) {
+      if (window._userToken) {
         const res = yield call(services.fecthUserInfo)
-        console.log("fuck the res ", res)
-        if(res){
-          console.log("in model user", res)
-          yield put({type: 'updateUserInfo', payload: res.data})
-        }else{
+        console.log('the user userinformation', res)
+        if (res) {
+          console.log('in model user', res)
+          yield put({ type: 'updateUserInfo', payload: res.data })
+        } else {
           Toast.fails(res.message)
         }
-      }else{
-        yield put({type: 'emptyUserInfo'})
+      } else {
+        yield put({ type: 'emptyUserInfo' })
       }
     },
-    *logout(action, {put, call}){
-      window._userToken=''
+    *logout(action, { put, call }) {
+      window._userToken = ''
       Storage.remove('_userToken')
-      yield put({type: 'emptyUserInfo'})
+      yield put({ type: 'emptyUserInfo' })
     },
-    *updateRemote(action, {put,call, select}){
-      const data = yield select((state)=>state.user)
-      console.log("params in model", data)
-      const res=yield call(services.updateUser, data)
-      if(res){
-        console.log("response in user model", res)
-        Toast.success("修改成功")
-      }else{
+    *updateRemote(action, { put, call, select }) {
+      const data = yield select(state => state.user)
+      console.log('params in model', data)
+      const res = yield call(services.updateUser, data)
+      if (res) {
+        console.log('response in user model', res)
+        Toast.success('修改成功')
+      } else {
         Toast.fails(res.message)
       }
-    }
-
+    },
   },
   subscriptions: {
     setup({ dispatch }) {
-      // dispatch({ type: 'initUser' })
+      // dispatch({ type: 'checkLogined' })
     },
   },
 }

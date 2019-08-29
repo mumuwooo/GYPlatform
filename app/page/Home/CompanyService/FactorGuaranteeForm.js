@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Dimensions, Text, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationBar, NavigationPage, PullPicker, Button } from 'teaset'
+import Toast from 'teaset/components/Toast/Toast'
 import { Divider, NavBar, IconFont, Touchable } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
 
@@ -12,13 +13,17 @@ class FactorGuaranteeForm extends NavigationPage {
     super(props)
     this.state = {
       progress: 1, //  1信息登记 2联系方式
-      typeName: '请选择需求类型',
-      demandText: '',
-      inputName: '',
-      inputIdCard: '',
-      inputPhone: '',
-      inputCode: '',
-      ExamineeNo: '',
+      contact: '',
+      enterpriseName: '',
+      phoneNum: '',
+      demandType: '',
+      content: '',
+    }
+  }
+  componentWillMount() {
+    if (!window._userToken) {
+      this.props.dispatch(NavigationActions.navigate({ routeName: 'Personal' }))
+      Toast.stop('请先登陆')
     }
   }
 
@@ -40,48 +45,37 @@ class FactorGuaranteeForm extends NavigationPage {
     this.setState({ progress: 1 })
   }
   // 显示需求列表
-  handleTypeSelect = () => {
-    const typeList = [
-      { Name: '能源保障服务' },
-      { Name: '能源保障服务' },
-      { Name: '能源保障服务' },
-    ]
-    PullPicker.show(
-      '请选择需求类型',
-      // this.props.register.schoolList.map(item => item.Name),
-      typeList.map(item => item.Name),
-      this.state.selectedIndex,
-      (item, index) => {
-        // const schoolID = this.props.register.schoolList[index].ID
-        // this.props.dispatch({
-        //   type: 'register/getLevelList',
-        //   payload: { School_ID: schoolID, IsCurStation: 1 },
-        // })
-        this.setState({ typeName: item })
-      }
-    )
-  }
+  // handleTypeSelect = () => {
+  //   const typeList = [
+  //     { Name: '能源保障服务' },
+  //     { Name: '能源保障服务' },
+  //     { Name: '能源保障服务' },
+  //   ]
+  //   PullPicker.show(
+  //     '请选择需求类型',
+  //     // this.props.register.schoolList.map(item => item.Name),
+  //     typeList.map(item => item.Name),
+  //     this.state.selectedIndex,
+  //     (item, index) => {
+  //       // const schoolID = this.props.register.schoolList[index].ID
+  //       // this.props.dispatch({
+  //       //   type: 'register/getLevelList',
+  //       //   payload: { School_ID: schoolID, IsCurStation: 1 },
+  //       // })
+  //       this.setState({ typeName: item })
+  //     }
+  //   )
+  // }
 
   handleProgress = index => {
     this.setState({ progress: index })
   }
 
   handleSubmit = () => {
-    alert('提交表单')
+    dispatch({ type: 'forms/postFactorGuaranteeForm', payload: this.state })
   }
   renderPage() {
-    const {
-      progress,
-      inputPhone,
-      inputCode,
-      inputName,
-      inputIdCard,
-      ExamineeNo,
-      School_ID,
-      Specialty_ID,
-      Batch_ID,
-    } = this.state
-    console.log("new form", this.props.user)
+    const { progress } = this.state
     return (
       <View style={styles.container}>
         <View style={styles.content}>
@@ -125,10 +119,10 @@ class FactorGuaranteeForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ contact: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.contact}
                 />
               </View>
               <View style={styles.eachItem}>
@@ -138,10 +132,10 @@ class FactorGuaranteeForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ enterpriseName: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.enterpriseName}
                 />
               </View>
 
@@ -152,14 +146,14 @@ class FactorGuaranteeForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ phoneNum: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.phoneNum}
                 />
               </View>
               <View style={styles.eachItem}>
-                <Touchable
+                {/* <Touchable
                   onPress={this.handleTypeSelect}
                   style={styles.school_select}
                 >
@@ -169,7 +163,18 @@ class FactorGuaranteeForm extends NavigationPage {
                     size={18}
                     style={styles.item_icon}
                   />
-                </Touchable>
+                </Touchable> */}
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入需求类型"
+                  underlineColorAndroid="transparent"
+                  keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ demandType: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.demandType}
+                />
               </View>
             </View>
           ) : (
@@ -181,8 +186,8 @@ class FactorGuaranteeForm extends NavigationPage {
                 underlineColorAndroid="transparent"
                 multiline
                 style={styles.userInput}
-                onChangeText={demandText => this.setState({ demandText })}
-                value={this.state.demandText}
+                onChangeText={content => this.setState({ content })}
+                value={this.state.content}
               />
             </View>
           )}

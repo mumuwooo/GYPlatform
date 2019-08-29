@@ -49,18 +49,6 @@ class ProjectService extends Component {
 
             <Touchable
               style={styles.item_each}
-              onPress={() => this.goToDetail(2)}
-            >
-              <IconFont
-                name="&#xe629;"
-                size={22}
-                color={commonStyle.orangeColor}
-              />
-              <Text style={styles.icon_text}>项目申报</Text>
-            </Touchable>
-
-            <Touchable
-              style={styles.item_each}
               onPress={() => this.goToDetail(3)}
             >
               <IconFont
@@ -69,6 +57,19 @@ class ProjectService extends Component {
                 color={commonStyle.orangeColor}
               />
               <Text style={styles.icon_text}>建设项目协调服务</Text>
+            </Touchable>
+          </View>
+          <View style={styles.item_row}>
+            <Touchable
+              style={styles.item_each}
+              onPress={() => this.goToDetail(2)}
+            >
+              <IconFont
+                name="&#xe629;"
+                size={22}
+                color={commonStyle.orangeColor}
+              />
+              <Text style={styles.icon_text}>项目申报</Text>
             </Touchable>
           </View>
         </Popover>

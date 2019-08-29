@@ -18,6 +18,12 @@ class FinanceGuaranteeForm extends NavigationPage {
       gurantName: '请选择反担措施',
     }
   }
+  componentWillMount() {
+    if (!window._userToken) {
+      this.props.dispatch(NavigationActions.navigate({ routeName: 'Personal' }))
+      Toast.stop('请先登陆')
+    }
+  }
 
   renderNavigationBar() {
     return <NavBar title="融资担保申请" />

@@ -131,6 +131,7 @@ class Libraries extends NavigationPage {
   renderPage() {
     const { sortType } = this.state
     const { libList } = this.props.policyService
+    console.log('the libList', libList)
     return (
       <ScrollView style={styles.container}>
         <View style={styles.top}>
@@ -186,7 +187,7 @@ class Libraries extends NavigationPage {
         </View>
         <View style={styles.content}>
           {libList &&
-            libList.map((item, index) => (
+            libList.list.map((item, index) => (
               <NewsBlock data={item} index={index} key={index} />
             ))}
           <Divider type="bottomSpace" />

@@ -39,13 +39,7 @@ export default {
       return { ...state, politicList: payload }
     },
     updateLibList(state, { payload, paging }) {
-      //   if (paging) {
-      //     state.newListPaging = paging
-      //     if (paging.PageIndex > 1) {
-      //       state.newList.push(...payload)
-      //       return { ...state }
-      //     }
-      //   }
+      console.log('the data', payload)
       return { ...state, libList: payload }
     },
   },
@@ -70,6 +64,7 @@ export default {
     },
     *getLibList({ payload }, { call, put }) {
       const res = yield call(services.fetchLibList, payload)
+      console.log('libList is not a ', res)
       const { PageIndex, PageSize, PageStatus } = payload
       if (res.successResponse) {
         yield put({ type: 'updateLibList', payload: res.data })
