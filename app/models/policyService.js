@@ -7,67 +7,49 @@ const paging = pageInit()
 export default {
   namespace: 'policyService',
   state: {
-    loading: true,
-    refresh: true,
-    newListPaging: paging, // 分页对象
-    lawList: null,
-    politicList: null,
-    libList: null,
+    libPaging: paging, // 分页对象
+    lawPaging: paging, // 分页对象
+    politicPaging: paging, // 分页对象
+    lawList: [],
+    politicList: [],
+    libList: [],
+    totalLib:0,
+    totalLaw:0,
+    totalPolitic:0
   },
   reducers: {
-    updateLoadStatus(state, payload) {
-      return { ...state, loading: payload.loading, refresh: payload.refresh }
-    },
     updateLawList(state, { payload, paging }) {
-      //   if (paging) {
-      //     state.newListPaging = paging
-      //     if (paging.PageIndex > 1) {
-      //       state.newList.push(...payload)
-      //       return { ...state }
-      //     }
-      //   }
-      return { ...state, lawList: payload }
+      return { ...state, lawList: state.lawList.concat(payload.law.list), totalLaw: payload.law.totalCount,lawPaging:payload.paging }
     },
     updatePoliticList(state, { payload, paging }) {
-      //   if (paging) {
-      //     state.newListPaging = paging
-      //     if (paging.PageIndex > 1) {
-      //       state.newList.push(...payload)
-      //       return { ...state }
-      //     }
-      //   }
-      return { ...state, politicList: payload }
+      return { ...state, politicList: state.politicList.concat(payload.politic.list), totalPolitic:payload.politic.totalCount,politicPaging:payload.paging }
     },
-    updateLibList(state, { payload, paging }) {
-      console.log('the data', payload)
-      return { ...state, libList: payload }
+    updateLibList(state, { payload }) {
+      return { ...state, libList: state.libList.concat(payload.lib.list), totalLib:payload.lib.totalCount, libPaging:payload.paging }
     },
   },
   effects: {
     *getLawList({ payload }, { call, put }) {
       const res = yield call(services.fetchLawList, payload)
-      const { PageIndex, PageSize, PageStatus } = payload
       if (res.successResponse) {
-        yield put({ type: 'updateLawList', payload: res.data })
+        yield put({ type: 'updateLawList', payload: {law:res.data, paging:payload} })
       } else {
         Toast.fail(res.Message)
       }
     },
     *getPoliticList({ payload }, { call, put }) {
       const res = yield call(services.fetchPoliticList, payload)
-      const { PageIndex, PageSize, PageStatus } = payload
+      console.log("the politic res", res)
       if (res.successResponse) {
-        yield put({ type: 'updatePoliticList', payload: res.data })
+        yield put({ type: 'updatePoliticList', payload: {politic:res.data, paging:payload} })
       } else {
         Toast.fail(res.Message)
       }
     },
     *getLibList({ payload }, { call, put }) {
       const res = yield call(services.fetchLibList, payload)
-      console.log('libList is not a ', res)
-      const { PageIndex, PageSize, PageStatus } = payload
       if (res.successResponse) {
-        yield put({ type: 'updateLibList', payload: res.data })
+        yield put({ type: 'updateLibList', payload: {lib:res.data, paging:payload} })
       } else {
         Toast.fail(res.Message)
       }

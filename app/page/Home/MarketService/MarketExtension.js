@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import Timeline from 'react-native-timeline-listview-touchable'
 import { NavigationPage, Button, Toast } from 'teaset'
 import { connect } from 'react-redux'
-import { Divider, IconFont, NavBar } from '../../../components'
+import { Touchable, Divider, IconFont, NavBar } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
 
 import _baseURLGlobal from '../../../utils/global'
@@ -16,41 +16,6 @@ class MarketExtension extends NavigationPage {
     this.onEventPress = this.onEventPress.bind(this)
     this.renderDetail = this.renderDetail.bind(this)
 
-    this.data = [
-      {
-        index: 1,
-        title: '2019年6月27日-6月29日/广州',
-        description: '2019世界食品广州展',
-        // lineColor:'#009688',
-        icon: require('../../../assets/images/timeline_redtag.png'),
-        imageUrl: 'http://www.zhaohua.gov.cn/pic.aspx?id=8894',
-      },
-      {
-        index: 2,
-        title: '2019年6月27日-6月29日/广州',
-        description: '国际火锅食材用品展览会',
-        icon: require('../../../assets/images/timeline_tag.png'),
-        imageUrl:
-          'https://cloud.githubusercontent.com/assets/21040043/24240405/0ba41234-0fe4-11e7-919b-c3f88ced349c.jpg',
-      },
-      {
-        index: 3,
-        title: '2019年6月27日-6月29日/广州',
-        description: '上海国际智能家居展览会',
-        icon: require('../../../assets/images/timeline_tag.png'),
-        // lineColor:'#009688',
-        imageUrl:
-          'https://cloud.githubusercontent.com/assets/21040043/24240419/1f553dee-0fe4-11e7-8638-6025682232b1.jpg',
-      },
-      {
-        index: 4,
-        title: '2019年6月27日-6月29日/广州',
-        description: '2019亚洲果蔬产业博览会',
-        icon: require('../../../assets/images/timeline_tag.png'),
-        imageUrl:
-          'https://cloud.githubusercontent.com/assets/21040043/24240422/20d84f6c-0fe4-11e7-8f1d-9dbc594d0cfa.jpg',
-      },
-    ]
     this.state = { selected: null }
   }
   renderNavigationBar() {
@@ -64,8 +29,18 @@ class MarketExtension extends NavigationPage {
     this.setState({ selected: data })
   }
 
+  goToDetail(data){
+    dispatch(
+      NavigationActions.navigate({
+        routeName: 'NewsDetail',
+        params: { data },
+      })
+    )
+  }
+
   renderDetail(rowData, sectionID, rowID) {
     const title = <Text style={[styles.title]}>{rowData.title}</Text>
+      console.log("title Details", rowData);
     let desc = null
     if (rowData.pictureUrl && rowData.content)
       desc = (
@@ -74,7 +49,9 @@ class MarketExtension extends NavigationPage {
             <Text style={[styles.textDescription]}>
               {rowData.contentSource}
             </Text>
+              <Touchable onPress={()=>this.goToDetail(rowData)}>
             <Text style={styles.textDescription_right}>{'详情 >'}</Text>
+              </Touchable>
           </View>
           <Image
             source={{ uri: _baseURLGlobal + rowData.pictureUrl }}

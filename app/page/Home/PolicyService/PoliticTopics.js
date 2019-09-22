@@ -35,52 +35,42 @@ class PoliticTopics extends NavigationPage {
       isShowHead: false, // true 显示头部
     }
   }
-
   renderNavigationBar() {
     return <NavBar title="专题政策" />
   }
-
-  gotoDetail = () => {
-    this.props.dispatch(NavigationActions.navigate({ routeName: 'Sorry' }))
-  }
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.setTimeout = this.setState({ swiperShow: true })
-    }, 0)
-  }
-
-  // 移除定时器
-  componentWillUnmount() {
-    this.setTimeout && clearTimeout(this.setTimeout)
-  }
-  _renderItemView = ({ item, index }) => (
-    <NewsBlock data={item} key={index} index={index} navTitle="专题政策" />
-  )
-  //  触底更新
   _onEndReached = () => {
-    // const { newListPaging } = this.props.notification
-    // const paging = { ...newListPaging, PageIndex: newListPaging.PageIndex + 1 }
-    // if (
-    //   newListPaging.PageIndex * newListPaging.PageSize <
-    //   newListPaging.TotalCount
-    // ) {
-    //   const payload = { AssignObject: 4, IsPust: 1, ...paging }
-    //   this.props.dispatch({ type: 'notification/getNewList', payload })
-    // }
-    // const { loading } = this.props.notification
-    // this.setState({ loading })
+    this.setState({loading: true})
+    const { politicPaging, totalPolitic } = this.props.policyService
+    console.log("trigged on the end Reched", totalPolitic)
+    if (
+      politicPaging.PageIndex * politicPaging.PageSize <
+      totalPolitic
+    ) {
+      const paging = { ...politicPaging, PageIndex: politicPaging.PageIndex + 1 }
+      const payload = { ...paging}
+      this.props.dispatch({ type: 'policyService/getPoliticList', payload:payload })
+    }else{
+      this.setState({isRefresh:false})
+    }
+    this.setState({loading: false})
   }
+
   _renderFooter = () =>
-    this.state.loading ? (
+  this.state.loading?(
       <Text style={styles.loading}>努力加载中...</Text>
-    ) : (
+  ):(
+    this.state.isRefresh?(
+      <Text style={styles.loading}>继续下拉加载更多内容...</Text>
+    ):(
       <View style={styles.loaded}>
         <Text style={styles.loaded_line} />
         <Text> 已经到底了 </Text>
         <Text style={styles.loaded_line} />
       </View>
     )
+  )
+  _renderItemView = ({ item, index }) => 
+    (<NewsBlock data={item} key={index} index={index} navTitle="专题政策" />)
 
   renderPage() {
     const { politicList } = this.props.policyService
@@ -101,7 +91,7 @@ class PoliticTopics extends NavigationPage {
               </View>
               {politicList && (
                 <FlatList
-                  data={politicList.list}
+                  data={politicList}
                   extraData={politicList.list}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={this._renderItemView}

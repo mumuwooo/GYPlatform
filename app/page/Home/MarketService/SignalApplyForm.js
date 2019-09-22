@@ -7,12 +7,30 @@ import { NavigationActions, commonStyle } from '../../../utils'
 
 const { width, height } = Dimensions.get('window')
 
-@connect(({ user }) => ({ user }))
+@connect(({ forms }) => ({ forms }))
 class SignalApplyForm extends NavigationPage {
   constructor(props) {
     super(props)
     this.state = {
       progress: 1, //  1信息登记 2联系方式
+      //[Display(Name = "产品名称")]
+      ProductName: '',
+      //[Display(Name = "出品企业")]
+      EnterpriseName: '',
+      //[Display(Name = "联系人")]
+      Contact: '',
+      //[Display(Name = "联系电话")]
+      PhoneNum: '',
+      //[Display(Name = "产品简介")]
+      ProductSummary: '',
+      //[Display(Name ="产品正面")]
+      ProductFront: '',
+      //[Display(Name ="产品侧面")]
+      ProductSide: '',
+      //[Display(Name ="产品俯视")]
+      ProductOver: '',
+      //[Display(Name ="产品全局")]
+      ProductGlobal: '',
     }
   }
   componentWillMount() {
@@ -44,7 +62,7 @@ class SignalApplyForm extends NavigationPage {
   }
 
   handleSubmit = () => {
-    alert('提交表单')
+    dispatch({ type: 'forms/postSignalApplyForm', payload: this.state })
   }
   renderPage() {
     const { progress } = this.state
@@ -91,10 +109,10 @@ class SignalApplyForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ ProductName: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.ProductName}
                 />
               </View>
 
@@ -105,10 +123,10 @@ class SignalApplyForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ EnterpriseName: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.EnterpriseName}
                 />
               </View>
               <View style={styles.eachItem}>
@@ -118,10 +136,10 @@ class SignalApplyForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ Contact: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.Contact}
                 />
               </View>
               <View style={styles.eachItem}>
@@ -131,10 +149,10 @@ class SignalApplyForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ PhoneNum: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.PhoneNum}
                 />
               </View>
             </View>
@@ -147,8 +165,8 @@ class SignalApplyForm extends NavigationPage {
                 underlineColorAndroid="transparent"
                 multiline
                 style={styles.userInput}
-                onChangeText={demandText => this.setState({ demandText })}
-                value={this.state.demandText}
+                onChangeText={ProductSummary => this.setState({ ProductSummary })}
+                value={this.state.ProductSummary}
               />
             </View>
           )}

@@ -32,7 +32,7 @@ class ZHInfos extends NavigationPage {
     this.state = {
       swiperShow: false,
       loading: false, // true加载中    false到底了
-      isRefresh: false, // true 加载符号转圈  false 不转圈
+      isRefresh: true, // true 加载符号转圈  false 不转圈
       isShowHead: false, // true 显示头部
     }
   }
@@ -46,7 +46,7 @@ class ZHInfos extends NavigationPage {
     console.log('====================================')
     console.log(item)
     console.log('====================================')
-    // this.props.dispatch(NavigationActions.navigate({ routeName: 'NewsDetail', params: { navTitle:'新闻快讯', data } }))
+    this.props.dispatch(NavigationActions.navigate({ routeName: 'NewsDetail', params: { navTitle:'新闻快讯', data } }))
   }
 
   componentDidMount() {
@@ -59,33 +59,41 @@ class ZHInfos extends NavigationPage {
   componentWillUnmount() {
     this.setTimeout && clearTimeout(this.setTimeout)
   }
-  _renderItemView = ({ item, index }) => (
+  _renderItemView = ({ item, index }) => {
+    return(
     <NewsBlock data={item} key={index} index={index} />
-  )
+  )}
   //  触底更新
   _onEndReached = () => {
-    const { newListPaging } = this.props.zhInfos
-    const paging = { ...newListPaging, PageIndex: newListPaging.PageIndex + 1 }
+    this.setState({loading: true})
+    console.log("trigged on the end Reched")
+    const { newListPaging, totalCount } = this.props.zhInfos
     if (
       newListPaging.PageIndex * newListPaging.PageSize <
-      newListPaging.TotalCount
+      totalCount
     ) {
-      const payload = { ...paging }
-      // this.props.dispatch({ type: 'zhInfos/getNewsList', payload })
+      const paging = { ...newListPaging, PageIndex: newListPaging.PageIndex + 1 }
+      const payload = { ...paging}
+      this.props.dispatch({ type: 'zhInfos/getNewsList', payload:payload })
+    }else{
+      this.setState({isRefresh:false})
     }
-    const { loading } = this.props.zhInfos
-    this.setState({ loading })
+    this.setState({loading: false})
   }
   _renderFooter = () =>
-    this.state.loading ? (
+  this.state.loading?(
       <Text style={styles.loading}>努力加载中...</Text>
-    ) : (
+  ):(
+    this.state.isRefresh?(
+      <Text style={styles.loading}>继续下拉加载更多内容...</Text>
+    ):(
       <View style={styles.loaded}>
         <Text style={styles.loaded_line} />
         <Text> 已经到底了 </Text>
         <Text style={styles.loaded_line} />
       </View>
     )
+  )
 
   // 轮播图
   renderBanner(slidesZh) {
@@ -98,7 +106,7 @@ class ZHInfos extends NavigationPage {
             style={styles.wrapper}
             showsButtons={false}
             autoplay
-            autoplayTimeout={4}
+            autoplayTimeout={6}
             paginationStyle={styles.paginationStyle}
             dotStyle={styles.dotStyle}
             activeDotStyle={styles.activeDotStyle}
@@ -134,7 +142,7 @@ class ZHInfos extends NavigationPage {
   }
 
   renderPage() {
-    const { zhInfoList, slidesZh } = this.props.zhInfos
+    const {isRefresh, zhInfoList, slidesZh } = this.props.zhInfos
     return (
       <View style={styles.container}>
         <View style={{ flex: 1 }}>

@@ -24,7 +24,7 @@ class SocialService extends NavigationPage {
   }
 
   renderNavigationBar() {
-    return <NavBar title="社会服务直通车" />
+    return <NavBar title="社保服务直通车" />
   }
 
   handleSubmit = address => {

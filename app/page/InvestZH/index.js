@@ -6,7 +6,16 @@ import {
   Image,
   Text,
   Dimensions,
+  Linking,
+  ImageBackground
 } from 'react-native'
+import {
+  Divider,
+  NavBar,
+  IconFont,
+  Button,
+  Touchable,
+} from '../../components'
 import { connect } from 'react-redux'
 import { NavigationPage } from 'teaset'
 import ScrollableTabView, {
@@ -14,9 +23,9 @@ import ScrollableTabView, {
 } from 'react-native-scrollable-tab-view'
 
 import HTML from 'react-native-render-html-for-maxwidth'
-import { Button, Divider, NavBar } from '../../components'
 import { NavigationActions, commonStyle } from '../../utils'
 import EventsList from './EventsList'
+import FinanceCoordinateForm from './FinanceCoordinateForm'
 
 
 const { width, height } = Dimensions.get('window')
@@ -28,7 +37,20 @@ class InvestZH extends NavigationPage {
   }
 
   gotoDetail = () => {
-    this.props.dispatch(NavigationActions.navigate({ routeName: 'Sorry' }))
+    this.props.dispatch(NavigationActions.navigate({ routeName: 'FinanceCoordinateForm' }))
+  }
+
+  callPhone=()=>{
+    let url="tel:18570063440"
+    console.log("call phone excuceted")
+       Linking.canOpenURL(url).then(supported => {
+        if (!supported) {
+            console.log('Can\'t handle url: ' + url);
+        } else {
+            return Linking.openURL(url);
+        }
+    }).catch(err => console.error('An error occurred', err));
+
   }
 
   // tab切换
@@ -37,6 +59,7 @@ class InvestZH extends NavigationPage {
   }
   renderPage() {
     const { pages, events } = this.props.investZH
+    console.log("what page is", pages);
     return (
       <View style={styles.tabView}>
         <ScrollableTabView
@@ -54,6 +77,7 @@ class InvestZH extends NavigationPage {
           </View>
           <View style={styles.tabView_textStyle} tabLabel="广元概况">
             <ScrollView showsVerticalScrollIndicator={false}>
+              <View style={styles.tabContent}>
               <HTML
                 html={pages ? pages[1].content : '加载中'}
                 // html="test,test"
@@ -67,18 +91,59 @@ class InvestZH extends NavigationPage {
                   },
                 }}
               />
+              </View>
             </ScrollView>
           </View>
           <View style={styles.tabView_textStyle} tabLabel="昭化概况">
             <ScrollView showsVerticalScrollIndicator={false}>
+              <View style={styles.tabContent}>
               <HTML
                 html={pages ? pages[2].content : '加载中'}
                 imagesMaxWidth={width * 0.95}
               />
+              </View>
             </ScrollView>
           </View>
           <View style={styles.tabView_textStyle} tabLabel="投资合作">
-            <Text>投资合作</Text>
+            <View>
+              <View style={styles.top}>
+                <ImageBackground
+                  source={require('../../assets/images/tech_bg.png')}
+                  style={styles.top_imageBg}
+                >
+                  <View style={styles.top_text}>
+                    <Text style={styles.text_title}>区内金字招牌介绍</Text>
+                    <Text style={styles.text_eng}>
+                      INTRODUCING THE GOLD SIGNS IN THE AREA
+                    </Text>
+                  </View>
+                </ImageBackground>
+              </View>
+              <View style={styles.content}>
+                <Touchable style={styles.eachitem} onPress={this.gotoDetail}>
+                  <View style={styles.item_left}>
+                    <IconFont
+                      name="&#xe632;"
+                      size={35}
+                      color={commonStyle.redColor}
+                    />
+                    <Text style={styles.item_text}>提交申请书</Text>
+                  </View>
+                  <IconFont name="&#xe6eb;" size={19} style={styles.item_right} />
+                </Touchable>
+                <Touchable style={styles.eachitem} onPress={this.callPhone}>
+                  <View style={styles.item_left}>
+                    <IconFont
+                      name="&#xe632;"
+                      size={35}
+                      color={commonStyle.redColor}
+                    />
+                    <Text style={styles.item_text}>拨打电话直接联系</Text>
+                  </View>
+                  <IconFont name="&#xe6eb;" size={19} style={styles.item_right} />
+                </Touchable>
+              </View>
+            </View>
           </View>
         </ScrollableTabView>
       </View>
@@ -87,6 +152,56 @@ class InvestZH extends NavigationPage {
 }
 
 const styles = StyleSheet.create({
+  top_imageBg: {
+    width,
+    height: 153,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  top_text: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text_title: {
+    color: '#fff',
+    fontFamily: commonStyle.PFmedium,
+    fontSize: commonStyle.hSize,
+    marginBottom: 9,
+  },
+  text_eng: {
+    fontFamily: commonStyle.PFregular,
+    fontSize: 8,
+    color: '#ffffff',
+  },
+  content: {
+    marginTop: 24,
+  },
+  eachitem: {
+    backgroundColor: '#fff',
+    marginHorizontal: 15,
+    borderRadius: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    alignItems: 'center',
+    paddingVertical: 10,
+    marginBottom: 14,
+  },
+  item_text: {
+    fontFamily: commonStyle.PFregular,
+    fontSize: 15,
+    color: '#3a3a3a',
+    width: 210,
+    marginLeft: 10,
+    marginRight: 24,
+  },
+  item_left: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  item_right: {
+    color: commonStyle.h2Color,
+  },
   tabView: {
     flex: 1,
     backgroundColor: commonStyle.bgColor,
@@ -105,7 +220,11 @@ const styles = StyleSheet.create({
     fontSize: commonStyle.h21Size,
   },
   tabView_textStyle: {
-    alignItems: 'center',
+  },
+  tabContent:{
+    width:width*0.9,
+    paddingTop:12,
+    paddingLeft:width*0.025,
   },
   loadHeader: {
     height: 150,

@@ -1,7 +1,9 @@
 import React from 'react'
-import { StyleSheet, View, Text, Dimensions, ScrollView } from 'react-native'
+import {Share, StyleSheet, View, Text, Dimensions, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationPage, ListRow, Label } from 'teaset'
+import {Touchable} from '../../components'
+import {Toast} from 'teaset'
 
 import { IconFont, NavBar, Button } from '../../components'
 import { createAction, NavigationActions, commonStyle } from '../../utils'
@@ -15,6 +17,26 @@ class Personal extends NavigationPage {
     return <NavBar title="用户中心" />
   }
 
+  shareArticle=()=>{
+    try {
+      const result = Share.share({
+        //分享网站链接
+        message: "昭化企业6S服务平台期待您的下载使用\n"+_baseURLGlobal+"/clientupdate/index.html"
+      })
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      Toast.error(error.message);
+    }
+  }
   gotoLogin = () => {
     this.props.dispatch(NavigationActions.navigate({ routeName: 'Login' }))
   }
@@ -29,8 +51,7 @@ class Personal extends NavigationPage {
   }
 
   renderPage() {
-    const { login, user } = this.props
-    console.log('user in Personal', user)
+    // const { login, user } = this.props
     return (
       <ScrollView style={styles.container}>
         <HeadView />
@@ -43,14 +64,16 @@ class Personal extends NavigationPage {
             />
             <Text style={styles.item_text}>我的办事</Text>
           </View>
-          <View style={[styles.content_item, styles.content_item2]}>
-            <IconFont
-              name="&#xe666;"
-              size={50}
-              color={commonStyle.themeColor}
-            />
-            <Text style={styles.item_text}>我要投诉</Text>
-          </View>
+          <Touchable onPress={()=>this.navigateTo("Complaint","sth")}>
+            <View style={[styles.content_item, styles.content_item2]}>
+              <IconFont
+                name="&#xe666;"
+                size={50}
+                color={commonStyle.themeColor}
+              />
+              <Text style={styles.item_text}>我的投诉</Text>
+            </View>
+          </Touchable>
         </View>
 
         <View style={styles.listRow}>
@@ -105,6 +128,7 @@ class Personal extends NavigationPage {
                 style={{ color: commonStyle.h1Color }}
               />
             }
+            onPress={this.shareArticle}
           />
           <RowLabel
             title="检查更新"

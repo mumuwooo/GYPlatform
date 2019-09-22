@@ -13,9 +13,24 @@ class FinanceGuaranteeForm extends NavigationPage {
     super(props)
     this.state = {
       progress: 1, //  1信息登记 2联系方式
-      typeName: '请选择行业类型',
-      loans: '请选择贷款金额',
-      gurantName: '请选择反担措施',
+      //[Display(Name = "企业名称")]
+      EnterpriseName:'',
+      //[Display(Name = "行业类型")]
+      IndustryType:'',
+      //[Display(Name = "贷款金额(万元)")]
+      LoanAmount:'',
+      //[Display(Name = "资金用途")]
+      FinancePurpose:'',
+      //[Display(Name = "期限")]
+      Deadline:'',
+      //[Display(Name = "还款来源")]
+      RepaySource:'',
+      //[Display(Name = "反担措施")]
+      ReverseGuarantee:'',
+      //[Display(Name = "联系人")]
+      Contact:'',
+      //[Display(Name = "联系电话")]
+      PhoneNUm:'',
     }
   }
   componentWillMount() {
@@ -106,7 +121,7 @@ class FinanceGuaranteeForm extends NavigationPage {
   }
 
   handleSubmit = () => {
-    alert('提交表单')
+    dispatch({ type: 'forms/postFinanceGuararnteeForm', payload: this.state })
   }
   renderPage() {
     const { progress } = this.state
@@ -153,39 +168,38 @@ class FinanceGuaranteeForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ EnterpriseName: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.EnterpriseName}
                 />
               </View>
 
               <View style={styles.eachItem}>
-                <Touchable
-                  onPress={this.handleTypeSelect}
-                  style={styles.school_select}
-                >
-                  <Text style={styles.school_title}>{this.state.typeName}</Text>
-                  <IconFont
-                    name="&#xe738;"
-                    size={18}
-                    style={styles.item_icon}
-                  />
-                </Touchable>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入行业类型"
+                  underlineColorAndroid="transparent"
+                  keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ IndustryType: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.IndustryType}
+                />
               </View>
-
               <View style={styles.eachItem}>
-                <Touchable
-                  onPress={this.handleLoansSelect}
-                  style={styles.school_select}
-                >
-                  <Text style={styles.school_title}>{this.state.loans}</Text>
-                  <IconFont
-                    name="&#xe738;"
-                    size={18}
-                    style={styles.item_icon}
-                  />
-                </Touchable>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入贷款金额（万元）"
+                  underlineColorAndroid="transparent"
+                  keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ LoanAmount: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.LoanAmount}
+                />
               </View>
 
               <View style={styles.eachItem}>
@@ -195,24 +209,24 @@ class FinanceGuaranteeForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ FinancePurpose: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.FinancePurpose}
                 />
               </View>
 
               <View style={styles.eachItem}>
                 <TextInput
                   style={styles.item_input}
-                  placeholder="请输入期      限"
+                  placeholder="请输入期        限"
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ Deadline: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.Deadline}
                 />
               </View>
             </View>
@@ -225,26 +239,24 @@ class FinanceGuaranteeForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ RepaySource: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.RepaySource}
                 />
               </View>
               <View style={styles.eachItem}>
-                <Touchable
-                  onPress={this.handleGuaranteeSelect}
-                  style={styles.school_select}
-                >
-                  <Text style={styles.school_title}>
-                    {this.state.gurantName}
-                  </Text>
-                  <IconFont
-                    name="&#xe738;"
-                    size={18}
-                    style={styles.item_icon}
-                  />
-                </Touchable>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入反担措施"
+                  underlineColorAndroid="transparent"
+                  keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ ReverseGuarantee: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.ReverseGuarantee}
+                />
               </View>
               <View style={styles.eachItem}>
                 <TextInput
@@ -253,10 +265,10 @@ class FinanceGuaranteeForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ Contact: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.Contact}
                 />
               </View>
               <View style={styles.eachItem}>
@@ -266,10 +278,10 @@ class FinanceGuaranteeForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ PhoneNUm: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.PhoneNUm}
                 />
               </View>
             </View>

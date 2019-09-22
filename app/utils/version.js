@@ -1,1 +1,1 @@
-export default (_version = 0.3)
+export default (_version = 0.4)

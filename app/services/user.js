@@ -10,6 +10,6 @@ export async function updateUser(params) {
   console.log('params in service', params)
   return PutWithToken({
     params,
-    url: '/api/Customers',
+    url: '/api/Customers/avatar',
   })
 }

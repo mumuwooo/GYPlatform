@@ -77,7 +77,6 @@ export default {
       console.log('app version', _version)
       const versionRemote = yield call(services.getVersion, payload)
 
-      console.log('Remote version', versionRemote)
       if (versionRemote.version > _version) {
         Overlay.show(<Update />)
       }
@@ -85,14 +84,12 @@ export default {
       // 版本更新
     },
     *manualVersion({ payload }, { put, call }) {
-      console.log('app version', _version)
       const versionRemote = yield call(services.getVersion, payload)
 
-      console.log('Remote version', versionRemote)
       if (versionRemote.version > _version) {
         Overlay.show(<Update />)
       } else {
-        Toast.success('已是最新版本！')
+        Toast.success(_version+'已是最新版本！')
       }
 
       // 版本更新
@@ -100,7 +97,6 @@ export default {
 
     // 登录判断
     *loginJudge({ loading }, { call, put }) {
-      console.log('judge execuded!!!')
       const _userToken = yield call(Storage.get, '_userToken')
       if (!_userToken) {
         yield put({ type: 'isLogout' }) // 已退出

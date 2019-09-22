@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Dimensions, Text, ScrollView } from 'react-native'
+import {FlatList, StyleSheet, View, Dimensions, Text, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationPage, SearchInput } from 'teaset'
 import DatePicker from 'react-native-datepicker'
@@ -21,6 +21,8 @@ class Libraries extends NavigationPage {
   constructor(props) {
     super(props)
     this.state = {
+      loading: false, // true加载中    false到底了
+      isRefresh: true, // true 加载符号转圈  false 不转圈
       startDate: '',
       endDate: '',
       sortType: 1, // 1 相关性  2 时间
@@ -30,6 +32,81 @@ class Libraries extends NavigationPage {
   renderNavigationBar() {
     return <NavBar title="文件库" />
   }
+
+
+  _onEndReached = () => {
+    this.setState({loading: true})
+    const { libPaging, totalLib } = this.props.policyService
+    console.log("trigged on the end Reched", totalLib)
+    if (
+      libPaging.PageIndex * libPaging.PageSize <
+      totalLib
+    ) {
+      const paging = { ...libPaging, PageIndex: libPaging.PageIndex + 1 }
+      const payload = { ...paging}
+      this.props.dispatch({ type: 'policyService/getLibList', payload:payload })
+    }else{
+      this.setState({isRefresh:false})
+    }
+    this.setState({loading: false})
+  }
+
+  _renderFooter = () =>
+  this.state.loading?(
+      <Text style={styles.loading}>努力加载中...</Text>
+  ):(
+    this.state.isRefresh?(
+      <Text style={styles.loading}>继续下拉加载更多内容...</Text>
+    ):(
+      <View style={styles.loaded}>
+        <Text style={styles.loaded_line} />
+        <Text> 已经到底了 </Text>
+        <Text style={styles.loaded_line} />
+      </View>
+    )
+  )
+
+
+
+  renderPage() {
+    // const { sortType } = this.state
+    const { libList } = this.props.policyService
+    console.log('the libList', libList)
+    return (
+      <View style={styles.container}>
+        <View style={styles.content}>
+          {libList &&
+          (
+          <FlatList
+          data={libList}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={(item,index)=>(<NewsBlock data={item.item} index={item.index} key={item.index} />)}
+          ListHeaderComponent={<SearchBar />}
+          ListEmptyComponent={<Text>网络加载中</Text>}
+          ListFooterComponent={this._renderFooter}
+          onEndReached={this._onEndReached.bind(this)}
+          onEndReachedThreshold={0.1}
+          showsVerticalScrollIndicator={false}
+          enabled
+          />
+          )
+          }
+        </View>
+      </View>
+    )
+  }
+}
+
+class SearchBar extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      startDate: '',
+      endDate: '',
+      sortType: 1, // 1 相关性  2 时间
+    }
+  }
+
   handleSortType = type => {
     this.setState({ sortType: type })
   }
@@ -128,12 +205,9 @@ class Libraries extends NavigationPage {
       />
     )
   }
-  renderPage() {
-    const { sortType } = this.state
-    const { libList } = this.props.policyService
-    console.log('the libList', libList)
+  render() {
+    const {sortType} = this.state
     return (
-      <ScrollView style={styles.container}>
         <View style={styles.top}>
           <SearchInput style={styles.searchLine} placeholder="输入关键词搜索" />
           <View style={styles.rowItem}>
@@ -185,17 +259,10 @@ class Libraries extends NavigationPage {
             搜索
           </Button>
         </View>
-        <View style={styles.content}>
-          {libList &&
-            libList.list.map((item, index) => (
-              <NewsBlock data={item} index={index} key={index} />
-            ))}
-          <Divider type="bottomSpace" />
-        </View>
-      </ScrollView>
     )
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {

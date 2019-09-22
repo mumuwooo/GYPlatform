@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Dimensions, Text, TextInput } from 'react-native'
+import { ScrollView, StyleSheet, View, Dimensions, Text, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import { Toast, NavigationBar, NavigationPage, Button } from 'teaset'
 import { Divider, NavBar, IconFont, Touchable } from '../../../components'
@@ -13,6 +13,7 @@ class ProjectCoordinateForm extends NavigationPage {
     super(props)
     this.state = {
       progress: 1, //  1信息登记 2联系方式
+      middlePosition:0,
       // [Display(Name = "项目名称")]
       ProjectName: '',
       // [Display(Name = "业主单位")]
@@ -56,6 +57,7 @@ class ProjectCoordinateForm extends NavigationPage {
     return <NavBar title="建设项目协调服务" />
   }
   gotoNext = () => {
+    this.refs.scrollContainer.scrollTo({x:0,y:0,animated:true})
     let { progress } = this.state
     if (progress >= 4) {
       this.handleSubmit()
@@ -66,6 +68,7 @@ class ProjectCoordinateForm extends NavigationPage {
   }
 
   gotoLast = () => {
+    this.refs.scrollContainer.scrollTo({x:0,y:0,animated:true})
     let { progress } = this.state
     progress--
     this.setState({ progress })
@@ -151,6 +154,10 @@ class ProjectCoordinateForm extends NavigationPage {
               4
             </Text>
           </View>
+            <ScrollView
+              ref="scrollContainer"
+            >
+            <View>
           {progress === 1 ? (
             <View>
               <View style={styles.eachItem}>
@@ -205,7 +212,12 @@ class ProjectCoordinateForm extends NavigationPage {
                   value={this.state.TotalFinance}
                 />
               </View>
-              <View style={styles.eachItem}>
+                <View
+                  onLayout={layout=>{
+                    console.log("the first layout excuted");
+                    this.setState({middlePosition:layout.nativeEvent.layout.y})
+                  }}
+                  style={styles.eachItem}>
                 <TextInput
                   style={styles.item_input}
                   placeholder="请输入建设地址"
@@ -214,7 +226,9 @@ class ProjectCoordinateForm extends NavigationPage {
                   onChangeText={text => {
                     this.setState({ BuildingLoaction: text })
                   }}
-                  onBlur={() => {}}
+                  onFocus={() => {
+                    this.refs.scrollContainer.scrollTo({x:0,y:this.state.middlePosition,animated:true})
+                  }}
                   value={this.state.BuildingLoaction}
                 />
               </View>
@@ -227,7 +241,9 @@ class ProjectCoordinateForm extends NavigationPage {
                   onChangeText={text => {
                     this.setState({ StartDateTime: text })
                   }}
-                  onBlur={() => {}}
+                  onFocus={() => {
+                    this.refs.scrollContainer.scrollTo({x:0,y:this.state.middlePosition,animated:true})
+                  }}
                   value={this.state.StartDateTime}
                 />
               </View>
@@ -240,7 +256,9 @@ class ProjectCoordinateForm extends NavigationPage {
                   onChangeText={text => {
                     this.setState({ PlanDateTime: text })
                   }}
-                  onBlur={() => {}}
+                  onFocus={() => {
+                    this.refs.scrollContainer.scrollTo({x:0,y:this.state.middlePosition,animated:true})
+                  }}
                   value={this.state.PlanDateTime}
                 />
               </View>
@@ -360,9 +378,10 @@ class ProjectCoordinateForm extends NavigationPage {
             onPress={this.gotoNext}
           />
         </View>
-
-        <Divider type="bottomSpace" />
+      </ScrollView>
       </View>
+      <Divider type="bottomSpace" />
+    </View>
     )
   }
 }
@@ -464,7 +483,10 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
   },
   buttons: {
+    width: width,
+    height: height+100,
     flexDirection: 'row',
+    justifyContent: 'center'
   },
   submitBtn: {
     width: (width - 145) / 2,

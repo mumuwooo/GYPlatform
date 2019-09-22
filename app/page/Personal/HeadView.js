@@ -15,6 +15,7 @@ import ImagePicker from 'react-native-image-picker'
 
 import { commonStyle, NavigationActions } from '../../utils'
 import { Touchable } from '../../components'
+import _baseURLGlobal from '../../utils/global'
 
 const isIOS = Platform.OS == 'ios'
 const { width } = Dimensions.get('window')
@@ -42,7 +43,10 @@ const options = {
 class HeadView extends Component {
   constructor(props) {
     super(props)
-    this.state = { avatarSource: null, isModal: false }
+    this.state = { 
+      avatarSource: null, 
+      isModal: false 
+    }
   }
 
   selectPhotoTapped = () => {
@@ -69,7 +73,6 @@ class HeadView extends Component {
   }
 
   gotoNext = () => {
-    console.log('ready to jump')
     this.navigateTo('Login')
   }
   navigateTo(routeName, params) {
@@ -77,27 +80,55 @@ class HeadView extends Component {
   }
   render() {
     // 没登陆点击头像到登陆界面，登陆了点击头像到修改头像
-    const { userinfo } = this.props.user
-    console.log('user in header view', userinfo)
-    console.log('user in header view', window._userToken)
+    const { userinfo, avatarURL } = this.props.user
+    console.log("userinfo",userinfo)
+    console.log("avatarURL", avatarURL)
     if (window._userToken && userinfo.customerId) {
       return (
         <View style={styles.head_view}>
           <View style={styles.heade_bg} />
           <View style={styles.head_block}>
             <Touchable onPress={this.selectPhotoTapped.bind(this)}>
-              <Image
-                source={require('../../assets/images/avatar.png')}
-                style={{
-                  width: 107,
-                  height: 107,
-                  borderRadius: 53,
-                  marginLeft: 33,
-                }}
-              />
+              {userinfo.avatarURL?(
+                avatarURL?(
+                <Image
+                  source={{uri: _baseURLGlobal+avatarURL}}
+                  style={{
+                    width: 107,
+                    height: 107,
+                    borderRadius: 53,
+                    marginLeft: 33,
+                  }}
+                />
+
+                ):(
+                <Image
+                  source={{uri: _baseURLGlobal+userinfo.avatarURL}}
+                  style={{
+                    width: 107,
+                    height: 107,
+                    borderRadius: 53,
+                    marginLeft: 33,
+                  }}
+                />
+
+                )
+
+              ):(
+                <Image
+                  source={require('../../assets/images/avatar.png')}
+                  style={{
+                    width: 107,
+                    height: 107,
+                    borderRadius: 53,
+                    marginLeft: 33,
+                  }}
+                />
+
+              )}
             </Touchable>
             <View style={styles.block_text}>
-              <Text style={styles.text_top} onPress={this.gotoNext}>
+              <Text style={styles.text_top}>
                 {userinfo.username}
               </Text>
               <Text style={styles.text_bottom}>

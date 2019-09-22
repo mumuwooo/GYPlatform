@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   Image,
+  ScrollView
 } from 'react-native'
 import { connect } from 'react-redux'
 import {
@@ -29,6 +30,10 @@ class FinanceDemandForm extends NavigationPage {
     super(props)
     this.state = {
       progress: 1, //  1信息登记 2联系方式
+
+      MajorBusinessLayout:0,
+      TotalOwesLayout:0,
+
       CompanyName: '',
       IndustryType: '请选择行业类型',
       MajorBusiness: '',
@@ -66,7 +71,16 @@ class FinanceDemandForm extends NavigationPage {
     return <NavBar title="融资需求登记" />
   }
 
+  getLayout=(layout, viewId)=>{
+    let {x,y,width,height} = layout.nativeEvent.layout;
+    console.log("get the layout: "+x+" viewId:"+viewId);
+    console.log("get the layout: "+y+" viewId:"+viewId);
+    console.log("get the layout: "+width+" viewId:"+viewId);
+    console.log("get the layout: "+height+" viewId:"+viewId);
+  }
+
   gotoNext = () => {
+    this.refs.scrollContainer.scrollTo({x:0,y:0,animated:true})
     let { progress } = this.state
     if (progress >= 5) {
       this.handleSubmit()
@@ -74,9 +88,11 @@ class FinanceDemandForm extends NavigationPage {
       progress++
       this.setState({ progress })
     }
+    this.forceUpdate();
   }
 
   gotoLast = () => {
+    this.refs.scrollContainer.scrollTo({x:0,y:0,animated:true})
     let { progress } = this.state
     progress--
     this.setState({ progress })
@@ -115,7 +131,6 @@ class FinanceDemandForm extends NavigationPage {
   }
 
   renderPage() {
-    console.log('render in sub-page')
     const { progress } = this.state
     return (
       <View style={styles.container}>
@@ -208,6 +223,11 @@ class FinanceDemandForm extends NavigationPage {
               5
             </Text>
           </View>
+          <ScrollView
+            ref="scrollContainer"
+          >
+          <View
+          >
           {progress === 1 ? (
             <View>
               <View style={styles.eachItem}>
@@ -253,7 +273,12 @@ class FinanceDemandForm extends NavigationPage {
                 </Touchable>
               </View>
 
-              <View style={styles.eachItem}>
+                <View
+                  onLayout={layout=>{
+                    console.log("the first layout excuted");
+                    this.setState({MajorBusinessLayout:layout.nativeEvent.layout.y})
+                  }}
+                  style={styles.eachItem}>
                 <TextInput
                   style={styles.item_input}
                   placeholder="请输入主营业务"
@@ -262,11 +287,14 @@ class FinanceDemandForm extends NavigationPage {
                   onChangeText={text => {
                     this.setState({ MajorBusiness: text })
                   }}
-                  onBlur={() => {}}
+                  onFocus={() => {
+                    this.refs.scrollContainer.scrollTo({x:0,y:this.state.MajorBusinessLayout,animated:true})
+                  }}
                   value={this.state.MajorBusiness}
                 />
               </View>
-              <View style={styles.eachItem}>
+                <View
+                  style={styles.eachItem}>
                 <TextInput
                   style={styles.item_input}
                   placeholder="请输入注册资金"
@@ -275,11 +303,14 @@ class FinanceDemandForm extends NavigationPage {
                   onChangeText={text => {
                     this.setState({ RegisterAssets: text })
                   }}
-                  onBlur={() => {}}
+                  onFocus={() => {
+                    this.refs.scrollContainer.scrollTo({x:0,y:this.state.MajorBusinessLayout,animated:true})
+                  }}
                   value={this.state.RegisterAssets}
                 />
               </View>
-              <View style={styles.eachItem}>
+              <View
+                  style={styles.eachItem}>
                 <TextInput
                   style={styles.item_input}
                   placeholder="请输入总资产"
@@ -288,7 +319,9 @@ class FinanceDemandForm extends NavigationPage {
                   onChangeText={text => {
                     this.setState({ TotalAssets: text })
                   }}
-                  onBlur={() => {}}
+                  onFocus={() => {
+                    this.refs.scrollContainer.scrollTo({x:0,y:this.state.MajorBusinessLayout,animated:true})
+                  }}
                   value={this.state.TotalAssets}
                 />
               </View>
@@ -301,7 +334,9 @@ class FinanceDemandForm extends NavigationPage {
                   onChangeText={text => {
                     this.setState({ IncomeLastYear: text })
                   }}
-                  onBlur={() => {}}
+                  onFocus={() => {
+                    this.refs.scrollContainer.scrollTo({x:0,y:this.state.MajorBusinessLayout,animated:true})
+                  }}
                   value={this.state.IncomeLastYear}
                 />
               </View>
@@ -360,7 +395,12 @@ class FinanceDemandForm extends NavigationPage {
                   value={this.state.FloatingAssets}
                 />
               </View>
-              <View style={styles.eachItem}>
+                <View
+                  onLayout={layout=>{
+                    console.log(" the second onLayout excuded");
+                    this.setState({TotalOwesLayout:layout.nativeEvent.layout.y})
+                  }}
+                  style={styles.eachItem}>
                 <TextInput
                   style={styles.item_input}
                   placeholder="请输入总负债"
@@ -369,7 +409,9 @@ class FinanceDemandForm extends NavigationPage {
                   onChangeText={text => {
                     this.setState({ TotalOwes: text })
                   }}
-                  onBlur={() => {}}
+                  onFocus={() => {
+                    this.refs.scrollContainer.scrollTo({x:0,y:this.state.MajorBusinessLayout,animated:true})
+                  }}
                   value={this.state.TotalOwes}
                 />
               </View>
@@ -382,7 +424,9 @@ class FinanceDemandForm extends NavigationPage {
                   onChangeText={text => {
                     this.setState({ FloatingOwes: text })
                   }}
-                  onBlur={() => {}}
+                  onFocus={() => {
+                    this.refs.scrollContainer.scrollTo({x:0,y:this.state.MajorBusinessLayout,animated:true})
+                  }}
                   value={this.state.FloatingOwes}
                 />
               </View>
@@ -395,7 +439,9 @@ class FinanceDemandForm extends NavigationPage {
                   onChangeText={text => {
                     this.setState({ OwePeopleSaved: text })
                   }}
-                  onBlur={() => {}}
+                  onFocus={() => {
+                    this.refs.scrollContainer.scrollTo({x:0,y:this.state.MajorBusinessLayout,animated:true})
+                  }}
                   value={this.state.OwePeopleSaved}
                 />
               </View>
@@ -408,7 +454,9 @@ class FinanceDemandForm extends NavigationPage {
                   onChangeText={text => {
                     this.setState({ OweBankSaved: text })
                   }}
-                  onBlur={() => {}}
+                  onFocus={() => {
+                    this.refs.scrollContainer.scrollTo({x:0,y:this.state.MajorBusinessLayout,animated:true})
+                  }}
                   value={this.state.OweBankSaved}
                 />
               </View>
@@ -545,6 +593,9 @@ class FinanceDemandForm extends NavigationPage {
             onPress={this.gotoNext}
           />
         </View>
+        </ScrollView>
+
+        </View>
 
         <Divider type="bottomSpace" />
       </View>
@@ -653,7 +704,11 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
   },
   buttons: {
+    width: width,
+    height: height+100,
     flexDirection: 'row',
+    justifyContent: 'center'
+
   },
   submitBtn: {
     width: (width - 145) / 2,

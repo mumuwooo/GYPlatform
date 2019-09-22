@@ -33,6 +33,51 @@ export default {
         Toast.fail('网络错误')
       }
     },
+    *postCustomerDemandForm({ payload }, { call, put }) {
+      const res = yield call(services.postCustomerDemandForm, payload)
+      if (res) {
+        // toast提交成功，跳转到我的表单用户界面
+        Toast.success('提交成功')
+      } else {
+        Toast.fail('网络错误')
+      }
+    },
+    *postOnlineResultForm({ payload }, { call, put }) {
+      const res = yield call(services.postOnlineResultForm, payload)
+      if (res) {
+        // toast提交成功，跳转到我的表单用户界面
+        Toast.success('提交成功')
+      } else {
+        Toast.fail('网络错误')
+      }
+    },
+    *postFinanceGuararnteeForm({ payload }, { call, put }) {
+      const res = yield call(services.postFinanceGuararnteeForm, payload)
+      if (res) {
+        // toast提交成功，跳转到我的表单用户界面
+        Toast.success('提交成功')
+      } else {
+        Toast.fail('网络错误')
+      }
+    },
+    *postSignalApplyForm({ payload }, { call, put }) {
+      const res = yield call(services.postSignalApplyForm, payload)
+      if (res) {
+        // toast提交成功，跳转到我的表单用户界面
+        Toast.success('提交成功')
+      } else {
+        Toast.fail('网络错误')
+      }
+    },
+    *postFinanceCoordinateForm({ payload }, { call, put }) {
+      const res = yield call(services.postFinanceCoordinateForm, payload)
+      if (res) {
+        // toast提交成功，跳转到我的表单用户界面
+        Toast.success('提交成功')
+      } else {
+        Toast.fail('网络错误')
+      }
+    },
   },
   subscriptions: {},
 }

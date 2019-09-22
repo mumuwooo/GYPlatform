@@ -26,12 +26,12 @@ export default {
     *initUser(action, { put, call }) {
       if (window._userToken) {
         const res = yield call(services.fecthUserInfo)
-        console.log('the user userinformation', res)
         if (res) {
-          console.log('in model user', res)
+            //有usertoken但是失效，我也不知道怎么办了
           yield put({ type: 'updateUserInfo', payload: res.data })
         } else {
-          Toast.fails(res.message)
+          // Toast.fails("登陆失败")
+          console.log("init user fails", res)
         }
       } else {
         yield put({ type: 'emptyUserInfo' })
@@ -44,13 +44,14 @@ export default {
     },
     *updateRemote(action, { put, call, select }) {
       const data = yield select(state => state.user)
-      console.log('params in model', data)
+      console.log("the user data update")
       const res = yield call(services.updateUser, data)
       if (res) {
         console.log('response in user model', res)
         Toast.success('修改成功')
       } else {
-        Toast.fails(res.message)
+        // Toast.fails("登陆失败")
+          console.log("update user fails", res)
       }
     },
   },

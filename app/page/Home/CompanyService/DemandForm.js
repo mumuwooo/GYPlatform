@@ -13,6 +13,16 @@ class DemandForm extends NavigationPage {
     super(props)
     this.state = {
       progress: 1, //  1信息登记 2联系方式
+      //[DisplayName("企业名称")]
+      EnterpriseName: '',
+      //[DisplayName("联系人")]
+      Contact: '',
+      //[DisplayName("联系电话")]
+      PhonNum: '',
+      //[DisplayName("邮箱")]
+      Email: '',
+      //[DisplayName("诉求描述")]
+      Demand: '',
     }
   }
 
@@ -43,19 +53,21 @@ class DemandForm extends NavigationPage {
   }
 
   handleSubmit = () => {
-    alert('提交表单')
+    dispatch({ type: 'forms/postCustomerDemandForm', payload: this.state })
   }
   renderPage() {
     const {
       progress,
-      inputPhone,
-      inputCode,
-      inputName,
-      inputIdCard,
-      ExamineeNo,
-      School_ID,
-      Specialty_ID,
-      Batch_ID,
+      //[DisplayName("企业名称")]
+      EnterpriseName,
+      //[DisplayName("联系人")]
+      Contact,
+      //[DisplayName("联系电话")]
+      PhonNum,
+      //[DisplayName("邮箱")]
+      Email,
+      //[DisplayName("诉求描述")]
+      Demand,
     } = this.state
     return (
       <View style={styles.container}>
@@ -96,14 +108,14 @@ class DemandForm extends NavigationPage {
               <View style={styles.eachItem}>
                 <TextInput
                   style={styles.item_input}
-                  placeholder="请输入联系人"
+                  placeholder="请输入企业名称"
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ EnterpriseName: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.EnterpriseName}
                 />
               </View>
               <View style={styles.eachItem}>
@@ -113,10 +125,10 @@ class DemandForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ Contact: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.Contact}
                 />
               </View>
 
@@ -127,10 +139,23 @@ class DemandForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ PhonNum: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.PhonNum}
+                />
+              </View>
+              <View style={styles.eachItem}>
+                <TextInput
+                  style={styles.item_input}
+                  placeholder="请输入联系电话"
+                  underlineColorAndroid="transparent"
+                  keyboardType="phone-pad"
+                  onChangeText={text => {
+                    this.setState({ Email: text })
+                  }}
+                  onBlur={() => {}}
+                  value={this.state.Email}
                 />
               </View>
             </View>
@@ -143,8 +168,8 @@ class DemandForm extends NavigationPage {
                 underlineColorAndroid="transparent"
                 multiline
                 style={styles.userInput}
-                onChangeText={demandText => this.setState({ demandText })}
-                value={this.state.demandText}
+                onChangeText={Demand => this.setState({ Demand })}
+                value={this.state.Demand}
               />
             </View>
           )}

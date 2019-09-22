@@ -7,39 +7,40 @@ const paging = pageInit()
 export default {
   namespace: 'zhInfos',
   state: {
-    loading: true,
-    refresh: true,
     newListPaging: paging, // 分页对象
-    zhInfoList: null,
+    zhInfoList: [],
     slidesZh: null,
+    totalCount: 0,
   },
   reducers: {
     updateLoadStatus(state, payload) {
       return { ...state, loading: payload.loading, refresh: payload.refresh }
     },
     updateNewsList(state, { payload, paging }) {
-      //   if (paging) {
-      //     state.newListPaging = paging
-      //     if (paging.PageIndex > 1) {
-      //       state.newList.push(...payload)
-      //       return { ...state }
-      //     }
-      //   }
-      return { ...state, zhInfoList: payload }
+      return { ...state, zhInfoList: state.zhInfoList.concat(payload), }
+    },
+    updatePage(state,{payload}){
+      return {...state, newListPaging: payload}
     },
     updateZhSlides(state, { payload }) {
       return { ...state, slidesZh: payload }
     },
+    updateTotalCount(state, { payload }) {
+      return { ...state, totalCount: payload }
+    },
   },
   effects: {
     *getNewsList({ payload }, { call, put }) {
-      const res = yield call(services.getNewsList, payload)
       const { PageIndex, PageSize, PageStatus } = payload
-      if (res.successResponse) {
-        yield put({ type: 'updateNewsList', payload: res.data.list })
-      } else {
-        Toast.fail(res.Message)
-      }
+        const res = yield call(services.getNewsList, payload)
+        console.log("getNewList effects excuted once!!!", payload)
+        if (res) {
+          yield put({ type: 'updateTotalCount', payload: res.totalCount })
+          yield put({ type: 'updateNewsList', payload: res.list })
+          yield put({ type: 'updatePage', payload: payload })
+        } else {
+          Toast.fail(res.Message)
+        }
     },
     *getZhSlides({ payload }, { call, put }) {
       const res = yield call(services.fetchZhSlides)

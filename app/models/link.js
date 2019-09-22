@@ -96,7 +96,7 @@ export default {
       }
     },
     *getProjectReport({ payload }, { call, put }) {
-      const res = yield call(services.fetchLegalAidService, payload)
+      const res = yield call(services.fetchProjectReport, payload)
       if (res) {
         yield put({ type: 'updateProjectReport', payload: res[0] })
       } else {

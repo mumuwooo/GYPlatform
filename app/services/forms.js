@@ -21,3 +21,38 @@ export async function postFactorGuaranteeForm(params) {
     url: '/api/FactorGuarantees',
   })
 }
+
+export async function postCustomerDemandForm(params) {
+  return POSTWithToken({
+    params,
+    url: '/api/CustomerDemands',
+  })
+}
+
+export async function postOnlineResultForm(params) {
+  return POSTWithToken({
+    params,
+    url: '/api/OnlineResults',
+  })
+}
+
+export async function postFinanceGuararnteeForm(params) {
+  return POSTWithToken({
+    params,
+    url: '/api/FinanceGuarantees',
+  })
+}
+
+export async function postSignalApplyForm(params) {
+  return POSTWithToken({
+    params,
+    url: '/api/GoldBrands',
+  })
+}
+
+export async function postFinanceCoordinateForm(params) {
+  return POSTWithToken({
+    params,
+    url: '/api/FinanceCoordinates',
+  })
+}

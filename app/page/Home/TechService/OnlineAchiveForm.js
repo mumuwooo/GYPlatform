@@ -13,6 +13,16 @@ class OnlineAchiveForm extends NavigationPage {
     super(props)
     this.state = {
       progress: 1, //  1信息登记 2联系方式
+      //[DisplayName("企业名称")]
+      EnterpriseName:'',
+      //[DisplayName("联系人")]
+      Contact:'',
+      //[DisplayName("联系电话")]
+      PhonNum:'',
+      //[DisplayName("所属行业")]
+      IndustryType:'',
+      //[DisplayName("需求描述")]
+      Demand:'',
     }
   }
 
@@ -44,10 +54,17 @@ class OnlineAchiveForm extends NavigationPage {
   }
 
   handleSubmit = () => {
-    alert('提交表单')
+    dispatch({ type: 'forms/postOnlineResultForm', payload: this.state })
   }
   renderPage() {
-    const { progress } = this.state
+    const { 
+      progress,
+      EnterpriseName,
+      Contact,
+      PhonNum,
+      IndustryType,
+      Demand,
+    } = this.state
     return (
       <View style={styles.container}>
         <View style={styles.content}>
@@ -91,10 +108,10 @@ class OnlineAchiveForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ EnterpriseName: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.EnterpriseName}
                 />
               </View>
 
@@ -105,10 +122,10 @@ class OnlineAchiveForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ Contact: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.Contact}
                 />
               </View>
               <View style={styles.eachItem}>
@@ -118,10 +135,10 @@ class OnlineAchiveForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ PhonNum: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.PhonNum}
                 />
               </View>
               <View style={styles.eachItem}>
@@ -131,10 +148,10 @@ class OnlineAchiveForm extends NavigationPage {
                   underlineColorAndroid="transparent"
                   keyboardType="phone-pad"
                   onChangeText={text => {
-                    this.setState({ inputPhone: text })
+                    this.setState({ IndustryType: text })
                   }}
                   onBlur={() => {}}
-                  value={this.state.inputPhone}
+                  value={this.state.IndustryType}
                 />
               </View>
             </View>
@@ -147,8 +164,8 @@ class OnlineAchiveForm extends NavigationPage {
                 underlineColorAndroid="transparent"
                 multiline
                 style={styles.userInput}
-                onChangeText={demandText => this.setState({ demandText })}
-                value={this.state.demandText}
+                onChangeText={Demand => this.setState({ Demand })}
+                value={this.state.Demand}
               />
             </View>
           )}

@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyleSheet, View, Dimensions, ScrollView, Text } from 'react-native'
+import { Share, StyleSheet, View, Dimensions, ScrollView, Text } from 'react-native'
+import Touchable from './Touchable'
 import { connect } from 'react-redux'
 import { NavigationPage } from 'teaset'
 import moment from 'moment'
@@ -8,6 +9,7 @@ import HTML from 'react-native-render-html-for-maxwidth'
 import { IconFont, NavBar, Divider } from '.'
 import { commonStyle } from '../utils'
 import { htmlDecodeByRegExp } from '../utils/tools'
+import Toast from 'teaset/components/Toast/Toast';
 
 const { width } = Dimensions.get('window')
 
@@ -22,6 +24,27 @@ class NewsDetail extends NavigationPage {
     return <NavBar title={navTitle} />
   }
 
+  shareArticle=(message,id)=>{
+    try {
+      const result = Share.share({
+        //分享网站链接
+        message: message+"\n"+_baseURLGlobal+"/Marticles/details/"+id
+      })
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      Toast.error(error.message);
+    }
+  }
+
   renderPage() {
     let newsList = null
     //  const { zhInfoList } = this.props.zhInfos
@@ -32,9 +55,6 @@ class NewsDetail extends NavigationPage {
       htmlContent = htmlDecodeByRegExp(newsList.content)
     }
 
-    // const htmlContent =`
-    // <p style="text-align: center;"><b>你头上有一个很长很长的犄角。。。。。。。。我是一个标题很长的标题的标题的标题总之就是很长就看你换不换行</b> </p><p style="text-align: center;"><img src="http://ctfive.oss-cn-hangzhou.aliyuncs.com/Course/2019/01/09/2417b42526634e3a82e94a3e64cff5fb0012.png" style="max-width:100%;"><br></p><p style="text-align: center;">开局一张图，后面全靠编。</p><p>        对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！对不起编不下去了。你看这个扁担，不看！<br></p>
-    // `;
     return (
       <View style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
@@ -76,10 +96,12 @@ class NewsDetail extends NavigationPage {
               <IconFont name="&#xe638;" size={30} color="gray" />
               <Text style={styles.item_text}>收藏</Text>
             </View>
-            <View style={styles.bottom_item}>
-              <IconFont name="&#xe638;" size={30} color="gray" />
-              <Text style={styles.item_text}>分享</Text>
-            </View>
+            <Touchable onPress={()=>this.shareArticle(newsList.title, newsList.id)}>
+              <View style={styles.bottom_item}>
+                <IconFont name="&#xe638;" size={30} color="gray" />
+                <Text style={styles.item_text}>分享</Text>
+              </View>
+            </Touchable>
           </View>
         </ScrollView>
       </View>
@@ -143,5 +165,4 @@ const styles = StyleSheet.create({
   },
 })
 
-// export default NewsDetail
 export default connect(({ zhInfos }) => ({ zhInfos }))(NewsDetail)

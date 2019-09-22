@@ -38,12 +38,12 @@ export default {
     },
     *userUploadPicture({ payload }, { call, put }) {
       // 直接要在服务器里修改user的数据
-      const res = yield call(services.uploadPicture, payload)
+      const res = yield call(services.uploadAvatar, payload)
       console.log('test the res', res)
       if (typeof res === 'object') {
         yield put({ type: 'updatePicture', payload: res })
         yield put({ type: 'user/updateUserAvatar', payload: res })
-        yield put({ type: 'user/updateRemote' })
+        // yield put({ type: 'user/updateRemote' })
       } else {
         Toast.fail('上传失败')
       }

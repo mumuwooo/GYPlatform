@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
-    "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "checkJs": true,
+     "jsx": "react"
   },
   "exclude": [
     "node_modules"

@@ -27,7 +27,6 @@ class LawRules extends NavigationPage {
   constructor(props) {
     super(props)
     this.state = {
-      swiperShow: false,
       loading: false, // true加载中    false到底了
       isRefresh: false, // true 加载符号转圈  false 不转圈
       isShowHead: false, // true 显示头部
@@ -38,47 +37,40 @@ class LawRules extends NavigationPage {
     return <NavBar title="法律法规" />
   }
 
-  gotoDetail = () => {
-    this.props.dispatch(NavigationActions.navigate({ routeName: 'Sorry' }))
-  }
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.setTimeout = this.setState({ swiperShow: true })
-    }, 0)
-  }
-
-  // 移除定时器
-  componentWillUnmount() {
-    this.setTimeout && clearTimeout(this.setTimeout)
-  }
   _renderItemView = ({ item, index }) => (
     <NewsBlock data={item} key={index} index={index} navTitle="法律法规" />
   )
-  //  触底更新
   _onEndReached = () => {
-    // const { newListPaging } = this.props.notification
-    // const paging = { ...newListPaging, PageIndex: newListPaging.PageIndex + 1 }
-    // if (
-    //   newListPaging.PageIndex * newListPaging.PageSize <
-    //   newListPaging.TotalCount
-    // ) {
-    //   const payload = { AssignObject: 4, IsPust: 1, ...paging }
-    //   this.props.dispatch({ type: 'notification/getNewList', payload })
-    // }
-    // const { loading } = this.props.notification
-    // this.setState({ loading })
+    this.setState({loading: true})
+    const { lawPaging, totalLaw } = this.props.policyService
+    console.log("trigged on the end Reched", totalLaw)
+    if (
+      lawPaging.PageIndex * lawPaging.PageSize <
+      totalLaw
+    ) {
+      const paging = { ...lawPaging, PageIndex: lawPaging.PageIndex + 1 }
+      const payload = { ...paging}
+      this.props.dispatch({ type: 'policyService/getLawList', payload:payload })
+    }else{
+      this.setState({isRefresh:false})
+    }
+    this.setState({loading: false})
   }
+
   _renderFooter = () =>
-    this.state.loading ? (
+  this.state.loading?(
       <Text style={styles.loading}>努力加载中...</Text>
-    ) : (
+  ):(
+    this.state.isRefresh?(
+      <Text style={styles.loading}>继续下拉加载更多内容...</Text>
+    ):(
       <View style={styles.loaded}>
         <Text style={styles.loaded_line} />
         <Text> 已经到底了 </Text>
         <Text style={styles.loaded_line} />
       </View>
     )
+  )
 
   renderPage() {
     const { lawList } = this.props.policyService
@@ -100,8 +92,8 @@ class LawRules extends NavigationPage {
                   <Text style={styles.title_text}>法律法规</Text>
                 </View>
                 <FlatList
-                  data={lawList.list}
-                  extraData={lawList.list}
+                  data={lawList}
+                  extraData={lawList}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={this._renderItemView}
                   // onRefresh={this._onRefresh}

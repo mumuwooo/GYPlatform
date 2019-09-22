@@ -158,7 +158,6 @@ export function POSTWithToken(options) {
 
 export function GetWithToken(url) {
   const dURL = BASE_URL + url.url
-  console.log('fuck the url', dURL)
   let headers
   if (window._userToken) {
     headers = { ...CONFIG_HEADERS, Authorization: window._userToken }
@@ -175,7 +174,6 @@ export function GetWithToken(url) {
     })
       .then(response => {
         if (response.ok) {
-          console.log('test', response)
           return response.json()
         }
       })
@@ -319,12 +317,18 @@ function requestFILE(url, params) {
     // filedata.append('file', params.file)
     filedata.append('Picture', params.file)
   }
+  let headers
+  if (window._userToken) {
+    headers = { Authorization: window._userToken }
+  } else {
+    headers = {}
+  }
   const requestOBJ = [
     url,
     {
       method: 'POST',
       // credentials: 'include',
-      // headers: CONFIG_FILE_HEADERS,
+      headers: headers,
       body: filedata,
     },
   ]

@@ -40,7 +40,7 @@ const NewsBlock = ({
         <Text style={styles.right_title}>{data.title}</Text>
         <View style={styles.right_bottom}>
           <Text style={styles.bottom_date}>
-            {moment(data.customeTime).format('YYYY-MM-DD')}
+            {moment(data.customTime).format('YYYY-MM-DD')}
           </Text>
           {<Text style={styles.bottom_source}>{data.contentSource}</Text>}
         </View>

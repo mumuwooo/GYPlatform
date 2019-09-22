@@ -9,3 +9,13 @@ export async function uploadPicture(params) {
     url: '/api/Picture',
   })
 }
+
+export async function uploadAvatar(params) {
+  const data = {
+    file: { uri: params.uri, type: 'image/jpeg', name: 'photo.jpg' },
+  }
+  return FILE({
+    data,
+    url: '/api/Picture/avatar',
+  })
+}

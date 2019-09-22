@@ -24,6 +24,7 @@ import PolicyService from './PolicyService'
 import CompanyInfos from './CompanyInfos'
 import AchiveInfos from './AchiveInfos'
 import { Storage } from '../../utils'
+import SplashScreen from 'react-native-splash-screen'
 
 import _baseURLGlobal from '../../utils/global'
 
@@ -70,6 +71,7 @@ class Home extends NavigationPage {
     )
   }
   componentDidMount() {
+    SplashScreen.hide()
     setTimeout(() => {
       this.setTimeout = this.setState({ swiperShow: true })
     }, 0)
@@ -160,7 +162,7 @@ class Home extends NavigationPage {
     this.props.dispatch(
       NavigationActions.navigate({
         routeName: 'NewsDetail',
-        params: { navTitle: '新闻快讯', data },
+        params: { navTitle: '政策文件', data },
       })
     )
   }
@@ -177,7 +179,7 @@ class Home extends NavigationPage {
           style={styles.wrapper}
           showsButtons={false}
           autoplay
-          autoplayTimeout={4}
+          autoplayTimeout={6}
           paginationStyle={styles.paginationStyle}
           dotStyle={styles.dotStyle}
           activeDotStyle={styles.activeDotStyle}
@@ -222,7 +224,6 @@ class Home extends NavigationPage {
   }
 
   renderPage() {
-    console.log('render in index')
     const {
       companyShow,
       projectShow,

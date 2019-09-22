@@ -1,6 +1,8 @@
 package com.GYPlatform;
 
 import com.facebook.react.ReactActivity;
+import android.os.Bundle;  //add
+import org.devio.rn.splashscreen.SplashScreen; //add
 
 public class MainActivity extends ReactActivity {
 
@@ -12,4 +14,11 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "GYPlatform";
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+      SplashScreen.show(this);
+      super.onCreate(savedInstanceState);
+    }
+
 }
