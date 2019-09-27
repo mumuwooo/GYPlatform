@@ -50,20 +50,23 @@ class Personal extends NavigationPage {
     this.props.dispatch(NavigationActions.navigate({ routeName, params }))
   }
 
+
   renderPage() {
     // const { login, user } = this.props
     return (
       <ScrollView style={styles.container}>
         <HeadView />
         <View style={styles.myContent}>
-          <View style={styles.content_item}>
-            <IconFont
-              name="&#xe661;"
-              size={50}
-              color={commonStyle.themeColor}
-            />
-            <Text style={styles.item_text}>我的办事</Text>
-          </View>
+          <Touchable onPress={()=>this.navigateTo("ApplyList")}>
+            <View style={styles.content_item}>
+              <IconFont
+                name="&#xe661;"
+                size={50}
+                color={commonStyle.themeColor}
+              />
+              <Text style={styles.item_text}>我的办事</Text>
+            </View>
+          </Touchable>
           <Touchable onPress={()=>this.navigateTo("Complaint","sth")}>
             <View style={[styles.content_item, styles.content_item2]}>
               <IconFont

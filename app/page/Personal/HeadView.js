@@ -81,8 +81,6 @@ class HeadView extends Component {
   render() {
     // 没登陆点击头像到登陆界面，登陆了点击头像到修改头像
     const { userinfo, avatarURL } = this.props.user
-    console.log("userinfo",userinfo)
-    console.log("avatarURL", avatarURL)
     if (window._userToken && userinfo.customerId) {
       return (
         <View style={styles.head_view}>

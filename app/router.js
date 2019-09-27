@@ -55,7 +55,6 @@ import PoliticTopics from './page/Home/PolicyService/PoliticTopics'
 import LawRules from './page/Home/PolicyService/LawRules'
 
 import FinanceCoordinateForm from './page/InvestZH/FinanceCoordinateForm'
-       FinanceCoordinateForm
 
 import ZHInfos from './page/ZHInfos'
 import InvestZH from './page/InvestZH'
@@ -65,6 +64,8 @@ import ChangePhone from './page/Personal/ChangePhone'
 import NewsDetail from './components/NewsDetail'
 
 import Complaint from './page/Personal/moudles/Complaint'
+import ApplyList from './page/Personal/ApplyList'
+import PFactorGuaranteeList from './page/Personal/List/PFactorGuaranteeList'
 
 import Detail from './page/Detail'
 import Sorry from './page/others/sorry'
@@ -88,8 +89,8 @@ const styles = {
 const HomeNavigator = createBottomTabNavigator(
   {
     Home: {
-      // screen: Libraries,
-      screen: Home,
+       screen: ApplyList,
+      //screen: Home,
       navigationOptions: {
         tabBarLabel: '6S服务',
         tabBarIcon: ({ focused }) =>
@@ -223,6 +224,8 @@ const AppNavigator = createStackNavigator(
     ChangePwd: { screen: ChangePwd, navigationOptions: { header: null } },
     ChangePhone: { screen: ChangePhone, navigationOptions: { header: null } },
     Complaint: { screen: Complaint, navigationOptions: { header: null } },
+    ApplyList: { screen: ApplyList, navigationOptions: { header: null } },
+    PFactorGuaranteeList: { screen: PFactorGuaranteeList, navigationOptions: { header: null } },
     Sorry: { screen: Sorry, navigationOptions: { header: null } },
     Test: { screen: Test, navigationOptions: { header: null } },
     NewsDetail: { screen: NewsDetail, navigationOptions: { header: null } },

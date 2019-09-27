@@ -58,16 +58,6 @@ class Home extends NavigationPage {
           />
         }
       />
-      // <NavigationBar
-      // style={{ backgroundColor:'#fff',paddingLeft:10,paddingRight:10}}
-      // type='ios'
-      // tintColor='white'
-      // title={
-      //    <View style={{ flex: 1,paddingVertical:8, paddingHorizontal: 4, alignItems: 'center' }}>
-      //     <Image source={require('../../assets/images/logo.png')} style={{ width:180, height:30,}} resizeMode="contain" />
-      //      </View>
-      // }
-      // />
     )
   }
   componentDidMount() {
@@ -201,13 +191,6 @@ class Home extends NavigationPage {
         </Swiper>
       )
     }
-    // else {
-    //     return (
-    //         <View style={{ height: width*40/75 }}>
-    //             <Image source={bannerImg} style={styles.bannerImg} />
-    //         </View>
-    //     );
-    // }
   }
 
   handleTest = () => {

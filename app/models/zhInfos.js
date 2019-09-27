@@ -33,7 +33,6 @@ export default {
     *getNewsList({ payload }, { call, put }) {
       const { PageIndex, PageSize, PageStatus } = payload
         const res = yield call(services.getNewsList, payload)
-        console.log("getNewList effects excuted once!!!", payload)
         if (res) {
           yield put({ type: 'updateTotalCount', payload: res.totalCount })
           yield put({ type: 'updateNewsList', payload: res.list })
