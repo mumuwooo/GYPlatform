@@ -61,7 +61,7 @@ class Home extends NavigationPage {
     )
   }
   componentDidMount() {
-    SplashScreen.hide()
+    //SplashScreen.hide()
     setTimeout(() => {
       this.setTimeout = this.setState({ swiperShow: true })
     }, 0)

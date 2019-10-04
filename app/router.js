@@ -89,8 +89,8 @@ const styles = {
 const HomeNavigator = createBottomTabNavigator(
   {
     Home: {
-       screen: ApplyList,
-      //screen: Home,
+       //screen: PFactorGuaranteeList,
+      screen: Home,
       navigationOptions: {
         tabBarLabel: '6S服务',
         tabBarIcon: ({ focused }) =>

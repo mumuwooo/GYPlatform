@@ -9,6 +9,7 @@ import {
   ScrollView,
   FlatList,
 } from 'react-native'
+import moment from 'moment'
 import { Col, Row, Grid} from 'react-native-easy-grid'
 import { connect } from 'react-redux'
 import { NavigationBar, NavigationPage } from 'teaset'
@@ -38,18 +39,26 @@ class PFactorGuaranteeList extends NavigationPage {
   }
 
   _renderItemView({item, index}){
-    console.log("item info", item);
     return(
       <View style={styles.block}>
         <View style={styles.blockTitle}>
-          <Text>{item.contact}</Text>
+          <View style={styles.leftLabel}>
+            <Text>{item.contact}</Text>
+          </View>
+          <View style={styles.rightLabel}>
+            <Text>查看申请进度>>></Text>
+          </View>
         </View>
         <View style={styles.blockContent}>
           <Text>{item.content}</Text>
         </View>
         <View style={styles.blockFooter}>
-          <Text>{item.enterpriseName}</Text>
-          <Text>{item.createdTime}</Text>
+          <View style={styles.leftLabel}>
+            <Text>{item.enterpriseName}</Text>
+          </View>
+          <View style={styles.rightLabel}>
+            <Text>{moment(item.createdTime).format('YYYY-MM-DD')}</Text>
+          </View>
         </View>
       </View>
     )
@@ -61,6 +70,7 @@ class PFactorGuaranteeList extends NavigationPage {
     const {
       factorGuarantees,
     } = userinfo
+    console.log("factorGuarantees", factorGuarantees);
     return (
       <View>
         <FlatList
@@ -79,21 +89,39 @@ class PFactorGuaranteeList extends NavigationPage {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
   },
   block:{
-    marginTop: 5,
+    marginTop: 10,
+    marginLeft: 4,
+    marginRight: 4,
     flex: 1,
-    backgroundColor: 'green',
+    borderRadius: 4,
+    borderWidth:1,
+    borderColor: '#999',
+    backgroundColor: '#fff',
   },
   blockTitle:{
-    backgroundColor: 'yellow',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding:4,
+    borderBottomWidth:1,
+    borderBottomColor: '#bbb',
   },
   blockContent:{
-    backgroundColor: 'red',
+    padding: 4,
   },
   blockFooter:{
-    backgroundColor: 'yellow'
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding:4,
+    borderTopWidth:1,
+    borderTopColor: '#bbb',
+  },
+  leftLabel:{
+    alignSelf: 'flex-start',
+  },
+  rightLabel:{
+    alignSelf: 'flex-end',
   }
 })
 
