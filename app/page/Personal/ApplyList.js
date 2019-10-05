@@ -75,6 +75,7 @@ class ApplyList extends NavigationPage {
           </Col>
           <Col>
             <Touchable
+              onPress={()=>{this.navigateTo('FourIdentifiList')}}
               style={[styles.item_each, {backgroundColor: commonStyle.blueColor}]}
             >
               <IconFont
@@ -149,6 +150,7 @@ class ApplyList extends NavigationPage {
           </Col>
           <Col>
             <Touchable
+              onPress={()=>{this.navigateTo('GoldBrandsList')}}
               style={[styles.item_each, {backgroundColor: commonStyle.redColor}]}
             >
               <IconFont name="&#xe632;" size={50} color={commonStyle.white} />

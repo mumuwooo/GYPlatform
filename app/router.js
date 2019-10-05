@@ -66,6 +66,8 @@ import NewsDetail from './components/NewsDetail'
 import Complaint from './page/Personal/moudles/Complaint'
 import ApplyList from './page/Personal/ApplyList'
 import PFactorGuaranteeList from './page/Personal/List/PFactorGuaranteeList'
+import GoldBrandsList from './page/Personal/List/GoldBrandsList'
+import FourIdentifiList from './page/Personal/List/FourIdentifiList'
 
 import Detail from './page/Detail'
 import Sorry from './page/others/sorry'
@@ -226,6 +228,8 @@ const AppNavigator = createStackNavigator(
     Complaint: { screen: Complaint, navigationOptions: { header: null } },
     ApplyList: { screen: ApplyList, navigationOptions: { header: null } },
     PFactorGuaranteeList: { screen: PFactorGuaranteeList, navigationOptions: { header: null } },
+    GoldBrandsList: { screen: GoldBrandsList, navigationOptions: { header: null } },
+    FourIdentifiList: { screen: FourIdentifiList, navigationOptions: { header: null } },
     Sorry: { screen: Sorry, navigationOptions: { header: null } },
     Test: { screen: Test, navigationOptions: { header: null } },
     NewsDetail: { screen: NewsDetail, navigationOptions: { header: null } },
