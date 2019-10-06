@@ -88,6 +88,7 @@ class ApplyList extends NavigationPage {
           </Col>
           <Col>
             <Touchable
+              onPress={()=>{this.navigateTo('AppealsList')}}
               style={[styles.item_each, {backgroundColor: commonStyle.blueColor}]}
             >
               <IconFont
@@ -126,6 +127,7 @@ class ApplyList extends NavigationPage {
           </Col>
           <Col>
             <Touchable
+              onPress={()=>{this.navigateTo('FinanceDemandsList')}}
               style={[styles.item_each, {backgroundColor: commonStyle.oceanColor}]}
             >
               <IconFont

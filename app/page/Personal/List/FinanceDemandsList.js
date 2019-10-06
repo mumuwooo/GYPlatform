@@ -23,7 +23,7 @@ const { width, height } = Dimensions.get('window')
 
 
 @connect(({ app, user }) => ({ app, user }))
-class PFactorGuaranteeList extends NavigationPage {
+class FinanceDemandsList extends NavigationPage {
   constructor(props) {
     super(props)
     this.state = {
@@ -33,7 +33,7 @@ class PFactorGuaranteeList extends NavigationPage {
   }
 
   renderNavigationBar() {
-    return <NavBar title="要素保障服务申请表" />
+    return <NavBar title="融资需求登记表" />
   }
 
 
@@ -70,11 +70,32 @@ class PFactorGuaranteeList extends NavigationPage {
           </Touchable> 
         </View>
         <View style={styles.blockContent}>
-          <Text>{item.content}</Text>
+          <Text>企业名称: <Text style={styles.blockContent_text}>{item.companyName}</Text></Text>
+          <Text>行业类型: <Text style={styles.blockContent_text}>{item.industryType}</Text></Text>
+          <Text>主营业务: <Text style={styles.blockContent_text}>{item.majorBusiness}</Text></Text>
+          <Text>统一社会信用代码: <Text style={styles.blockContent_text}>{item.enterpriseKey}</Text></Text>
+          <Text>注册资金: <Text style={styles.blockContent_text}>{item.registerAssets}</Text></Text>
+          <Text>总资产: <Text style={styles.blockContent_text}>{item.totalAssets}</Text></Text>
+          <Text>上年收入: <Text style={styles.blockContent_text}>{item.incomeLastYear}</Text></Text>
+          <Text>融资金额: <Text style={styles.blockContent_text}>{item.financeAmount}</Text></Text>
+          <Text>融资方式: <Text style={styles.blockContent_text}>{item.financeMethod}</Text></Text>
+          <Text>融资用途: <Text style={styles.blockContent_text}>{item.financePurpose}</Text></Text>
+          <Text>流动资产: <Text style={styles.blockContent_text}>{item.floatingAssets}</Text></Text>
+          <Text>总负债: <Text style={styles.blockContent_text}>{item.totalOwes}</Text></Text>
+          <Text>流动负债: <Text style={styles.blockContent_text}>{item.floatingOwes}</Text></Text>
+          <Text>民间借款余额: <Text style={styles.blockContent_text}>{item.owePeopleSaved}</Text></Text>
+          <Text>银行贷款余额: <Text style={styles.blockContent_text}>{item.oweBankSaved}</Text></Text>
+          <Text>预计融资时间: <Text style={styles.blockContent_text}>{item.financeTimeExpected}</Text></Text>
+          <Text>贷款银行: <Text style={styles.blockContent_text}>{item.renterBank}</Text></Text>
+          <Text>抵押物估值: <Text style={styles.blockContent_text}>{item.valueOfPawn}</Text></Text>
+          <Text>抵押物类型: <Text style={styles.blockContent_text}>{item.pawnCategory}</Text></Text>
+          <Text>融资进展情况: <Text style={styles.blockContent_text}>{item.financeProcess}</Text></Text>
+          <Text>联挂责任部门: <Text style={styles.blockContent_text}>{item.department}</Text></Text>
+          <Text>负责领导: <Text style={styles.blockContent_text}>{item.leader}</Text></Text>
         </View>
         <View style={styles.blockFooter}>
           <View style={styles.leftLabel}>
-            <Text>{item.enterpriseName}</Text>
+            <Text>{item.companyName}</Text>
           </View>
           <View style={styles.rightLabel}>
             <Text style={styles.rightLabel_time}>{moment(item.createdTime).format('YYYY-MM-DD')}</Text>
@@ -89,13 +110,13 @@ class PFactorGuaranteeList extends NavigationPage {
     const { modalContent } = this.state
     const {userinfo} = this.props.user
     const {
-      factorGuarantees,
+      financeDemands,
     } = userinfo
-    console.log("factorGuarantees", factorGuarantees);
+    console.log("financeDemands", financeDemands);
     return (
       <View>
         <FlatList
-          data={factorGuarantees}
+          data={financeDemands}
           keyExtractor={(item, index) => index.toString()}
           renderItem={this._renderItemView}
           ListEmptyComponent={<Text>网络加载中</Text>}
@@ -188,7 +209,10 @@ const styles = StyleSheet.create({
   },
   rightLabel_time: {
     color:'#e0161b'
-  }
+  },
+  blockContent_text: {
+    color:'#333',
+  },
 })
 
-export default PFactorGuaranteeList
+export default FinanceDemandsList

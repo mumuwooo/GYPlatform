@@ -23,7 +23,8 @@ const { width, height } = Dimensions.get('window')
 
 
 @connect(({ app, user }) => ({ app, user }))
-class PFactorGuaranteeList extends NavigationPage {
+
+class AppealsList extends NavigationPage {
   constructor(props) {
     super(props)
     this.state = {
@@ -33,7 +34,7 @@ class PFactorGuaranteeList extends NavigationPage {
   }
 
   renderNavigationBar() {
-    return <NavBar title="要素保障服务申请表" />
+    return <NavBar title="我要诉求申请表" />
   }
 
 
@@ -89,13 +90,13 @@ class PFactorGuaranteeList extends NavigationPage {
     const { modalContent } = this.state
     const {userinfo} = this.props.user
     const {
-      factorGuarantees,
+      appeals,
     } = userinfo
-    console.log("factorGuarantees", factorGuarantees);
+    console.log("appeals", appeals);
     return (
       <View>
         <FlatList
-          data={factorGuarantees}
+          data={appeals}
           keyExtractor={(item, index) => index.toString()}
           renderItem={this._renderItemView}
           ListEmptyComponent={<Text>网络加载中</Text>}
@@ -191,4 +192,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default PFactorGuaranteeList
+export default AppealsList
