@@ -66,10 +66,13 @@ import NewsDetail from './components/NewsDetail'
 import Complaint from './page/Personal/moudles/Complaint'
 import ApplyList from './page/Personal/ApplyList'
 import PFactorGuaranteeList from './page/Personal/List/PFactorGuaranteeList'
+import projectCoodinatesList from './page/Personal/List/projectCoodinatesList'
+import OnlineResultList from './page/Personal/List/OnlineResultList'
 import GoldBrandsList from './page/Personal/List/GoldBrandsList'
 import FourIdentifiList from './page/Personal/List/FourIdentifiList'
 import AppealsList from './page/Personal/List/AppealsList'
 import FinanceDemandsList from './page/Personal/List/FinanceDemandsList'
+import FinanceGuaranteesList from './page/Personal/List/FinanceGuaranteesList'
 
 import Detail from './page/Detail'
 import Sorry from './page/others/sorry'
@@ -231,6 +234,9 @@ const AppNavigator = createStackNavigator(
     ApplyList: { screen: ApplyList, navigationOptions: { header: null } },
     PFactorGuaranteeList: { screen: PFactorGuaranteeList, navigationOptions: { header: null } },
     FinanceDemandsList: { screen: FinanceDemandsList, navigationOptions: { header: null } },
+    projectCoodinatesList: { screen: projectCoodinatesList, navigationOptions: { header: null } },
+    FinanceGuaranteesList: { screen: FinanceGuaranteesList, navigationOptions: { header: null } },
+    OnlineResultList: { screen: OnlineResultList, navigationOptions: { header: null } },
     GoldBrandsList: { screen: GoldBrandsList, navigationOptions: { header: null } },
     AppealsList: { screen: AppealsList, navigationOptions: { header: null } },
     FourIdentifiList: { screen: FourIdentifiList, navigationOptions: { header: null } },

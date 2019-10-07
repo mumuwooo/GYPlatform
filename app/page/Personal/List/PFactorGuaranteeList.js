@@ -98,7 +98,7 @@ class PFactorGuaranteeList extends NavigationPage {
           data={factorGuarantees}
           keyExtractor={(item, index) => index.toString()}
           renderItem={this._renderItemView}
-          ListEmptyComponent={<Text>网络加载中</Text>}
+          ListEmptyComponent={<Text>暂无数据</Text>}
           showsVerticalScrollIndicator={false}
           enabled
         />
@@ -110,7 +110,7 @@ class PFactorGuaranteeList extends NavigationPage {
           title="申请进度"
         >
           <ScrollView
-            style={{ flex: 1 }}
+            style={{ height: 150 }}
             automaticallyAdjustContentInsets={false}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}

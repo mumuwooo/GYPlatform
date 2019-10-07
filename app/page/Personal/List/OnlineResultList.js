@@ -14,7 +14,7 @@ import { Col, Row, Grid} from 'react-native-easy-grid'
 import { connect } from 'react-redux'
 import { NavigationBar, NavigationPage } from 'teaset'
 import { Icon, Steps, WingBlank } from '@ant-design/react-native';
-import { Touchable, ModalView, IconFont, NavBar, Divider } from '../../../components'
+import { Touchable, ModalView, IconFont, NavBar } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
 const Step = Steps.Step;
 
@@ -23,7 +23,7 @@ const { width, height } = Dimensions.get('window')
 
 
 @connect(({ app, user }) => ({ app, user }))
-class GoldBrandsList extends NavigationPage {
+class OnlineResultList extends NavigationPage {
   constructor(props) {
     super(props)
     this.state = {
@@ -33,7 +33,7 @@ class GoldBrandsList extends NavigationPage {
   }
 
   renderNavigationBar() {
-    return <NavBar title= "金字招牌工程申请表" />
+    return <NavBar title="在线成果定制申请表" />
   }
 
 
@@ -70,17 +70,14 @@ class GoldBrandsList extends NavigationPage {
           </Touchable> 
         </View>
         <View style={styles.blockContent}>
-          <Text>产品名称: <Text style={styles.blockContent_text}>{item.productName}</Text></Text>
-          <Text>产品简介: <Text style={styles.blockContent_text}>{item.productSummary}</Text></Text>
-          <Text>产品正面: <Text style={styles.blockContent_text}>{item.productFront}</Text></Text>
-          <Text>产品侧面: <Text style={styles.blockContent_text}>{item.productSide}</Text></Text>
-          <Text>产品俯视: <Text style={styles.blockContent_text}>{item.productOver}</Text></Text>
-          <Text>产品全局: <Text style={styles.blockContent_text}>{item.productGlobal}</Text></Text>
+          <Text>联系电话: <Text style={styles.blockContent_text}>{item.phoneNum}</Text></Text>
+          <Text>所属行业: <Text style={styles.blockContent_text}>{item.industryType}</Text></Text>
+          <Text>需求描述: <Text style={styles.blockContent_text}>{item.demand}</Text></Text>
         </View>
         <View style={styles.blockFooter}>
           <View style={styles.leftLabel}>
             <Text>{item.enterpriseName}</Text>
-          </View> 
+          </View>
           <View style={styles.rightLabel}>
             <Text style={styles.rightLabel_time}>{moment(item.createdTime).format('YYYY-MM-DD')}</Text>
           </View>
@@ -94,13 +91,13 @@ class GoldBrandsList extends NavigationPage {
     const { modalContent } = this.state
     const {userinfo} = this.props.user
     const {
-      goldBrands,
+      onlineResults,
     } = userinfo
-    console.log("GoldBrandsList", goldBrands);
+    console.log("onlineResults", onlineResults);
     return (
       <View>
         <FlatList
-          data={goldBrands}
+          data={onlineResults}
           keyExtractor={(item, index) => index.toString()}
           renderItem={this._renderItemView}
           ListEmptyComponent={<Text>暂无数据</Text>}
@@ -141,7 +138,6 @@ class GoldBrandsList extends NavigationPage {
             </View>
         </ScrollView>
       </ModalView>
-      <Divider type="bottomSpace" color="#fff" />
       </View>
     )
   }
@@ -198,9 +194,6 @@ const styles = StyleSheet.create({
   blockContent_text: {
     color:'#333',
   },
-  divided: {
-    height: 50,
-  }
 })
 
-export default GoldBrandsList
+export default OnlineResultList

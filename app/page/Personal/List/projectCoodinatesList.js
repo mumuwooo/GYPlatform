@@ -23,7 +23,7 @@ const { width, height } = Dimensions.get('window')
 
 
 @connect(({ app, user }) => ({ app, user }))
-class PFactorGuaranteeList extends NavigationPage {
+class projectCoodinatesList extends NavigationPage {
   constructor(props) {
     super(props)
     this.state = {
@@ -33,7 +33,7 @@ class PFactorGuaranteeList extends NavigationPage {
   }
 
   renderNavigationBar() {
-    return <NavBar title="要素保障服务申请表" />
+    return <NavBar title="建设项目协调服务申请表" />
   }
 
 
@@ -70,11 +70,22 @@ class PFactorGuaranteeList extends NavigationPage {
           </Touchable> 
         </View>
         <View style={styles.blockContent}>
-          <Text>{item.content}</Text>
+        <Text>项目名称: <Text style={styles.blockContent_text}>{item.projectName}</Text></Text>
+        <Text>联系人电话: <Text style={styles.blockContent_text}>{item.phoneNum}</Text></Text>
+        <Text>所属行业: <Text style={styles.blockContent_text}>{item.industryType}</Text></Text>
+        <Text>项目总投资: <Text style={styles.blockContent_text}>{item.totalFinance}</Text></Text>
+        <Text>建设地址: <Text style={styles.blockContent_text}>{item.buildingLoaction}</Text></Text>
+        <Text>开工日期: <Text style={styles.blockContent_text}>{item.startDateTime}</Text></Text>
+        <Text>建成日期: <Text style={styles.blockContent_text}>{item.planDateTime}</Text></Text>
+        <Text>主要建设内容及规模: <Text style={styles.blockContent_text}>{item.majorBuildingContent}</Text></Text>
+        <Text>工程形象进度: <Text style={styles.blockContent_text}>{item.buildingProcess}</Text></Text>
+        <Text>办理责任人: <Text style={styles.blockContent_text}>{item.responsible}</Text></Text>
+        <Text>办理部门: <Text style={styles.blockContent_text}>{item.department}</Text></Text>
+        <Text>存在困难: <Text style={styles.blockContent_text}>{item.difficultyies}</Text></Text>
         </View>
         <View style={styles.blockFooter}>
           <View style={styles.leftLabel}>
-            <Text>{item.enterpriseName}</Text>
+            <Text>{item.companyName}</Text>
           </View>
           <View style={styles.rightLabel}>
             <Text style={styles.rightLabel_time}>{moment(item.createdTime).format('YYYY-MM-DD')}</Text>
@@ -89,16 +100,16 @@ class PFactorGuaranteeList extends NavigationPage {
     const { modalContent } = this.state
     const {userinfo} = this.props.user
     const {
-      factorGuarantees,
+      projectCoordinates,
     } = userinfo
-    console.log("factorGuarantees", factorGuarantees);
+    console.log("projectCoordinates", projectCoordinates);
     return (
       <View>
         <FlatList
-          data={factorGuarantees}
+          data={projectCoordinates}
           keyExtractor={(item, index) => index.toString()}
           renderItem={this._renderItemView}
-          ListEmptyComponent={<Text>网络加载中</Text>}
+          ListEmptyComponent={<Text>暂无数据</Text>}
           showsVerticalScrollIndicator={false}
           enabled
         />
@@ -110,7 +121,7 @@ class PFactorGuaranteeList extends NavigationPage {
           title="申请进度"
         >
           <ScrollView
-            style={{ flex: 1 }}
+            style={{ height: 150 }}
             automaticallyAdjustContentInsets={false}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
@@ -188,7 +199,10 @@ const styles = StyleSheet.create({
   },
   rightLabel_time: {
     color:'#e0161b'
-  }
+  },
+  blockContent_text: {
+    color:'#333',
+  },
 })
 
-export default PFactorGuaranteeList
+export default projectCoodinatesList
