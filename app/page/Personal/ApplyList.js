@@ -101,6 +101,7 @@ class ApplyList extends NavigationPage {
           </Col>
           <Col>
             <Touchable
+              onPress={()=>{this.navigateTo('projectCoodinatesList')}}
               style={[styles.item_each, {backgroundColor: commonStyle.orangeColor}]}
             >
               <IconFont
@@ -115,6 +116,7 @@ class ApplyList extends NavigationPage {
         <Row size={25}>
           <Col>
             <Touchable
+              onPress={()=>{this.navigateTo('OnlineResultList')}}            
               style={[styles.item_each, {backgroundColor: commonStyle.pinkColor}]}
             >
               <IconFont
@@ -140,6 +142,7 @@ class ApplyList extends NavigationPage {
           </Col>
           <Col>
             <Touchable
+              onPress={()=>{this.navigateTo('FinanceGuaranteesList')}}
               style={[styles.item_each, {backgroundColor: commonStyle.oceanColor}]}
             >
               <IconFont

@@ -55,7 +55,7 @@ class FourIdentifiList extends NavigationPage {
       <View style={styles.block}>
         <View style={styles.blockTitle}>
           <View style={styles.leftLabel}>
-            <Text style={styles.leftLabel_name}>{item.contact}</Text>
+            <Text style={styles.leftLabel_name}>{item.Reporter}</Text>
           </View>
           <Touchable onPress={()=>this.handleCheckDetail(item)}>
             <View style={styles.rightLabel} >
@@ -70,7 +70,8 @@ class FourIdentifiList extends NavigationPage {
           </Touchable> 
         </View>
         <View style={styles.blockContent}>
-          <Text>{item.content}</Text>
+        <Text>所属行业: <Text style={styles.blockContent_text}>{item.industryType}</Text></Text>
+        <Text>联系电话: <Text style={styles.blockContent_text}>{item.phoneNum}</Text></Text>
         </View>
         <View style={styles.blockFooter}>
           <View style={styles.leftLabel}>
@@ -101,7 +102,7 @@ class FourIdentifiList extends NavigationPage {
           data={siShangEnterprises}
           keyExtractor={(item, index) => index.toString()}
           renderItem={this._renderItemView}
-          ListEmptyComponent={<Text>网络加载中</Text>}
+          ListEmptyComponent={<Text>暂无数据</Text>}
           showsVerticalScrollIndicator={false}
           enabled
         />
@@ -191,7 +192,10 @@ const styles = StyleSheet.create({
   },
   rightLabel_time: {
     color:'#e0161b'
-  }
+  },
+  blockContent_text: {
+    color:'#333',
+  },
 })
 
 export default FourIdentifiList

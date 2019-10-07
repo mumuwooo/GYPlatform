@@ -71,7 +71,9 @@ class AppealsList extends NavigationPage {
           </Touchable> 
         </View>
         <View style={styles.blockContent}>
-          <Text>{item.content}</Text>
+        <Text>联系电话: <Text style={styles.blockContent_text}>{item.phoneNum}</Text></Text>
+        <Text>邮箱: <Text style={styles.blockContent_text}>{item.emailAddress}</Text></Text>
+        <Text>问题、诉求描述: <Text style={styles.blockContent_text}>{item.question}</Text></Text>
         </View>
         <View style={styles.blockFooter}>
           <View style={styles.leftLabel}>
@@ -99,7 +101,7 @@ class AppealsList extends NavigationPage {
           data={appeals}
           keyExtractor={(item, index) => index.toString()}
           renderItem={this._renderItemView}
-          ListEmptyComponent={<Text>网络加载中</Text>}
+          ListEmptyComponent={<Text>暂无数据</Text>}
           showsVerticalScrollIndicator={false}
           enabled
         />
@@ -111,7 +113,7 @@ class AppealsList extends NavigationPage {
           title="申请进度"
         >
           <ScrollView
-            style={{ flex: 1 }}
+            style={{ height: 150 }}
             automaticallyAdjustContentInsets={false}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
@@ -189,7 +191,10 @@ const styles = StyleSheet.create({
   },
   rightLabel_time: {
     color:'#e0161b'
-  }
+  },
+  blockContent_text: {
+    color:'#333',
+  },
 })
 
 export default AppealsList

@@ -23,7 +23,7 @@ const { width, height } = Dimensions.get('window')
 
 
 @connect(({ app, user }) => ({ app, user }))
-class PFactorGuaranteeList extends NavigationPage {
+class FinanceGuaranteesList extends NavigationPage {
   constructor(props) {
     super(props)
     this.state = {
@@ -33,7 +33,7 @@ class PFactorGuaranteeList extends NavigationPage {
   }
 
   renderNavigationBar() {
-    return <NavBar title="要素保障服务申请表" />
+    return <NavBar title="融资担保申请表" />
   }
 
 
@@ -70,7 +70,13 @@ class PFactorGuaranteeList extends NavigationPage {
           </Touchable> 
         </View>
         <View style={styles.blockContent}>
-          <Text>{item.content}</Text>
+          <Text>行业类型: <Text style={styles.blockContent_text}>{item.industryType}</Text></Text>
+          <Text>贷款金额(万元): <Text style={styles.blockContent_text}>{item.loanAmount}</Text></Text>
+          <Text>资金用途: <Text style={styles.blockContent_text}>{item.financePurpose}</Text></Text>
+          <Text>期限: <Text style={styles.blockContent_text}>{item.deadline}</Text></Text>
+          <Text>还款来源: <Text style={styles.blockContent_text}>{item.repaySource}</Text></Text>
+          <Text>反担措施: <Text style={styles.blockContent_text}>{item.reverseGuarantee}</Text></Text>
+          <Text>联系电话: <Text style={styles.blockContent_text}>{item.phoneNUm}</Text></Text>
         </View>
         <View style={styles.blockFooter}>
           <View style={styles.leftLabel}>
@@ -89,16 +95,16 @@ class PFactorGuaranteeList extends NavigationPage {
     const { modalContent } = this.state
     const {userinfo} = this.props.user
     const {
-      factorGuarantees,
+      financeGuarantees,
     } = userinfo
-    console.log("factorGuarantees", factorGuarantees);
+    console.log("financeGuarantees", financeGuarantees);
     return (
       <View>
         <FlatList
-          data={factorGuarantees}
+          data={financeGuarantees}
           keyExtractor={(item, index) => index.toString()}
           renderItem={this._renderItemView}
-          ListEmptyComponent={<Text>网络加载中</Text>}
+          ListEmptyComponent={<Text>暂无数据</Text>}
           showsVerticalScrollIndicator={false}
           enabled
         />
@@ -110,7 +116,7 @@ class PFactorGuaranteeList extends NavigationPage {
           title="申请进度"
         >
           <ScrollView
-            style={{ flex: 1 }}
+            style={{ height: 150 }}
             automaticallyAdjustContentInsets={false}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
@@ -188,7 +194,10 @@ const styles = StyleSheet.create({
   },
   rightLabel_time: {
     color:'#e0161b'
-  }
+  },
+  blockContent_text: {
+    color:'#333',
+  },
 })
 
-export default PFactorGuaranteeList
+export default FinanceGuaranteesList

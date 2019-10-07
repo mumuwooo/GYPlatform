@@ -91,7 +91,6 @@ class FinanceDemandsList extends NavigationPage {
           <Text>抵押物类型: <Text style={styles.blockContent_text}>{item.pawnCategory}</Text></Text>
           <Text>融资进展情况: <Text style={styles.blockContent_text}>{item.financeProcess}</Text></Text>
           <Text>联挂责任部门: <Text style={styles.blockContent_text}>{item.department}</Text></Text>
-          <Text>负责领导: <Text style={styles.blockContent_text}>{item.leader}</Text></Text>
         </View>
         <View style={styles.blockFooter}>
           <View style={styles.leftLabel}>
@@ -119,7 +118,7 @@ class FinanceDemandsList extends NavigationPage {
           data={financeDemands}
           keyExtractor={(item, index) => index.toString()}
           renderItem={this._renderItemView}
-          ListEmptyComponent={<Text>网络加载中</Text>}
+          ListEmptyComponent={<Text>暂无数据</Text>}
           showsVerticalScrollIndicator={false}
           enabled
         />
@@ -131,7 +130,7 @@ class FinanceDemandsList extends NavigationPage {
           title="申请进度"
         >
           <ScrollView
-            style={{ flex: 1 }}
+            style={{ height: 150 }}
             automaticallyAdjustContentInsets={false}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
