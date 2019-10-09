@@ -43,6 +43,7 @@
 
 -keep class * extends com.facebook.react.bridge.JavaScriptModule { *; }
 -keep class * extends com.facebook.react.bridge.NativeModule { *; }
+-keep class com.facebook.hermes.unicode.** { *; }
 -keepclassmembers,includedescriptorclasses class * { native <methods>; }
 -keepclassmembers class *  { @com.facebook.react.uimanager.UIProp <fields>; }
 -keepclassmembers class *  { @com.facebook.react.uimanager.annotations.ReactProp <methods>; }
