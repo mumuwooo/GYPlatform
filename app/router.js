@@ -1,14 +1,15 @@
 import React, { PureComponent } from 'react'
 import { BackHandler, Animated, Easing, ToastAndroid } from 'react-native'
 import {
-  createStackNavigator,
-  createBottomTabNavigator,
-  NavigationActions,
+  NavigationActions
 } from 'react-navigation'
+import {createBottomTabNavigator} from 'react-navigation-tabs'
+import {createStackNavigator} from 'react-navigation-stack'
 import {
   reduxifyNavigator,
   createReactNavigationReduxMiddleware,
   createNavigationReducer,
+  createReduxContainer
 } from 'react-navigation-redux-helpers'
 import { connect } from 'react-redux'
 
@@ -348,11 +349,11 @@ const AppNavigator = createStackNavigator(
 export const routerReducer = createNavigationReducer(AppNavigator)
 
 export const routerMiddleware = createReactNavigationReduxMiddleware(
-  'root',
-  state => state.router
+  state => state.router,
+  'root'
 )
 
-const App = reduxifyNavigator(AppNavigator, 'root')
+const App = createReduxContainer(AppNavigator, 'root')
 
 function getActiveRouteName(navigationState) {
   if (!navigationState) {

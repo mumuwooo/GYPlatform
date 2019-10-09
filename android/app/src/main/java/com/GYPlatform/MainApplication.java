@@ -3,6 +3,11 @@ package com.GYPlatform;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import com.swmansion.rnscreens.RNScreensPackage;
+import com.swmansion.reanimated.ReanimatedPackage;
+import com.reactnativecommunity.viewpager.RNCViewPagerPackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.facebook.react.ReactNativeHost;
@@ -25,6 +30,11 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new AsyncStoragePackage(),
+            new RNScreensPackage(),
+            new ReanimatedPackage(),
+            new RNCViewPagerPackage(),
+            new RNGestureHandlerPackage(),
             new SplashScreenReactPackage(),
             new ImagePickerPackage()
       );

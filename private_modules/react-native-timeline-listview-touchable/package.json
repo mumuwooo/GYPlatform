@@ -1,0 +1,33 @@
+{
+  "name": "react-native-timeline-listview-touchable",
+  "version": "0.2.3",
+  "description": "Timeline component for React Native",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:thegamenicorus/react-native-timeline-listview.git"
+  },
+  "keywords": [
+    "react-native",
+    "timeline",
+    "listview",
+    "schedule",
+    "react native component",
+    "ios",
+    "android",
+    "component"
+  ],
+  "peerDependencies": {
+    "react-native": ">= 0.4"
+  },
+  "author": "Mickey",
+  "license": "MIT",
+  "bugs": {
+    "url":
+      "https://github.com/mumuwooo/react-native-timeline-listview/issues"
+  },
+  "homepage": "https://github.com/mumuwooo/react-native-timeline-listview"
+}
