@@ -531,19 +531,6 @@ class FinanceDemandForm extends NavigationPage {
                   value={this.state.FinanceProcess}
                 />
               </View>
-              <View style={styles.eachItem}>
-                <TextInput
-                  style={styles.item_input}
-                  placeholder="请输入联挂责任部门"
-                  underlineColorAndroid="transparent"
-                  // keyboardType="phone-pad"
-                  onChangeText={text => {
-                    this.setState({ Department: text })
-                  }}
-                  onBlur={() => {}}
-                  value={this.state.Department}
-                />
-              </View>
             </View>
           ) : (
             <View>

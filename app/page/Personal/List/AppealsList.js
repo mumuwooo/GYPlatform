@@ -34,7 +34,7 @@ class AppealsList extends NavigationPage {
   }
 
   renderNavigationBar() {
-    return <NavBar title="我要诉求申请表" />
+    return <NavBar title="我的投诉" />
   }
 
 
@@ -71,9 +71,7 @@ class AppealsList extends NavigationPage {
           </Touchable> 
         </View>
         <View style={styles.blockContent}>
-        <Text>联系电话: <Text style={styles.blockContent_text}>{item.phoneNum}</Text></Text>
-        <Text>邮箱: <Text style={styles.blockContent_text}>{item.emailAddress}</Text></Text>
-        <Text>问题、诉求描述: <Text style={styles.blockContent_text}>{item.question}</Text></Text>
+        <Text>问题、诉求描述: <Text style={styles.blockContent_text}>{item.demandText}</Text></Text>
         </View>
         <View style={styles.blockFooter}>
           <View style={styles.leftLabel}>

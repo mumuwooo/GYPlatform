@@ -1,0 +1,9 @@
+{
+    "symbol_url": "//at.alicdn.com/t/font_1117527_xbnutrmello.js",
+    "use_typescript": false,
+    "save_dir": "./app/assets/iconfont",
+    "generate_mode": "all-in-one",
+    "trim_icon_prefix": "",
+    "default_icon_size": 20,
+    "summary_component_name": "Icon"
+}

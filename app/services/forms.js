@@ -56,3 +56,9 @@ export async function postFinanceCoordinateForm(params) {
     url: '/api/FinanceCoordinates',
   })
 }
+export async function postAppeals(params) {
+  return POSTWithToken({
+    params,
+    url: '/api/Appeals',
+  })
+}

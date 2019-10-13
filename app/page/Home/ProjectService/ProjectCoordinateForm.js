@@ -319,32 +319,6 @@ class ProjectCoordinateForm extends NavigationPage {
                   value={this.state.BuildingProcess}
                 />
               </View>
-              <View style={styles.eachItem}>
-                <TextInput
-                  style={styles.item_input}
-                  placeholder="请输入办理责任人"
-                  underlineColorAndroid="transparent"
-                  keyboardType="phone-pad"
-                  onChangeText={text => {
-                    this.setState({ Responsible: text })
-                  }}
-                  onBlur={() => {}}
-                  value={this.state.Responsible}
-                />
-              </View>
-              <View style={styles.eachItem}>
-                <TextInput
-                  style={styles.item_input}
-                  placeholder="请输入办理部门"
-                  underlineColorAndroid="transparent"
-                  keyboardType="phone-pad"
-                  onChangeText={text => {
-                    this.setState({ Department: text })
-                  }}
-                  onBlur={() => {}}
-                  value={this.state.Department}
-                />
-              </View>
             </View>
           ) : (
             <View style={styles.next_content}>

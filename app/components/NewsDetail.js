@@ -88,14 +88,14 @@ class NewsDetail extends NavigationPage {
           </View>
 
           <View style={styles.bottom}>
-            <View style={styles.bottom_item}>
+            {/* <View style={styles.bottom_item}>
               <IconFont name="&#xe638;" size={30} color="gray" />
               <Text style={styles.item_text}>点赞</Text>
             </View>
             <View style={styles.bottom_item}>
               <IconFont name="&#xe638;" size={30} color="gray" />
               <Text style={styles.item_text}>收藏</Text>
-            </View>
+            </View> */}
             <Touchable onPress={()=>this.shareArticle(newsList.title, newsList.id)}>
               <View style={styles.bottom_item}>
                 <IconFont name="&#xe638;" size={30} color="gray" />
@@ -154,7 +154,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 70,
     marginTop: 20,
     marginBottom: 54,
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
+    justifyContent:'center'
   },
 
   item_text: {

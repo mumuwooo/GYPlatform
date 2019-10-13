@@ -12,6 +12,7 @@ import { connect } from 'react-redux'
 import { Touchable, IconFont } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
 import _baseURLGlobal from '../../../utils/global'
+import FastImage from 'react-native-fast-image'
 
 const { width, height } = Dimensions.get('window')
 
@@ -38,7 +39,7 @@ export const CompanyInfos = ({ style, data, dispatch, ...rest }) => {
           onPress={() => gotoDetail(index)}
         >
           <View style={styles.item_top}>
-            <Image
+            <FastImage
               style={{ width: 154, height: 96 }}
               resizeMode="contain"
               source={{ uri: _baseURLGlobal + item.pictureUrl }}

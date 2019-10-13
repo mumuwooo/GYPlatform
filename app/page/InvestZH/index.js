@@ -41,7 +41,7 @@ class InvestZH extends NavigationPage {
   }
 
   callPhone=()=>{
-    let url="tel:18570063440"
+    let url="tel:13320734111"
     console.log("call phone excuceted")
        Linking.canOpenURL(url).then(supported => {
         if (!supported) {
@@ -112,7 +112,7 @@ class InvestZH extends NavigationPage {
                   style={styles.top_imageBg}
                 >
                   <View style={styles.top_text}>
-                    <Text style={styles.text_title}>区内金字招牌介绍</Text>
+                    <Text style={styles.text_title}>投资合作申请</Text>
                     <Text style={styles.text_eng}>
                       INTRODUCING THE GOLD SIGNS IN THE AREA
                     </Text>

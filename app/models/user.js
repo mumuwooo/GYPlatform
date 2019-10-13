@@ -27,6 +27,7 @@ export default {
       if (window._userToken) {
         const res = yield call(services.fecthUserInfo)
         if (res) {
+          console.log("userinfo", res)
             //有usertoken但是失效，我也不知道怎么办了
           yield put({ type: 'updateUserInfo', payload: res.data })
         } else {

@@ -78,6 +78,15 @@ export default {
         Toast.fail('网络错误')
       }
     },
+    *postAppeals({ payload }, { call, put }) {
+      const res = yield call(services.postAppeals, payload)
+      if (res) {
+        // toast提交成功，跳转到我的表单用户界面
+        Toast.success('提交成功')
+      } else {
+        Toast.fail('网络错误')
+      }
+    },
   },
   subscriptions: {},
 }

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Text, View, Linking, NetInfo, Platform } from 'react-native'
 import { Overlay, Label } from 'teaset'
-import { MyFilePicker } from 'NativeModules'
 import Toast from 'teaset/components/Toast/Toast'
 import { createAction, Storage, commonStyle } from '../utils'
 import { Button, Update } from '../components'
@@ -337,7 +336,7 @@ export default {
         }
 
         case 'Personal': {
-          // dispatch({type: 'loginJudge'})
+          dispatch({ type: 'user/initUser' })
           break
         }
 

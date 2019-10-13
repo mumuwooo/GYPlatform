@@ -88,6 +88,19 @@ class ApplyList extends NavigationPage {
           </Col>
           <Col>
             <Touchable
+              onPress={()=>{this.navigateTo('CustomerDemandList')}}
+              style={[styles.item_each, {backgroundColor: commonStyle.blueColor}]}
+            >
+              <IconFont
+                name="&#xe62b;"
+                size={50}
+                color={commonStyle.white}
+              />
+              <Text style={[styles.icon_text,{height:32}]}>我的诉求</Text>
+            </Touchable>
+          </Col>
+          <Col>
+            <Touchable
               onPress={()=>{this.navigateTo('AppealsList')}}
               style={[styles.item_each, {backgroundColor: commonStyle.blueColor}]}
             >
@@ -96,7 +109,7 @@ class ApplyList extends NavigationPage {
                 size={50}
                 color={commonStyle.white}
               />
-              <Text style={[styles.icon_text,{height:32}]}>我要诉求</Text>
+              <Text style={[styles.icon_text,{height:32}]}>我的投诉</Text>
             </Touchable>
           </Col>
           <Col>

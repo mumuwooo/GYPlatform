@@ -7,8 +7,8 @@ import {
   Alert,
   Text,
   TextInput,
-  WebView,
 } from 'react-native'
+import { WebView } from 'react-native-webview'
 import { connect } from 'react-redux'
 import { NavigationBar, NavigationPage, Label, Toast } from 'teaset'
 import { Divider, Button } from '../../../components'

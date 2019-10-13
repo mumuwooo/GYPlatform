@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { NavigationBar, NavigationPage } from 'teaset'
 import { NavBar, Button, IconFont } from '../../../components'
 import { NavigationActions, commonStyle } from '../../../utils'
+import Icon from '../../../assets/iconfont/Icon'
 
 const { width, height } = Dimensions.get('window')
 
@@ -34,7 +35,7 @@ class BankConnect extends NavigationPage {
           {banks &&
             banks.map((item, index) => (
               <View style={styles.eachitem} key={index}>
-                <IconFont name="&#xe659;" size={35} color="#a2011b" />
+                <Icon name={item.iconName} size={35} />
                 <Text style={styles.item_text}>{item.title}</Text>
                 <Button
                   style={styles.submitBtn}
@@ -45,78 +46,6 @@ class BankConnect extends NavigationPage {
                 </Button>
               </View>
             ))}
-
-          {/* <View style={styles.eachitem}>
-            <IconFont name="&#xe65e;" size={35} color="#c90000" />
-            <Text style={styles.item_text}>中国工商银行</Text>
-            <Button
-              style={styles.submitBtn}
-              textStyle={styles.button_text}
-              onPress={this.handleSubmit}
-            >
-              办理
-            </Button>
-          </View>
-
-          <View style={styles.eachitem}>
-            <IconFont name="&#xe65a;" size={35} color="#009c96" />
-            <Text style={styles.item_text}>中国农业银行</Text>
-            <Button
-              style={styles.submitBtn}
-              textStyle={styles.button_text}
-              onPress={this.handleSubmit}
-            >
-              办理
-            </Button>
-          </View>
-
-          <View style={styles.eachitem}>
-            <IconFont name="&#xe65d;" size={35} color="#c92420" />
-            <Text style={styles.item_text}>广元村镇贵商银行</Text>
-            <Button
-              style={styles.submitBtn}
-              textStyle={styles.button_text}
-              onPress={this.handleSubmit}
-            >
-              办理
-            </Button>
-          </View>
-
-          <View style={styles.eachitem}>
-            <IconFont name="&#xe65f;" size={35} color="#a1cd44" />
-            <Text style={styles.item_text}>四川农信</Text>
-            <Button
-              style={styles.submitBtn}
-              textStyle={styles.button_text}
-              onPress={this.handleSubmit}
-            >
-              办理
-            </Button>
-          </View>
-
-          <View style={styles.eachitem}>
-            <IconFont name="&#xe65b;" size={35} color="#c7162e" />
-            <Text style={styles.item_text}>招商银行</Text>
-            <Button
-              style={styles.submitBtn}
-              textStyle={styles.button_text}
-              onPress={this.handleSubmit}
-            >
-              办理
-            </Button>
-          </View>
-
-          <View style={styles.eachitem}>
-            <IconFont name="&#xe65c;" size={35} color="#003b90" />
-            <Text style={styles.item_text}>建设银行</Text>
-            <Button
-              style={styles.submitBtn}
-              textStyle={styles.button_text}
-              onPress={this.handleSubmit}
-            >
-              办理
-            </Button>
-          </View> */}
         </View>
       </View>
     )

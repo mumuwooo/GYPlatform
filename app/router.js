@@ -1,14 +1,15 @@
 import React, { PureComponent } from 'react'
 import { BackHandler, Animated, Easing, ToastAndroid } from 'react-native'
 import {
-  createStackNavigator,
-  createBottomTabNavigator,
-  NavigationActions,
+  NavigationActions
 } from 'react-navigation'
+import {createBottomTabNavigator} from 'react-navigation-tabs'
+import {createStackNavigator} from 'react-navigation-stack'
 import {
   reduxifyNavigator,
   createReactNavigationReduxMiddleware,
   createNavigationReducer,
+  createReduxContainer
 } from 'react-navigation-redux-helpers'
 import { connect } from 'react-redux'
 
@@ -71,6 +72,7 @@ import OnlineResultList from './page/Personal/List/OnlineResultList'
 import GoldBrandsList from './page/Personal/List/GoldBrandsList'
 import FourIdentifiList from './page/Personal/List/FourIdentifiList'
 import AppealsList from './page/Personal/List/AppealsList'
+import CustomerDemandList from './page/Personal/List/CustomerDemandList'
 import FinanceDemandsList from './page/Personal/List/FinanceDemandsList'
 import FinanceGuaranteesList from './page/Personal/List/FinanceGuaranteesList'
 
@@ -239,6 +241,7 @@ const AppNavigator = createStackNavigator(
     OnlineResultList: { screen: OnlineResultList, navigationOptions: { header: null } },
     GoldBrandsList: { screen: GoldBrandsList, navigationOptions: { header: null } },
     AppealsList: { screen: AppealsList, navigationOptions: { header: null } },
+    CustomerDemandList: { screen: CustomerDemandList, navigationOptions: { header: null } },
     FourIdentifiList: { screen: FourIdentifiList, navigationOptions: { header: null } },
     Sorry: { screen: Sorry, navigationOptions: { header: null } },
     Test: { screen: Test, navigationOptions: { header: null } },
@@ -354,11 +357,11 @@ const AppNavigator = createStackNavigator(
 export const routerReducer = createNavigationReducer(AppNavigator)
 
 export const routerMiddleware = createReactNavigationReduxMiddleware(
-  'root',
-  state => state.router
+  state => state.router,
+  'root'
 )
 
-const App = reduxifyNavigator(AppNavigator, 'root')
+const App = createReduxContainer(AppNavigator, 'root')
 
 function getActiveRouteName(navigationState) {
   if (!navigationState) {

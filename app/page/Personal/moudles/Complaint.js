@@ -29,7 +29,7 @@ class Complaint extends NavigationPage {
   }
 
   handleSubmit = () => {
-    alert('提交表单')
+    dispatch({type:'forms/postAppeals', payload:this.state})
   }
   renderPage() {
     const { progress } = this.state
@@ -54,7 +54,7 @@ class Complaint extends NavigationPage {
             style={styles.submitBtn}
             titleStyle={styles.submitText}
             title={'提交' }
-            onPress={this.gotoNext}
+            onPress={this.handleSubmit}
           />
         </View>
 

@@ -80,7 +80,7 @@ class Personal extends NavigationPage {
         </View>
 
         <View style={styles.listRow}>
-          <RowLabel
+          {/* <RowLabel
             title="我的收藏"
             icon={
               <IconFont
@@ -89,7 +89,7 @@ class Personal extends NavigationPage {
                 style={{ color: commonStyle.h1Color }}
               />
             }
-          />
+          /> */}
           <RowLabel
             title="修改密码"
             icon={
