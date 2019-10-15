@@ -203,25 +203,6 @@ class FinanceDemandForm extends NavigationPage {
             >
               4
             </Text>
-            <IconFont
-              name="&#xe6eb;"
-              size={15}
-              style={{
-                marginRight: 5,
-                marginLeft: 5,
-                color: commonStyle.h2Color,
-              }}
-            />
-            <Text
-              style={
-                progress === 5
-                  ? styles.topText
-                  : [styles.topText, styles.topText2]
-              }
-              onPress={() => this.handleProgress(5)}
-            >
-              5
-            </Text>
           </View>
           <ScrollView
             ref="scrollContainer"
@@ -516,22 +497,6 @@ class FinanceDemandForm extends NavigationPage {
                 />
               </View>
             </View>
-          ) : progress === 4 ? (
-            <View>
-              <View style={styles.eachItem}>
-                <TextInput
-                  style={styles.item_input}
-                  placeholder="请输入融资进展情况"
-                  underlineColorAndroid="transparent"
-                  // keyboardType="phone-pad"
-                  onChangeText={text => {
-                    this.setState({ FinanceProcess: text })
-                  }}
-                  onBlur={() => {}}
-                  value={this.state.FinanceProcess}
-                />
-              </View>
-            </View>
           ) : (
             <View>
               <View style={styles.eachItem}>
@@ -576,7 +541,7 @@ class FinanceDemandForm extends NavigationPage {
           <Button
             style={styles.submitBtn}
             titleStyle={styles.submitText}
-            title={progress === 5 ? '提交' : '下一步'}
+            title={progress === 4 ? '提交' : '下一步'}
             onPress={this.gotoNext}
           />
         </View>

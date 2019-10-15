@@ -1,5 +1,6 @@
 import { Toast, ModalIndicator } from 'teaset'
 import * as services from '../services/forms'
+import {NavigationActions} from '../utils'
 
 export default {
   namespace: 'forms',
@@ -11,6 +12,8 @@ export default {
       if (res) {
         // toast提交成功，跳转到我的表单用户界面
         Toast.success('提交成功')
+        //yield put(NavigationActions.navigate({ routeName: 'PFactorGuaranteeList ' }))
+        yield put(NavigationActions.navigate({ routeName: 'Personal' }))
       } else {
         Toast.fail('网络错误')
       }
@@ -20,6 +23,8 @@ export default {
       if (res) {
         // toast提交成功，跳转到我的表单用户界面
         Toast.success('提交成功')
+        //yield put(NavigationActions.navigate({ routeName: 'projectCoodinatesList' }))
+        yield put(NavigationActions.navigate({ routeName: 'Personal' }))
       } else {
         Toast.fail('网络错误')
       }
@@ -29,6 +34,8 @@ export default {
       if (res) {
         // toast提交成功，跳转到我的表单用户界面
         Toast.success('提交成功')
+        //yield put(NavigationActions.navigate({ routeName: 'FinanceDemandsList' }))
+        yield put(NavigationActions.navigate({ routeName: 'Personal' }))
       } else {
         Toast.fail('网络错误')
       }
@@ -38,6 +45,8 @@ export default {
       if (res) {
         // toast提交成功，跳转到我的表单用户界面
         Toast.success('提交成功')
+        //yield put(NavigationActions.navigate({ routeName: 'CustomerDemandList' }))
+        yield put(NavigationActions.navigate({ routeName: 'Personal' }))
       } else {
         Toast.fail('网络错误')
       }
@@ -47,6 +56,8 @@ export default {
       if (res) {
         // toast提交成功，跳转到我的表单用户界面
         Toast.success('提交成功')
+        //yield put(NavigationActions.navigate({ routeName: 'OnlineResultList' }))
+        yield put(NavigationActions.navigate({ routeName: 'Personal' }))
       } else {
         Toast.fail('网络错误')
       }
@@ -56,6 +67,8 @@ export default {
       if (res) {
         // toast提交成功，跳转到我的表单用户界面
         Toast.success('提交成功')
+        //yield put(NavigationActions.navigate({ routeName: 'FinanceGuaranteesList' }))
+        yield put(NavigationActions.navigate({ routeName: 'Personal' }))
       } else {
         Toast.fail('网络错误')
       }
@@ -65,6 +78,8 @@ export default {
       if (res) {
         // toast提交成功，跳转到我的表单用户界面
         Toast.success('提交成功')
+        //yield put(NavigationActions.navigate({ routeName: 'GoldBrandsList' }))
+        yield put(NavigationActions.navigate({ routeName: 'Personal' }))
       } else {
         Toast.fail('网络错误')
       }
@@ -74,6 +89,8 @@ export default {
       if (res) {
         // toast提交成功，跳转到我的表单用户界面
         Toast.success('提交成功')
+        //yield put(NavigationActions.navigate({ routeName: 'ApplyList' }))
+        yield put(NavigationActions.navigate({ routeName: 'Personal' }))
       } else {
         Toast.fail('网络错误')
       }
@@ -83,6 +100,8 @@ export default {
       if (res) {
         // toast提交成功，跳转到我的表单用户界面
         Toast.success('提交成功')
+        //yield put(NavigationActions.navigate({ routeName: 'ApplyList' }))
+        yield put(NavigationActions.navigate({ routeName: 'Personal' }))
       } else {
         Toast.fail('网络错误')
       }

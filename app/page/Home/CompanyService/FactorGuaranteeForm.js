@@ -32,7 +32,6 @@ class FactorGuaranteeForm extends NavigationPage {
   }
 
   gotoNext = () => {
-    console.lo
     let { progress } = this.state
     if (progress >= 2) {
       this.handleSubmit()
