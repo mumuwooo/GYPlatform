@@ -16,7 +16,7 @@
     "deprecated-react-native-listview": "^0.0.5",
     "dva": "^2.4.1",
     "dva-core": "^2.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "prop-types": "^15.7.2",
     "react": "16.9.0",
     "react-native": "^0.61.2",
